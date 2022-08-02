@@ -14,20 +14,20 @@
 	function Theme__toggle(){  
 		
 		const theme = localStorage.getItem("theme") ?? "cupcake";
-		if(theme == "dark"){
+		if(theme == "forest"){
 			localStorage.setItem("theme", "cupcake");
 			//Theme__applyTo("cupcake");
 			
 		} else if(theme == "cupcake"){
-			localStorage.setItem("theme", "dark");
-			//Theme__applyTo("dark");
+			localStorage.setItem("theme", "forest");
+			//Theme__applyTo("forest");
 		}  
 		
 		location.reload();
 	}	
 	
 	function Theme__applyTo(themeName){ 
-		// cupcake, dark 
+		// cupcake, forest 
 		$("html").attr("data-theme", themeName);
 	}
 	
@@ -57,21 +57,20 @@
 
 <div class="drawer drawer-mobile">
   <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content flex flex-col items-center justify-center">
-    <!-- Page content here -->
-    <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">Open drawer</label>  
-  </div> 
-  
-  <div class="drawer-side">
-    <label for="my-drawer-2" class="drawer-overlay"></label> 
-    <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
-      <!-- Sidebar content here -->
-      <li><a>Sidebar Item 1</a></li>
-      <li><a>Sidebar Item 2</a></li>
-    </ul>
-  </div>
-  
-</div>
+  <div class="drawer-content flex-full flex-col items-start justify-start">
+   
+    <!-- HEADER start -->
+    <div class="flex justify-between">
+      <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">
+        <i class="fas fa-bars"></i>
+      </label>
+      
+      <a class="btn btn-primary btn-theme-toggle" href="javascript:Theme__toggle();">
+        <span class="theme cupcake"><i class="far fa-sun"></i></span>
+        <span class="theme forest"><i class="far fa-moon"></i></span>
+      </a>
+    </div>  
+    <!-- HEADER end -->
 
 <!-- 
   <header class="m-auto w-3/4 flex items-center py-4">
@@ -114,7 +113,7 @@
       <li>
        <a class="hover:underline btn-theme-toggle" href="javascript:Theme__toggle();">
           <span class="theme cupcake"><i class="far fa-sun"></i></span>
-          <span class="theme dark"><i class="far fa-moon"></i></span>
+          <span class="theme forest"><i class="far fa-moon"></i></span>
         </a>
       </li> 
     </ul>

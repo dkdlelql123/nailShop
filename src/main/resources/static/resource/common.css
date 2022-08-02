@@ -25,7 +25,7 @@
 	font-style: normal;
 }
 
-html[data-theme='dark'] .theme{
+html[data-theme='forest'] .theme{
 	cursor:pointer;
 }
 
@@ -33,7 +33,7 @@ html[data-theme='cupcake'] .theme.cupcake {
 	display:none;
 }
 
-html[data-theme='dark'] .theme.dark {
+html[data-theme='forest'] .theme.forest {
 	display:none;
 }
 
@@ -57,7 +57,8 @@ body{
 	font-weight: normal;
 }
 
-html[data-theme="dark"] :is(.table-box-type-1>table th, .table-box-type-1>table td) {
+/*
+html[data-theme="night"] :is(.table-box-type-1>table th, .table-box-type-1>table td) {
   border-color:white;
   border-color:rgba(166, 173, 186, 0.2);
 }
@@ -67,7 +68,7 @@ html[data-theme='cupcake'] :where(input[type=text], input[type=password], input[
 	background: #f0f0f0;
 	padding:4px 8px ; 
 	border-radius: 2px;
-} 
+} */
 
 
 input:read-only{
