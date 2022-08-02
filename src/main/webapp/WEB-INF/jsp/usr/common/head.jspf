@@ -60,65 +60,30 @@
   <div class="drawer-content flex-full flex-col items-start justify-start">
    
     <!-- HEADER start -->
-    <div class="flex justify-between">
-      <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">
-        <i class="fas fa-bars"></i>
-      </label>
+    <div class="flex justify-between items-center p-4 gap-4">
+      <div class="flex-1">
+        <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">
+          <i class="fas fa-bars"></i>
+        </label>
+      </div>      
+      
+      <ul class="flex gap-4 text-base-content">
+        <li>
+          <a href="https://www.instagram.com/pu_de_96/" target="_blank">
+            <i class="fab fa-instagram"></i>
+  	    </a>
+        </li>
+        <li>
+          <a href="https://github.com/dkdlelql123/blog" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        </li>
+      </ul>
       
       <a class="btn btn-primary btn-theme-toggle" href="javascript:Theme__toggle();">
         <span class="theme cupcake"><i class="far fa-sun"></i></span>
         <span class="theme forest"><i class="far fa-moon"></i></span>
       </a>
     </div>  
-    <!-- HEADER end -->
-
-<!-- 
-  <header class="m-auto w-3/4 flex items-center py-4">
-    <a href="/" class="font-bold text-xl">LOGO</a>
-    <div class="flex-grow"></div>
-    <ul class="flex items-center gap-4">  
-      <li>
-        <a href="/usr/article/write">작성</a>
-      </li>
-      <li>
-        <a href="/usr/article/list?boardId=1">공지</a>
-      </li>
-      <li>
-        <a href="/usr/article/list?boardId=2">자유</a>
-      </li>
-       
-      <c:choose>
-        <c:when test="${rq.logined == false}">
-        <li>
-          <a href="${rq.loginUri}">로그인</a>
-        </li>
-        <li>
-          <a href="/usr/member/join">회원가입</a>
-        </li>
-        </c:when>
-        <c:when test="${rq.logined}">
-          <li>
-            <a href="/usr/member/mypage">${rq.member.nickname}'s profile</a>
-          </li>
-          <li>
-            <a href="${rq.logoutUri}">로그아웃</a>
-          </li>
-          <c:if test="${rq.isAdmin()}">
-            <li>
-              <a href="/adm" class="btn btn-xs btn-info">ADMIN</a>
-            </li>
-          </c:if>
-        </c:when>
-      </c:choose>
-      <li>
-       <a class="hover:underline btn-theme-toggle" href="javascript:Theme__toggle();">
-          <span class="theme cupcake"><i class="far fa-sun"></i></span>
-          <span class="theme forest"><i class="far fa-moon"></i></span>
-        </a>
-      </li> 
-    </ul>
-  </header>
- -->
+    <!-- HEADER end --> 
     
-
-  

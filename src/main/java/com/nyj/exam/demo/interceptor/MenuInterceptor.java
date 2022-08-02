@@ -8,22 +8,22 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.fasterxml.jackson.databind.cfg.HandlerInstantiator;
 import com.nyj.exam.demo.service.BoardService;
-import com.nyj.exam.demo.vo.Rq;
 
 @Component
-public class BeforeActionInterceptor implements HandlerInterceptor {
-	
-	private Rq rq;
-
-	public BeforeActionInterceptor(Rq rq) {
-		this.rq = rq;
+public class MenuInterceptor implements HandlerInterceptor{
+	private BoardService boardService;
+	public MenuInterceptor(BoardService boardService) {
+		this.boardService = boardService;
 	}
 	
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler) throws Exception {
-		req.setAttribute("rq", rq);
+	
+		List boards = boardService.getBoards();
+		req.setAttribute("boards", boards);
 		
 		return HandlerInterceptor.super.preHandle(req, resp, handler);
 	}
-}
+}	

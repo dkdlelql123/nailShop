@@ -6,6 +6,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.nyj.exam.demo.interceptor.BeforeActionInterceptor;
+import com.nyj.exam.demo.interceptor.MenuInterceptor;
 import com.nyj.exam.demo.interceptor.NeedAdminInterceptor;
 import com.nyj.exam.demo.interceptor.NeedLoginInterceptor;
 import com.nyj.exam.demo.interceptor.NeedLogoutInterceptor;
@@ -15,6 +16,9 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 	// beforeActionInterceptor 인터셉터 불러오기
 	@Autowired
 	BeforeActionInterceptor beforeActionInterceptor;
+	
+	@Autowired
+	MenuInterceptor menuInterceptor;
 	
 	@Autowired
 	NeedLoginInterceptor needLoginInterceptor;
@@ -33,6 +37,14 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		.addPathPatterns("/**")
 		.excludePathPatterns("/resource/**")
 		.excludePathPatterns("/error");
+		
+		registry.addInterceptor(menuInterceptor)
+		.addPathPatterns("/**")
+		.excludePathPatterns("/resource/**")
+		.excludePathPatterns("/error")
+		.excludePathPatterns("/adm")
+		.excludePathPatterns("/adm/**")
+		;
 		
 		registry.addInterceptor(needLoginInterceptor)
 		.addPathPatterns("/usr/article/write")

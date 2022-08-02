@@ -13,14 +13,20 @@ import com.nyj.exam.demo.vo.Board;
 public interface BoardRepository {
 
 	@Select("""
-			SELECT *
-			FROM board  
+			SELECT b.*,
+			COUNT(a.boardId) as extra__articleCount
+			FROM board  b
+			LEFT JOIN article a
+			ON b.id = a.boardId 
+			GROUP BY b.id
+			ORDER BY b.id DESC
 				""")
 	List<Board> getBoards();
 
 	@Select("""
 			<script>
-			SELECT b.*, COUNT(a.boardId) as extra__articleCount
+			SELECT b.*, 
+			COUNT(a.boardId) as extra__articleCount
 			FROM `board` b
 			LEFT JOIN article a
 			ON b.id = a.boardId

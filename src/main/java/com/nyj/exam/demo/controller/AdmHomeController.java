@@ -20,7 +20,6 @@ public class AdmHomeController {
 	
 	@RequestMapping("/adm/home")
 	public String showMain() {
-		
 		return "/adm/home/index";
 	}
 	

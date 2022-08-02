@@ -27,27 +27,29 @@
   
   <div class="drawer-side bg-base-200">
     <label for="my-drawer-2" class="drawer-overlay"></label> 
-    <div class="logo">
-      <a href="/" class="flex p-4 items-center gap-2" >
+    <div class="logo p-4">
+      <a href="/" class="flex items-center gap-2 pl-3" >
         <span class="text-2xl font-bold">Blog</span>
         <span class="text-xs">22.08.02 -</span>
       </a>
     </div>
+    
     <ul class="menu p-4 overflow-y-auto w-80 text-base-content">
-      <!-- Sidebar content here -->
-      <li><a>Sidebar Item 1</a></li>
-      <li><a>Sidebar Item 2</a></li>
+      <c:forEach var="board" items="${boards}">
+        <li><a href="/usr/article/list?boardId=${board.id}">${board.name}[${board.extra__articleCount}]</a></li>
+      </c:forEach>  
     </ul>
     
     <ul class="menu p-4 overflow-y-auto w-80 text-base-content">
-      <li><a href="https://www.instagram.com/pu_de_96/" target="_blank">인스타그램</a></li>
       <li><a href="https://blog.naver.com/dkdlelql123" target="_blank">네이버블로그</a></li>
     </ul>
   </div>
   
 </div>
-  
 
+<div id="license_link" class="hidden">
+  <a target="_blank" href="https://icons8.com/icon/32323/instagram">Instagram</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>  
+</div>
 
 </body>
 </html>
