@@ -40,10 +40,12 @@
         </select>
     </form>
   </div>
+  <c:if test="${rq.member.authLevel == 10}">
   <div>
     <a href="/usr/article/write?boardId=${board.id}"
       class="btn btn-sm btn-info">글쓰기</a>
   </div>
+  </c:if>
 </div>
 
 
