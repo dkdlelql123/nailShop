@@ -20,7 +20,7 @@
 <!--  text-base-content glass xl:rounded-box -mt-48 grid max-w-screen-xl gap-4 bg-opacity-60 xl:pb-0 -->
 <section>
   <h2 class="text-4xl font-extrabold mb-2">BEST</h2>
-  <div class="mx-auto grid grid-cols-3 gap-4">
+  <div class="mx-auto grid md:grid-cols-3 grid-cols-1 gap-4">
   <c:forEach var="article" items="${bestArticles}">
     <a class="card card-compact bg-base-200 border shadow-sm" href="/usr/article/detail?id=${article.id}">
       <div class="card-body">
@@ -38,7 +38,7 @@
 
 <section class="mt-12">
   <h2 class="text-4xl font-extrabold mb-2">NEW</h2> 
-  <div class="mx-auto grid grid-cols-3 gap-4">
+  <div class="mx-auto grid md:grid-cols-3 grid-cols-1 gap-4">
   <c:forEach var="article" items="${newArticles}">
     <a class="card card-compact bg-base-200 border shadow-sm" href="/usr/article/detail?id=${article.id}">
       <div class="card-body">
