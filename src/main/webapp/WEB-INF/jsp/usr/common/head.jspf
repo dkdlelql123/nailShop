@@ -39,12 +39,12 @@
 	Theme__init();
 </script>
 
-<!-- 노말라이즈, 라이브러리 한 번에 해결 
-<script src="https://unpkg.com/tailwindcss-jit-cdn"></script>-->
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
-
 <!-- 데이지UI -->
-<link href="https://cdn.jsdelivr.net/npm/daisyui@2.13.4/dist/full.css" rel="stylesheet" type="text/css" /> 
+<link href="https://cdn.jsdelivr.net/npm/daisyui@2.20.0/dist/full.css" rel="stylesheet" type="text/css" />
+
+<!-- 노말라이즈, 라이브러리 한 번에 해결--> 
+<!--<script src="https://unpkg.com/tailwindcss-jit-cdn"></script>-->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
 
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
@@ -55,6 +55,25 @@
 </head>
 <body>
 
+<div class="drawer drawer-mobile">
+  <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+  <div class="drawer-content flex flex-col items-center justify-center">
+    <!-- Page content here -->
+    <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">Open drawer</label>  
+  </div> 
+  
+  <div class="drawer-side">
+    <label for="my-drawer-2" class="drawer-overlay"></label> 
+    <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
+      <!-- Sidebar content here -->
+      <li><a>Sidebar Item 1</a></li>
+      <li><a>Sidebar Item 2</a></li>
+    </ul>
+  </div>
+  
+</div>
+
+<!-- 
   <header class="m-auto w-3/4 flex items-center py-4">
     <a href="/" class="font-bold text-xl">LOGO</a>
     <div class="flex-grow"></div>
@@ -100,17 +119,7 @@
       </li> 
     </ul>
   </header>
-
-   
-<c:choose>
-  <c:when test="${main==true}">
-    <main>
-  </c:when>
-  
-  <c:otherwise>
-    <%@include file="./breadcrumb.jspf" %>
-    <main class="m-auto w-3/4 py-12">  
-  </c:otherwise>  
-</c:choose>
+ -->
+    
 
   

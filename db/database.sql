@@ -1,7 +1,7 @@
 # DB생성
-DROP DATABASE IF EXISTS sb_c_2022;
-CREATE DATABASE sb_c_2022;
-USE sb_c_2022;
+DROP DATABASE IF EXISTS blog;
+CREATE DATABASE blog;
+USE blog;
 
 # 게시물 테이블 생성
 CREATE TABLE article(
@@ -18,20 +18,6 @@ SET regDate = NOW(),
 updateDate = NOW(),
 title = "제목",
 `body` = "내용";
- 
-INSERT INTO article 
-SET regDate = NOW(),
-updateDate = NOW(),
-title = "제목입니당",
-`body` = "내용ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ";
-
- 
-INSERT INTO article 
-SET regDate = NOW(),
-updateDate = NOW(),
-title = "안녕하세요~",
-`body` = "내용ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ";
-
 
 # 회원테이블 추가
 CREATE TABLE `member` (
@@ -73,24 +59,13 @@ email = '사용자1@naver.com',
 phoneNumber = '010-1111-1111',
 authLevel = 2;	 
 
-INSERT INTO `member`
-SET regDate = NOW(),
-updateDate = NOW(),
-loginId = 'user2',
-loginPw = 'user2',
-`name` = '사용자2 이름',
-nickname = '사용자2 별명',
-email = '사용자2@naver.com',
-phoneNumber = '010-1111-1111',
-authLevel = 2;	
-
 # 게시물 테이블에 회원정보 추가
 ALTER TABLE article 
 ADD COLUMN memberId INT UNSIGNED NOT NULL AFTER updateDate;
 
 # 기존 게시물 데이터 회원정보 변경
 UPDATE article
-SET memberID = 2
+SET memberID = 1
 WHERE memberid = 0;
 
 # 게시판 만들기
@@ -111,39 +86,12 @@ updateDate = NOW(),
 `code` = 'notice',
 `name` = '공지사항';
 
-# 기본 게시판 생성
-INSERT INTO board
-SET regDate = NOW(),
-updateDate = NOW(),
-`code` = 'free',
-`name` = '자유게시판';
-
-
 # 게시물 테이블에 게시판id 추가하기
 ALTER TABLE article ADD COLUMN boardId INT NOT NULL AFTER updateDate;
 
-# 1, 3번은 자유게시판
+# 게시물 boardId 지정
 UPDATE article
-SET boardId = 2
-WHERE id IN (1,3);
-
-# 2 번은 공지사항
-UPDATE article
-SET boardId = 1
-WHERE id = 2;
- 
-# 페이징을 위한 게시물 대량 생성
-/*
-insert into article
-(
-    regDate, updateDate, memberId, boardId, title, `body`
-)
-select now(), now(), FLOOR(RAND() * 2) + 1, FLOOR(RAND() * 2) + 1, concat('제목_', rand()), CONCAT('내용_', RAND())
-from article;
-
-select * FROM `article`;
-
-*/
+SET boardId = 1;
 
 # 게시물에 조회수 칼럼 추가
 ALTER TABLE `article`
@@ -168,42 +116,6 @@ memberId = 1,
 relTypeCode = 'article',
 relId = 1,
 `point` = 1;
-
-# 리액션포인트 테스트 데이터 생성
-INSERT INTO reactionPoint 
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 2,
-relTypeCode = 'article',
-relId = 1,
-`point` = 1;
-
-# 리액션포인트 테스트 데이터 생성
-INSERT INTO reactionPoint 
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 2,
-relTypeCode = 'article',
-relId = 2,
-`point` = 1;
-
-# 리액션포인트 테스트 데이터 생성
-INSERT INTO reactionPoint 
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 3,
-relTypeCode = 'article',
-relId = 2,
-`point` = -1;
-
-# 리액션포인트 테스트 데이터 생성
-INSERT INTO reactionPoint 
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 3,
-relTypeCode = 'article',
-relId = 1,
-`point` = -1;
 
 # 게시물에 좋아요, 싫어요 칼럼 추가
 ALTER TABLE article
@@ -245,7 +157,6 @@ memberId = 1,
 relTypeCode = 'article',
 relId = 1,
 `body` = '이것이 첫번째 댓글 입니다~';
-
 
 # 댓글에 좋아요 수, 싫어요 수 칼럼 추가
 ALTER TABLE reply
