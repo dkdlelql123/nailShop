@@ -32,9 +32,11 @@ public class UsrHomeController {
 	@RequestMapping("/usr/home") 
 	public String showHome(Model model) { 
 		
+		// 조회수 높은 글
 		List<Article> bestArticles = articleService.getBestArticles();
 		model.addAttribute("bestArticles", bestArticles);
 
+		// 새로 작성된 글
 		List<Article> newArticles = articleService.getNewArticles();
 		model.addAttribute("newArticles", newArticles);
 		

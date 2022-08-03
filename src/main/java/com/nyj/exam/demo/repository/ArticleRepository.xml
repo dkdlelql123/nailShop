@@ -33,14 +33,10 @@
 
 	<select id="getArticles" resultType="Article">
 	SELECT a.*,
-		m.nickname AS extra__writerName,
-		b.replyStatus AS extra__replyStatus,
-		b.reactionPointStatus AS extra__reactionPointStatus
+		m.nickname AS extra__writerName
 		FROM article a
 		LEFT JOIN `member` m
-		ON a.memberId = m.id
-		LEFT JOIN `board` b
-		ON a.boardId = b.id
+		ON a.memberId = m.id 
 		WHERE 1
 		<if test='boardId !=null and boardId !="" and boardId !=0 '>
 			AND boardId = #{boardId}	
@@ -136,8 +132,8 @@
 	LEFT JOIN `member` AS m
 	ON a.memberId = m.id
 	LEFT JOIN `board` b
-	ON a.boardId = b.id
-	ORDER BY a.goodReactionPoint DESC 
+	ON a.boardId = b.id 
+	ORDER BY a.hit DESC 
 	LIMIT 0, 3;
 	</select>
 	
