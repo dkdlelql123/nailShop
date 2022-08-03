@@ -9,17 +9,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Article {
 	private int id;
-	private String regDate;
-	private String updateDate;
-	private int memberId;
 	private String title;
 	private String body;
+
+	private String regDate;
+	private String updateDate;
 	
 	private int hit;
 	
 	private int boardId;
 	private String extra__boardName;
+	private int extra__replyStatus;
+	private int extra__reactionPointStatus;
 	
+	private int memberId;
 	private String extra__writerName;
 	private boolean extra__actorCanEdit;
 

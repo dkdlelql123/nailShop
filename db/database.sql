@@ -222,3 +222,12 @@ ALTER TABLE article
 ADD CONSTRAINT FOREIGN KEY (boardId)
 REFERENCES board(id)
 ON DELETE CASCADE;
+
+# 게시판 댓글 사용여부 칼럼 추가
+ALTER TABLE board
+ADD COLUMN replyStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '0:사용, 1:미사용' AFTER `name`; 
+
+# 게시판 리액션포인트 사용여부 칼럼 추가
+ALTER TABLE board
+ADD COLUMN reactionPointStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '0:사용, 1:미사용' AFTER `name`; 
+

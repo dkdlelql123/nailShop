@@ -24,8 +24,8 @@
 		$.ajax({
 			url : '/usr/article/increaseHitCount?id=' + articleId,
 			success : function(data) {
-				console.log("성공");
-				console.log(data);
+				//console.log("성공");
+				//console.log(data);
 				$(".articleHit").html(data.data1);
 			},
 			error : function(request, status, error) {
@@ -97,6 +97,7 @@
         <div class="articleHit">${article.hit}</div>
       </td>
     </tr>
+    <c:if test="${article.extra__replyStatus == 0}"> 
     <tr>
       <td>추천</td>
       <td>
@@ -131,6 +132,7 @@
         </div>
       </td>
     </tr>
+    </c:if>
     <tr>
       <td>카테고리</td>
       <td>${article.extra__boardName}</td>
@@ -156,14 +158,15 @@
       <td>
         <div class="toast-ui-viewer">
           <script type="text/x-template">
-					${article.body}
-				</script>
+			${article.body}
+		  </script>
         </div>
       </td>
     </tr>
   </table>
 </div>
 
+<c:if test="${article.extra__reactionPointStatus == 0}"> 
 <div class="py-8">
   <h4 class="py-2 border-b border-gray-400">💬 댓글 ${replyCount}개</h4>
   <table>
@@ -172,8 +175,7 @@
     </c:if>
     <c:forEach var="reply" items='${replies}'>
       <tr>
-        <div
-          class="flex flex-wrap gap-2 items-center py-2 border-b border-gray-200">
+        <div class="flex flex-wrap gap-2 items-center py-2 border-b border-gray-200">
           <p>${reply.body}</p>
           <c:if test="${reply.extra__reactionStatus == ''}">
             <a
@@ -262,5 +264,6 @@
     </form>
   </div>
 </div> 
+</c:if>
 
 <%@ include file="../common/tail.jspf"%>

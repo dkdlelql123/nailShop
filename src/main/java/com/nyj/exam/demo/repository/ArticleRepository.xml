@@ -20,13 +20,50 @@
 	<select id="getForPrintArticle" resultType="Article">
 		SELECT a.*,
 		m.nickname AS extra__writerName,
-		b.name AS extra__boardName
+		b.name AS extra__boardName,
+		b.replyStatus AS extra__replyStatus,
+		b.reactionPointStatus AS extra__reactionPointStatus
 		FROM article a
 		LEFT JOIN `member` m
 		ON a.memberId = m.id
 		LEFT JOIN `board` b
 		ON a.boardId = b.id
 		WHERE a.id = #{id}
+	</select>
+
+	<select id="getArticles" resultType="Article">
+	SELECT a.*,
+		m.nickname AS extra__writerName,
+		b.replyStatus AS extra__replyStatus,
+		b.reactionPointStatus AS extra__reactionPointStatus
+		FROM article a
+		LEFT JOIN `member` m
+		ON a.memberId = m.id
+		LEFT JOIN `board` b
+		ON a.boardId = b.id
+		WHERE 1
+		<if test='boardId !=null and boardId !="" and boardId !=0 '>
+			AND boardId = #{boardId}	
+		</if>
+		<if test="searchKeyword != ''">
+			<choose>
+				<when test="searchKeywordType == 'title'" >
+					AND title LIKE CONCAT('%', #{searchKeyword}, '%')
+				</when>
+				<when test="searchKeywordType == 'body'" >
+					AND `body` LIKE CONCAT('%', #{searchKeyword}, '%')
+				</when>
+				<otherwise>
+					AND (
+						title LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+						`body` LIKE CONCAT('%', #{searchKeyword}, '%')
+					)
+				</otherwise>
+			</choose>
+		</if>
+		ORDER BY a.id DESC
+		LIMIT #{limitStart}, #{limitTake}
 	</select>
 
 	<delete id="deleteArticle">

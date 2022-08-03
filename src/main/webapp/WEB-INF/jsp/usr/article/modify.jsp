@@ -7,11 +7,9 @@
 <%@ include file="../../common/toastUIEditerLib.jspf"%>
 
 <script>
-
 let submitModifyrFormDone = false;
 
 function article__submitForm(form){
-	
 	if(submitModifyrFormDone){
 		alert("처리중입니다.");
 	}
@@ -19,8 +17,8 @@ function article__submitForm(form){
   	const editor = $(form).find('.toast-ui-editor').data('data-toast-editor'); 
 	const markdown = editor.getMarkdown().trim(); 
 	 
-    if (markdown.length < 10) {
-		alert("내용을 10글자 이상 작성해주세요.");
+    if (markdown.length < 5) {
+		alert("내용을 5글자 이상 작성해주세요.");
 		editor.focus();
 		
 		return; 
@@ -33,9 +31,7 @@ function article__submitForm(form){
 }
 </script>
 
-<form class="table-box-type-1" action="/usr/article/doModify" onsubmit="article__submitForm(this); return false;" method="POST">
-
-  
+<form class="table-box-type-1" action="/usr/article/doModify" onsubmit="article__submitForm(this); return false;" method="POST">  
   <input type="hidden" value="${article.body}" name="body" />
   
   <c:if test="${article.extra__actorCanEdit}">

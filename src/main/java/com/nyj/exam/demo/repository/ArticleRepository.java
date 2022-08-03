@@ -17,38 +17,6 @@ public interface ArticleRepository {
 
 	Article getForPrintArticle(@Param("id") int id);
 
-	@Select("""
-			<script>
-			SELECT a.*,
-					m.nickname AS extra__writerName
-					FROM article a
-					LEFT JOIN `member` m
-					ON a.memberId = m.id
-					WHERE 1
-					<if test='boardId !=null and boardId !="" and boardId !=0 '>
-						AND boardId = #{boardId}	
-					</if>
-					<if test="searchKeyword != ''">
-						<choose>
-							<when test="searchKeywordType == 'title'" >
-								AND title LIKE CONCAT('%', #{searchKeyword}, '%')
-							</when>
-							<when test="searchKeywordType == 'body'" >
-								AND `body` LIKE CONCAT('%', #{searchKeyword}, '%')
-							</when>
-							<otherwise>
-								AND (
-									title LIKE CONCAT('%', #{searchKeyword}, '%')
-										OR
-									`body` LIKE CONCAT('%', #{searchKeyword}, '%')
-								)
-							</otherwise>
-						</choose>
-					</if>
-					ORDER BY a.id DESC
-					LIMIT #{limitStart}, #{limitTake}
-			</script>
-			""")
 	List<Article> getArticles(
 			@Param("boardId") int boardId,
 			@Param("searchKeywordType") String searchKeywordType,

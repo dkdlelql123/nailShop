@@ -14,6 +14,9 @@ public class Board {
 	String code;
 	String name;
 	
+	int replyStatus;
+	int reactionPointStatus;
+	
 	int delStatus;
 	String delDate;
 	

@@ -61,7 +61,9 @@
         <th>번호</th>
         <th>제목</th>
         <th>조회</th>
-        <th>추천</th>
+        <c:if test="${article.extra__replyStatus == 0}">
+          <th>추천</th>
+        </c:if>
         <th>작성자</th>
         <th>작성일</th>
       </tr>
@@ -72,10 +74,14 @@
           <th class="text-center">${article.id}</th>
           <td>
             <a href="${rq.getArticleDetailFromList(article)}">${article.title}</a>
-            [0]
+            <c:if test="${article.extra__reactionPointStatus == 0}">
+              [0]
+            </c:if>
           </td>
           <td class="text-center">${article.hit}</td>
-          <td class="text-center">${article.goodReactionPoint}</td>
+          <c:if test="${article.extra__replyStatus == 0}">
+            <td class="text-center">${article.goodReactionPoint}</td>
+          </c:if>
           <td class="text-center">${article.extra__writerName}</td>
           <td class="text-center">${article.forPrintType1RegDate}</td>
         </tr>
