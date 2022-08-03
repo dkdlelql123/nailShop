@@ -8,17 +8,18 @@
       <div>
         <div class="footer text-base-content p-12">
           <div>
-            <span class="footer-title">😊</span> 
+            <span class="mb-2">😊</span> 
             <a href="#" class="link link-hover">안녕하세요.</a>
           </div> 
           <div>
-            <span class="footer-title">✋</span> 
+            <span class="mb-2">✋</span> 
             <a href="#" class="link link-hover">인사할래요?</a>  
           </div> 
           <div>
-            <span class="footer-title">❤️</span > 
-            <div class="grid grid-flow-col gap-4">
+            <span class="mb-2">❤️</span > 
+            <div class="grid grid-flow-col gap-1">
               <a href="https://blog.naver.com/dkdlelql123" target="_blank">네이버블로그</a>
+              <a href="/usr/member/login"><i class="fas fa-seedling"></i></a>
             </div>
           </div>
         </div>
@@ -27,21 +28,23 @@
     
   </div> 
   
-  <div class="drawer-side bg-base-200">
+  <div class="drawer-side">
     <label for="my-drawer-2" class="drawer-overlay"></label> 
-    <div class="logo p-4">
-      <a href="/" class="flex items-center gap-2 pl-3" >
-        <span class="text-2xl font-bold">Blog</span>
-        <span class="text-xs">22.08.02 -</span>
-      </a>
-    </div>
-    
-    <ul class="menu p-4 overflow-y-auto w-80 text-base-content">
-      <c:forEach var="board" items="${boards}">
-        <li><a href="/usr/article/list?boardId=${board.id}">${board.name}[${board.extra__articleCount}]</a></li>
-      </c:forEach>  
-    </ul>
-    
+    <aside class="bg-base-200 w-80"> 
+      <div class="p-4">
+        <a href="/" class="logo flex items-end gap-2 pl-3" >
+          <span class="text-3xl font-bold">Blog</span>
+          <span class="text-xs">22.08.02 -</span>
+        </a>
+        <div class="p-4">today | total</div>
+      </div>
+          
+      <ul class="menu p-4 overflow-y-auto text-base-content">
+        <c:forEach var="board" items="${boards}">
+          <li><a href="/usr/article/list?boardId=${board.id}">${board.name}[${board.extra__articleCount}]</a></li>
+        </c:forEach>  
+      </ul>
+    </aside>
   </div>
   
 </div>

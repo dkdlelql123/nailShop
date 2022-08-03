@@ -40,10 +40,6 @@ html>body,
 	font-family: 'NanumBarunGothic', sans-serif;
 }
 
-body{
-	min-width: 800px;
-}
-
 .table-box-type-1 table {
 	width: 100%;
 }
