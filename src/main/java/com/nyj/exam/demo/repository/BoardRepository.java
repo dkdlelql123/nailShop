@@ -56,10 +56,13 @@ public interface BoardRepository {
 	List<Board> getForPrintBoards(String searchKeywordType, String searchKeyword, int limitStart, int limitTake);
 	
 	@Select("""
-			SELECT *
-			FROM board AS B
-			WHERE B.id = #{id}
-			AND B.delStatus = 0
+			SELECT  b.*, 
+			COUNT(a.boardId) as extra__articleCount
+			FROM board AS b
+			LEFT JOIN article a
+			ON b.id = a.boardId
+			WHERE b.id = #{id}
+			AND b.delStatus = 0
 				""")
 	Board getBoardById(@Param("id") int id);
 	

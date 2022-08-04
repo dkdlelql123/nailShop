@@ -71,6 +71,7 @@
         <th>이름</th>
         <th>게시글수</th>
         <th>생성일</th>
+        <th>관리</th>
       </tr>
     </thead>
     <tbody>
@@ -89,8 +90,14 @@
             </a>
           </td>
           <td class="text-center">${board.extra__articleCount}</td>
-          <td class="text-center">${board.regDate.substring(0, 10)}</td>
-        </tr>
+          <td class="text-center">${board.getForPrintType1RegData()}</td>
+          <td>
+            <div class="flex justify-center gap-1">
+              <a href="/adm/board/detail?id=${board.id}" class="btn btn-xs btn-success">수정</a>
+              <a href="" class="btn btn-xs btn-error">삭제</a>
+            </div>
+          </td>
+        </tr>  
       </c:forEach>
     </tbody>
   </table>

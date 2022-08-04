@@ -78,6 +78,8 @@ public class UsrArticleController {
 		if(board==null) {
 			Ut.jsHistoryBack("해당 게시판은 존재하지 않습니다.");
 		}
+		model.addAttribute("reactionPointStatus", board.getReactionPointStatus());
+		model.addAttribute("replyStatus", board.getReplyStatus());
 		 
 		int articlesCount = articleService.getArticlesCount(boardId, searchKeywordType, searchKeyword);
 		

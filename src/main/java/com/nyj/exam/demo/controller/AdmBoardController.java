@@ -62,4 +62,14 @@ public class AdmBoardController {
 		ResultData rd = boardService.CheckForDuplicates(value,type);
 		return rd;
 	}
+
+	
+	@RequestMapping("/adm/board/detail")
+	public String showDetail(int id, Model model) {
+		Board board = boardService.getBoardById(id);
+		model.addAttribute("board", board);
+
+		return "/adm/board/detail";
+	}
+
 }

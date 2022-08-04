@@ -48,8 +48,6 @@
   </c:if>
 </div>
 
-
-
 <div class="table-box-type-1">
   <table id="boardtable">
     <colgroup>
@@ -61,7 +59,7 @@
         <th>번호</th>
         <th>제목</th>
         <th>조회</th>
-        <c:if test="${article.extra__replyStatus == 0}">
+        <c:if test="${reactionPointStatus == 0}">
           <th>추천</th>
         </c:if>
         <th>작성자</th>
@@ -74,12 +72,10 @@
           <th class="text-center">${article.id}</th>
           <td>
             <a href="${rq.getArticleDetailFromList(article)}">${article.title}</a>
-            <c:if test="${article.extra__reactionPointStatus == 0}">
-              [0]
-            </c:if>
+            <c:if test="${replyStatus == 0}"> [0] </c:if>
           </td>
           <td class="text-center">${article.hit}</td>
-          <c:if test="${article.extra__replyStatus == 0}">
+          <c:if test="${reactionPointStatus == 0}">
             <td class="text-center">${article.goodReactionPoint}</td>
           </c:if>
           <td class="text-center">${article.extra__writerName}</td>
