@@ -61,7 +61,7 @@ html[data-theme='cupcake'] :where(input[type=text], input[type=password], input[
 	background: #f0f0f0;
 	padding:4px 8px ; 
 	border-radius: 2px;
-} */
+}
 
 
 input:read-only{
@@ -69,4 +69,4 @@ input:read-only{
 	padding:0px; 
 	border: 0;
 	box-shadow: none;
-}
+} */

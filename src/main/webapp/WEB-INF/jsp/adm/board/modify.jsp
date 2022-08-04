@@ -133,6 +133,51 @@ $(function() {
             <span></span>
         </td>
       </tr>
+      
+      <tr>
+        <th>댓글 기능</th>
+        <td colspan="3">
+          <div class="flex gap-4">
+            <div class="form-control">
+              <label class="label cursor-pointer">
+                <span class="label-text mr-2">YES</span> 
+                <input type="radio" name="replyStatus" class="radio checked:bg-blue-500" 
+                value="0"  ${ board.reactionPointStatus == 0 ? "checked" : null}/>
+              </label>
+            </div> 
+            <div class="form-control">
+              <label class="label cursor-pointer">
+                <span class="label-text mr-2">No</span> 
+                <input type="radio" name="replyStatus" class="radio checked:bg-red-500" 
+                value="1" ${ board.reactionPointStatus == 1 ? "checked" : null}/>
+              </label>
+            </div>
+          </div>
+        </td>
+      </tr> 
+      
+      <tr>
+        <th>좋아요 기능</th>
+        <td colspan="3">
+        <div class="flex gap-4">
+          <div class="form-control">
+            <label class="label cursor-pointer">
+              <span class="label-text mr-2">YES</span> 
+              <input type="radio" name="reactionPointStatus" class="radio checked:bg-blue-500" 
+              value="0" ${ board.reactionPointStatus == 0 ? "checked" : null} />
+            </label>
+          </div> 
+          <div class="form-control">
+            <label class="label cursor-pointer">
+              <span class="label-text mr-2">No</span> 
+              <input type="radio" name="reactionPointStatus" class="radio checked:bg-red-500" 
+              value="1"  ${ board.reactionPointStatus == 1 ? "checked" : null}/>
+            </label>
+          </div> 
+        </div> 
+        </td>
+      </tr> 
+      
     </table>
 
     <div class="flex justify-end mt-4 gap-2">

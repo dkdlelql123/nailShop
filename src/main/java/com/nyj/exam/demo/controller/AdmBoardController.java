@@ -49,9 +49,9 @@ public class AdmBoardController {
 	
 	@RequestMapping("/adm/board/doWrite")
 	@ResponseBody
-	public String doWrite(String name, String code) {
+	public String doWrite(String name, String code, int replyStatus, int reactionPointStatus) {
 		
-		boardService.doWrite(name, code);
+		boardService.doWrite(name, code, replyStatus, reactionPointStatus);
 		
 		return Ut.jsReplace("게시판이 생성되었습니다.", "/adm/board/list");
 	}
@@ -83,7 +83,7 @@ public class AdmBoardController {
 	
 	@RequestMapping("/adm/board/doModify")
 	@ResponseBody
-	public String doModify(String name, String code, int id, Model model) {
+	public String doModify(String name, String code, int id, int replyStatus, int reactionPointStatus, Model model) {
 
 		Board board = boardService.getBoardById(id);
 		if(board == null) {
@@ -92,7 +92,7 @@ public class AdmBoardController {
 
 		model.addAttribute("board", board);
 
-		boardService.doModify(id, name, code);
+		boardService.doModify(id, name, code, replyStatus, reactionPointStatus);
 		return Ut.jsReplace("게시판이 수정되었습니다.", "/adm/board/detail?id="+id);
 	}
 

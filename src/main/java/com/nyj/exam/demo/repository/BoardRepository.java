@@ -113,18 +113,22 @@ public interface BoardRepository {
 			SET regDate = NOW(),
 			updateDate = NOW(),
 			`code` = #{code},
-			`name` = #{name}
+			`name` = #{name},
+			`replyStatus` = #{replyStatus},
+			`reactionPointStatus` = #{reactionPointStatus}
 			""")
-	void doWrite(String name, String code);
+	void doWrite(String name, String code, int replyStatus, int reactionPointStatus);
 	
 	@Update("""
 			<script>			
 			UPDATE board
 			SET `name` = #{name},
-			`code` = #{code}
+			`code` = #{code},
+			`replyStatus` = #{replyStatus},
+			`reactionPointStatus` = #{reactionPointStatus}
 			WHERE id = #{id};
 			</script>
 			""")
-	void doModify(int id, String name, String code);
+	void doModify(int id, String name, String code, int replyStatus, int reactionPointStatus);
 
 }

@@ -44,13 +44,13 @@ public class BoardService {
 		return ResultData.form("S-1", "사용가능한 이름입니다."); 
 	}
 
-	public void doWrite(String name, String code) {
-		boardrepository.doWrite(name, code);
+	public void doWrite(String name, String code, int replyStatus, int reactionPointStatus) {
+		boardrepository.doWrite(name, code, replyStatus, reactionPointStatus);
 	}
 
 
-	public void doModify(int id, String name, String code) {
-		boardrepository.doModify(id, name, code);	
+	public void doModify(int id, String name, String code, int replyStatus, int reactionPointStatus) {
+		boardrepository.doModify(id, name, code, replyStatus, reactionPointStatus);	
 	}
 	
 }

@@ -44,7 +44,21 @@
             ${board.code}
         </td>
       </tr>
+      <tr>
+        <th>댓글 기능</th>
+        <td colspan="3">
+           ${board.replyStatus == 0 ? "사용" : "미사용"}
+        </td>
+      </tr> 
+      <tr>
+        <th>좋아요 기능</th>
+        <td colspan="3">
+           ${board.reactionPointStatus == 0 ? "사용" : "미사용"}
+        </td>
+      </tr> 
     </table>
+    
+         
 
     <div class="flex justify-end mt-4 gap-2">
       <a href="/adm/board/modify?id=${board.id}" class="btn btn-info btn-sm">수정</a>

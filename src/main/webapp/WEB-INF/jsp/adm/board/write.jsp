@@ -34,9 +34,16 @@
 			alert("사용이 불가능합니다. \n다시 입력해주세요");
 			return;
 		}
+	    
+	    form.replyStatus.value = form.replyStatusBtn.value == "on" ? 0 : 1;
+	    
+	    console.log(form.replyStatusBtn.value)
+	    console.log(form.reactionPointStatusBtn.value)
+	    
+	    return ;
 
-		form.submit();
-		submitWriterFormDone = true;
+		//form.submit();
+		//submitWriterFormDone = true;
 	}  
 
 	function checkName(el){
@@ -73,7 +80,8 @@
             })
         }
 	}
-	const fncDebounce = _.debounce(checkName, 500)
+	const fncDebounce = _.debounce(checkName, 500) 
+	 
 </script>
 
 <h1 class="font-title mb-8 text-3xl font-extrabold">게시판 생성하기</h1>
@@ -98,6 +106,44 @@
             <input type="text" class="w-full input input-sm" name="code"  onkeyup="fncDebounce(this);"
             required="required" placeholder="영문으로만 입력해주세요." />
             <span></span>
+        </td>
+      </tr> 
+      <tr>
+        <th>댓글 기능</th>
+        <td>
+          <div class="flex gap-4">
+            <div class="form-control">
+              <label class="label cursor-pointer">
+                <span class="label-text mr-2">YES</span> 
+                <input type="radio" name="replyStatus" class="radio checked:bg-blue-500" value="0"  />
+              </label>
+            </div> 
+            <div class="form-control">
+              <label class="label cursor-pointer">
+                <span class="label-text mr-2">No</span> 
+                <input type="radio" name="replyStatus" class="radio checked:bg-red-500" value="1" checked/>
+              </label>
+            </div>
+          </div>
+        </td>
+      </tr> 
+      <tr>
+        <th>좋아요 기능</th>
+        <td>
+        <div class="flex gap-4">
+          <div class="form-control">
+            <label class="label cursor-pointer">
+              <span class="label-text mr-2">YES</span> 
+              <input type="radio" name="reactionPointStatus" class="radio checked:bg-blue-500" value="0" />
+            </label>
+          </div> 
+          <div class="form-control">
+            <label class="label cursor-pointer">
+              <span class="label-text mr-2">No</span> 
+              <input type="radio" name="reactionPointStatus" class="radio checked:bg-red-500" value="1" checked/>
+            </label>
+          </div> 
+        </div> 
         </td>
       </tr> 
     </table>
