@@ -34,7 +34,7 @@
       <tr>
         <th>이름</th>
         <td colspan="3">
-            <a href="" >${board.name}[${board.extra__articleCount}]</a>
+            <a href="#" >${board.name}[${board.extra__articleCount}]</a>
         </td>
       </tr> 
 

@@ -47,5 +47,10 @@ public class BoardService {
 	public void doWrite(String name, String code) {
 		boardrepository.doWrite(name, code);
 	}
+
+
+	public void doModify(int id, String name, String code) {
+		boardrepository.doModify(id, name, code);	
+	}
 	
 }
