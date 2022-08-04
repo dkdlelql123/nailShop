@@ -68,9 +68,9 @@
         <th><input type="checkbox" class="allCheckIds" /></th>
         <th>번호</th>
         <th>코드</th>
-        <th>이름</th>
-        <th>게시글수</th>
-        <th>생성일</th>
+        <th>이름[게시글수]</th>
+        <th>댓글</th> 
+        <th>좋아요</th> 
         <th>관리</th>
       </tr>
     </thead>
@@ -86,11 +86,11 @@
           </td>
           <td class="text-center">
             <a href="/adm/board/detail?id=${board.id}"> 
-              ${board.name}
+              ${board.name}[${board.extra__articleCount}]
             </a>
           </td>
-          <td class="text-center">${board.extra__articleCount}</td>
-          <td class="text-center">${board.getForPrintType1RegData()}</td>
+          <td class="text-center">${board.replyStatus == 0 ? "O":"X"}</td> 
+          <td class="text-center">${board.reactionPointStatus == 0 ? "O":"X"}</td> 
           <td>
             <div class="flex justify-center gap-1">
               <a href="/adm/board/detail?id=${board.id}" class="btn btn-xs btn-success">수정</a>
