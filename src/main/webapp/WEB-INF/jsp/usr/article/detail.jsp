@@ -8,18 +8,48 @@
 
 <input type="hidden" name="articleId" value="${param.id}" />
 <script type="text/javascript" defer="defer">
+
+	// 게시물 조회수 시간 처리 함수
+    let today =  Date.now()   			//오늘날짜
+    let date = new Date();  
+    date.setDate(date.getDate() + 1);  	// 내일날짜
+    date.setHours(0,0,0,0);  			// 시, 분, 초, 밀리 - 내일날짜 중 시간은 초기화
+    let tomorrow = date.getTime();
+    
+    console.log(today)
+    console.log(tomorrow)
+
 	// 게시물 조회수 처리 함수
 	let articleId = $("input[name='articleId']").val();
 	articleId = parseInt(articleId);
+	
+	function setItemWithExpireTime(keyName, keyValue) { 
+		// localStorage에 저장할 객체 
+		const obj = {   
+		 	value : keyValue,  
+		 	expire : tomorrow //Date.now() + tts 
+		} 
+		// 객체를 JSON 문자열로 변환 
+		const objString = JSON.stringify(obj);   
+		
+		// setItem 
+		localStorage.setItem(keyName, objString);
+	} 
 
 	function ArticleDetail__increaseHitCount() { // 게시물 조회수 관련 함수
-		const localStorageKey = "article__" + articleId + "__viewDone";
-
-		if (localStorage.getItem(localStorageKey)) {
-			return;
-		}
-
-		localStorage.setItem(localStorageKey, true);
+		const localStorageKey = "article__" + articleId + "__viewDone"; 
+	
+		const objString = localStorage.getItem(localStorageKey);
+		if (objString) { 			
+			const obj = JSON.parse(objString);
+			
+			if(Date.now() > obj.expire || !obj.expire )
+				localStorage.removeItem(localStorageKey);
+			else 
+				return;
+			
+		} 
+		setItemWithExpireTime(localStorageKey, true);
 
 		$.ajax({
 			url : '/usr/article/increaseHitCount?id=' + articleId,
