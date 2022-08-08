@@ -57,14 +57,14 @@ public class MemberService {
 	public String getEncrypt(String loginPw, String salt) {
 		String result = "";
 		try {	
-			//SHA-256 알고리즘 객체 생성
+			// SHA-256 알고리즘 객체 생성
 			MessageDigest md = MessageDigest.getInstance("SHA-256");
 			
-			//password + salt 합친 문자열에 SHA-256 적용
+			// password + salt 합친 문자열에 SHA-256 적용
 			md.update((loginPw + salt).getBytes() );
 			byte[] pwdsalt = md.digest();
 			
-			//byte to String
+			// byte to String
 			StringBuffer sb = new StringBuffer();
 			for(byte b : pwdsalt) {
 				sb.append(String.format("%02x", b));
@@ -78,11 +78,14 @@ public class MemberService {
 	}
 
 	public String getSalt() {
+		// SecureRandom, byte 객체 생성
 		SecureRandom r = new SecureRandom();
 		byte[] salt = new byte[10];
 		
+		// 난수 생성
 		r.nextBytes(salt);
 		
+		// byte To String (10진수 문자열 변경)
 		StringBuffer sb = new StringBuffer();
 		for(byte b : salt) {
 			sb.append(String.format("%02x", b));
@@ -134,13 +137,13 @@ public class MemberService {
 	public String genMemberModifyAuthKey(int memberId) {
 		String memberModifyAuthKey = Ut.getTempPassword(10);  
 		
-		// relTypeCode, relId, typeCode, type2Code, value, exprieDate 
+		// 순서 : relTypeCode, relId, typeCode, type2Code, value, exprieDate 
 		attrService.setValue("member", memberId, "extra", "memberModifyAuthKey", memberModifyAuthKey, Ut.getDataStrLater(60*5));
 		
 		return memberModifyAuthKey;
 	} 
 	public ResultData checkMemberModifyAuthKey(int loginedMemberId, String memberModifyAuthKey) {
-		// relTypeCode relId typeCode type2Code
+		// 순서 : relTypeCode relId typeCode type2Code
 		String value = attrService.getValue("member", loginedMemberId, "extra", "memberModifyAuthKey");
 		System.out.println("value:  "+value);
 		System.out.println("memberModifyAuthKey:  "+memberModifyAuthKey);

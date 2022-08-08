@@ -22,7 +22,7 @@ public class AdmBoardController {
 	
 	@RequestMapping("/adm/board/list")
 	public String showList(@RequestParam(defaultValue = "1") int page, 
-			@RequestParam(defaultValue = "5") int itemsCountInAPage,
+			@RequestParam(defaultValue = "10") int itemsCountInAPage,
 			@RequestParam(defaultValue = "name,code") String searchKeywordType,
 			@RequestParam(defaultValue = "") String searchKeyword,
 			Model model

@@ -58,10 +58,11 @@ public class Ut {
 				if ( msg.length > 0 ) {
 				    alert(msg);
 				}
+								
 				location.replace('%s');
 				</script>
 				""", msg, uri);
-	}
+	 }
 	
 	 public static String getUriEncoded(String str) {
         try {

@@ -32,7 +32,7 @@ public class AdmMemberController {
 	public String showMemberList(Model model,
 			@RequestParam(defaultValue = "1") int searchAuthLevel, 
 			@RequestParam(defaultValue = "1") int page, 
-			@RequestParam(defaultValue = "5") int itemsCountInAPage, 
+			@RequestParam(defaultValue = "10") int itemsCountInAPage, 
 			@RequestParam(defaultValue = "title,body") String searchKeywordType,
 			@RequestParam(defaultValue = "") String searchKeyword) {
 		

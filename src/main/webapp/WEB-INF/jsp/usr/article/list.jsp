@@ -32,9 +32,8 @@
        
        <select id="select" name="itemsCountInAPage" data-value="${param.itemsCountInAPage}" 
           onchange="this.form.submit();"
-          class="select select-sm select-bordered font-normal" style="font-weight:normal">
-          <option value="5" selected>5개씩 보기</option>
-          <option value="10">10개씩 보기</option>
+          class="select select-sm select-bordered font-normal" style="font-weight:normal"> 
+          <option value="10" selected>10개씩 보기</option>
           <option value="20">20개씩 보기</option>
           <option value="50">50개씩 보기</option>
         </select>
