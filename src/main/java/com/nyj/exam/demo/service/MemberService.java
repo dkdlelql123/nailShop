@@ -1,6 +1,7 @@
 package com.nyj.exam.demo.service;
 
-import java.util.ArrayList;
+import java.security.MessageDigest;
+import java.security.SecureRandom;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +47,50 @@ public class MemberService {
 			return ResultData.form("F-2", Ut.f("이미 사용중인 이름(%s)와 이메일(%s) 입니다", name, email));
 		}
 		
-		memberRepository.join(loginId, loginPw, email, name, nickname, phoneNumber);
+		String salt = getSalt();
+		String encrypt = getEncrypt(loginPw, salt);
+		
+		memberRepository.join(loginId, encrypt, salt, email, name, nickname, phoneNumber);
 		return ResultData.form("S-1", "회원가입이 완료되었습니다.");
 	}
 	
+	public String getEncrypt(String loginPw, String salt) {
+		String result = "";
+		try {	
+			//SHA-256 알고리즘 객체 생성
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			
+			//password + salt 합친 문자열에 SHA-256 적용
+			md.update((loginPw + salt).getBytes() );
+			byte[] pwdsalt = md.digest();
+			
+			//byte to String
+			StringBuffer sb = new StringBuffer();
+			for(byte b : pwdsalt) {
+				sb.append(String.format("%02x", b));
+			}
+			
+			result = sb.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public String getSalt() {
+		SecureRandom r = new SecureRandom();
+		byte[] salt = new byte[10];
+		
+		r.nextBytes(salt);
+		
+		StringBuffer sb = new StringBuffer();
+		for(byte b : salt) {
+			sb.append(String.format("%02x", b));
+		}
+		
+		return sb.toString();
+	}
+
 	public int getLastInsertId() {
 		return memberRepository.getLastInsertId();
 	}
@@ -77,7 +118,15 @@ public class MemberService {
 			return ResultData.form("F-1", "회원정보가 없습니다.");
 		}
 		
-		memberRepository.modify(memberId, loginPw, email, nickname, phoneNumber);
+		String salt = null;
+		String encrypt = null;
+		
+		if(loginPw != null) {
+			salt = getSalt();
+			encrypt = getEncrypt(loginPw, salt);			
+		}
+		
+		memberRepository.modify(memberId, encrypt, salt, email, nickname, phoneNumber);
 		
 		return ResultData.form("S-1", "정보수정이 완료되었습니다.");
 	}
@@ -87,7 +136,6 @@ public class MemberService {
 		
 		// relTypeCode, relId, typeCode, type2Code, value, exprieDate 
 		attrService.setValue("member", memberId, "extra", "memberModifyAuthKey", memberModifyAuthKey, Ut.getDataStrLater(60*5));
-		
 		
 		return memberModifyAuthKey;
 	} 

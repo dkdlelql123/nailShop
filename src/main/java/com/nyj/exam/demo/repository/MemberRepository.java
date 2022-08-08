@@ -12,7 +12,7 @@ import com.nyj.exam.demo.vo.Member;
 @Mapper
 public interface MemberRepository {
 
-	void join(@Param("loginId") String loginId, @Param("loginPw") String loginPw, @Param("email") String email, @Param("name") String name,@Param("nickname") String nickname, @Param("phoneNumber")String phoneNumber);
+	void join(@Param("loginId") String loginId, @Param("loginPw") String loginPw, @Param("salt") String salt, @Param("email") String email, @Param("name") String name,@Param("nickname") String nickname, @Param("phoneNumber")String phoneNumber);
 
 	int getLastInsertId();
 
@@ -24,7 +24,7 @@ public interface MemberRepository {
 
 	Member getMemberNameAndEmail(@Param("name") String name, @Param("email") String email);
 
-	void modify(int memberId,String loginPw, String email,String nickname, String phoneNumber);
+	void modify(int memberId,String loginPw, String salt, String email,String nickname, String phoneNumber);
 
 	@Select("""
 			<script>

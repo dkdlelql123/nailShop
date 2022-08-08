@@ -8,6 +8,7 @@
 	updateDate = NOW(),
 	loginId = #{loginId},
 	loginPw = #{loginPw},
+	salt = #{salt},
 	`name` = #{name},
 	nickname = #{nickname},
 	email = #{email},
@@ -62,6 +63,9 @@
 	</if>
 	<if test="email !=null">
 		, email = #{email}
+	</if>
+	<if test="salt !=null">
+	, salt = #{salt}
 	</if>
 	<if test="nickname !=null">
 		, nickname = #{nickname}

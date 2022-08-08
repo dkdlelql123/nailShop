@@ -11,6 +11,8 @@ public class Member {
 	private int id;
 	private String loginId;
 	private String loginPw;
+	private String salt;
+	
 	private String email;
 	private String name;
 	private String nickname;

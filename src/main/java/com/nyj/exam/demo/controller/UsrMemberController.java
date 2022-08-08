@@ -1,5 +1,8 @@
 package com.nyj.exam.demo.controller;
 
+import java.security.MessageDigest;
+import java.security.SecureRandom;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.nyj.exam.demo.service.AttrService;
 import com.nyj.exam.demo.service.MemberService;
 import com.nyj.exam.demo.util.Ut;
 import com.nyj.exam.demo.vo.Member;
@@ -27,7 +29,7 @@ public class UsrMemberController {
 	}
 
 	@RequestMapping("/usr/member/join")
-	public String showJoin() { 
+	public String showJoin() { 	
 		return "/usr/member/join";
 	}
 	
@@ -50,6 +52,7 @@ public class UsrMemberController {
 
 		return Ut.jsReplace(joinRd.getMsg(), "/usr/member/login");
 	}
+	
 
 	@RequestMapping("/usr/member/login")
 	public String showLogin() { 
@@ -77,7 +80,10 @@ public class UsrMemberController {
 			return Ut.jsHistoryBack("회원정보가 없습니다.");
 		}
 
-		if (member.getLoginPw().equals(loginPw) == false) {
+		String salt = member.getSalt(); 
+		String encrypt = memberService.getEncrypt(loginPw, salt); 
+
+		if (member.getLoginPw().equals(encrypt) == false) {
 			return Ut.jsHistoryBack("비밀번호가 일치하지 않습니다.");
 		}
 
@@ -116,11 +122,12 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/doCheckPassword")
 	@ResponseBody
 	public String doCheckPassword(String loginPw, String replaceUri) {  
-			
-		System.out.println(loginPw);
-		System.out.println(rq.getMember().getLoginPw());
+
+		String salt = rq.getMember().getSalt();
+		String encrypt = memberService.getEncrypt(loginPw, salt);
+		 
 		
-		if(rq.getMember().getLoginPw().equals(loginPw) == false) {
+		if(rq.getMember().getLoginPw().equals(encrypt) == false) {
 			return Ut.jsHistoryBack("비밀번호가 일치하지 않습니다");
 		}
 		
@@ -171,6 +178,7 @@ public class UsrMemberController {
 		} 
 		
 		ResultData doModifyRd = memberService.doModify( rq.getLoginedMemberId(), loginPw, email, nickname, phoneNumber);
+		
 		if (doModifyRd.isFail()) {
 			return Ut.jsHistoryBack(doModifyRd.getMsg());
 		}
