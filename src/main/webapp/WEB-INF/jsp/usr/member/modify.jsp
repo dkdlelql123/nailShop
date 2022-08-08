@@ -83,14 +83,14 @@
         <td>새 비밀번호</td>
         <td>
           <input type="password" name="loginPw" class="input w-full" 
-            placeholder="새 비밀번호" />
+            placeholder="새 비밀번호"autoComplete="off"  />
         </td>
       </tr>
        <tr>
         <td>새 비밀번호 재확인</td>
         <td>
           <input type="password" name="loginPw2" class="input w-full" 
-            placeholder="비밀번호 재확인" />
+            placeholder="비밀번호 재확인" autoComplete="off" />
         </td>
       </tr>
       <tr>

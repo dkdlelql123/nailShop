@@ -9,11 +9,10 @@
 	let submitJoinFormDone = false;
 	
 	function checkForm(form) {
-		console.log(submitJoinFormDone)
-		//if (submitJoinFormDone) {
-		//	alert("처리중입니다.");
-		//	return;
-		//}
+		if (submitJoinFormDone) {
+			alert("처리중입니다.");
+			return;
+	    }
 
 		if (form.loginPw.value.trim().length <= 0) {
 			$(".messege").html("<div class='py-2'>비밀번호를(를) 올바르게 입력해주세요.</div>");
@@ -23,8 +22,8 @@
 
 		$(".messege").html("");
 
-		submitJoinFormDone = true;
 		form.submit();
+		submitJoinFormDone = true;
 	}
 </script>
 
@@ -34,7 +33,6 @@
     class="table-box-type-1 mt-8"
     action="/usr/member/doCheckPassword" method="POST"
     onsubmit="checkForm(this); return false;">
-    
     <input type="hidden" name="replaceUri" value="${param.replaceUri}" />
     
     <table>
@@ -51,7 +49,7 @@
         <th>비밀번호</th>
         <td>
           <input type="password" name="loginPw" class="input w-full"
-            required="required" placeholder="현재 비밀번호" />
+            required="required" placeholder="현재 비밀번호" autoComplete="off" />
         </td>
       </tr>
     </table>

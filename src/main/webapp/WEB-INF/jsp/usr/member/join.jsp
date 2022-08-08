@@ -54,6 +54,7 @@
 			return;
 		}
 
+		console.log("완료")
 		form.submit();
 		submitJoinFormDone = true;
 	}  
@@ -114,13 +115,13 @@
         <td>비밀번호</td>
         <td>
           <input type="password" id="loginPw" name="loginPw"
-            class="input w-full loginPw" placeholder="비밀번호" required />
+            class="input w-full loginPw" placeholder="비밀번호" required autoComplete="off" />
       </tr>
       <tr>
         <td>비밀번호 재확인</td>
         <td>
           <input type="password" name="loginPw2" class="input w-full"
-            placeholder="비밀번호" required />
+            placeholder="비밀번호" required autoComplete="off" />
         </td>
       </tr>
       <tr>
