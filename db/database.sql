@@ -35,6 +35,14 @@ CREATE TABLE `member` (
 	delDate DATETIME COMMENT '탈퇴날짜'
 );
 
+# 암호화 - 비번 칼럼의 길이를 100으로 늘림
+ALTER TABLE `member`
+MODIFY COLUMN loginPw VARCHAR(100) NOT NULL;
+
+# 암호화 - salt
+ALTER TABLE `member`
+ADD COLUMN salt VARCHAR(20) NULL AFTER loginPw;
+
 # 관리자 회원 생성
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -45,19 +53,7 @@ loginPw = 'admin',
 nickname = '내가 관리자',
 email = '관리자@naver.com',
 phoneNumber = '010-1111-1111',
-authLevel = 10;
-	
-# 테스트 회원 생성
-INSERT INTO `member`
-SET regDate = NOW(),
-updateDate = NOW(),
-loginId = 'user1',
-loginPw = 'user1',
-`name` = '사용자1 이름',
-nickname = '사용자1 별명',
-email = '사용자1@naver.com',
-phoneNumber = '010-1111-1111',
-authLevel = 2;	 
+authLevel = 10;  
 
 # 게시물 테이블에 회원정보 추가
 ALTER TABLE article 
@@ -230,4 +226,3 @@ ADD COLUMN replyStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '0:사용,
 # 게시판 리액션포인트 사용여부 칼럼 추가
 ALTER TABLE board
 ADD COLUMN reactionPointStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '0:사용, 1:미사용' AFTER `name`; 
-
