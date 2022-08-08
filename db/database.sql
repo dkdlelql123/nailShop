@@ -226,3 +226,11 @@ ADD COLUMN replyStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '0:사용,
 # 게시판 리액션포인트 사용여부 칼럼 추가
 ALTER TABLE board
 ADD COLUMN reactionPointStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '0:사용, 1:미사용' AFTER `name`; 
+
+# 암호화 - member loginPw 칼럼 길이 늘림
+ALTER TABLE `member`
+MODIFY COLUMN loginPw VARCHAR(100) NOT NULL;
+
+# 암호화 - salt 칼럼 추가
+ALTER TABLE `member`
+ADD COLUMN salt VARCHAR(20) NOT NULL AFTER loginPw;
