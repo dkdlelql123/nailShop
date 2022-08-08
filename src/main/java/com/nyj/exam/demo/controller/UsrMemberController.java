@@ -1,7 +1,4 @@
-package com.nyj.exam.demo.controller;
-
-import java.security.MessageDigest;
-import java.security.SecureRandom;
+package com.nyj.exam.demo.controller; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -75,13 +72,23 @@ public class UsrMemberController {
 		}
 
 		Member member = memberService.getMemberLoginId(loginId);
-
 		if (member == null) {
 			return Ut.jsHistoryBack("회원정보가 없습니다.");
 		}
 
-		String salt = member.getSalt(); 
-		String encrypt = memberService.getEncrypt(loginPw, salt); 
+		String salt = "";
+		String encrypt = loginPw;
+		String msg = Ut.f("%s님 반갑습니다.", member.getNickname());
+		
+		if(member.getSalt().length() > 0) { 
+			salt = member.getSalt();
+			encrypt = memberService.getEncrypt(loginPw, salt);
+		} else {
+			// salt가 없는 경우
+			afterLoginUri = "/usr/member/checkPassword";
+			afterLoginUri += "?replaceUri=../member/modify";
+			msg = Ut.f("%s님 비밀번호를 변경해주세요.", member.getNickname());			
+		}
 
 		if (member.getLoginPw().equals(encrypt) == false) {
 			return Ut.jsHistoryBack("비밀번호가 일치하지 않습니다.");
@@ -89,11 +96,7 @@ public class UsrMemberController {
 
 		rq.login(member);  
 		
-		if(member.isAdmin()) {
-			return Ut.jsReplace("관리자님 반갑습니다.", "/adm");
-		}
-		
-		return Ut.jsReplace(Ut.f("%s님 반갑습니다.", member.getNickname()), afterLoginUri);
+		return Ut.jsReplace(msg, afterLoginUri);
 	}
 
 	@RequestMapping("/usr/member/doLogout")
@@ -123,9 +126,15 @@ public class UsrMemberController {
 	@ResponseBody
 	public String doCheckPassword(String loginPw, String replaceUri) {  
 
-		String salt = rq.getMember().getSalt();
-		String encrypt = memberService.getEncrypt(loginPw, salt);
-		 
+		String salt = "";
+		String encrypt = loginPw;
+		System.out.println("encrypt : "+encrypt);
+		
+		if(rq.getMember().getSalt().length() > 0) {
+			salt = rq.getMember().getSalt();
+			encrypt = memberService.getEncrypt(loginPw, salt);
+		} 				   
+		
 		
 		if(rq.getMember().getLoginPw().equals(encrypt) == false) {
 			return Ut.jsHistoryBack("비밀번호가 일치하지 않습니다");
