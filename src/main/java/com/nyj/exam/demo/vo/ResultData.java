@@ -57,11 +57,22 @@ public class ResultData {
 		ResultData newRd = new ResultData();
 		
 		newRd.resultCode = rd.getResultCode();
-		newRd.data1msg = rd.getData1msg();
+		newRd.msg = rd.getMsg(); 
 		newRd.data1 = obj;
 		
 		return newRd;
 	}
+	
+	public static ResultData newData(ResultData rd, String data1msg, Object data1) {
+		ResultData newRd = new ResultData();
+		
+		newRd.resultCode = rd.getResultCode();
+		newRd.msg = rd.getMsg();
+		newRd.data1msg = data1msg;
+		newRd.data1 = data1;
+		
+		return newRd;
+	} 
 
 	public void setData2(String msg, Object obj) {
 		this.data2msg = msg;

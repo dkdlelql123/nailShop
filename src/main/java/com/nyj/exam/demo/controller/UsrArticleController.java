@@ -13,6 +13,7 @@ import com.nyj.exam.demo.service.ArticleService;
 import com.nyj.exam.demo.service.BoardService;
 import com.nyj.exam.demo.service.ReactionPointService;
 import com.nyj.exam.demo.service.ReplyService;
+import com.nyj.exam.demo.service.VisitService;
 import com.nyj.exam.demo.util.Ut;
 import com.nyj.exam.demo.vo.Article;
 import com.nyj.exam.demo.vo.Board;
@@ -32,6 +33,8 @@ public class UsrArticleController {
 	ReactionPointService reactionPointService;
 	@Autowired
 	ReplyService replyService;
+	@Autowired
+	VisitService visitService;
 	
 	private Rq rq;
 	
@@ -145,10 +148,14 @@ public class UsrArticleController {
 		if(increaseHitCountRd.isFail()) {
 			return increaseHitCountRd;
 		}
+
+		ResultData visitRd = visitService.increaseHitCount(id);
 		
 		int hitCount = articleService.getArticleHitCount(id); 
-		ResultData rd = ResultData.newData(increaseHitCountRd, hitCount); 
-		rd.setData2("articleId", id);
+		System.out.println("hitCounthitCounthitCounthitCount");
+		System.out.println(hitCount);
+		ResultData rd = ResultData.newData(increaseHitCountRd, "조회 후 조회수", hitCount); 
+	    rd.setData2(visitRd.getMsg(), visitRd);
 		
 		return rd;
 	}

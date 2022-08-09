@@ -12,12 +12,6 @@ CREATE TABLE article(
 	`body` TEXT NOT NULL	
 );
 
-# 게시물, 테이스 데이터 생성
-INSERT INTO article 
-SET regDate = NOW(),
-updateDate = NOW(),
-title = "제목",
-`body` = "내용";
 
 # 회원테이블 추가
 CREATE TABLE `member` (
@@ -60,9 +54,7 @@ ALTER TABLE article
 ADD COLUMN memberId INT UNSIGNED NOT NULL AFTER updateDate;
 
 # 기존 게시물 데이터 회원정보 변경
-UPDATE article
-SET memberID = 1
-WHERE memberid = 0;
+UPDATE article;
 
 # 게시판 만들기
 CREATE TABLE board(
@@ -119,7 +111,7 @@ ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
  
 ALTER TABLE article
 ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
- 
+
 # reactionPoint 테이블의 좋아요, 싫어요 카운트 세서 article테이블에 넣기 
 UPDATE article AS a
 INNER JOIN(
@@ -160,7 +152,6 @@ ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
 
 ALTER TABLE reply
 ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
-
 
 # 댓글 테이블 인덱스 걸기
 ALTER TABLE reply
@@ -234,3 +225,10 @@ MODIFY COLUMN loginPw VARCHAR(100) NOT NULL;
 # 암호화 - salt 칼럼 추가
 ALTER TABLE `member`
 ADD COLUMN salt VARCHAR(20) NOT NULL AFTER loginPw;
+
+# 방문자수 table 생성
+CREATE TABLE visit(
+id INT(10) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+articleId INT(10) UNSIGNED NOT NULL, 
+regDate DATETIME NOT NULL
+); 

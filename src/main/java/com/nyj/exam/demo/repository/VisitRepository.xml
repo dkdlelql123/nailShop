@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nyj.exam.demo.repository.VisitRepository">
+
+	<insert id="increaseHitCount">
+	INSERT INTO visit
+	SET articleId = #{articleId},
+	regDate = NOW();
+	</insert>
+	
+	<select id="getTotalCount" resultType="int">
+	SELECT COUNT(*) AS extra__totalCount
+	FROM visit; 
+	</select>
+	
+	<select id="getTodayCount" resultType="int">
+	SELECT COUNT(*) AS extra__todayCount 
+	FROM visit
+	WHERE DATE_FORMAT(regDate, "%Y-%m-%d") = CURDATE();
+	</select>
+
+</mapper>

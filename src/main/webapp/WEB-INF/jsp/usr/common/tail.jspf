@@ -36,7 +36,7 @@
           <span class="text-3xl font-bold">Blog</span>
           <span class="text-xs">22.08.02 -</span>
         </a>
-        <div class="p-4">today | total</div>
+        <div class="p-4">today <span id="today">${today}</span> | total <span id="total">${total}</span></div>
       </div>
           
       <ul class="menu p-4 overflow-y-auto text-base-content">

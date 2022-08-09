@@ -78,9 +78,9 @@ public class ArticleService {
 	public ResultData increaseHitCount(int id) { 
 		int affectedRowCount =  articleRepository.increaseHitCount(id);
 		if( affectedRowCount == 0 ) {
-			return ResultData.form("F-1", "조회수 증가 실패", affectedRowCount);			
+			return ResultData.form("F-1", "조회수 증가 실패");			
 		}
-		return ResultData.form("S-1", "조회수 +1", affectedRowCount);
+		return ResultData.form("S-1", "조회수 +1");
 	}
 
 	public ResultData increaseGoodReactionPoint(int relId) {
