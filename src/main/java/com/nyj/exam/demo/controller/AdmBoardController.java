@@ -2,6 +2,7 @@ package com.nyj.exam.demo.controller;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.nyj.exam.demo.service.AttrService;
 import com.nyj.exam.demo.service.BoardService;
 import com.nyj.exam.demo.util.Ut;
 import com.nyj.exam.demo.vo.Board;
@@ -19,6 +21,8 @@ public class AdmBoardController {
 	
 	@Autowired
 	BoardService boardService;
+	@Autowired
+	AttrService attrService;
 	
 	@RequestMapping("/adm/board/list")
 	public String showList(@RequestParam(defaultValue = "1") int page, 
@@ -51,7 +55,8 @@ public class AdmBoardController {
 	@ResponseBody
 	public String doWrite(String name, String code, int replyStatus, int reactionPointStatus) {
 		
-		boardService.doWrite(name, code, replyStatus, reactionPointStatus);
+		int id = boardService.doWrite(name, code, replyStatus, reactionPointStatus);
+		 
 		
 		return Ut.jsReplace("게시판이 생성되었습니다.", "/adm/board/list");
 	}

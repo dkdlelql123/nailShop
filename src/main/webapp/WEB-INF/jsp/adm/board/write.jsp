@@ -145,7 +145,7 @@
           </div> 
         </div> 
         </td>
-      </tr> 
+      </tr>  
     </table>
 
     <div class="flex justify-end mt-4">

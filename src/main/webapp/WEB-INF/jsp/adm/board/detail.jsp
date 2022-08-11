@@ -56,10 +56,14 @@
            ${board.reactionPointStatus == 0 ? "사용" : "미사용"}
         </td>
       </tr> 
+       <tr>
+        <th>메뉴 노출</th>
+        <td colspan="3">
+           
+        </td>
+      </tr> 
     </table>
-    
-         
-
+     
     <div class="flex justify-end mt-4 gap-2">
       <a href="/adm/board/modify?id=${board.id}" class="btn btn-info btn-sm">수정</a>
       <a href="/adm/board/list" class="btn btn-info btn-sm btn-outline">목록</a>

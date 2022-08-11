@@ -131,4 +131,10 @@ public interface BoardRepository {
 			""")
 	void doModify(int id, String name, String code, int replyStatus, int reactionPointStatus);
 
+	@Select("""
+			SELECT LAST_INSERT_ID();
+			""")
+	int getLastInsertId();
+
+
 }

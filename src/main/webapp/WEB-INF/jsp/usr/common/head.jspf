@@ -61,11 +61,17 @@
    
     <!-- HEADER start -->
     <div class="flex justify-between items-center p-4 gap-4">
-      <div class="flex-1">
+      <div >
         <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">
           <i class="fas fa-bars"></i>
         </label>
       </div>      
+      
+      <div class="flex-1 ">
+        <a href="/" class="lg:hidden"> 
+          <span class="text-2xl font-bold">Blog</span>
+        </a>
+      </div>
       
       <ul class="flex gap-4 text-base-content">
         <li>
