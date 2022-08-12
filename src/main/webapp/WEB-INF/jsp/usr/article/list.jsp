@@ -6,24 +6,17 @@
 <%@ include file="../common/head.jspf"%>
 
 <h1 class="font-title mb-4 text-3xl font-extrabold">${board.name} 총 ${articlesCount}개</h1>
-<div class="form-control">
-  <form class="input-group justify-center" name="search-form">
-   <input type="hidden" name="boardId" value="${param.boardId}" />
-   <input type="hidden" name="itemsCountInAPage" value="${param.itemsCountInAPage}" />
-   <select id="select" name="searchKeywordType" data-value="${param.searchKeywordType}" class="select select-md select-bordered border-r-0 rounded-r-none" style="border-bottom-right-radius: 0px;border-top-right-radius: 0px;font-weight:normal">
-      <option value="title" selected>제목</option>
-      <option value="body">내용</option>
-      <option value="title,body">제목+내용</option>
-    </select>
-    <input type="text" name="searchKeyword" value="${param.searchKeyword}" placeholder="Search…" class="input input-md input-bordered" />
-    <button type="submit" class="btn btn-md btn-square">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke="#fff" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-    </button>
-  </form>
-</div> 
+ 
+ 
+<c:if test="${rq.member.authLevel == 10}">
+  <div class="flex justify-end">  
+    <a href="/usr/article/write?boardId=${board.id}"
+      class="btn btn-sm btn-primary">글쓰기</a>
+  </div>
+</c:if>
 
-<div class="flex itmes-center justify-between my-4">  
+
+<div class="flex flex-col-reverse lg:flex-row gap-2 lg:gap-0 itmes-center justify-between my-4">  
   <div class="form-control">
     <form>
        <input type="hidden" name="boardId" value="${param.boardId}" /> 
@@ -39,46 +32,60 @@
         </select>
     </form>
   </div>
-  <c:if test="${rq.member.authLevel == 10}">
-  <div>
-    <a href="/usr/article/write?boardId=${board.id}"
-      class="btn btn-sm btn-info">글쓰기</a>
-  </div>
-  </c:if>
+  <div class="form-control">
+    <form class="input-group justify-center" name="search-form">
+     <input type="hidden" name="boardId" value="${param.boardId}" />
+     <input type="hidden" name="itemsCountInAPage" value="${param.itemsCountInAPage}" />
+     <select id="select" name="searchKeywordType" data-value="${param.searchKeywordType}" 
+        class="select select-sm select-bordered border-r-0 rounded-r-none" style="border-bottom-right-radius: 0px;border-top-right-radius: 0px;font-weight:normal">
+        <option value="title" selected>제목</option>
+        <option value="body">내용</option>
+        <option value="title,body">제목+내용</option>
+      </select>
+      <input type="text" name="searchKeyword" value="${param.searchKeyword}" placeholder="Search…" class="input input-sm input-bordered" />
+      <button type="submit" class="btn btn-sm px-1 py-0">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke="#fff" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+      </button>
+    </form>
+  </div> 
 </div>
 
 <div class="table-box-type-1">
   <table id="boardtable">
-    <colgroup>
+    <colgroup> 
+      <col>
+      <col width="80">
       <col width="100">
-      <col width="500">
     </colgroup>
     <thead>
-      <tr>
-        <th>번호</th>
+      <tr> 
         <th>제목</th>
         <th>조회</th>
         <c:if test="${reactionPointStatus == 0}">
           <th>추천</th>
-        </c:if>
-        <th>작성자</th>
+        </c:if>  
         <th>작성일</th>
       </tr>
     </thead>
     <tbody>
       <c:forEach var="article" items="${articles}">
-        <tr>
-          <th class="text-center">${article.id}</th>
+        <tr> 
           <td>
-            <a href="${rq.getArticleDetailFromList(article)}">${article.title}</a>
-            <c:if test="${replyStatus == 0}"> [0] </c:if>
+             <div class="">
+                <a href="${rq.getArticleDetailFromList(article)}">${article.title}</a>
+                <c:if test="${replyStatus == 0}"> [0] </c:if>
+              </div>
+              <!-- <div class="flex items-center gap-1">
+                <span class="text-base-content/70 text-xs" >${article.extra__writerName}</span>
+                <span class="text-base-content/70 text-xs lg:hidden" >${article.forPrintType1RegDate}</span>
+              </div> -->
           </td>
           <td class="text-center">${article.hit}</td>
           <c:if test="${reactionPointStatus == 0}">
             <td class="text-center">${article.goodReactionPoint}</td>
-          </c:if>
-          <td class="text-center">${article.extra__writerName}</td>
-          <td class="text-center">${article.forPrintType1RegDate}</td>
+          </c:if>  
+          <td class="text-center"> ${article.forPrintType1RegDate}</td>
         </tr>
       </c:forEach>
     </tbody>

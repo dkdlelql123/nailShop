@@ -112,10 +112,10 @@
 </div>
 
 <div class="table-box-type-1">
-  <table>
-    <colgroup>
-      <col width="200">
-    </colgroup>
+  <table> 
+  <colgroup>
+    <col width="200"/>
+  </colgroup>
     <tr>
       <td>번호</td>
       <td>${article.id}</td>
@@ -182,9 +182,8 @@
       <td>수정일</td>
       <td>${article.forPrintType2UpdateDate}</td>
     </tr>
-    <tr>
-      <td>내용</td>
-      <td>
+    <tr> 
+      <td colspan=2>
         <div class="toast-ui-viewer">
           <script type="text/x-template">
 			${article.body}

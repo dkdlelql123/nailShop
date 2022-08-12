@@ -31,7 +31,8 @@ function article__submitForm(form){
 }
 </script>
 
-<form class="table-box-type-1" action="/usr/article/doModify" onsubmit="article__submitForm(this); return false;" method="POST">  
+<form class="table-box-type-1" action="/usr/article/doModify" onsubmit="article__submitForm(this); return false;" method="POST"> 
+  <input type="hidden" name="id" value="${article.id}" readonly /> 
   <input type="hidden" value="${article.body}" name="body" />
   
   <c:if test="${article.extra__actorCanEdit}">
@@ -46,9 +47,7 @@ function article__submitForm(form){
     </colgroup>
     <tr class="">
       <td>번호</td>
-      <td>
-        <input type="text" name="id" value="${article.id}" readonly />
-      </td>
+      <td>${article.id}</td>
     </tr>
     <tr>
         <td>카테고리</td>
@@ -70,12 +69,6 @@ function article__submitForm(form){
         </td>
       </tr>
     <tr>
-      <td>제목</td>
-      <td>
-        <input type="text" class="w-full input input-sm" name="title" value="${article.title}" />
-      </td>
-    </tr>
-    <tr>
       <td>작성자</td>
       <td>${article.extra__writerName}</td>
     </tr>
@@ -87,6 +80,12 @@ function article__submitForm(form){
       <td>수정일</td>
       <td>${article.forPrintType2UpdateDate}</td>
     </tr> 
+    <tr>
+      <td>제목</td>
+      <td>
+        <input type="text" class="w-full input input-sm input-bordered" name="title" value="${article.title}" />
+      </td>
+    </tr>
   </table>
   <div class="toast-ui-editor">
       <script type="text/x-template">${article.body}</script>

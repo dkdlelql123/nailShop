@@ -67,7 +67,7 @@
       <tr style="width:200px">
         <th>작성자</th>
         <td>
-          <input type="text" class="w-full input-sm"
+          <input type="text" class="w-full input input-sm"
             value="${rq.member.nickname}" readonly />
         </td>
       </tr>
@@ -86,7 +86,7 @@
       <tr>
         <th>제목</th>
         <td>
-          <input type="text" class="w-full input input-sm" name="title"  
+          <input type="text" class="w-full input input-sm input-bordered" name="title"  
             required="required" placeholder="제목을 입력해주세요." />
         </td>
       </tr> 
