@@ -34,6 +34,11 @@ html[data-theme='forest'] .theme.forest {
 	display:none;
 }
 
+html[data-theme='forest'] .toastui-editor-contents * {
+	color:inherit;
+}
+
+
 html>body,
 .toastui-editor-contents, 
 .toastui-editor-contents, * { 
