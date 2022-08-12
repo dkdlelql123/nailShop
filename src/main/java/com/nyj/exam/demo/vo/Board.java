@@ -16,6 +16,7 @@ public class Board {
 	
 	int replyStatus;
 	int reactionPointStatus;
+	int publicStatus;
 	
 	int delStatus;
 	String delDate;

@@ -101,7 +101,8 @@ $(function() {
        <tr>
         <th>번호</th>
         <td colspan="3">
-          <input type="text" name="id" value="${board.id}" readonly/>
+          <input type="hidden" name="id" value="${board.id}" readonly/>
+          ${board.id}
         </td>
        </tr>
 
@@ -172,6 +173,28 @@ $(function() {
               <span class="label-text mr-2">No</span> 
               <input type="radio" name="reactionPointStatus" class="radio checked:bg-red-500" 
               value="1"  ${ board.reactionPointStatus == 1 ? "checked" : null}/>
+            </label>
+          </div> 
+        </div> 
+        </td>
+      </tr> 
+      
+      <tr>
+        <th>공개여부</th>
+        <td colspan="3">
+        <div class="flex gap-4">
+          <div class="form-control">
+            <label class="label cursor-pointer">
+              <span class="label-text mr-2">공개</span> 
+              <input type="radio" name="publicStatus" class="radio checked:bg-blue-500" value="0" 
+              ${ board.publicStatus == 0 ? "checked" : null} />
+            </label>
+          </div> 
+          <div class="form-control">
+            <label class="label cursor-pointer">
+              <span class="label-text mr-2">비공개</span> 
+              <input type="radio" name="publicStatus" class="radio checked:bg-red-500" value="1" 
+               ${ board.publicStatus == 1 ? "checked" : null} />
             </label>
           </div> 
         </div> 

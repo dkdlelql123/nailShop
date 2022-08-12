@@ -115,9 +115,10 @@ public interface BoardRepository {
 			`code` = #{code},
 			`name` = #{name},
 			`replyStatus` = #{replyStatus},
-			`reactionPointStatus` = #{reactionPointStatus}
+			`reactionPointStatus` = #{reactionPointStatus},
+			`publicStatus` = #{publicStatus}
 			""")
-	void doWrite(String name, String code, int replyStatus, int reactionPointStatus);
+	void doWrite(String name, String code, int replyStatus, int reactionPointStatus, int publicStatus);
 	
 	@Update("""
 			<script>			
@@ -125,11 +126,12 @@ public interface BoardRepository {
 			SET `name` = #{name},
 			`code` = #{code},
 			`replyStatus` = #{replyStatus},
-			`reactionPointStatus` = #{reactionPointStatus}
+			`reactionPointStatus` = #{reactionPointStatus},
+			`publicStatus` = #{publicStatus}
 			WHERE id = #{id};
 			</script>
 			""")
-	void doModify(int id, String name, String code, int replyStatus, int reactionPointStatus);
+	void doModify(int id, String name, String code, int replyStatus, int reactionPointStatus, int publicStatus);
 
 	@Select("""
 			SELECT LAST_INSERT_ID();

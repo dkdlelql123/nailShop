@@ -61,7 +61,12 @@
     <colgroup>
       <col width="45">
       <col width="100">
-      <col width="200">
+      <col>
+      <col>
+      <col width="100">
+      <col width="100">
+      <col width="100">
+      <col width="120">
     </colgroup>
     <thead>
       <tr>
@@ -71,6 +76,7 @@
         <th>이름[게시글수]</th>
         <th>댓글</th> 
         <th>좋아요</th> 
+        <th>공개</th> 
         <th>관리</th>
       </tr>
     </thead>
@@ -91,6 +97,7 @@
           </td>
           <td class="text-center">${board.replyStatus == 0 ? "O":"X"}</td> 
           <td class="text-center">${board.reactionPointStatus == 0 ? "O":"X"}</td> 
+          <td class="text-center">${board.publicStatus == 0 ? "O":"X"}</td> 
           <td>
             <div class="flex justify-center gap-1">
               <a href="/adm/board/detail?id=${board.id}" class="btn btn-xs btn-success">수정</a>

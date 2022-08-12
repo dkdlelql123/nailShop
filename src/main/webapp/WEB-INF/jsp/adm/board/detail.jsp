@@ -57,9 +57,9 @@
         </td>
       </tr> 
        <tr>
-        <th>메뉴 노출</th>
+        <th>공개여부</th>
         <td colspan="3">
-           
+           ${board.publicStatus == 0 ? "공개" : "미공개"}
         </td>
       </tr> 
     </table>
