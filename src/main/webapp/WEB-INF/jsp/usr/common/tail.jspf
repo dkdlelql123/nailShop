@@ -42,11 +42,15 @@
       <ul class="menu p-4 overflow-y-auto text-base-content">
         <c:forEach var="board" items="${boards}">
           <c:choose>
-            <c:when test="${board.publicStatus == 0}">
+            <c:when test="${board.publicStatus == 1}">
               <li><a href="/usr/article/list?boardId=${board.id}">${board.name}[${board.extra__articleCount}]</a></li>
            </c:when>
-           <c:when test="${board.publicStatus == 1 && rq.member.authLevel == 10}">
-              <li><a href="/usr/article/list?boardId=${board.id}">[비공개] ${board.name}[${board.extra__articleCount}]</a></li>
+           <c:when test="${board.publicStatus == 0 && rq.member.authLevel == 10}">
+              <li>
+                <a class="gap-0" href="/usr/article/list?boardId=${board.id}">
+                <span class="text-sm text-base-content/70 mr-1">[비공개]</span>${board.name}[${board.extra__articleCount}]
+                </a>
+              </li>
             </c:when>
           </c:choose>
         </c:forEach>  

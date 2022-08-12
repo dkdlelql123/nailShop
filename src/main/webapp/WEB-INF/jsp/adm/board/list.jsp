@@ -97,7 +97,7 @@
           </td>
           <td class="text-center">${board.replyStatus == 0 ? "O":"X"}</td> 
           <td class="text-center">${board.reactionPointStatus == 0 ? "O":"X"}</td> 
-          <td class="text-center">${board.publicStatus == 0 ? "O":"X"}</td> 
+          <td class="text-center">${board.publicStatus == 1 ? "O":"X"}</td> 
           <td>
             <div class="flex justify-center gap-1">
               <a href="/adm/board/detail?id=${board.id}" class="btn btn-xs btn-success">수정</a>

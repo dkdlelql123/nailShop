@@ -153,13 +153,13 @@
           <div class="form-control">
             <label class="label cursor-pointer">
               <span class="label-text mr-2">공개</span> 
-              <input type="radio" name="publicStatus" class="radio checked:bg-blue-500" value="0" checked />
+              <input type="radio" name="publicStatus" class="radio checked:bg-blue-500" value="1" checked />
             </label>
           </div> 
           <div class="form-control">
             <label class="label cursor-pointer">
               <span class="label-text mr-2">비공개</span> 
-              <input type="radio" name="publicStatus" class="radio checked:bg-red-500" value="1" />
+              <input type="radio" name="publicStatus" class="radio checked:bg-red-500" value="0" />
             </label>
           </div> 
         </div> 

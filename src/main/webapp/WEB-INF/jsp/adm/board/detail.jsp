@@ -59,7 +59,7 @@
        <tr>
         <th>공개여부</th>
         <td colspan="3">
-           ${board.publicStatus == 0 ? "공개" : "미공개"}
+           ${board.publicStatus == 1 ? "공개" : "미공개"}
         </td>
       </tr> 
     </table>
