@@ -6,7 +6,7 @@
 <html lang="ko" data-theme="cupcake">
 <head>
 <meta charset="UTF-8" />
-<title>${pageTitle} !!!</title>
+<title>${pageTitle}</title>
 <meta name="viewport" content="width=device-width">
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -74,6 +74,9 @@
       </div>
       
       <ul class="flex gap-4 text-base-content">
+        <c:if test="${rq.member.authLevel == 10 }">
+          <li><a href="/adm">adm</a></li>
+        </c:if>
         <li>
           <a href="https://www.instagram.com/pu_de_96/" target="_blank">
             <i class="fab fa-instagram"></i>

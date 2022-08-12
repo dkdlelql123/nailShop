@@ -30,8 +30,10 @@
 	      return;
 	    }
 
-	 	const editor = $(form).find('.toast-ui-editor').data('data-toast-editor');
+	 	const editor = $(form).find('.toast-ui-editor').data('data-toast-editor'); 
+	    
 	    const markdown = editor.getMarkdown().trim(); 
+	    console.log("markdown : "+markdown)
  
 	    if (markdown.length < 10) {
 			alert("내용을 10글자 이상 작성해주세요.");
@@ -39,6 +41,7 @@
 			
 			return; 
 	    }
+	    
 	    
 	    form.body.value = markdown; 
 
@@ -61,9 +64,9 @@
     <input type="hidden" name="body" />
 
     <table >
-       <colgroup>
-          <col width="200" />
-        </colgroup>
+      <colgroup>
+        <col width="200" />
+      </colgroup>
       <tr style="width:200px">
         <th>작성자</th>
         <td>

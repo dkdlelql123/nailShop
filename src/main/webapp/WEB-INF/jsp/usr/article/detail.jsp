@@ -6,7 +6,7 @@
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../../common/toastUIEditerLib.jspf"%>
 
-<input type="hidden" name="articleId" value="${param.id}" />
+<input type="hidden" name="articleId" value="${param.id}" /> 
 <script type="text/javascript" defer="defer">
 
 	// 게시물 조회수 시간계산

@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:set var="main" value="true" />
-<c:set var="pageTitle" value="홈" />
+<c:set var="pageTitle" value="blog 사이트를 만들고있습니다." />
 <%@ include file="../common/head.jspf"%>
 
 <style>

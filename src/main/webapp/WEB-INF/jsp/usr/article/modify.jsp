@@ -5,35 +5,33 @@
 <c:set var="pageTitle" value="게시물 수정페이지" />
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../../common/toastUIEditerLib.jspf"%>
-
-<script>
-let submitModifyrFormDone = false;
-
-function article__submitForm(form){
-	if(submitModifyrFormDone){
-		alert("처리중입니다.");
-	}
-	
-  	const editor = $(form).find('.toast-ui-editor').data('data-toast-editor'); 
-	const markdown = editor.getMarkdown().trim(); 
-	 
+ 
+<script> 
+  let submitModifyrFormDone = false;
+  
+  function article__submitForm(form){
+  	if(submitModifyrFormDone){
+  		alert("처리중입니다.");
+  	}
+  	
+    const editor = $(form).find('.toast-ui-editor').data('data-toast-editor'); 
+  	const markdown = editor.getMarkdown().trim(); 
+  	 
     if (markdown.length < 5) {
-		alert("내용을 5글자 이상 작성해주세요.");
-		editor.focus();
-		
-		return; 
-    }
-    
+  		alert("내용을 5글자 이상 작성해주세요.");
+  		editor.focus(); 
+  		return; 
+    } 
     form.body.value = markdown; 
-
-	form.submit();
-	submitModifyrFormDone = true;
-}
+  
+  	form.submit();
+  	submitModifyrFormDone = true;
+  } 
 </script>
 
 <form class="table-box-type-1" action="/usr/article/doModify" onsubmit="article__submitForm(this); return false;" method="POST"> 
   <input type="hidden" name="id" value="${article.id}" readonly /> 
-  <input type="hidden" value="${article.body}" name="body" />
+  <input type="hidden" name="body" value="" />
   
   <c:if test="${article.extra__actorCanEdit}">
     <div class="flex justify-end mb-4 gap-2">
@@ -89,7 +87,8 @@ function article__submitForm(form){
   </table>
   <div class="toast-ui-editor">
       <script type="text/x-template">${article.body}</script>
-  </div>  
+  </div>   
 </form>
+ 
 
 <%@ include file="../common/tail.jspf"%>
