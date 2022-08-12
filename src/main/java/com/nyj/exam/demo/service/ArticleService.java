@@ -31,7 +31,7 @@ public class ArticleService {
 		int limitTake = itemsCountInAPage; 
 		
 		return articleRepository.getArticles(boardId, searchKeyType, searchKeyword, limitStart, limitTake); 
-	} 
+	}  
 	
 	public Article getArticle(int id) { 		
 		return articleRepository.getArticle(id); 
@@ -69,7 +69,7 @@ public class ArticleService {
 
 	public int getArticlesCount(int boardId, String searchKeywordType, String searchKeyword) {
 		return articleRepository.getArticlesCount(boardId, searchKeywordType, searchKeyword);
-	}
+	}  
 	
 	public int getArticleHitCount(int id) {
 		return articleRepository.getArticleHitCount(id);
@@ -128,6 +128,6 @@ public class ArticleService {
 
 	public void deleteFromMember(int memberId) {
 		articleRepository.deleteFromMember(memberId);
-	} 
+	}
 	
 }

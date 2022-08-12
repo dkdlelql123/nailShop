@@ -99,6 +99,27 @@ public class UsrArticleController {
 		return "usr/article/list";
 	}
 	
+	@RequestMapping("/usr/article/searchList")
+	public String showList(Model model,  
+			@RequestParam(defaultValue = "1") int page, 
+			@RequestParam(defaultValue = "10") int itemsCountInAPage, 
+			@RequestParam(defaultValue = "title,body") String searchKeywordType,
+			@RequestParam(defaultValue = "") String searchKeyword ) {	   
+		 
+		int articlesCount = articleService.getArticlesCount(0, searchKeywordType, searchKeyword);
+		
+		int pagesCount = (int) Math.ceil((double)articlesCount / itemsCountInAPage) ; 
+		
+		List<Article> articles = articleService.getArticles(0,searchKeywordType, searchKeyword, page, itemsCountInAPage);
+		 
+		model.addAttribute("articlesCount", articlesCount);
+		model.addAttribute("articles", articles);
+		model.addAttribute("page", page);
+		model.addAttribute("pagesCount", pagesCount);
+		
+		return "usr/article/search";
+	} 
+	
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(Model model, int id) {
 		String relTypeCode = "article";
