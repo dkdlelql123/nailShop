@@ -45,9 +45,11 @@ public class UsrMemberController {
 			return Ut.jsHistoryBack(joinRd.getMsg());
 		}
 
-		int id = memberService.getLastInsertId(); 
+		int id = memberService.getLastInsertId();
+		Member member = memberService.getMemberById(id);
+		rq.login(member);  
 
-		return Ut.jsReplace(joinRd.getMsg(), "/usr/member/login");
+		return Ut.jsReplace(Ut.f("%s님 반갑습니다.", member.getNickname()), "/");
 	}
 	
 
