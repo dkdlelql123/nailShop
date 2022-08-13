@@ -47,13 +47,13 @@
       <tr>
         <th>댓글 기능</th>
         <td colspan="3">
-           ${board.replyStatus == 0 ? "사용" : "미사용"}
+           ${board.replyStatus == 1 ? "사용" : "미사용"}
         </td>
       </tr> 
       <tr>
         <th>좋아요 기능</th>
         <td colspan="3">
-           ${board.reactionPointStatus == 0 ? "사용" : "미사용"}
+           ${board.reactionPointStatus == 1 ? "사용" : "미사용"}
         </td>
       </tr> 
        <tr>

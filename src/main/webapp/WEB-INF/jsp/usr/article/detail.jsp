@@ -5,7 +5,6 @@
 <c:set var="pageTitle" value="게시물 상세페이지" />
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../../common/toastUIEditerLib.jspf"%>
-
 <input type="hidden" name="articleId" value="${param.id}" />
 <script type="text/javascript" defer="defer">
 
@@ -126,7 +125,7 @@
         <div class="articleHit">${article.hit}</div>
       </td>
     </tr>
-    <c:if test="${article.extra__replyStatus == 0}"> 
+    <c:if test="${article.extra__reactionPointStatus == 1}"> 
     <tr>
       <td>추천</td>
       <td>
@@ -192,9 +191,8 @@
       </td>
     </tr>
   </table>
-</div>
-
-<c:if test="${article.extra__reactionPointStatus == 0}"> 
+</div> 
+<c:if test="${article.extra__replyStatus == 1}"> 
 <div class="py-8">
   <h4 class="py-2 border-b border-gray-400">💬 댓글 ${replyCount}개</h4>
   <table>
@@ -204,33 +202,36 @@
     <c:forEach var="reply" items='${replies}'>
       <tr>
         <div class="flex flex-wrap gap-2 items-center py-2 border-b border-gray-200">
-          <p>${reply.body}</p>
-          <c:if test="${reply.extra__reactionStatus == ''}">
-            <a
-              href="/usr/reactionPoint/doGoodReaction?relId=${reply.id}&relTypeCode=reply&replaceUri=${rq.getEncodedCurrentUri()}"
-              class="btn btn-xs btn-success btn-outline">${reply.goodReactionPoint}👍</a>
-            <a
-              href="/usr/reactionPoint/doBadReaction?relId=${reply.id}&relTypeCode=reply&replaceUri=${rq.getEncodedCurrentUri()}"
-              class="btn btn-xs btn-secondary btn-outline">${reply.badReactionPoint}👎</a>
+          <p>${reply.body}</p> 
+          <c:if test="${article.extra__reactionPointStatus== 1}">
+            <c:if test="${reply.extra__reactionStatus == ''}">
+              <a
+                href="/usr/reactionPoint/doGoodReaction?relId=${reply.id}&relTypeCode=reply&replaceUri=${rq.getEncodedCurrentUri()}"
+                class="btn btn-xs btn-success btn-outline">${reply.goodReactionPoint}👍</a>
+              <a
+                href="/usr/reactionPoint/doBadReaction?relId=${reply.id}&relTypeCode=reply&replaceUri=${rq.getEncodedCurrentUri()}"
+                class="btn btn-xs btn-secondary btn-outline">${reply.badReactionPoint}👎</a>
+            </c:if>
+            <c:if test="${reply.extra__reactionStatus == 'good'}">
+              <a
+                href="/usr/reactionPoint/doCancleReaction?relId=${reply.id}&relTypeCode=reply&replaceUri=${rq.getEncodedCurrentUri()}&cancleReaction=good"
+                class="btn btn-xs btn-success">${reply.goodReactionPoint}👍</a>
+              <a
+                href="#" title="좋아요를 취소해주세요"
+                onClick="alert(this.title); return false;"
+                class="btn btn-xs btn-secondary btn-outline">${reply.badReactionPoint}👎</a>
+            </c:if>
+            <c:if test="${reply.extra__reactionStatus == 'bad'}">
+              <a
+                href="#" title="싫어요를 취소해주세요"
+                onClick="alert(this.title); return false;"
+                class="btn btn-xs btn-success btn-outline">${reply.goodReactionPoint}👍</a>
+              <a
+                href="/usr/reactionPoint/doCancleReaction?relId=${reply.id}&relTypeCode=reply&replaceUri=${rq.getEncodedCurrentUri()}&cancleReaction=bad"
+                class="btn btn-xs btn-secondary ">${reply.badReactionPoint}👎</a>
+            </c:if>
           </c:if>
-          <c:if test="${reply.extra__reactionStatus == 'good'}">
-            <a
-              href="/usr/reactionPoint/doCancleReaction?relId=${reply.id}&relTypeCode=reply&replaceUri=${rq.getEncodedCurrentUri()}&cancleReaction=good"
-              class="btn btn-xs btn-success">${reply.goodReactionPoint}👍</a>
-            <a
-              href="#" title="좋아요를 취소해주세요"
-              onClick="alert(this.title); return false;"
-              class="btn btn-xs btn-secondary btn-outline">${reply.badReactionPoint}👎</a>
-          </c:if>
-          <c:if test="${reply.extra__reactionStatus == 'bad'}">
-            <a
-              href="#" title="싫어요를 취소해주세요"
-              onClick="alert(this.title); return false;"
-              class="btn btn-xs btn-success btn-outline">${reply.goodReactionPoint}👍</a>
-            <a
-              href="/usr/reactionPoint/doCancleReaction?relId=${reply.id}&relTypeCode=reply&replaceUri=${rq.getEncodedCurrentUri()}&cancleReaction=bad"
-              class="btn btn-xs btn-secondary ">${reply.badReactionPoint}👎</a>
-          </c:if>
+          
           <span class="text-xs text-gray-500">${reply.extra__writerName}</span>
           <span class="text-xs text-gray-500">${reply.forPrintType1RegDate}</span>
           <c:if test="${reply.extra__actorCanEdit}">

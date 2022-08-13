@@ -66,10 +66,7 @@
     <thead>
       <tr> 
         <th>제목</th>
-        <th>조회</th>
-        <c:if test="${reactionPointStatus == 0}">
-          <th>추천</th>
-        </c:if>  
+        <th>조회</th> 
         <th>작성일</th>
       </tr>
     </thead>
@@ -77,19 +74,23 @@
       <c:forEach var="article" items="${articles}">
         <tr> 
           <td>
-             <div class="">
-                <a href="${rq.getArticleDetailFromList(article)}">${article.title}</a>
-                <c:if test="${replyStatus == 0}"> [0] </c:if>
+             <div>
+                <a class="flex flex-wrap gap-2" href="${rq.getArticleDetailFromList(article)}">
+                  ${article.title}
+                  <c:if test="${replyStatus == 1}"> 
+                    <span class="text-base-content/60 text-sm"><i class="far fa-comment-dots"></i> 0</span>
+                  </c:if>
+                  <c:if test="${reactionPointStatus == 1}">
+                    <span class="text-base-content/60 text-sm"><i class="far fa-heart"></i> ${article.goodReactionPoint}</span>
+                  </c:if>  
+                </a>
               </div>
               <!-- <div class="flex items-center gap-1">
                 <span class="text-base-content/70 text-xs" >${article.extra__writerName}</span>
                 <span class="text-base-content/70 text-xs lg:hidden" >${article.forPrintType1RegDate}</span>
               </div> -->
           </td>
-          <td class="text-center">${article.hit}</td>
-          <c:if test="${reactionPointStatus == 0}">
-            <td class="text-center">${article.goodReactionPoint}</td>
-          </c:if>  
+          <td class="text-center">${article.hit}</td> 
           <td class="text-center"> ${article.forPrintType1RegDate}</td>
         </tr>
       </c:forEach>

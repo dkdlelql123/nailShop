@@ -115,13 +115,13 @@
             <div class="form-control">
               <label class="label cursor-pointer">
                 <span class="label-text mr-2">YES</span> 
-                <input type="radio" name="replyStatus" class="radio checked:bg-blue-500" value="0"  />
+                <input type="radio" name="replyStatus" class="radio checked:bg-blue-500" value="1" checked/>
               </label>
             </div> 
             <div class="form-control">
               <label class="label cursor-pointer">
                 <span class="label-text mr-2">No</span> 
-                <input type="radio" name="replyStatus" class="radio checked:bg-red-500" value="1" checked/>
+                <input type="radio" name="replyStatus" class="radio checked:bg-red-500" value="0"/>
               </label>
             </div>
           </div>
@@ -134,13 +134,13 @@
           <div class="form-control">
             <label class="label cursor-pointer">
               <span class="label-text mr-2">YES</span> 
-              <input type="radio" name="reactionPointStatus" class="radio checked:bg-blue-500" value="0" />
+              <input type="radio" name="reactionPointStatus" class="radio checked:bg-blue-500" value="1" checked/>
             </label>
           </div> 
           <div class="form-control">
             <label class="label cursor-pointer">
               <span class="label-text mr-2">No</span> 
-              <input type="radio" name="reactionPointStatus" class="radio checked:bg-red-500" value="1" checked/>
+              <input type="radio" name="reactionPointStatus" class="radio checked:bg-red-500" value="0" />
             </label>
           </div> 
         </div> 

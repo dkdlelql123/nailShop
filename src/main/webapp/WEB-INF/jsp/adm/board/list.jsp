@@ -91,12 +91,12 @@
             </a>
           </td>
           <td class="text-center">
-            <a href="/adm/board/detail?id=${board.id}"> 
+            <a href="/usr/article/list?id=${board.id}"> 
               ${board.name}[${board.extra__articleCount}]
             </a>
           </td>
-          <td class="text-center">${board.replyStatus == 0 ? "O":"X"}</td> 
-          <td class="text-center">${board.reactionPointStatus == 0 ? "O":"X"}</td> 
+          <td class="text-center">${board.replyStatus == 1 ? "O":"X"}</td> 
+          <td class="text-center">${board.reactionPointStatus == 1 ? "O":"X"}</td> 
           <td class="text-center">${board.publicStatus == 1 ? "O":"X"}</td> 
           <td>
             <div class="flex justify-center gap-1">
