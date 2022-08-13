@@ -44,8 +44,10 @@
       </div>
     </form>
     
-    <div class="text-sm">
+    <div class="text-sm flex items-center justify-between">
       <a href="/usr/member/join" class="text-base-content/70">회원가입</a>
+      <a href="/usr/member/findMember
+      " class="text-base-content/70">계정찾기</a>
     </div>
   </div>
 </div>

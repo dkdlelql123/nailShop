@@ -42,7 +42,7 @@ public class MemberService {
 	public ResultData join(String loginId, String loginPw, String email, String name, String nickname, String phoneNumber) {
 		Member oldMember = getMemberLoginId(loginId); 
 		
-		oldMember = getMemberNameAndEmail(name, email);
+		oldMember = getMemberByNameAndEmail(name, email);
 		if(oldMember != null) {
 			return ResultData.form("F-2", Ut.f("이미 사용중인 이름(%s)와 이메일(%s) 입니다", name, email));
 		}
@@ -110,8 +110,8 @@ public class MemberService {
 		return memberRepository.getForPrintMemberById(id);
 	}
 	
-	public Member getMemberNameAndEmail(String name, String email) {
-		return memberRepository.getMemberNameAndEmail(name, email);
+	public Member getMemberByNameAndEmail(String name, String email) {
+		return memberRepository.getMemberByNameAndEmail(name, email);
 	}
 
 	public ResultData doModify(int memberId, String loginPw, String email, String nickname, String phoneNumber) {
@@ -189,6 +189,7 @@ public class MemberService {
 		//replyService.deleteReplyFromMember(member.getId());
 		//reactionPointService.deleteReactionPointFromMember(member.getId());
 	}
+ 
 
 	
 }

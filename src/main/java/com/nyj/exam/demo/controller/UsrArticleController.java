@@ -237,5 +237,6 @@ public class UsrArticleController {
 		articleService.modifyArticle(id, boardId, title, body); 
 		return Ut.jsReplace("수정이 완료되었습니다", "/usr/article/detail?id="+id);
 	}
+	
 
 }

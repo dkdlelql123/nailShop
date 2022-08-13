@@ -54,6 +54,9 @@
 		, phoneNumber = #{phoneNumber}
 	</if>
 	WHERE id = #{memberId};
-	</update>
+	</update> 
+	
+	
+	
 	
 </mapper>

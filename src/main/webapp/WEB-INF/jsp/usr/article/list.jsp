@@ -111,19 +111,19 @@
 <div class="flex justify-center mt-8">
   <div class="btn-group">
     <c:if test="${page != 1}">
-      <a href="${baseUri}&page=1"  class="btn btn-sm">«</a>
+      <a href="${baseUri}&page=1" class="btn btn-sm btn-outline btn-primary ">«</a>
     </c:if>
     
     <c:forEach begin="${startPage}" end="${endPage}" var="i">
       <a
         href="${baseUri}&page=${i}"
-       class="btn btn-sm ${page == i ? 'btn-active' : '' }">${i}</a>
+       class="btn btn-sm btn-outline btn-primary  ${page == i ? 'btn-active' : '' }">${i}</a>
     </c:forEach>
     
     <c:if test="${page != pagesCount && pagesCount != 1 }">
     <a 
       href="${baseUri}&page=${pagesCount}" 
-      class="btn btn-sm">»</a>
+      class="btn btn-sm btn-outline btn-primary ">»</a>
     </c:if>
   </div>
 </div>

@@ -48,7 +48,7 @@
 	WHERE m.id = #{id}
 	</select>
 	
-	<select id="getMemberNameAndEmail" resultType="Member">
+	<select id="getMemberByNameAndEmail" resultType="Member">
 	SELECT *
 	FROM `member`
 	WHERE `name` = #{name}

@@ -197,4 +197,22 @@ public class UsrMemberController {
 		return Ut.jsReplace("회원정보수정이 완료되었습니다.", "/usr/member/mypage");
 	} 
 	
+	@RequestMapping("usr/member/findMember") 
+	public String showFindMember() {
+		return "/usr/member/findMember";
+	}
+	
+	@RequestMapping("usr/member/findLoginId")
+	@ResponseBody
+	public ResultData findLoginId(String name, String email, Model model) {
+		Member member = memberService.getMemberByNameAndEmail(name, email);
+		if(member == null) {
+			return ResultData.form("F-1", "정보와 일치하는 계정이 없습니다.");
+		}
+		
+		model.addAttribute("loginId", member.getLoginId());
+		return ResultData.form("S-1", "아이디 찾기 성공", "member", member.getLoginId());
+	}
+	
+	
 }
