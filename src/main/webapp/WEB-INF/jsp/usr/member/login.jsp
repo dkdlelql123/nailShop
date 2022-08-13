@@ -13,9 +13,6 @@
       </div>
       
       <h2 class="mt-6 text-center text-3xl font-extrabold">Sign in</h2>
-      <p class="mt-2 text-center text-sm">
-        <a href="#" class="font-medium">관리자만 로그인 할 수 있습니다</a>
-      </p>
     </div>
     <form class="mt-8 space-y-6"  action="/usr/member/doLogin" method="POST">   
     <input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}"/>
@@ -46,6 +43,10 @@
         </button>
       </div>
     </form>
+    
+    <div class="text-sm">
+      <a href="/usr/member/join" class="text-base-content/70">회원가입</a>
+    </div>
   </div>
 </div>
  
