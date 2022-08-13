@@ -78,7 +78,7 @@
                 <a class="flex flex-wrap gap-2" href="${rq.getArticleDetailFromList(article)}">
                   ${article.title}
                   <c:if test="${replyStatus == 1}"> 
-                    <span class="text-base-content/60 text-sm"><i class="far fa-comment-dots"></i> 0</span>
+                    <span class="text-base-content/60 text-sm"><i class="far fa-comment-dots"></i> ${article.extra__replyCount}</span>
                   </c:if>
                   <c:if test="${reactionPointStatus == 1}">
                     <span class="text-base-content/60 text-sm"><i class="far fa-heart"></i> ${article.goodReactionPoint}</span>

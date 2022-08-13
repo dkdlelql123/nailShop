@@ -32,9 +32,17 @@
 	</select>
 
 	<select id="getArticles" resultType="Article">
-	SELECT a.*,
+		SELECT a.*,
 		m.nickname AS extra__writerName
-		FROM article a
+		FROM (
+			SELECT a.*, 
+			COUNT(r.id) AS extra__replyCount
+			FROM article a
+			LEFT JOIN `reply` r
+			ON a.id = r.relId 
+			WHERE (r.relTypeCode IS NULL || r.relTypeCode = "article")
+			GROUP BY a.id
+		) a
 		LEFT JOIN `member` m
 		ON a.memberId = m.id 
 		WHERE 1
