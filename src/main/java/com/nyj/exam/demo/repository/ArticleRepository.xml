@@ -133,6 +133,7 @@
 	ON a.memberId = m.id
 	LEFT JOIN `board` b
 	ON a.boardId = b.id 
+	WHERE b.publicStatus = 1
 	ORDER BY a.hit DESC 
 	LIMIT 0, 3;
 	</select>
@@ -146,6 +147,7 @@
 	ON a.memberId = m.id
 	LEFT JOIN `board` b
 	ON a.boardId = b.id
+	WHERE b.publicStatus = 1
 	ORDER BY a.regDate DESC 
 	LIMIT 0, 3;
 	</select>

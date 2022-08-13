@@ -46,7 +46,7 @@ html[data-theme='forest'] .toastui-editor-contents * {
 	color:inherit;
 }
 
-/* 모바일 - ios 사파리 기본 스타일 제거 */
+/* 모바일 - ios 사파리 기본 스타일 제거 
 input, textarea, button {
     appearance: none;
     -moz-appearance: none;
@@ -61,6 +61,7 @@ input[type=radio]{
 	-moz-appearance: auto;
     -webkit-appearance: auto;    
 }
+*/
 
 input:focus{
 	outline:none;
