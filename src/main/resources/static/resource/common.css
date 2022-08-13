@@ -21,7 +21,15 @@
  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot');
  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.ttf') format('truetype');
 }
+
+html>body,
+.toastui-editor-contents, 
+.toastui-editor-contents, * { 
+	font-family: 'NanumBarunGothic', sans-serif;
+}
  
+ 
+/* 테마 관련 */ 
 html[data-theme='forest'] .theme{
 	cursor:pointer;
 }
@@ -38,11 +46,25 @@ html[data-theme='forest'] .toastui-editor-contents * {
 	color:inherit;
 }
 
+/* 모바일 - ios 사파리 기본 스타일 제거 */
+input, textarea, button {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+}
 
-html>body,
-.toastui-editor-contents, 
-.toastui-editor-contents, * { 
-	font-family: 'NanumBarunGothic', sans-serif;
+input[type=radio]{
+	appearance: auto;
+	-moz-appearance: auto;
+    -webkit-appearance: auto;    
+}
+
+input:focus{
+	outline:none;
+	-webkit-tap-highlight-color : transparent;
 }
 
 .table-box-type-1 table {

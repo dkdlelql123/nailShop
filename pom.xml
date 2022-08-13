@@ -94,7 +94,7 @@
 				<configuration>
 					<url>https://blog.public.967.be/manager/text</url>
 					<server>blog.public.967.be__manager_text</server>
-					<path>/ROOT##4</path>
+					<path>/ROOT##5</path>
 				</configuration>
 			</plugin>
 			

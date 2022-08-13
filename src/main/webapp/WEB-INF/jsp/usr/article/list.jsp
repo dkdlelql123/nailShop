@@ -15,8 +15,7 @@
   </div>
 </c:if>
 
-
-<div class="flex flex-col-reverse lg:flex-row gap-2 lg:gap-0 itmes-center justify-between my-4">  
+<div class="flex flex-col-reverse lg:flex-row gap-2 lg:gap-0 itmes-center justify-between mt-12 mb-4 md:my-4">  
   <div class="form-control">
     <form>
        <input type="hidden" name="boardId" value="${param.boardId}" /> 
@@ -25,25 +24,31 @@
        
        <select id="select" name="itemsCountInAPage" data-value="${param.itemsCountInAPage}" 
           onchange="this.form.submit();"
-          class="select select-sm select-bordered font-normal" style="font-weight:normal"> 
+          class="select select-sm select-bordered font-normal" 
+          style="font-weight:normal"> 
           <option value="10" selected>10개씩 보기</option>
           <option value="20">20개씩 보기</option>
           <option value="50">50개씩 보기</option>
         </select>
     </form>
   </div>
+  
   <div class="form-control">
-    <form class="input-group justify-center" name="search-form">
-     <input type="hidden" name="boardId" value="${param.boardId}" />
-     <input type="hidden" name="itemsCountInAPage" value="${param.itemsCountInAPage}" />
+    <form class="input-group border-primary border justify-center rounded-full sm:border-none " name="search-form">
      <select id="select" name="searchKeywordType" data-value="${param.searchKeywordType}" 
-        class="select select-sm select-bordered border-r-0 rounded-r-none" style="border-bottom-right-radius: 0px;border-top-right-radius: 0px;font-weight:normal">
+        class="select select-sm select-bordered border-r-0 rounded-r-none hidden sm:inline">
         <option value="title" selected>제목</option>
         <option value="body">내용</option>
         <option value="title,body">제목+내용</option>
       </select>
-      <input type="text" name="searchKeyword" value="${param.searchKeyword}" placeholder="Search…" class="input input-sm input-bordered" />
-      <button type="submit" class="btn btn-sm px-1 py-0">
+      <input type="text" name="searchKeyword" value="${param.searchKeyword}" placeholder="Search…" 
+      class="input input-sm input-bordered w-11/12 sm:w-1/4 lg:w-1/2 border-0 sm:border my-1 sm:my-0 focus:z-10 focus:outline-none appearance-none"/>
+      
+      <!--  중간에 위치시키는 이유는 css적용 때문에 -->
+     <input type="hidden" name="boardId" value="${param.boardId}" />
+     <input type="hidden" name="itemsCountInAPage" value="${param.itemsCountInAPage}" />
+     
+      <button type="submit" class="btn btn-sm px-1 py-0 hidden sm:inline">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke="#fff" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
       </button>

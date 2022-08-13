@@ -24,19 +24,18 @@ function check__searchFrom(form){
   <form action="/usr/article/searchList" method="get" onsubmit="check__searchFrom(this); return false; ">
    <input type="hidden" name="itemsCountInAPage" value="${param.itemsCountInAPage}" /> 
     <div class="form-control ">
-      <div class="input-group input-group-lg justify-center">
+     <div class="input-group input-group-lg justify-center border border-primary rounded-full sm:border-0" >
         <input 
         type="search" 
-        name="searchKeyword" 
-        class="input input-lg input-bordered input-primary w-full max-w-xs"
-        value="${param.searchKeyword}" 
+        name="searchKeyword"
+        class="input input-md md:input-lg input-primary w-11/12 md:w-1/3 focus:z-10 focus:outline-none appearance-none border-0 sm:border my-1 sm:my-0 "
         placeholder="Search…"  /> 
-        <button class="btn btn-primary btn-lg">
+        <button type="submit" class="btn btn-primary btn-md hidden md:btn-lg sm:inline">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
         </button>
-      </div>
+      </div> 
       <div class="alertMessage"></div>
     </div> 
   </form> 
