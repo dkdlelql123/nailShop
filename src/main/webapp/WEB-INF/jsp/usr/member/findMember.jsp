@@ -28,17 +28,39 @@ function check__findMemberId(form){
 			"name" : form.name.value,
 			"email" : form.email.value 
 		}, success:function(result) {
-			let title = "회원 아이디를 찾았습니다";
-			let body ="";
+			let title = result.msg;
+			let body = "다시 입력해주세요.";
 			if(result.resultCode.substr(0,1) == "S"){
 				body = result.data1; 
-			} else {
-				title = "회원정보와 일치하는 계정을 찾지 못했습니다.";
-				body ="다시 입력해주세요.";
-			}
+			}  
 			
 			$(".modal h3").text(title);
 			$(".modal p").text(body);
+			$("#my-modal").prop("checked", true);
+			
+		}, error: function(e) {
+			console.log(e);
+		}
+	})
+}
+
+function check__getNewPw(form){
+	let ui_id= form.loginId.value.trim();
+	let ui_email= form.email.value.trim(); 
+	
+	$.ajax({
+		url: "/usr/member/findLoginPassword",
+		method : "GET",
+		data : {
+			"loginId" : ui_id,
+			"email" : ui_email
+		},success: function(result){
+			console.log(result)
+			if(result.resultCode.substr(0,1) == "S"){
+				// 메일 전송
+			}
+			
+			$(".modal h3").text(result.msg);
 			$("#my-modal").prop("checked", true);
 			
 		}, error: function(e) {
@@ -53,38 +75,34 @@ function check__findMemberId(form){
     <div>
       <h2 class="mt-6 text-center text-3xl font-extrabold">아이디 찾기</h2>
     </div>
-    <form class="mt-8 space-y-6"  action="/usr/member/findLoginId" method="GET" onsubmit="check__findMemberId(this); return false;">   
+    <form class="mt-8 space-y-6" onsubmit="check__findMemberId(this); return false;">   
       <div class="rounded-md shadow-sm -space-y-px">
         <div class="mb-2">
-          <input value="테스트" name="name" type="text" required class="rounded-full appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:z-10 sm:text-sm" placeholder="이름">
+          <input name="name" type="text" required class="rounded-full appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:z-10 sm:text-sm" placeholder="이름">
         </div>
         <div>
-          <input value="dkdlelql123@naver.com" name="email" type="text" autocomplete="current-password" required class="rounded-full appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:z-10 sm:text-sm" autoComplete="off" placeholder="이메일" >
+          <input name="email" type="text" autocomplete="current-password" required class="rounded-full appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:z-10 sm:text-sm" autoComplete="off" placeholder="이메일" >
         </div>
       </div>
       <div>
         <button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-full text-white btn btn-primary">
           아이디 찾기
         </button>
-      </div>
-    </form> 
+    </div>
+    </form>
   </div>
   
   <div class="max-w-md w-full space-y-8">
     <div>
       <h2 class="mt-6 text-center text-3xl font-extrabold">비밀번호 찾기</h2>
     </div>
-    <form class="mt-8 space-y-6"  action="" method="POST">   
-    <input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}"/>
+    <form class="mt-8 space-y-6" onsubmit="check__getNewPw(this); return false;">    
       <div class="rounded-md shadow-sm ">
         <div class="mb-2">
-          <input name="loginId" type="text" required class="rounded-full appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:z-10 sm:text-sm" placeholder="아이디">
-        </div>
-        <div class="mb-2">
-          <input name="name" type="text" required class="rounded-full appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:z-10 sm:text-sm" placeholder="이름">
-        </div>
+          <input value="테스트" name="loginId" type="text" required class="rounded-full appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:z-10 sm:text-sm" placeholder="아이디">
+        </div> 
         <div>
-          <input name="email" type="text" required class="rounded-full appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:z-10 sm:text-sm" autoComplete="off" placeholder="이메일" >
+          <input value="dkdlelql123@naver.com" name="email" type="text" required class="rounded-full appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:z-10 sm:text-sm" autoComplete="off" placeholder="이메일" >
         </div>
       </div> 
       <div>

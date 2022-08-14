@@ -77,10 +77,9 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		.addPathPatterns("/usr/member/doLogin")
 		.addPathPatterns("/usr/member/join")
 		.addPathPatterns("/usr/member/doJoin")
+		.addPathPatterns("/usr/member/findMember")
 		.addPathPatterns("/usr/member/findLoginId")
-		.addPathPatterns("/usr/member/doFindLoginId")
-		.addPathPatterns("/usr/member/findLoginPw")
-		.addPathPatterns("/usr/member/doFindLoginPw")
+		.addPathPatterns("/usr/member/findLoginPassword")
 		;
 		
 		registry.addInterceptor(needAdminInterceptor)

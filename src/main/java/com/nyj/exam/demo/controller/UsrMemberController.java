@@ -197,12 +197,12 @@ public class UsrMemberController {
 		return Ut.jsReplace("회원정보수정이 완료되었습니다.", "/usr/member/mypage");
 	} 
 	
-	@RequestMapping("usr/member/findMember") 
+	@RequestMapping("/usr/member/findMember") 
 	public String showFindMember() {
 		return "/usr/member/findMember";
 	}
 	
-	@RequestMapping("usr/member/findLoginId")
+	@RequestMapping("/usr/member/findLoginId")
 	@ResponseBody
 	public ResultData findLoginId(String name, String email, Model model) {
 		Member member = memberService.getMemberByNameAndEmail(name, email);
@@ -211,8 +211,19 @@ public class UsrMemberController {
 		}
 		
 		model.addAttribute("loginId", member.getLoginId());
-		return ResultData.form("S-1", "아이디 찾기 성공", "member", member.getLoginId());
+		return ResultData.form("S-1", "회원 아이디를 찾았습니다", "member", member.getLoginId());
 	}
-	
+
+	@RequestMapping("/usr/member/findLoginPassword") 
+	@ResponseBody
+	public ResultData showfoundMember(String loginId, String email, Model model) {
+		
+		Member member = memberService.getMemberLoginId(loginId);
+		if(member == null || member.getEmail().equals(email) == false)  {
+			return  ResultData.form("F-1", "정보와 일치하는 계정이 없습니다.");
+		}
+		
+		return ResultData.form("S-1", "임시 비밀번호를 이메일로 전송했습니다.", "member", member.getLoginId());
+	}
 	
 }
