@@ -1,5 +1,7 @@
 package com.nyj.exam.demo.controller; 
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.nyj.exam.demo.service.MailService;
 import com.nyj.exam.demo.service.MemberService;
 import com.nyj.exam.demo.util.Ut;
+import com.nyj.exam.demo.vo.Mail;
 import com.nyj.exam.demo.vo.Member;
 import com.nyj.exam.demo.vo.ResultData;
 import com.nyj.exam.demo.vo.Rq;
@@ -18,6 +22,9 @@ public class UsrMemberController {
 
 	@Autowired
 	MemberService memberService; 
+	
+	@Autowired
+	MailService mailService; 
 
 	private Rq rq;
 
@@ -135,8 +142,7 @@ public class UsrMemberController {
 		if(rq.getMember().getSalt().length() > 0) {
 			salt = rq.getMember().getSalt();
 			encrypt = memberService.getEncrypt(loginPw, salt);
-		} 				   
-		
+		} 		 
 		
 		if(rq.getMember().getLoginPw().equals(encrypt) == false) {
 			return Ut.jsHistoryBack("비밀번호가 일치하지 않습니다");
@@ -223,7 +229,17 @@ public class UsrMemberController {
 			return  ResultData.form("F-1", "정보와 일치하는 계정이 없습니다.");
 		}
 		
-		return ResultData.form("S-1", "임시 비밀번호를 이메일로 전송했습니다.", "member", member.getLoginId());
+		// 1. 임시 비밀번호 생성 
+		// 2. 메일 전송 - mailService
+		Mail mail = mailService.createMailAndChangePassword(member);
+		mailService.mailSend(mail);
+		
+		// 3. 임시 비밀번호로 회원 정보 수정 - memberService
+		String salt = member.getSalt();
+		String encrypt = memberService.getEncrypt(mail.getNewPw(), salt);
+		memberService.changePw(member.getId(), encrypt, salt);
+		
+		return ResultData.form("S-1", "임시 비밀번호를 이메일로 전송했습니다.", "mail", mail);
 	}
 	
 }

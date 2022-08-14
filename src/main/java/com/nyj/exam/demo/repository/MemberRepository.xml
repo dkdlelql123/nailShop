@@ -79,14 +79,13 @@
 	<delete id="delete" >
 		DELETE FROM `member`
 		WHERE id = #{memberId};
-	</delete>	
-	<!-- 
-	<update id="delete" >
-		UPDATE `member`
-		SET delDate = NOW(),
-		delStatus = 1
-		WHERE id = #{memberId};
+	</delete>	 
+	 
+	<update id="changePw" >
+	UPDATE `member`
+	SET updateDate = NOW(),
+	loginPw = #{loginPw},
+	salt = #{salt}
+	WHERE id = #{id};
 	</update>
-	 -->
-	
 </mapper>

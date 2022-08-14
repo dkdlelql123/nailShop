@@ -189,6 +189,10 @@ public class MemberService {
 		//replyService.deleteReplyFromMember(member.getId());
 		//reactionPointService.deleteReactionPointFromMember(member.getId());
 	}
+
+	public void changePw(int id, String loginPw, String salt) { 
+		memberRepository.changePw(id, loginPw, salt);
+	}
  
 
 	

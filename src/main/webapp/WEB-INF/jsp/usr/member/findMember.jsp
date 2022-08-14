@@ -57,7 +57,7 @@ function check__getNewPw(form){
 		},success: function(result){
 			console.log(result)
 			if(result.resultCode.substr(0,1) == "S"){
-				// 메일 전송
+				$(".modal p").text("메일을 확인해주세요");
 			}
 			
 			$(".modal h3").text(result.msg);

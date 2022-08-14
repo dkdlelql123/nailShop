@@ -10,13 +10,23 @@ spring:
     url: jdbc:log4jdbc:mysql://127.0.0.1:3306/blog?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
     username: test
     password: test
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: #본인의 구글 계정 @gmail.com
+    password: #본인의 구글 계정 비밀번호
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true 
 mybatis:
   type-aliases-package: com.nyj.exam.demo.vo
 custom:
   logging:
     dir: log
     level: debug
-
 ---
 
 spring:

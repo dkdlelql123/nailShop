@@ -90,5 +90,7 @@ public interface MemberRepository {
 	List<Member> getForPrintMembers(String searchKeywordType, String searchKeyword, int searchAuthLevel , int limitStart, int limitTake);
 
 	void delete(int memberId);
+
+	void changePw(int id, String loginPw, String salt);
  
 }
