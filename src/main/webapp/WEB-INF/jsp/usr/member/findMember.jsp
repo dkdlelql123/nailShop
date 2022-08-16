@@ -19,7 +19,7 @@ function findMember(url, data){
 }
 
 // 아이디찾기
-function check__findMemberId(form){
+async function check__findMemberId(form){
 	form.name.value = form.name.value.trim();
 	if(form.name.value.length < 0){
 		alert("이름을 입력해주세요");
@@ -38,24 +38,25 @@ function check__findMemberId(form){
 	let data = {
 		"name":form.name.value,
 		"email":form.email.value
-	}
+	} 
 	
-	findMember(url, data).then(function(res) { 
-		let body = "다시 입력해주세요.";
-		if(res.resultCode.substr(0,1) == "S"){
-			body = "회원님의 아이디는 '"+res.data1+"' 입니다."; 
-		} 
-		$(".modal h3").text(res.msg);
-		$(".modal p").text(body);
-		$("#my-modal").prop("checked", true);
-	}).catch(function(err) {
-		console.error(err);
-	});
+	try {
+    	let res = await findMember(url, data); 
+    	let body = "다시 입력해주세요.";
+    	if(res.resultCode.substr(0,1) == "S")
+    		body = "회원님의 아이디는 '"+res.data1+"' 입니다."; 
+    	
+    	$(".modal h3").text(res.msg);
+    	$(".modal p").text(body);
+    	$("#my-modal").prop("checked", true);
+	} catch (error) {
+	    console.log(error);
+  	} 
 
 }
 
 //새 비밀번호 발급
-function check__getNewPw(form){ 	
+async function check__getNewPw(form){ 	
 	let ui_id = form.loginId.value.trim();
 	if(ui_id.length < 0){
 		alert("이름을 입력해주세요");
@@ -75,13 +76,15 @@ function check__getNewPw(form){
 		"loginId" : ui_id,
 		"email" : ui_email
 	}
-	
-	findMember(url, data).then(function(res) {  
-	    $(".modal h3").text(res.msg);
+	 
+	try {
+    	let res = await findMember(url, data); 
+        $(".modal h3").text(res.msg);
+    	$(".modal p").text("");
 	    $("#my-modal").prop("checked", true);
-	}).catch(function(err) {
-		console.error(err); 
-	}); 
+	} catch (error) {
+	    console.log(error);
+  	} 
 }
 </script>
 
