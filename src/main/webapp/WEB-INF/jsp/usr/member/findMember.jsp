@@ -6,6 +6,19 @@
 <%@ include file="../common/head.jspf"%>
 
 <script>
+
+function findMember(url, data){ 		
+	return new Promise(function(resolve, reject){
+		$.get(url, data).done(function(response) {
+			if (response) {
+	        	resolve(response) 
+	      	}
+	     	reject(new Error("Request is failed"));
+		})
+	})
+}
+
+// 아이디찾기
 function check__findMemberId(form){
 	form.name.value = form.name.value.trim();
 	if(form.name.value.length < 0){
@@ -21,52 +34,54 @@ function check__findMemberId(form){
 		return;
 	}
 	
-	$.ajax({
-		url : "/usr/member/findLoginId",
-		method : "GET",
-		data: {
-			"name" : form.name.value,
-			"email" : form.email.value 
-		}, success:function(result) {
-			let title = result.msg;
-			let body = "다시 입력해주세요.";
-			if(result.resultCode.substr(0,1) == "S"){
-				body = result.data1; 
-			}  
-			
-			$(".modal h3").text(title);
-			$(".modal p").text(body);
-			$("#my-modal").prop("checked", true);
-			
-		}, error: function(e) {
-			console.log(e);
-		}
-	})
+	let url = '/usr/member/findLoginId';
+	let data = {
+		"name":form.name.value,
+		"email":form.email.value
+	}
+	
+	findMember(url, data).then(function(res) { 
+		let body = "다시 입력해주세요.";
+		if(res.resultCode.substr(0,1) == "S"){
+			body = "회원님의 아이디는 '"+res.data1+"' 입니다."; 
+		} 
+		$(".modal h3").text(res.msg);
+		$(".modal p").text(body);
+		$("#my-modal").prop("checked", true);
+	}).catch(function(err) {
+		console.error(err);
+	});
+
 }
 
-function check__getNewPw(form){
-	let ui_id= form.loginId.value.trim();
-	let ui_email= form.email.value.trim(); 
+//새 비밀번호 발급
+function check__getNewPw(form){ 	
+	let ui_id = form.loginId.value.trim();
+	if(ui_id.length < 0){
+		alert("이름을 입력해주세요");
+		form.loginId.focus();
+		return;
+	}
 	
-	$.ajax({
-		url: "/usr/member/findLoginPassword",
-		method : "GET",
-		data : {
-			"loginId" : ui_id,
-			"email" : ui_email
-		},success: function(result){
-			console.log(result)
-			if(result.resultCode.substr(0,1) == "S"){
-				$(".modal p").text("메일을 확인해주세요");
-			}
-			
-			$(".modal h3").text(result.msg);
-			$("#my-modal").prop("checked", true);
-			
-		}, error: function(e) {
-			console.log(e);
-		}
-	})
+	let ui_email = form.email.value.trim();
+	if(ui_email.length < 0){
+		alert("이메일를 입력해주세요");
+		form.email.focus();
+		return;
+	}
+	
+	let url = '/usr/member/findLoginPassword';
+	let data = {
+		"loginId" : ui_id,
+		"email" : ui_email
+	}
+	
+	findMember(url, data).then(function(res) {  
+	    $(".modal h3").text(res.msg);
+	    $("#my-modal").prop("checked", true);
+	}).catch(function(err) {
+		console.error(err); 
+	}); 
 }
 </script>
 
