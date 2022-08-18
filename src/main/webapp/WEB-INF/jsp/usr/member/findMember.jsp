@@ -5,19 +5,7 @@
 <c:set var="pageTitle" value="계정찾기" />
 <%@ include file="../common/head.jspf"%>
 
-<script>
-
-function findMember(url, data){ 		
-	return new Promise(function(resolve, reject){
-		$.get(url, data).done(function(response) {
-			if (response) {
-	        	resolve(response) 
-	      	}
-	     	reject(new Error("Request is failed"));
-		})
-	})
-}
-
+<script>   
 // 아이디찾기
 async function check__findMemberId(form){
 	form.name.value = form.name.value.trim();
@@ -39,20 +27,15 @@ async function check__findMemberId(form){
 		"name":form.name.value,
 		"email":form.email.value
 	} 
-	
-	try {
-    	let res = await findMember(url, data); 
-    	let body = "다시 입력해주세요.";
-    	if(res.resultCode.substr(0,1) == "S")
-    		body = "회원님의 아이디는 '"+res.data1+"' 입니다."; 
-    	
-    	$(".modal h3").text(res.msg);
-    	$(".modal p").text(body);
-    	$("#my-modal").prop("checked", true);
-	} catch (error) {
-	    console.log(error);
-  	} 
-
+	 
+  	let res = await $.get(url, data);  
+  	let body = "다시 입력해주세요."; 
+  	if(res.resultCode.substr(0,1) == "S")
+  		body = "회원님의 아이디는 '"+res.data1+"' 입니다."; 
+  	
+  	$(".modal h3").text(res.msg);
+  	$(".modal p").text(body);
+  	$("#my-modal").prop("checked", true); 
 }
 
 //새 비밀번호 발급
@@ -76,15 +59,11 @@ async function check__getNewPw(form){
 		"loginId" : ui_id,
 		"email" : ui_email
 	}
-	 
-	try {
-    	let res = await findMember(url, data); 
-        $(".modal h3").text(res.msg);
-    	$(".modal p").text("");
-	    $("#my-modal").prop("checked", true);
-	} catch (error) {
-	    console.log(error);
-  	} 
+	  
+  	let res = await $.get(url, data);  
+    $(".modal h3").text(res.msg);
+  	$(".modal p").text("");
+    $("#my-modal").prop("checked", true); 
 }
 </script>
 
