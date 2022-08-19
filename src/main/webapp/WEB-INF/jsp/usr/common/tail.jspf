@@ -13,7 +13,7 @@
           </div> 
           <div>
             <span class="mb-2">✋</span> 
-            <a href="#" class="link link-hover">인사할래요?</a>  
+            <a href="/usr/article/detail?id=14" class="link link-hover">기술설명서</a>  
           </div> 
           <div>
             <span class="mb-2">❤️</span > 
@@ -38,7 +38,7 @@
         <div class="p-4">today <span id="today">${today}</span> | total <span id="total">${total}</span></div>
       </div>
           
-      <ul class="menu p-4 overflow-y-auto text-base-content">
+      <ul class="menu p-4 overflow-y-auto text-base-content text-sm">
         <c:forEach var="board" items="${boards}">
           <c:choose>
             <c:when test="${board.publicStatus == 1}">

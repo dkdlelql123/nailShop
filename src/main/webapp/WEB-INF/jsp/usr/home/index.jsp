@@ -59,7 +59,7 @@ function check__searchFrom(form){
     <a class="card card-compact bg-base-200 border shadow-sm" href="/usr/article/detail?id=${article.id}">
       <div class="card-body">
          <h2 class="card-title flex-col" style="align-items:flex-start">
-           <span class="badge badge-outline font-normal">${article.extra__boardName}</span>
+           <span class="badge badge-outline font-normal pt-1">${article.extra__boardName}</span>
             <span class="title_text text-lg font-semibold">${article.title}</span>
          </h2>       
          <p class="text-sm text-base-content/70"> <!-- ${article.extra__writerName} |  -->${article.getForPrintType1RegDate()}</p>

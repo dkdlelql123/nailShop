@@ -63,6 +63,7 @@
 			}
 		})
 	}
+	
 	ArticleDetail__increaseHitCount();
 
 	// 댓글 작성하기 	
