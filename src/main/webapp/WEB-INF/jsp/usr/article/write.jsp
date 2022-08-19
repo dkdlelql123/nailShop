@@ -4,7 +4,6 @@
 
 <c:set var="pageTitle" value="게시물 글쓰기" />
 <%@ include file="../common/head.jspf"%>
-<%@ include file="../../common/toastUIEditerLib.jspf"%>
 
 <c:set var="board_id" value="${param.boardId}" />
 <input type="hidden" id="board_id" value="${board_id}" />
@@ -30,15 +29,15 @@
 	      return;
 	    }
 
-	 	const editor = $(form).find('.toast-ui-editor').data('data-toast-editor'); 
-	    
+	    const editor = $(form).find('.toast-ui-editor').data('data-toast-editor');
+	    console.log(editor)
 	    const markdown = editor.getMarkdown().trim(); 
 	    console.log("markdown : "+markdown)
+	    return
  
-	    if (markdown.length < 10) {
-			alert("내용을 10글자 이상 작성해주세요.");
-			editor.focus();
-			
+	    if (markdown.length < 2) {
+			alert("내용을 2글자 이상 작성해주세요.");
+			editor.focus(); 
 			return; 
 	    }
 	    
@@ -94,14 +93,17 @@
         </td>
       </tr> 
     </table>
-    <div class="toast-ui-editor">
+    <!--<div id="editor"></div>-->
+     <div class="toast-ui-editor">
         <script type="text/x-template"></script>
-    </div>  
+    </div>   
 
     <div class="flex justify-end mt-4">
-      <button type="submit" class="btn btn-info btn-sm">작성하기</button>
+      <button type="submit" class="btn btn-info btn-sm">작성하기</button> 
     </div>
   </form>
 </div>
 
+
+<%@ include file="../../common/toastUIEditerLib.jspf"%>
 <%@ include file="../common/tail.jspf"%>

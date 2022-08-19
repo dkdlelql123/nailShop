@@ -17,12 +17,14 @@
     const editor = $(form).find('.toast-ui-editor').data('data-toast-editor'); 
   	const markdown = editor.getMarkdown().trim(); 
   	 
-    if (markdown.length < 5) {
-  		alert("내용을 5글자 이상 작성해주세요.");
+    if (markdown.length < 2) {
+  		alert("내용을 2글자 이상 작성해주세요.");
   		editor.focus(); 
   		return; 
     } 
+    console.log(markdown);
     form.body.value = markdown; 
+    console.log(form.body.value); 
   
   	form.submit();
   	submitModifyrFormDone = true;

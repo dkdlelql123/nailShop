@@ -5,16 +5,17 @@
 <c:set var="pageTitle" value="게시물 상세페이지" />
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../../common/toastUIEditerLib.jspf"%>
-<input type="hidden" name="articleId" value="${param.id}" />
-<script type="text/javascript" defer="defer">
 
+<input type="hidden" name="articleId" value="${param.id}" />
+
+<script> 
 	// 게시물 조회수 시간계산
     let today =  Date.now()   			//오늘날짜
     let date = new Date();  
     date.setDate(date.getDate() + 1);  	// 내일날짜
     date.setHours(0,0,0,0);  			// 시, 분, 초, 밀리 - 내일날짜 중 시간은 초기화
     let tomorrow = date.getTime(); 
-    console.log("today "+today+", tomorrow "+ tomorrow);
+    //console.log("today "+today+", tomorrow "+ tomorrow);
 
 	// 게시물 조회수 처리 함수
 	let articleId = $("input[name='articleId']").val();
@@ -90,14 +91,20 @@
 	})
 </script>
 
-
-<div class="flex justify-between mb-4 ">
-  <c:if test="${empty param.listUri}">
-    <a href="/usr/article/list?boardId=${article.boardId}" class="btn btn-sm btn-outline" >목록</a>
-  </c:if> 
-  <c:if test="${not empty param.listUri}">
-    <a class="btn btn-sm" href="${param.listUri}">목록</a>
-  </c:if>
+<div class="flex justify-between mb-4">
+  <div>
+    <c:choose>
+      <c:when test="${article.extra__publicStatus == 0}">
+        <!-- 없음 -->
+      </c:when>
+      <c:when test="${empty param.listUri}">
+        <a href="/usr/article/list?boardId=${article.boardId}" class="btn btn-sm btn-outline" >목록</a>
+      </c:when>
+      <c:otherwise>
+        <a class="btn btn-sm" href="${param.listUri}">목록</a>
+      </c:otherwise>
+    </c:choose> 
+  </div>
 
   <c:if test="${article.extra__actorCanEdit}">
     <div class="flex justify-end gap-2">
@@ -110,88 +117,55 @@
   </c:if>
 </div>
 
-<div class="table-box-type-1">
-  <table> 
-  <colgroup>
-    <col width="200"/>
-  </colgroup>
-    <tr>
-      <td>번호</td>
-      <td>${article.id}</td>
-    </tr>
-    <tr>
-      <td>조회</td>
-      <td>
-        <div class="articleHit">${article.hit}</div>
-      </td>
-    </tr>
-    <c:if test="${article.extra__reactionPointStatus == 1}"> 
-    <tr>
-      <td>추천</td>
-      <td>
-        <div class="flex gap-2 items-center">
-          <div class="goodReactionPoint">${article.goodReactionPoint}</div>
-          <c:if test="${actorCanMakeReactionPoint}">
-            <a
-              href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
-              class="btn btn-xs btn-success btn-outline">좋아요👍</a>
-            <a
-              href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
-              class="btn btn-xs btn-outline btn-secondary">싫어요👎</a>
-          </c:if>
+<div>
+  <div class="text-center">
+    <h4 class="text-sm text-base-content/70 mb-2">${article.extra__boardName}</h4>
+    <h1 class="text-3xl font-bold mb-4">${article.title}</h1>
+    <div class="text-sm text-base-content/70 pb-8 mb-8 border-b border-gray-400">
+      <span>작성자 ${article.extra__writerName} | </span>
+      <span>${article.forPrintType2RegDate}</span>
+      <c:if test="${article.extra__reactionPointStatus == 1}"> 
+      <div class="flex gap-2 items-center justify-center mt-2">
+        <span class="goodReactionPoint">👍 ${article.goodReactionPoint}</span>
+        <c:if test="${actorCanMakeReactionPoint}">
+          <a
+            href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
+            class="btn btn-xs btn-success btn-outline">좋아요👍</a>
+          <a
+            href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
+            class="btn btn-xs btn-outline btn-secondary">싫어요👎</a>
+        </c:if>
 
-          <c:if test="${actorCanMakeCancleGoodReactionPoint}">
-            <a
-              href="/usr/reactionPoint/doCancleReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}&cancleReaction=good"
-              class="btn btn-xs btn-success">좋아요👍</a>
-            <a href="#" onclick="alert(this.title); return false;"
-              title="좋아요를 취소해주세요"
-              class="btn btn-xs btn-secondary btn-outline">싫어요👎</a>
-          </c:if>
+        <c:if test="${actorCanMakeCancleGoodReactionPoint}">
+          <a
+            href="/usr/reactionPoint/doCancleReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}&cancleReaction=good"
+            class="btn btn-xs btn-success">좋아요👍</a>
+          <a href="#" onclick="alert(this.title); return false;"
+            title="좋아요를 취소해주세요"
+            class="btn btn-xs btn-secondary btn-outline">싫어요👎</a>
+        </c:if>
 
-          <c:if test="${actorCanMakeCancleBadReactionPoint}">
-            <a href="#" onclick="alert(this.title); return false;"
-              title="싫어요를 취소해주세요"
-              class="btn btn-xs btn-success btn-outline">좋아요👍</a>
-            <a
-              href="/usr/reactionPoint/doCancleReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}&cancleReaction=bad"
-              class="btn btn-xs btn-secondary">싫어요👎</a>
-          </c:if>
-        </div>
-      </td>
-    </tr>
-    </c:if>
-    <tr>
-      <td>카테고리</td>
-      <td>${article.extra__boardName}</td>
-    </tr>
-    <tr>
-      <td>제목</td>
-      <td>${article.title}</td>
-    </tr>
-    <tr>
-      <td>작성자</td>
-      <td>${article.extra__writerName}</td>
-    </tr>
-    <tr>
-      <td>작성일</td>
-      <td>${article.forPrintType2RegDate}</td>
-    </tr>
-    <tr>
-      <td>수정일</td>
-      <td>${article.forPrintType2UpdateDate}</td>
-    </tr>
-    <tr> 
-      <td colspan=2>
-        <div class="toast-ui-viewer">
-          <script type="text/x-template">
-			${article.body}
-		  </script>
-        </div>
-      </td>
-    </tr>
-  </table>
+        <c:if test="${actorCanMakeCancleBadReactionPoint}">
+          <a href="#" onclick="alert(this.title); return false;"
+            title="싫어요를 취소해주세요"
+            class="btn btn-xs btn-success btn-outline">좋아요👍</a>
+          <a
+            href="/usr/reactionPoint/doCancleReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}&cancleReaction=bad"
+            class="btn btn-xs btn-secondary">싫어요👎</a>
+        </c:if>
+      </div> 
+    </c:if> 
+    </div>
+  </div>
+  <div style="min-height:33vh">
+    <div class="toast-ui-viewer">
+      <script type="text/x-template">
+		${article.body}
+	  </script>
+    </div> 
+  </div> 
 </div> 
+
 <c:if test="${article.extra__replyStatus == 1}"> 
 <div class="py-8">
   <h4 class="py-2 border-b border-gray-400">💬 댓글 ${replyCount}개</h4>
