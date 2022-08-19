@@ -19,6 +19,7 @@ public class Article {
 	
 	private int boardId;
 	private String extra__boardName;
+	private int extra__publicStatus;
 	private int extra__replyStatus;
 	private int extra__reactionPointStatus;
 	

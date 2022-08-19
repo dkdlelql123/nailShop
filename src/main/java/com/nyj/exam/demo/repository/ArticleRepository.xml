@@ -21,6 +21,7 @@
 		SELECT a.*,
 		m.nickname AS extra__writerName,
 		b.name AS extra__boardName,
+		b.publicStatus AS extra__publicStatus,
 		b.replyStatus AS extra__replyStatus,
 		b.reactionPointStatus AS extra__reactionPointStatus
 		FROM article a
