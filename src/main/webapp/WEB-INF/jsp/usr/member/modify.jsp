@@ -19,7 +19,7 @@
 
 	function checkForm(form) {
 		if (submitJoinFormDone) {
-			alert("처리중입니다.");
+			alert("처리중입니다. \n새로고침 후 이용해주세요.");
 			return;
 		}
 		
@@ -63,68 +63,84 @@
 </script>
 
 <div class="table-box-type-1 m-auto w-full lg:w-1/2">
-  <div class="messege mb-4 text-red-500 text-center bg-red-100 rounded"></div> 
+  <h1 class="text-3xl font-bold text-center">내정보 수정</h1> 
   
   <form onsubmit="checkForm(this); return false;" action="/usr/member/doModify" method="post">
-  <input type="hidden" name="memberModifyAuthKey" value="${param.memberModifyAuthKey}" />
-    <table>
-      <colgroup>
-        <col width="200">
-      </colgroup>
-      <tr>
-        <td>아이디</td>
-        <td>
-          <input type="text" id="loginId" value="${member.loginId}"
-            name="loginId" class="input input-disabled w-full" required
-            disabled />
-        </td>
-      </tr> 
-      <tr>
-        <td>새 비밀번호</td>
-        <td>
-          <input type="password" name="loginPw" class="input w-full" 
-            placeholder="새 비밀번호"autoComplete="off"  />
-        </td>
-      </tr>
-       <tr>
-        <td>새 비밀번호 재확인</td>
-        <td>
-          <input type="password" name="loginPw2" class="input w-full" 
-            placeholder="비밀번호 재확인" autoComplete="off" />
-        </td>
-      </tr>
-      <tr>
-        <td>이름</td>
-        <td>
-          <input type="text" value="${member.name}" name="name"
-            class="input input-disabled w-full" placeholder="이름"
-            required disabled />
-        </td>
-      </tr>
-      <tr>
-        <td>이메일</td>
-        <td>
-          <input type="email" value="${member.email}" name="email"
-            class="input w-full" placeholder="abc@abc.com" />
-        </td>
-      </tr>
-      <tr>
-        <td>별명</td>
-        <td>
-          <input type="text" value="${member.nickname}" name="nickname"
-            class="input w-full" placeholder="별명" required />
-        </td>
-      </tr>
-      <tr>
-        <td>전화번호</td>
-        <td>
-          <input type="text" value="${member.phoneNumber}"
-            name="phoneNumber" class="input w-full" placeholder="전화번호"
-            required />
-        </td>
-      </tr>
-    </table>
-    <button class="w-full btn btn-info mt-4 py-2 block text-center">정보수정</button> 
+    <input type="hidden" name="memberModifyAuthKey" value="${param.memberModifyAuthKey}" />
+    
+    <div class="mt-8 mb-4">
+      <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">아이디</label>
+      <input 
+        type="text"  
+        name="loginId" 
+        aria-label="disabled input" 
+        class="block p-2 w-full cursor-not-allowed text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        value="${member.loginId}"
+        readonly disabled
+      />
+    </div>
+    <div class="mb-4">
+      <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">새 비밀번호</label>
+      <input 
+        type="password"  
+        name="loginPw" 
+        class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder="새 비밀번호" autoComplete="off"  
+      />
+    </div>
+    <div class="mb-4">
+      <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">비밀번호 재확인</label>
+      <input 
+        type="password"  
+        name="loginPw2" 
+        class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder="새 비밀번호 재확인" autoComplete="off"  
+      />
+    </div> 
+    <div class="mb-4">
+      <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">이름</label>
+      <input 
+        type="text"  
+        name="name"
+        aria-label="disabled input" 
+        class="block p-2 cursor-not-allowed w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        value="${member.name}"
+        readonly disabled required
+      />
+    </div>
+    <div class="mb-4">
+      <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">이메일</label>
+      <input 
+        type="text"  
+        name="email"
+        aria-label="disabled input" 
+        class="block cursor-not-allowed p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        value="${member.email}"
+        readonly disabled required
+      />
+    </div>
+    <div class="mb-4">
+      <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">별명</label>
+      <input 
+        type="text"  
+        name="nickname"
+        class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        value="${member.nickname}"
+      />
+    </div>
+    <div class="mb-4">
+      <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">전화번호</label>
+      <input 
+        type="text"  
+        name="phoneNumber" 
+        class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        value="${member.phoneNumber}"
+      />
+    </div>  
+    
+    <div class="messege mt-4 text-red-500 text-center bg-red-100 rounded"></div>
+  
+    <button class="w-full btn btn-primary mt-4 py-2 block text-center">정보수정</button> 
   </form>
 </div>
 

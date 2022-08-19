@@ -7,44 +7,58 @@
 <%@ include file="../common/head.jspf"%>
 
 <div class="table-box-type-1 m-auto w-full lg:w-1/2">
-  <div class="messege mb-4 text-red-500 text-center bg-red-100 rounded"></div> 
-    <table>
-      <colgroup>
-        <col width="200">
-      </colgroup>
-      <tr>
-        <td>아이디</td>
-        <td>
-         ${member.loginId}
-        </td>
-      </tr>  
-      <tr>
-        <td>이름</td>
-        <td>
-          ${member.name}
-        </td>
-      </tr>
-      <tr>
-        <td>이메일</td>
-        <td>
-          ${member.email}
-        </td>
-      </tr>
-      <tr>
-        <td>별명</td>
-        <td>
-          ${member.nickname}
-        </td>
-      </tr>
-      <tr>
-        <td>전화번호</td>
-        <td>
-          ${member.phoneNumber}
-        </td>
-      </tr>
-    </table> 
-    <a href="/usr/member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modify')}" 
-    class="w-full btn btn-success mt-4 py-2 block text-center">정보수정하기</a>
+  <h1 class="text-3xl font-bold text-center">내정보</h1>
+  
+  <div class="mt-8 mb-4">
+    <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">아이디</label>
+    <input 
+      type="text"  
+      class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      value="${member.loginId}"
+      readonly disabled
+    />
+  </div>
+  <div class="mb-4">
+    <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">이름</label>
+    <input 
+      type="text"  
+      class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      value="${member.name}"
+      readonly disabled
+    />
+  </div>
+  <div class="mb-4">
+    <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">이메일</label>
+    <input 
+      type="text"  
+      class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      value="${member.email}"
+      readonly disabled
+    />
+  </div>
+  <div class="mb-4">
+    <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">별명</label>
+    <input 
+      type="text"  
+      class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      value="${member.nickname}"
+      readonly disabled
+    />
+  </div>
+  <div class="mb-4">
+    <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">전화번호</label>
+    <input 
+      type="text"  
+      class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      value="${member.phoneNumber}"
+      readonly disabled
+    />
+  </div> 
+  <a 
+    href="/usr/member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modify')}" 
+    class="w-full btn btn-primary mt-4 text-center">
+    정보수정하기
+  </a>
 </div>
 
 <%@ include file="../common/tail.jspf"%>
