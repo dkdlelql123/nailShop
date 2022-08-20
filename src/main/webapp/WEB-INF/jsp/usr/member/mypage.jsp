@@ -10,50 +10,55 @@
   <h1 class="text-3xl font-bold text-center">내정보</h1>
   
   <div class="mt-8 mb-4">
-    <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">아이디</label>
+    <label for="loginId" class="block mb-2 text-sm font-medium ">아이디</label>
     <input 
       type="text"  
-      class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      id="loginId"
+      class="block p-2 w-full cursor-not-allowed input input-sm input-bordered rounded-lg sm:text-xs"
       value="${member.loginId}"
       readonly disabled
     />
   </div>
   <div class="mb-4">
-    <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">이름</label>
+    <label for="name" class="block mb-2 text-sm font-medium label-text">이름</label>
     <input 
       type="text"  
-      class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      id="name"
+      class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-sm"
       value="${member.name}"
       readonly disabled
     />
   </div>
   <div class="mb-4">
-    <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">이메일</label>
+    <label for="email" class="block mb-2 text-sm font-medium label-text">이메일</label>
     <input 
       type="text"  
-      class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      id="email"
+      class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-sm"
       value="${member.email}"
       readonly disabled
     />
   </div>
   <div class="mb-4">
-    <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">별명</label>
+    <label for="nick" class="block mb-2 text-sm font-medium label-text">별명</label>
     <input 
       type="text"  
-      class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      id="nick"
+      class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-sm"
       value="${member.nickname}"
       readonly disabled
     />
   </div>
   <div class="mb-4">
-    <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">전화번호</label>
+    <label for="tel" class="block mb-2 text-sm font-medium label-text">전화번호</label>
     <input 
       type="text"  
-      class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      id="tel"
+      class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-sm"
       value="${member.phoneNumber}"
       readonly disabled
     />
-  </div> 
+  </div>  
   <a 
     href="/usr/member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modify')}" 
     class="w-full btn btn-primary mt-4 text-center">

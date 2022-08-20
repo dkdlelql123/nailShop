@@ -19,11 +19,11 @@
       <div class="rounded-md shadow-sm -space-y-px">
         <div class="mb-4">
           <label for="email-address" >ID</label> 
-          <input id="email-address" name="loginId" type="text" autocomplete="email" required class="rounded-full appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:z-10 sm:text-sm" placeholder="LoginId">
+          <input id="email-address" name="loginId" type="text" autocomplete="email" required class="rounded-full appearance-none relative block w-full px-3 py-3 input input-md input-bordered rounded-lg focus:z-10 sm:text-sm" placeholder="LoginId">
         </div>
         <div>
           <label for="password" class="mb-2">PW</label>
-          <input id="password" name="loginPw" type="password" autocomplete="current-password" required class="rounded-full appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:z-10 sm:text-sm" autoComplete="off" placeholder="Password" >
+          <input id="password" name="loginPw" type="password" autocomplete="current-password" required class="rounded-full appearance-none relative block w-full px-3 py-3 input input-md input-bordered rounded-lg focus:z-10 sm:text-sm" autoComplete="off" placeholder="Password" >
         </div>
       </div> 
        

@@ -77,7 +77,7 @@
         <c:choose>
           <c:when test="${rq.logined}">
             <div class="dropdown dropdown-end">
-              <label tabindex="0" class="cursor-pointer"><i class="far fa-user"></i></label>
+              <label tabindex="0" class="cursor-pointer"><i class="far fa-smile"></i></label>
               <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-300 rounded-box w-36 text-sm">
                 <li><a href="/usr/member/doLogout">logout</a></li>
                 <li><a href="/usr/member/mypage">mypage</a></li>
@@ -111,5 +111,5 @@
     <!-- HEADER end --> 
     
     <!-- content -->
-    <div class="p-4">
+    <div class="p-8 md:p-12 xl:max-w-screen-lg xl:mx-auto">
     

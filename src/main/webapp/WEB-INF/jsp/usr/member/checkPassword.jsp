@@ -38,19 +38,21 @@
     <div class="messege my-4 text-red-500 text-center bg-red-100 rounded"></div>
     
     <div class="mb-4">
-      <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">아이디</label>
+      <label for="loginId" class="block mb-2 text-sm font-medium label-text">아이디</label>
       <input 
-        type="text"  
-        class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        type="text" 
+        id="loginId"  
+        aria-label="disabled input" 
+        class="block p-2 w-full input cursor-not-allowed input-bordered rounded-lg sm:text-sm"
         value="${rq.member.loginId}"
         readonly disabled
       />
     </div>
     <div class="mb-4">
-      <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">비밀번호</label>
+      <label for="loginPw" class="block mb-2 text-sm font-medium label-text">비밀번호</label>
       <input 
-        type="password" name="loginPw"  
-        class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        type="password" name="loginPw" id="loginPw"  
+        class="block p-2 w-full input input-bordered rounded-lg sm:text-sm"
         placeholder="현재 비밀번호"
         autoComplete="off" 
         required="required" 

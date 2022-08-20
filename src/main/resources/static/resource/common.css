@@ -105,6 +105,11 @@ aside {
 	background-size: cover;
 }
 html[data-theme='forest'] aside {
-	background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.65)), url('/resource/220210.png') no-repeat;
+	background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.65)), url('/resource/220210.png') no-repeat;
 	background-size: cover;
+}
+
+html[data-theme='forest'] .toastui-editor-main-container,
+html[data-theme='forest'] .ProseMirror {
+	color:inherit;
 }

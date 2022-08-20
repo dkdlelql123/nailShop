@@ -69,71 +69,71 @@
     <input type="hidden" name="memberModifyAuthKey" value="${param.memberModifyAuthKey}" />
     
     <div class="mt-8 mb-4">
-      <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">아이디</label>
+      <label for="loginId" class="block mb-2 text-sm font-medium label-text">아이디</label>
       <input 
         type="text"  
-        name="loginId" 
+        name="loginId"  id="loginId"  
         aria-label="disabled input" 
-        class="block p-2 w-full cursor-not-allowed text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        class="block p-2 w-full  input input-sm input-bordered rounded-lg sm:text-xs"
         value="${member.loginId}"
         readonly disabled
       />
     </div>
     <div class="mb-4">
-      <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">새 비밀번호</label>
+      <label for="loginPw" class="block mb-2 text-sm font-medium label-text">새 비밀번호</label>
       <input 
-        type="password"  
+        type="password"  id="loginPw"  
         name="loginPw" 
-        class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-xs"
         placeholder="새 비밀번호" autoComplete="off"  
       />
     </div>
     <div class="mb-4">
-      <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">비밀번호 재확인</label>
+      <label for="loginPw2" class="block mb-2 text-sm font-medium label-text">비밀번호 재확인</label>
       <input 
         type="password"  
-        name="loginPw2" 
-        class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        name="loginPw2"  id="loginPw2"  
+        class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-xs"
         placeholder="새 비밀번호 재확인" autoComplete="off"  
       />
     </div> 
     <div class="mb-4">
-      <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">이름</label>
+      <label for="name" class="block mb-2 text-sm font-medium label-text">이름</label>
       <input 
         type="text"  
-        name="name"
+        name="name" id="name"  
         aria-label="disabled input" 
-        class="block p-2 cursor-not-allowed w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        class="block p-2 cursor-not-allowed w-full input input-sm input-bordered rounded-lg sm:text-xs"
         value="${member.name}"
         readonly disabled required
       />
     </div>
     <div class="mb-4">
-      <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">이메일</label>
+      <label for="email" class="block mb-2 text-sm font-medium label-text">이메일</label>
       <input 
         type="text"  
-        name="email"
+        name="email" id="email"  
         aria-label="disabled input" 
-        class="block cursor-not-allowed p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        class="block cursor-not-allowed p-2 w-full input input-sm input-bordered rounded-lg sm:text-xs"
         value="${member.email}"
         readonly disabled required
       />
     </div>
     <div class="mb-4">
-      <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">별명</label>
+      <label for="nickname" class="block mb-2 text-sm font-medium label-text">별명</label>
       <input 
         type="text"  
-        name="nickname"
-        class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        name="nickname" id="nickname"  
+        class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-xs"
         value="${member.nickname}"
       />
     </div>
     <div class="mb-4">
-      <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">전화번호</label>
+      <label for="phoneNumber" class="block mb-2 text-sm font-medium label-text">전화번호</label>
       <input 
         type="text"  
-        name="phoneNumber" 
-        class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        name="phoneNumber"  id="phoneNumber"  
+        class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-xs"
         value="${member.phoneNumber}"
       />
     </div>  

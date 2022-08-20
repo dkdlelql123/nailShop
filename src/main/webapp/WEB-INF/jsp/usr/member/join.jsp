@@ -94,68 +94,72 @@
 </script>
 
 <div class="table-box-type-1 m-auto w-full lg:w-1/2">
-  <form onsubmit="checkForm(this); return false;"
-    action="/usr/member/doJoin" method="post">
-     
-    <table>
-      <colgroup>
-        <col width="200">
-      </colgroup>
-      <tr>
-        <td>아이디</td>
-        <td>
-          <div class="flex flex-col">
-              <input type="text" id="loginId" name="loginId" onkeyup="checkLoginIdDupDebounced(this);"
-              class="input input-sm w-full" placeholder="아이디" autocomplete="off"
-              required />
-              <div class="text-xs loginId-message"></div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>비밀번호</td>
-        <td>
-          <input type="password" id="loginPw" name="loginPw"
-            class="input input-sm w-full loginPw" placeholder="비밀번호" required autoComplete="off" />
-      </tr>
-      <tr>
-        <td>비밀번호 재확인</td>
-        <td>
-          <input type="password" name="loginPw2" class="input input-sm w-full"
-            placeholder="비밀번호" required autoComplete="off" />
-        </td>
-      </tr>
-      <tr>
-        <td>이름</td>
-        <td>
-          <input type="text" name="name" class="input input-sm w-full"
-            placeholder="이름" required />
-        </td>
-      </tr>
-      <tr>
-        <td>이메일</td>
-        <td>
-          <input type="email" name="email" class="input input-sm w-full"
-            placeholder="abc@abc.com" required />
-        </td>
-      </tr>
-      <tr>
-        <td>별명</td>
-        <td>
-          <input type="text" name="nickname" class="input input-sm w-full"
-            placeholder="별명" required />
-        </td>
-      </tr>
-      <tr>
-        <td>전화번호</td>
-        <td>
-          <input type="text" name="phoneNumber" class="input input-sm w-full"
-            placeholder="전화번호" required />
-        </td>
-      </tr>
-    </table>
-    <button type="submit"
-      class="w-full btn btn-primary mt-4 py-2 block text-center">회원가입</button>
+  <form onsubmit="checkForm(this); return false;" action="/usr/member/doJoin" method="post">
+  
+    <div class="mt-8 mb-4">
+      <label for="loginId" class="block mb-2 text-sm font-medium label-text">아이디</label>
+      <input 
+        type="text"  
+        name="loginId"  id="loginId" onkeyup="checkLoginIdDupDebounced(this);" 
+        class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-sm"
+        placeholder="아이디" autocomplete="off" required
+      />
+      <div class="text-xs loginId-message"></div>
+    </div> 
+    
+    <div class="mb-4">
+      <label for="loginPw" class="block mb-2 text-sm font-medium label-text">비밀번호</label>
+      <input 
+        type="password"  id="loginPw"  
+        name="loginPw" 
+        class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-sm"
+         placeholder="비밀번호" required autoComplete="off"
+      />
+    </div>
+    
+    <div class="mb-4">
+      <label for="name" class="block mb-2 text-sm font-medium label-text">이름</label>
+      <input 
+        type="text"  
+        name="name" id="name"   
+        class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-sm"
+        value="${member.name}"
+         placeholder="이름" required 
+      />
+    </div>
+    <div class="mb-4">
+      <label for="email" class="block mb-2 text-sm font-medium label-text">이메일</label>
+      <input 
+        type="text"  
+        name="email" id="email"   
+        class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-sm"
+        placeholder="abc@abc.com" required
+      />
+    </div> 
+    
+    <div class="mb-4">
+      <label for="nickname" class="block mb-2 text-sm font-medium label-text">별명</label>
+      <input 
+        type="text"  
+        name="nickname" id="nickname"  
+        class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-sm"
+         placeholder="별명" required
+      />
+    </div>
+    <div class="mb-4">
+      <label for="phoneNumber" class="block mb-2 text-sm font-medium label-text">전화번호</label>
+      <input 
+        type="text"  
+        name="phoneNumber"  id="phoneNumber"  
+        class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-sm "
+        placeholder="전화번호" required 
+      />
+    </div> 
+    
+    <button 
+      type="submit"
+      class="w-full btn btn-primary mt-4 py-2 block text-center"
+      >회원가입</button>
   </form>
 </div>
 

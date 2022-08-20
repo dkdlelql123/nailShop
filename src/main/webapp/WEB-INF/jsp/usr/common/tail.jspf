@@ -6,7 +6,7 @@
   
 	 <footer class="border-t mt-20">
       <div>
-        <div class="footer text-base-content p-12">
+        <div class="footer text-base-content p-8 md:p-12 xl:max-w-screen-lg xl:mx-auto">
           <div>
             <span class="mb-2">😊</span> 
             <a href="#" class="link link-hover">안녕하세요.</a>
