@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <c:set var="main" value="true" />
 <c:set var="pageTitle" value="blog 사이트를 만들고있습니다." />
@@ -58,11 +59,13 @@ function check__searchFrom(form){
   <c:forEach var="article" items="${bestArticles}">
     <a class="card card-compact bg-base-200 border shadow-sm" href="/usr/article/detail?id=${article.id}">
       <div class="card-body">
-         <h2 class="card-title flex-col" style="align-items:flex-start">
-           <span class="badge badge-outline font-normal pt-1">${article.extra__boardName}</span>
-            <span class="title_text text-lg font-semibold">${article.title}</span>
-         </h2>       
-         <p class="text-sm text-base-content/70"> <!-- ${article.extra__writerName} |  -->${article.getForPrintType1RegDate()}</p>
+         <h2 class="card-title"> 
+           <span class="title_text text-lg font-semibold">${article.title}</span>
+         </h2>     
+         <p><c:out value='${fn:substring(article.body.replaceAll("\\\<.*?\\\>",""),0,40)}' /> </p>
+         <p class="text-xs text-base-content/70">
+         <!-- ${article.extra__writerName} |  -->${article.getForPrintType1RegDate()} | ${article.extra__boardName}
+         </p>
       </div>
     </a>
   </c:forEach>
@@ -76,11 +79,13 @@ function check__searchFrom(form){
   <c:forEach var="article" items="${newArticles}">
     <a class="card card-compact bg-base-200 border shadow-sm" href="/usr/article/detail?id=${article.id}">
       <div class="card-body">
-         <h2 class="card-title flex-col" style="align-items:flex-start">
-            <span class="badge badge-outline font-normal pt-1">${article.extra__boardName}</span>
+         <h2 class="card-title"> 
             <span class="title_text text-lg font-semibold">${article.title}</span>
          </h2>       
-         <p class="text-sm text-base-content/70"><!-- ${article.extra__writerName} |  -->${article.getForPrintType1RegDate()}</p>
+         <p><c:out value='${fn:substring(article.body.replaceAll("\\\<.*?\\\>",""),0,40)}' /> </p>
+         <p class="text-xs text-base-content/70">
+         <!-- ${article.extra__writerName} |  -->${article.getForPrintType1RegDate()} | ${article.extra__boardName}
+         </p>
       </div>
     </a>
   </c:forEach>
