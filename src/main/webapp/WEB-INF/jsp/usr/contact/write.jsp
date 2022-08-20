@@ -16,7 +16,7 @@
 		$(".num2").text(num2);
 	});
 
-	function mail__submitForm(form) { 
+	async function mail__submitForm(form) { 
 		if (submitWriterFormDone) {
 			alert("처리중이거나 이미 메일을 보낸상태입니다.");
 			return;
@@ -36,7 +36,8 @@
 	      return;
 	    }
  
-	    if (form.body.value.trim().length < 5) {
+	    form.body.value = form.body.value.trim();
+	    if (form.body.value.length < 5) {
 			alert("내용을 5글자 이상 작성해주세요."); 
 			return; 
 	    }
@@ -45,15 +46,25 @@
 	    	alert("덧셈 계산이 틀렸습니다.");
 	    	return;
 	    } 
+	    
+	    let url = "/usr/contact/send";
+	    let data = {
+    		"name" :form.name.value,
+    		"email" :form.email.value,
+    		"body" :form.body.value,
+	    }
 
-		form.submit();
+	    $("#sendMail").addClass("loading animate-bounce ");
+	    let res = await $.post(url, data);
+	    $("#sendMail").removeClass("loading animate-bounce");
+
 		submitWriterFormDone = true;
 	} 
 </script>
 
 
 <div>
-  <form onsubmit="mail__submitForm(this); return false;" action="/usr/contact/send" method="POST"> 
+  <form onsubmit="mail__submitForm(this); return false;"> 
     <div class="card flex-shrink-0 w-full max-w-2xl shadow-2xl bg-base-100 mx-auto">
       <div class="card-body">
         <div class="md:flex md:gap-4">
@@ -86,7 +97,7 @@
           </div>
         </div>
         <div class="form-control mt-6">
-          <button type="submit" class="btn btn-primary">전송</button>
+          <button type="submit" id="sendMail" class="btn btn-primary transition duration-100">전송</button>
         </div>
       </div>
     </div>

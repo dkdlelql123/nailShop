@@ -60,7 +60,12 @@ async function check__getNewPw(form){
 		"email" : ui_email
 	}
 	  
+
+    $("#sendMail").addClass("loading animate-bounce");
   	let res = await $.get(url, data);  
+    $("#sendMail").removeClass("loading animate-bounce");
+  	
+  	
     $(".modal h3").text(res.msg);
   	$(".modal p").text("");
     $("#my-modal").prop("checked", true); 
@@ -75,10 +80,14 @@ async function check__getNewPw(form){
     <form class="mt-8 space-y-6" onsubmit="check__findMemberId(this); return false;">   
       <div class="rounded-md shadow-sm -space-y-px">
         <div class="mb-2">
-          <input name="name" type="text" required class="rounded-full appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:z-10 sm:text-sm" placeholder="이름">
+          <input name="name" type="text" required 
+          class="rounded-full appearance-none relative block w-full px-3 py-3 input input-bordered rounded-lg focus:z-10 sm:text-sm" 
+          placeholder="이름">
         </div>
         <div>
-          <input name="email" type="text" autocomplete="current-password" required class="rounded-full appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:z-10 sm:text-sm" autoComplete="off" placeholder="이메일" >
+          <input name="email" type="text" autocomplete="current-password" required 
+           class="rounded-full appearance-none relative block w-full px-3 py-3 input input-bordered rounded-lg focus:z-10 sm:text-sm"
+          autoComplete="off" placeholder="이메일" >
         </div>
       </div>
       <div>
@@ -96,14 +105,18 @@ async function check__getNewPw(form){
     <form class="mt-8 space-y-6" onsubmit="check__getNewPw(this); return false;">    
       <div class="rounded-md shadow-sm ">
         <div class="mb-2">
-          <input value="테스트" name="loginId" type="text" required class="rounded-full appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:z-10 sm:text-sm" placeholder="아이디">
+          <input name="loginId" type="text" required 
+          class="rounded-full appearance-none relative block w-full px-3 py-3 input input-bordered rounded-lg focus:z-10 sm:text-sm" 
+          placeholder="아이디">
         </div> 
         <div>
-          <input value="dkdlelql123@naver.com" name="email" type="text" required class="rounded-full appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:z-10 sm:text-sm" autoComplete="off" placeholder="이메일" >
+          <input name="email" type="text" required 
+          class="rounded-full appearance-none relative block w-full px-3 py-3 input input-bordered rounded-lg focus:z-10 sm:text-sm" 
+          autoComplete="off" placeholder="이메일" >
         </div>
       </div> 
       <div>
-        <button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-full text-white btn btn-primary">
+        <button type="submit" id="sendMail" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-full text-white btn btn-primary">
           비밀번호 찾기
         </button>
       </div>
