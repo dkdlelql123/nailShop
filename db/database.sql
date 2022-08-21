@@ -222,9 +222,6 @@ ADD COLUMN reactionPointStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '0
 ALTER TABLE `member`
 MODIFY COLUMN loginPw VARCHAR(100) NOT NULL;
 
-# 암호화 - salt 칼럼 추가
-ALTER TABLE `member`
-ADD COLUMN salt VARCHAR(20) NOT NULL AFTER loginPw;
 
 # 방문자수 table 생성
 CREATE TABLE visit(
@@ -236,3 +233,10 @@ regDate DATETIME NOT NULL
 # 게시판테이블 공개여부 칼럼 추가
 ALTER TABLE board
 ADD COLUMN publicStatus BOOLEAN NOT NULL DEFAULT 1 COMMENT '0:미사용, 1:사용' AFTER replyStatus;
+
+ALTER TABLE board
+MODIFY COLUMN replyStatus BOOLEAN NOT NULL DEFAULT 1 COMMENT '﻿0:미사용, 1:사용' ;
+
+ALTER TABLE board
+MODIFY COLUMN reactionPointStatus BOOLEAN NOT NULL DEFAULT 1 COMMENT '﻿0:미사용, 1:사용' ;
+  
