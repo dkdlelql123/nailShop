@@ -1,7 +1,5 @@
 package com.nyj.exam.demo.controller; 
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -89,7 +87,7 @@ public class UsrMemberController {
 		String encrypt = loginPw;
 		String msg = Ut.f("%s님 반갑습니다.", member.getNickname());
 		
-		if(member.getSalt().length() > 0) { 
+		if( member.getSalt() != null && member.getSalt().length() > 0) { 
 			salt = member.getSalt();
 			encrypt = memberService.getEncrypt(loginPw, salt);
 		} else {
@@ -139,7 +137,7 @@ public class UsrMemberController {
 		String encrypt = loginPw;
 		System.out.println("encrypt : "+encrypt);
 		
-		if(rq.getMember().getSalt().length() > 0) {
+		if(rq.getMember().getSalt() !=null && rq.getMember().getSalt().length() > 0) {
 			salt = rq.getMember().getSalt();
 			encrypt = memberService.getEncrypt(loginPw, salt);
 		} 		 
