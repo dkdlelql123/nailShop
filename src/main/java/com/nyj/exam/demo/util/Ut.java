@@ -2,6 +2,7 @@ package com.nyj.exam.demo.util;
 
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -117,6 +118,13 @@ public class Ut {
 			return (String)map.get(attrName);
 		}
 		return defaultValue;
+	}
+
+	public static String getNowYearMonthDateStr() {
+		LocalDate now = LocalDate.now();  
+		String today = now.toString();
+		String nowstr = today.replaceAll("-", "");
+		return nowstr;
 	}
 	
 }
