@@ -5,6 +5,16 @@
 <!doctype html> 
 <html lang="ko" data-theme="cupcake">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W7HD7X65ZD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-W7HD7X65ZD');
+</script>
+
 <meta charset="UTF-8" />
 <title>${pageTitle}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no">
@@ -74,33 +84,10 @@
       </div>
       
       <ul class="flex gap-4 text-base-content"> 
-        <c:choose>
-          <c:when test="${rq.logined}">
-            <div class="dropdown dropdown-end">
-              <label tabindex="0" class="cursor-pointer"><i class="far fa-smile"></i></label>
-              <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-300 rounded-box w-36 text-sm">
-                <li><a href="/usr/member/doLogout">logout</a></li>
-                <li><a href="/usr/member/mypage">mypage</a></li>
-                <c:if test="${rq.member.authLevel == 10 }">
-                  <li><a href="/adm">admin</a></li>
-                </c:if>
-              </ul>
-            </div> 
-          </c:when>
-          <c:when test="${rq.logined == false}">
-            <li><a href="/usr/member/login"><i class="far fa-user"></i></a></li>
-          </c:when>
-        </c:choose>
-        <li>
-          <a href="https://www.instagram.com/pu_de_96/" target="_blank">
-            <i class="fab fa-instagram"></i>
-  	    </a>
+        <li><a href="/usr/article/detail?id=14" class="link link-hover">
+          <span class="hidden md:inline">기술</span>설명서</a>
         </li>
-        <li>
-          <a href="https://github.com/dkdlelql123/blog" target="_blank">
-            <i class="fab fa-github"></i>
-          </a>
-        </li>
+        <li><a href="/usr/contact">문의</a></li> 
       </ul>
       
       <a class="btn btn-primary btn-theme-toggle" href="javascript:Theme__toggle();">

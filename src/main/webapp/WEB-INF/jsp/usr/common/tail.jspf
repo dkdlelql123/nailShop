@@ -7,20 +7,43 @@
 	 <footer class="border-t mt-20">
       <div>
         <div class="footer text-base-content p-8 md:p-12 xl:max-w-screen-lg xl:mx-auto">
-          <div>
-            <span class="mb-2">😊</span> 
-            <a href="#" class="link link-hover">안녕하세요.</a>
-          </div> 
-          <div>
-            <span class="mb-2">✋</span> 
-            <a href="/usr/article/detail?id=14" class="link link-hover">기술설명서</a>  
-          </div> 
-          <div>
-            <span class="mb-2">❤️</span > 
+          <div> 
+            <a href="#" class="link link-hover">안녕하세요😊</a>
+          </div>  
+          <div> 
             <div class="grid grid-flow-col gap-1">
-              <a href="https://blog.naver.com/dkdlelql123" target="_blank">네이버블로그</a>
+              <a href="https://blog.naver.com/dkdlelql123" target="_blank">네이버블로그❤️</a>
             </div>
           </div>
+          <ul class="flex gap-4 text-base-content"> 
+            <c:choose>
+              <c:when test="${rq.logined}">
+                <div class="dropdown dropdown-end">
+                  <label tabindex="0" class="cursor-pointer"><i class="far fa-smile"></i></label>
+                  <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-300 rounded-box w-36 text-sm">
+                    <li><a href="/usr/member/doLogout">logout</a></li>
+                    <li><a href="/usr/member/mypage">mypage</a></li>
+                    <c:if test="${rq.member.authLevel == 10 }">
+                      <li><a href="/adm">admin</a></li>
+                    </c:if>
+                  </ul>
+                </div> 
+              </c:when>
+              <c:when test="${rq.logined == false}">
+                <li><a href="/usr/member/login"><i class="far fa-user"></i></a></li>
+              </c:when>
+            </c:choose>
+            <li>
+              <a href="https://www.instagram.com/pu_de_96/" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            </li>
+            <li>
+              <a href="https://github.com/dkdlelql123/blog" target="_blank">
+                <i class="fab fa-github"></i>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>  
     </footer>
