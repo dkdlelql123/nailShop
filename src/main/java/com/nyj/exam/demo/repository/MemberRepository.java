@@ -92,5 +92,7 @@ public interface MemberRepository {
 	void delete(int memberId);
 
 	void changePw(int id, String loginPw, String salt);
+
+	List<Member> getNewMembers();
  
 }

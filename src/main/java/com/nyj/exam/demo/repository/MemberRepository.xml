@@ -88,4 +88,11 @@
 	salt = #{salt}
 	WHERE id = #{id};
 	</update>
+	
+	<select id="getNewMembers" resultType="Member">
+	SELECT *
+	FROM `member`
+	ORDER BY ID DESC
+	LIMIT 0, 3
+	</select>
 </mapper>

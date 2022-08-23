@@ -193,6 +193,10 @@ public class MemberService {
 	public void changePw(int id, String loginPw, String salt) { 
 		memberRepository.changePw(id, loginPw, salt);
 	}
+
+	public List<Member> getNewMembers() { 
+		return memberRepository.getNewMembers();
+	}
  
 
 	

@@ -11,4 +11,6 @@ public interface VisitRepository {
 
 	int getTotalCount();
 
+	int getYesterdayCount();
+
 }

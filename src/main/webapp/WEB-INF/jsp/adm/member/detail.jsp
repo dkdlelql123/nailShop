@@ -145,7 +145,7 @@
           </label>
           
           <label for="authLevel2" class="ml-4">
-            <input type="radio" id="authLevel2"  name="level" value="7" ${authLevel == 7 ? "checked" : null}/>
+            <input type="radio" id="authLevel2"  name="level" value="10" ${authLevel == 10 ? "checked" : null}/>
             <span>관리자</span>
           </label>
         </td> 

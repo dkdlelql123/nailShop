@@ -28,5 +28,9 @@ public class VisitService {
 
 	public int getTotalCount() { 
 		return visitRepository.getTotalCount();
+	}
+
+	public int getYesterdayCount() {
+		return visitRepository.getYesterdayCount();
 	} 
 }
