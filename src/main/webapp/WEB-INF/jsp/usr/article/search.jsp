@@ -110,7 +110,7 @@ function check__searchFrom(form){
   <c:set var="endPage" value="${ startPage+pageRange <= pagesCount ? startPage+pageRange : pagesCount }" />
    
   <c:set var="baseUri" value="?" />
-  <c:set var="baseUri" value="${baseUri}&itemsCountInAPage=${param.itemsCountInAPage}" /> 
+  <c:set var="baseUri" value="${baseUri}&itemsCountInAPage=${param.itemsCountInAPage}" />   
   <c:set var="baseUri" value="${baseUri}&searchKeyword=${param.searchKeyword}" />
   
   <div class="flex justify-center mt-8">

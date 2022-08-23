@@ -30,7 +30,7 @@
         <c:forEach var="article" items="${articleList}">
         <li>
           <a class="flex items-center" href="/usr/article/detail?id=${article.id}">
-            <span class="title_text text-md flex-grow">${article.title.substring(0,10)}</span>
+            <span class="title_text text-md flex-grow">${article.title}</span>
             <span class="text-sm text-base-content/70">${article.forPrintType1RegDate}</span>
           </a>
         </li>
