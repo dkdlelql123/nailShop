@@ -54,22 +54,20 @@
 
 
 <div>
-  <form onsubmit="article__submitForm(this); return false;"
-    class="table-box-type-1" action="/usr/article/doWrite" method="POST">
+  <form 
+    action="/usr/article/doWrite" 
+    method="POST"
+    class="table-box-type-1" 
+    onsubmit="article__submitForm(this); return false;"
+    enctype="multipart/form-data"
+    >
     <input type="hidden" name="memberId" value="${rq.loginedMemberId}" />
     <input type="hidden" name="body" />
 
     <table >
       <colgroup>
         <col width="200" />
-      </colgroup>
-      <tr style="width:200px">
-        <th>작성자</th>
-        <td>
-          <input type="text" class="w-full input input-sm"
-            value="${rq.member.nickname}" readonly />
-        </td>
-      </tr>
+      </colgroup> 
       <tr>
         <th>카테고리</th>
         <td>

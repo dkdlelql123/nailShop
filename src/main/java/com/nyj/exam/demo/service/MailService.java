@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.nyj.exam.demo.vo.Mail;
 import com.nyj.exam.demo.vo.Member;
+import com.nyj.exam.demo.vo.ResultData;
 
 @Service
 public class MailService {

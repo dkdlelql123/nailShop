@@ -22,7 +22,7 @@ import com.nyj.exam.demo.vo.ResultData;
 import com.nyj.exam.demo.vo.Rq;
 
 
-@Controller
+@Controller 
 public class UsrArticleController {
 
 	@Autowired
@@ -34,7 +34,7 @@ public class UsrArticleController {
 	@Autowired
 	ReplyService replyService;
 	@Autowired
-	VisitService visitService;
+	VisitService visitService; 
 	
 	private Rq rq;
 	
@@ -53,7 +53,7 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doWrite(int boardId, String title, String body) {
+	public String doWrite(int boardId, String title, String body ) { 
 		if (Ut.empty(title)) {
 			return Ut.jsHistoryBack("제목을 입력해주세요");
 		}
@@ -63,7 +63,8 @@ public class UsrArticleController {
 		}
 
 		ResultData writeArticleRd = articleService.writeArticle(rq.getLoginedMemberId(), boardId, title, body);
-		int id = (int) writeArticleRd.getData1();
+		int id = (int) writeArticleRd.getData1();  
+
 
 		return Ut.jsReplace("작성을 완료했습니다", "/usr/article/detail?id="+id); 
 	}
@@ -172,9 +173,7 @@ public class UsrArticleController {
 
 		ResultData visitRd = visitService.increaseHitCount(id);
 		
-		int hitCount = articleService.getArticleHitCount(id); 
-		System.out.println("hitCounthitCounthitCounthitCount");
-		System.out.println(hitCount);
+		int hitCount = articleService.getArticleHitCount(id);  
 		ResultData rd = ResultData.newData(increaseHitCountRd, "조회 후 조회수", hitCount); 
 	    rd.setData2(visitRd.getMsg(), visitRd);
 		

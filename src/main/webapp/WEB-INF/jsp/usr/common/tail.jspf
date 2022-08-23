@@ -34,6 +34,11 @@
               </c:when>
             </c:choose>
             <li>
+              <a href="/usr/attendance">
+                <i class="far fa-calendar-check"></i>
+              </a>
+            </li>
+            <li>
               <a href="https://www.instagram.com/pu_de_96/" target="_blank">
                 <i class="fab fa-instagram"></i>
             </a>

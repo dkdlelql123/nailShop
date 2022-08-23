@@ -4,6 +4,5 @@
 <c:set var="pageTitle" value="관리자 홈" />
 <%@ include file="../common/head.jspf"%>
 
-today
 
 <%@ include file="../common/tail.jspf"%>

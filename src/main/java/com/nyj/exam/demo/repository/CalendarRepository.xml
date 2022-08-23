@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nyj.exam.demo.repository.CalendarRepository">
+	
+	<insert id="checkAttendance" >
+	INSERT INTO attendance
+	SET memberId = #{memberId},
+	title = #{title},
+	`start` = #{start}
+	</insert>  
+	
+	<select id="getLastInsertId" resultType="int">
+		SELECT LAST_INSERT_ID()
+	</select>
+	
+	<select id="getAttendanceById" resultType="Attendance">
+	SELECT *
+	FROM attendance
+	WHERE id = #{id} 
+	</select> 
+	
+	<select id="getAttendanceByMemberIdAndStart" resultType="Attendance">
+	SELECT *
+	FROM attendance
+	WHERE `start` = #{start}
+	AND memberId = #{memberId}
+	</select> 
+	
+	<select id="getAllAttendance" resultType="Attendance">
+	SELECT *
+	FROM attendance 
+	</select> 
+</mapper>

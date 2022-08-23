@@ -2,7 +2,8 @@ package com.nyj.exam.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping; 
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nyj.exam.demo.service.MailService;
 import com.nyj.exam.demo.util.Ut;
@@ -12,7 +13,7 @@ import com.nyj.exam.demo.vo.Mail;
 public class UsrMailController {
 
 	@Autowired
-	MailService mailService;
+	MailService mailService; 
 	
 	@RequestMapping("/usr/contact") 
 	public String showContact() {  	
@@ -29,4 +30,6 @@ public class UsrMailController {
 		
 	   return "redirect:/"; 
 	} 
+	 
+	 
 }
