@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <c:set var="main" value="true" />
-<c:set var="pageTitle" value="blog 사이트를 만들고있습니다." />
+<c:set var="pageTitle" value="blog 만들기💓" />
 <%@ include file="../common/head.jspf"%>
 
 <style>
@@ -31,6 +31,7 @@ function check__searchFrom(form){
 	console.log("검색");
 }
 </script>
+
 
 <section class="mt-12 lg:mt-0">
   <h2 class="hidden">전체검색</h2>

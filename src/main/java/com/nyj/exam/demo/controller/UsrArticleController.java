@@ -165,6 +165,10 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/increaseHitCount")
 	@ResponseBody
 	public ResultData doIncreaseHitCount(int id) {
+		if(rq.getMember() !=null && rq.isAdmin() == true) {
+			return ResultData.form("F-1", "관리자는 카운트하지않습니다.");			
+		}
+		
 		ResultData increaseHitCountRd = articleService.increaseHitCount(id);
 		
 		if(increaseHitCountRd.isFail()) {

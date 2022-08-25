@@ -51,11 +51,12 @@
 
 		$.ajax({
 			url : '/usr/article/increaseHitCount?id=' + articleId,
-			success : function(data) {
-				console.log(data.data2)
-				$(".articleHit").html(data.data1);
-				$("#today").html(data.data2.data1);
-				$("#total").html(data.data2.data2);
+			success : function(data) { 
+				if(data.resultCode.substr(0,1) == "S"){
+    				$(".articleHit").html(data.data1);
+    				$("#today").html(data.data2.data1);
+    				$("#total").html(data.data2.data2);
+				}
 			},
 			error : function(request, status, error) {
 				console.log("code:" + request.status + "\n" + "message:"

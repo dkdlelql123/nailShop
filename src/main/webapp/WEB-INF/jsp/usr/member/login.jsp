@@ -5,12 +5,12 @@
 <c:set var="pageTitle" value="로그인" />
 <%@ include file="../common/head.jspf"%>
 
-<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
   <div class="max-w-md w-full space-y-8">
     <div>
-      <div class="text-4xl text-center">      
+      <!-- <div class="text-4xl text-center">      
         <i class="fas fa-seedling"></i>
-      </div>
+      </div> -->
       
       <h2 class="mt-6 text-center text-3xl font-extrabold">Sign in</h2>
     </div>
@@ -49,7 +49,9 @@
       <a href="/usr/member/findMember
       " class="text-base-content/70">계정찾기</a>
     </div>
+
   </div>
 </div>
+ 
  
 <%@ include file="../common/tail.jspf"%>
