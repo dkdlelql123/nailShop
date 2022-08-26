@@ -13,8 +13,6 @@ public interface ReplyRepository {
 
 	Reply getForPrintReply(int id);
 
-	void doWriteReply(int memberId, String relTypeCode, int relId, String body);
-
 	void doDelete(int id);
 
 	void doModify(int id, String body);
@@ -26,4 +24,8 @@ public interface ReplyRepository {
 	int decreaseReactionPoint(int relId, String cancelReaction);
 
 	void deleteReplyFromMember(int memberId);
+	
+	void doMemberWriteReply(int memberId, String relTypeCode, int relId, String body);
+
+	void doNonMemberWriteReply(String writer, String pw, String salt, String relTypeCode, int relId, String body);
 }

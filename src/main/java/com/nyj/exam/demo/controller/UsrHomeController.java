@@ -6,12 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nyj.exam.demo.service.ArticleService;
 import com.nyj.exam.demo.service.BoardService;
 import com.nyj.exam.demo.vo.Article;
-import com.nyj.exam.demo.vo.Board;
 
 @Controller
 public class UsrHomeController {

@@ -1,11 +1,15 @@
 package com.nyj.exam.demo.service;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nyj.exam.demo.repository.ReplyRepository;
+import com.nyj.exam.demo.util.Ut;
 import com.nyj.exam.demo.vo.Reply;
 import com.nyj.exam.demo.vo.ResultData;
 
@@ -16,13 +20,13 @@ public class ReplyService {
 	ReplyRepository replyRepository;
 	 
 	public List<Reply> getForPrintReplies(int memberId, int id, String relTypeCode) {
-		List<Reply> replies = replyRepository.getForPrintReplies(id, relTypeCode);
-
+		List<Reply> replies = replyRepository.getForPrintReplies(id, relTypeCode); 
+		 
 		for (Reply reply : replies) {
 			ResultData rd = actorCanEdit(reply, memberId);
 			reply.setExtra__actorCanEdit(rd.isSuccess());	
-		}
-
+		} 
+		
 		return replies;
 	}
 
@@ -36,9 +40,51 @@ public class ReplyService {
 		return ResultData.form("S-1", "게시물 변경이 가능합니다.", reply);
 	}
 
-	public ResultData doWriteReply(int memberId, String relTypeCode, int relId, String body) {
-		replyRepository.doWriteReply(memberId, relTypeCode, relId, body);
-		return ResultData.form("S-1", "댓글을 남겼습니다.");
+	public ResultData doMemberWriteReply(int memberId, String relTypeCode, int relId, String body) {
+		replyRepository.doMemberWriteReply(memberId, relTypeCode, relId, body);
+		return ResultData.form("S-1", "회원님 댓글을 등록되었습니다.");
+	}
+	
+	public ResultData doNonMemberWriteReply(String writer, String pw, String relTypeCode, int relId, String body) {
+		String salt = getSalt();
+		String encrypt = sha256(pw, salt);
+		
+		replyRepository.doNonMemberWriteReply(writer, encrypt, salt, relTypeCode, relId, body);
+		return ResultData.form("S-1", Ut.f("%s님 댓글을 등록되었습니다.", writer));
+	}
+	
+
+	public String sha256(String pw, String salt){
+		String result = "";
+		
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			md.update((pw+salt).getBytes());
+			byte[] pwd = md.digest();	
+			result = byteToString(pwd);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	public String getSalt() {
+		SecureRandom random = new SecureRandom();
+		byte[] salt = new byte[10];
+		random.nextBytes(salt);
+		
+		return byteToString(salt);
+	}
+	
+	public String byteToString(byte[] temp) {
+		StringBuffer sb = new StringBuffer();
+		
+		for(byte b : temp) {
+			sb.append(String.format("%02x", b));
+		}
+		
+		return sb.toString();
 	}
 
 	public void doDelete(int id) {

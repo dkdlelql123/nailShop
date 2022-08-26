@@ -3,8 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:set var="pageTitle" value="게시물 상세페이지" />
-<%@ include file="../common/head.jspf"%>
-<%@ include file="../../common/toastUIEditerLib.jspf"%>
+<%@ include file="../common/head.jspf"%> 
 
 <input type="hidden" name="articleId" value="${param.id}" />
 
@@ -69,22 +68,37 @@
 
 	// 댓글 작성하기 	
 	let submitReplyDone = false;
-	function checkReplyForm(form) {
+	function checkReplyForm(form, memberCheck) { 
 		if (submitReplyDone) {
 			alert("처리중입니다.");
 			return;
 		}
 
-		let body = form.body.value.trim();
-
+		let body = form.body.value.trim(); 
 		if (body.length <= 2) {
 			alert("댓글은 두글자 이상 입력이 가능합니다.");
 			$("#replyBody").focus();
 			return;
+		} 
+
+		if(memberCheck == false){
+			let writer = form.writer.value.trim(); 
+			if (writer.length < 1) {
+				alert("이름을 입력해주세요");
+				form.writer.focus();
+				return;
+			} 
+			
+			let pw = form.pw.value.trim(); 
+			if (pw.length < 1) {
+				alert("비밀번호를 입력해주세요.");
+				form.pw.focus();
+				return;
+			}  
 		}
 
-		submitReplyDone = true;
 		form.submit();
+		submitReplyDone = true;
 	}
 
 	$(document).on('click', 'label[data-type]', function(e) {
@@ -207,18 +221,16 @@
                 class="btn btn-xs btn-secondary ">${reply.badReactionPoint}👎</a>
             </c:if>
           </c:if>
-          
-          <span class="text-xs text-gray-500">${reply.extra__writerName}</span>
-          <span class="text-xs text-gray-500">${reply.forPrintType1RegDate}</span>
-          <c:if test="${reply.extra__actorCanEdit}">
-            <label for="my-modal-6"
-              class="text-xs underline cursor-pointer"
-              data-id="${reply.id}" data-type="modify"
-              data-body="${reply.body}">수정</label>
-            <a class="text-xs underline"
-              onclick="if( confirm('정말 삭제하시겠습니까?') == false) return false;"
-              href="/usr/reply/doDelete?id=${reply.id}&replaceUri=${rq.getEncodedCurrentUri()}">삭제</a>
-          </c:if>
+
+          <span class="text-xs text-gray-500">${reply.extra__writerName}${reply.writer}</span>
+          <span class="text-xs text-gray-500">${reply.forPrintType1RegDate}</span> 
+          <label for="my-modal-6"
+            class="text-xs underline cursor-pointer"
+            data-id="${reply.id}" data-type="modify"
+            data-body="${reply.body}">수정</label>
+          <a class="text-xs underline"
+            onclick="if( confirm('정말 삭제하시겠습니까?') == false) return false;"
+            href="/usr/reply/doDelete?id=${reply.id}&replaceUri=${rq.getEncodedCurrentUri()}">삭제</a>
           <c:if test="${reply.regDate != reply.updateDate}">
             <span class="text-xs text-gray-500">
               ${reply.forPrintType2UpdateDate} 에 수정됨
@@ -228,24 +240,34 @@
       </tr>
     </c:forEach>
   </table>
-
-  <c:if test="${!rq.logined}">
-    <div class="navbar bg-green-100 rounded rounded-full px-4 mt-4" style="min-height: 2rem">
-      <a class="link link-neutral" href="${rq.loginUri}">로그인</a>  이후 댓글을 작성할 수 있습니다.
-    </div>
-  </c:if>
-
-  <c:if test="${rq.logined}">
-    <form action="/usr/reply/doWrite?replaceUri=${rq.encodedCurrentUri}"
-      method="post" class="mt-8"
-      onsubmit="checkReplyForm(this); return false;">
-      <input type="hidden" name="id" value="${article.id}" />
-      <div class="flex items-end gap-2">
-        <textarea id="replyBody" name="body" cols="30" rows="3" class="textarea textarea-bordered flex-grow"></textarea>
-        <button type="submit" class="btn btn-sm btn-outline">입력</button>
-      </div>
-    </form>
-  </c:if>
+ 
+  <c:set var="logined" value="${rq.logined}" />
+  <c:choose>
+    <c:when test="${logined == false}">
+      <form id="nonMemberReplyForm" action="/usr/reply/doWrite?replaceUri=${rq.encodedCurrentUri}" method="post" class="mt-8" onsubmit="checkReplyForm(this, false); return false;">
+        <input type="hidden" name="id" value="${article.id}" />
+        <div class="flex flex-col gap-2 justify-bewteen items-end">
+          <textarea id="replyBody" name="body" cols="30" rows="3" class="textarea textarea-bordered w-full" placeholder="내용을 입력해주세요" required></textarea>
+          <div class="w-full flex flex-wrap gap-2 flex-col sm:flex-row">
+              <input type="text" name="writer" placeholder="작성자명"  class="input input-sm input-bordered"  required />
+              <input type="password" name="pw" placeholder="비밀번호" class="input input-sm input-bordered" autocomplete="false"  required/>        
+              <button type="submit" class="btn btn-sm btn-outline">입력</button>
+          </div>
+        </div>
+      </form>
+    </c:when>
+    <c:otherwise>
+      <form action="/usr/reply/doWrite?replaceUri=${rq.encodedCurrentUri}"
+        method="post" class="mt-8"
+        onsubmit="checkReplyForm(this, true); return false;">
+        <input type="hidden" name="id" value="${article.id}" />
+        <div class="flex items-end gap-2">
+          <textarea id="replyBody" name="body" cols="30" rows="3" class="textarea textarea-bordered flex-grow" placeholder="내용을 입력해주세요" required></textarea>
+          <button type="submit" class="btn btn-sm btn-outline">입력</button>
+        </div>
+      </form> 
+    </c:otherwise>
+  </c:choose> 
 </div>
 
 <!-- 댓글 수정 모달 -->

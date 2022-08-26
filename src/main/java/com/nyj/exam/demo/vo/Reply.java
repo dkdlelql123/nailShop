@@ -11,7 +11,12 @@ public class Reply {
 	private int id;
 	private String regDate;
 	private String updateDate;
+	
 	private int memberId;
+	private String writer;
+	private String pw;
+	private String salt;
+	
 	private String relTypeCode;
 	private int relId;
 	private String body;

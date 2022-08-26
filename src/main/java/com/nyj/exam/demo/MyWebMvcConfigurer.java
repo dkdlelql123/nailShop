@@ -60,7 +60,7 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		.addPathPatterns("/usr/reactionPoint/doGoodReaction")
 		.addPathPatterns("/usr/reactionPoint/dobadReaction")
 		.addPathPatterns("/usr/reactionPoint/doCancleReaction")
-		.addPathPatterns("/usr/reply/doWrite")
+		//.addPathPatterns("/usr/reply/doWrite")
 		.addPathPatterns("/usr/reply/doModfiy")
 		.addPathPatterns("/usr/reply/doDelete")
 		.addPathPatterns("/adm")

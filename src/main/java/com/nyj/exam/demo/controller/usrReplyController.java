@@ -25,8 +25,18 @@ public class usrReplyController {
 	
 	@RequestMapping("/usr/reply/doWrite")
 	@ResponseBody
-	public String doWrite(String replaceUri, String body, int id) {
-		ResultData rd = replyService.doWriteReply(rq.getLoginedMemberId(), "article", id, body);
+	public String doWrite(String replaceUri, String body, String writer, String pw, int id) {
+		ResultData rd; 
+		
+		if(rq.isLogined() == true) {			
+			rd = replyService.doMemberWriteReply(rq.getLoginedMemberId(), "article", id, body);
+		} else {
+			rd = replyService.doNonMemberWriteReply(writer, pw, "article", id, body);
+		}
+		
+		if(rd.isFail()) {
+			return Ut.jsHistoryBack("댓글 작성실패");
+		}
 	
 		return Ut.jsReplace("", replaceUri);
 	}

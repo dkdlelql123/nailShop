@@ -18,16 +18,6 @@
 		AND relTypeCode = "article" ;
 	</select>
 	
-	<insert id="doWriteReply" >
-		INSERT INTO `reply`
-		SET regDate = NOW(),
-		updateDate = NOW(),
-		memberId = #{memberId},
-		relTypeCode = #{relTypeCode},
-		relId = #{relId},
-		`body` = #{body}
-	</insert>
-	
 	<delete id="doDelete">
 		DELETE FROM `reply`
 		WHERE id = #{id}
@@ -70,4 +60,25 @@
 		WHERE memberId = #{memberId};	
 	</delete>
 	
+	<insert id="doMemberWriteReply" >
+		INSERT INTO `reply`
+		SET regDate = NOW(),
+		updateDate = NOW(),
+		memberId = #{memberId},
+		relTypeCode = #{relTypeCode},
+		relId = #{relId},
+		`body` = #{body}
+	</insert>
+	
+	<insert id="doNonMemberWriteReply" >
+		INSERT INTO `reply`
+		SET regDate = NOW(),
+		updateDate = NOW(),
+		`writer` = #{writer},
+		`pw` = #{pw},
+		salt = #{salt},
+		relTypeCode = #{relTypeCode},
+		relId = #{relId},
+		`body` = #{body}
+	</insert>
 </mapper>
