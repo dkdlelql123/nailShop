@@ -273,4 +273,18 @@ CREATE TABLE attendance(
 	`end` CHAR(30) NULL,
 	allDay BOOLEAN NOT NULL DEFAULT 1,
 	PRIMARY KEY (id)
-)
+);
+
+# 댓글테이블 작성자이름, 비밀빈호, salt 컬럼 추가
+ALTER TABLE reply
+ADD writer VARCHAR(20) AFTER memberId;
+
+ALTER TABLE reply
+ADD pw VARCHAR(100) AFTER writer;
+
+ALTER TABLE reply
+ADD salt VARCHAR(100) AFTER pw;
+
+# 댓글테이블 memberId 제약조건 변경 - null 허용
+ALTER TABLE reply
+MODIFY memberId INT(10) UNSIGNED NULL;
