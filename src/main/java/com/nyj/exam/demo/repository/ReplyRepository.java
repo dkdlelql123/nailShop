@@ -25,7 +25,7 @@ public interface ReplyRepository {
 
 	void deleteReplyFromMember(int memberId);
 	
-	void doMemberWriteReply(int memberId, String relTypeCode, int relId, String body);
+	void doMemberWriteReply(int memberId, String pw, String salt, String relTypeCode, int relId, String body);
 
 	void doNonMemberWriteReply(String writer, String pw, String salt, String relTypeCode, int relId, String body);
 }

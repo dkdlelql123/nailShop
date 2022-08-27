@@ -29,7 +29,7 @@ public class usrReplyController {
 		ResultData rd; 
 		
 		if(rq.isLogined() == true) {			
-			rd = replyService.doMemberWriteReply(rq.getLoginedMemberId(), "article", id, body);
+			rd = replyService.doMemberWriteReply(rq.getLoginedMemberId(), pw,"article", id, body);
 		} else {
 			rd = replyService.doNonMemberWriteReply(writer, pw, "article", id, body);
 		}
@@ -39,6 +39,22 @@ public class usrReplyController {
 		}
 	
 		return Ut.jsReplace("", replaceUri);
+	}
+	
+	@RequestMapping("/usr/reply/doCheckPw") 
+	@ResponseBody
+	public ResultData doCheckPw(int id, String pw) {		
+		Reply reply = replyService.getForPrintReply(id);
+		if(reply == null) {
+			return ResultData.form("F-1", "해당 댓글은 존재하지 않습니다.");  
+		}
+		
+		String encrypt = replyService.sha256(pw, reply.getSalt());
+		
+		if(reply.getPw().equals(encrypt) != true) {
+			return ResultData.form("F-2", "비밀번호가 일치하지 않습니다.");   
+		}
+		return ResultData.form("S-1", "비밀번호가 일치합니다.");   
 	}
 	
 	@RequestMapping("/usr/reply/doModify")

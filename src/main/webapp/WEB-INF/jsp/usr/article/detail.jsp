@@ -68,7 +68,7 @@
 
 	// 댓글 작성하기 	
 	let submitReplyDone = false;
-	function checkReplyForm(form, memberCheck) { 
+	function checkReplyForm(form) { 
 		if (submitReplyDone) {
 			alert("처리중입니다.");
 			return;
@@ -80,29 +80,62 @@
 			$("#replyBody").focus();
 			return;
 		} 
-
-		if(memberCheck == false){
-			let writer = form.writer.value.trim(); 
-			if (writer.length < 1) {
-				alert("이름을 입력해주세요");
-				form.writer.focus();
-				return;
-			} 
-			
-			let pw = form.pw.value.trim(); 
-			if (pw.length < 1) {
-				alert("비밀번호를 입력해주세요.");
-				form.pw.focus();
-				return;
-			}  
-		}
+ 
+		let writer = form.writer.value.trim(); 
+		if (writer.length < 1) {
+			alert("이름을 입력해주세요");
+			form.writer.focus();
+			return;
+		} 
+		
+		let pw = form.pw.value.trim(); 
+		if (pw.length < 1) {
+			alert("비밀번호를 입력해주세요.");
+			form.pw.focus();
+			return;
+		}   
 
 		form.submit();
 		submitReplyDone = true;
 	}
+	
+	async function checkReplyPw(form){
+	  	
+    let replyId = form.id.value.trim();
+    if(replyId == null | replyId <= 0){
+    	alert("새로고침 후 다시 시도해주세요.");
+    	return;
+    }
+    
+    let pw = form.pw.value.trim(); 
+    if (pw.length < 1) {
+    	alert("비밀번호를 입력해주세요.");
+    	form.pw.focus();
+    	return;
+    }  
+    
+  	$("#reply-pwCheck button").addClass("loading");
+    let data = { 
+    	"id" : replyId,
+    	"pw" : pw,
+    };
+    
+    let res = await $.post('/usr/reply/doCheckPw', data);
+    if(res.success){
+      	$("#my-modal-5").prop("checked", false)
+      	$("#my-modal-6").prop("checked", true)
+    } else {
+      $(".status").html('<p class="text-error p-2">'+res.msg+'</p>');
+    }
+    
+    $(".status").html('');
+    $("#reply-pwCheck button").removeClass("loading");
+    
+form.pw.value = "";
+	}
 
 	$(document).on('click', 'label[data-type]', function(e) {
-		$('#reply-modify input').val(e.target.dataset.id);
+		$('div[id^=reply-] input.id').val(e.target.dataset.id);
 		$('#reply-modify textarea').val(e.target.dataset.body);
 	})
 </script>
@@ -224,12 +257,11 @@
 
           <span class="text-xs text-gray-500">${reply.extra__writerName}${reply.writer}</span>
           <span class="text-xs text-gray-500">${reply.forPrintType1RegDate}</span> 
-          <label for="my-modal-6"
-            class="text-xs underline cursor-pointer"
-            data-id="${reply.id}" data-type="modify"
+          <label for="my-modal-5"
+            class="text-xs underline cursor-pointer" data-id="${reply.id}" data-type="modify"
             data-body="${reply.body}">수정</label>
           <a class="text-xs underline"
-            onclick="if( confirm('정말 삭제하시겠습니까?') == false) return false;"
+            onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
             href="/usr/reply/doDelete?id=${reply.id}&replaceUri=${rq.getEncodedCurrentUri()}">삭제</a>
           <c:if test="${reply.regDate != reply.updateDate}">
             <span class="text-xs text-gray-500">
@@ -239,38 +271,40 @@
         </div>
       </tr>
     </c:forEach>
-  </table>
+  </table> 
  
-  <c:set var="logined" value="${rq.logined}" />
-  <c:choose>
-    <c:when test="${logined == false}">
-      <form id="nonMemberReplyForm" action="/usr/reply/doWrite?replaceUri=${rq.encodedCurrentUri}" method="post" class="mt-8" onsubmit="checkReplyForm(this, false); return false;">
-        <input type="hidden" name="id" value="${article.id}" />
-        <div class="flex flex-col gap-2 justify-bewteen items-end">
-          <textarea id="replyBody" name="body" cols="30" rows="3" class="textarea textarea-bordered w-full" placeholder="내용을 입력해주세요" required></textarea>
-          <div class="w-full flex flex-wrap gap-2 flex-col sm:flex-row">
-              <input type="text" name="writer" placeholder="작성자명"  class="input input-sm input-bordered"  required />
-              <input type="password" name="pw" placeholder="비밀번호" class="input input-sm input-bordered" autocomplete="false"  required/>        
-              <button type="submit" class="btn btn-sm btn-outline">입력</button>
-          </div>
-        </div>
-      </form>
-    </c:when>
-    <c:otherwise>
-      <form action="/usr/reply/doWrite?replaceUri=${rq.encodedCurrentUri}"
-        method="post" class="mt-8"
-        onsubmit="checkReplyForm(this, true); return false;">
-        <input type="hidden" name="id" value="${article.id}" />
-        <div class="flex items-end gap-2">
-          <textarea id="replyBody" name="body" cols="30" rows="3" class="textarea textarea-bordered flex-grow" placeholder="내용을 입력해주세요" required></textarea>
+  <form id="nonMemberReplyForm" action="/usr/reply/doWrite?replaceUri=${rq.encodedCurrentUri}" method="post" class="mt-8" onsubmit="checkReplyForm(this); return false;">
+    <input type="hidden" name="id" value="${article.id}" />
+    <div class="flex flex-col gap-2 justify-bewteen items-end">
+      <textarea id="replyBody" name="body" cols="30" rows="3" class="textarea textarea-bordered w-full" placeholder="내용을 입력해주세요" required></textarea>
+      <div class="w-full flex flex-wrap gap-2 flex-col sm:flex-row">
+          <input type="text" name="writer" placeholder="작성자명"  class="input input-sm input-bordered" value="${rq.member.nickname}" required />
+          <input type="password" name="pw" placeholder="비밀번호" class="input input-sm input-bordered" autocomplete="false"  required/>        
           <button type="submit" class="btn btn-sm btn-outline">입력</button>
-        </div>
-      </form> 
-    </c:otherwise>
-  </c:choose> 
+      </div>
+    </div>
+  </form> 
 </div>
 
-<!-- 댓글 수정 모달 -->
+<input type="checkbox" id="my-modal-5" class="modal-toggle" />
+<div id="reply-pwCheck" class="modal sm:modal-bottom modal-middle">
+  <div class="modal-box">
+    <div class="flex justify-between items-center">
+      <h3 class="font-bold text-lg">비밀번호 확인</h3>
+      <label for="my-modal-5" class="cursor-pointer p-2 font-lg text-lg">
+        <i class="fas fa-times"></i>
+      </label>
+    </div>
+    <form class="mt-2" onsubmit="checkReplyPw(this); return false;">
+      <input type="hidden" name="id" class="id" value="" />
+      <input type="password" name="pw" class="input input-sm input-bordered" autocomplete="false" placeholder="비밀번호" /> 
+      <p class="status"></p>
+      <button type="submit" class="btn btn-sm btn-info float-right">확인</button>
+    </form>
+  </div>
+</div>  
+
+<!-- 댓글 수정 모달-->
 <input type="checkbox" id="my-modal-6" class="modal-toggle" />
 <div id="reply-modify" class="modal sm:modal-bottom modal-middle">
   <div class="modal-box">
@@ -285,12 +319,12 @@
       method="post" 
       class="mt-2"
       onsubmit="checkReplyForm(this); return false;">
-      <input type="hidden" name="id" value="" />
+      <input type="hidden" name="id" class="id" value="" />
       <textarea name="body" cols="30" rows="5" class="textarea textarea-bordered  w-full p-2"></textarea>
       <button type="submit" class="btn btn-sm btn-info float-right">수정</button>
     </form>
   </div>
-</div> 
+</div>  
 </c:if>
 
 <%@ include file="../common/tail.jspf"%>

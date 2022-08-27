@@ -65,6 +65,8 @@
 		SET regDate = NOW(),
 		updateDate = NOW(),
 		memberId = #{memberId},
+		pw = #{pw},
+		salt = #{salt},
 		relTypeCode = #{relTypeCode},
 		relId = #{relId},
 		`body` = #{body}

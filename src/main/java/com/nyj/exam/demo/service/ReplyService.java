@@ -40,8 +40,11 @@ public class ReplyService {
 		return ResultData.form("S-1", "게시물 변경이 가능합니다.", reply);
 	}
 
-	public ResultData doMemberWriteReply(int memberId, String relTypeCode, int relId, String body) {
-		replyRepository.doMemberWriteReply(memberId, relTypeCode, relId, body);
+	public ResultData doMemberWriteReply(int memberId, String pw, String relTypeCode, int relId, String body) {
+		String salt = getSalt();
+		String encrypt = sha256(pw, salt);
+		
+		replyRepository.doMemberWriteReply(memberId, encrypt, salt, relTypeCode, relId, body);
 		return ResultData.form("S-1", "회원님 댓글을 등록되었습니다.");
 	}
 	
