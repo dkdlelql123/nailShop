@@ -5,6 +5,7 @@
 <c:set var="pageTitle" value="게시물 상세페이지" />
 <%@ include file="../common/head.jspf"%> 
 
+<%@ include file="../../common/toastUIEditerLib.jspf"%>
 <input type="hidden" name="articleId" value="${param.id}" />
 
 <script> 
@@ -20,8 +21,7 @@
 	let articleId = $("input[name='articleId']").val();
 	articleId = parseInt(articleId);
 	
-	function setItemWithExpireTime(keyName, keyValue) { 
-		// localStorage에 저장할 객체 
+	function setItemWithExpireTime(keyName, keyValue) {  
 		const obj = {   
 		 	value : keyValue,  
 		 	expire : tomorrow //Date.now() + tts 
@@ -99,39 +99,37 @@
 		submitReplyDone = true;
 	}
 	
-	async function checkReplyPw(form){
-	  	
-    let replyId = form.id.value.trim();
-    if(replyId == null | replyId <= 0){
-    	alert("새로고침 후 다시 시도해주세요.");
-    	return;
-    }
-    
-    let pw = form.pw.value.trim(); 
-    if (pw.length < 1) {
-    	alert("비밀번호를 입력해주세요.");
-    	form.pw.focus();
-    	return;
-    }  
-    
-  	$("#reply-pwCheck button").addClass("loading");
-    let data = { 
-    	"id" : replyId,
-    	"pw" : pw,
-    };
-    
-    let res = await $.post('/usr/reply/doCheckPw', data);
-    if(res.success){
-      	$("#my-modal-5").prop("checked", false)
-      	$("#my-modal-6").prop("checked", true)
-    } else {
-      $(".status").html('<p class="text-error p-2">'+res.msg+'</p>');
-    }
-    
-    $(".status").html('');
-    $("#reply-pwCheck button").removeClass("loading");
-    
-form.pw.value = "";
+	async function checkReplyPw(form){ 
+      let replyId = form.id.value.trim();
+      if(replyId == null | replyId <= 0){
+      	alert("새로고침 후 다시 시도해주세요.");
+      	return;
+      }
+      
+      let pw = form.pw.value.trim(); 
+      if (pw.length < 1) {
+      	alert("비밀번호를 입력해주세요.");
+      	form.pw.focus();
+      	return;
+      }  
+      
+      $("#reply-pwCheck button").addClass("loading");
+      let data = { 
+      	"id" : replyId,
+      	"pw" : pw,
+      };
+      
+      let res = await $.post('/usr/reply/doCheckPw', data);
+      if(res.success){
+        	$("#my-modal-5").prop("checked", false)
+        	$("#my-modal-6").prop("checked", true)
+      } else {
+         $(".status").html('<p class="text-error p-2">'+res.msg+'</p>');
+         setTimeout(()=>{ $(".status").html(''); }, 3000)
+      }
+      
+      $("#reply-pwCheck button").removeClass("loading");
+  	  form.pw.value = "";
 	}
 
 	$(document).on('click', 'label[data-type]', function(e) {
@@ -260,9 +258,9 @@ form.pw.value = "";
           <label for="my-modal-5"
             class="text-xs underline cursor-pointer" data-id="${reply.id}" data-type="modify"
             data-body="${reply.body}">수정</label>
-          <a class="text-xs underline"
+          <!--  <a class="text-xs underline"
             onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
-            href="/usr/reply/doDelete?id=${reply.id}&replaceUri=${rq.getEncodedCurrentUri()}">삭제</a>
+            href="/usr/reply/doDelete?id=${reply.id}&replaceUri=${rq.getEncodedCurrentUri()}">삭제</a>-->
           <c:if test="${reply.regDate != reply.updateDate}">
             <span class="text-xs text-gray-500">
               ${reply.forPrintType2UpdateDate} 에 수정됨
