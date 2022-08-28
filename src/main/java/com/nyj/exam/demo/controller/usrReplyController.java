@@ -72,9 +72,17 @@ public class usrReplyController {
 	
 	@RequestMapping("/usr/reply/doDelete")
 	@ResponseBody
-	public String doDelete(String replaceUri, int id) {
+	public String doDelete(int id) {
+		Reply reply = replyService.getForPrintReply(id);
+		if(reply == null) {
+			return Ut.jsHistoryBack("해당 댓글은 존재하지 않습니다.");
+		}
+		 
+		String replaceUri = "/usr/article/detail?id=" + reply.getRelId();
+	
 		replyService.doDelete(id);
-		return Ut.jsReplace("", replaceUri);
+		
+		return Ut.jsReplace("댓글이 삭제되었습니다.", replaceUri);
 	}
 	
 	

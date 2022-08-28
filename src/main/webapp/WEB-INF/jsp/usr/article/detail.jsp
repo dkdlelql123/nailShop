@@ -33,7 +33,8 @@
 		localStorage.setItem(keyName, objString);
 	} 
 
-	function ArticleDetail__increaseHitCount() { // 게시물 조회수 관련 함수
+	/** 게시물 조회수 */
+	function ArticleDetail__increaseHitCount() { 
 		const localStorageKey = "article__" + articleId + "__viewDone"; 
 	 
 		const objString = localStorage.getItem(localStorageKey);
@@ -43,8 +44,7 @@
 			if(Date.now() >= obj.expire || !obj.expire )
 				localStorage.removeItem(localStorageKey);
 			else 
-				return;
-			
+				return; 
 		} 
 		setItemWithExpireTime(localStorageKey, true); 
 
@@ -99,41 +99,60 @@
 		submitReplyDone = true;
 	}
 	
-	async function checkReplyPw(form){ 
+	async function checkReplyPw(form){       
       let replyId = form.id.value.trim();
       if(replyId == null | replyId <= 0){
       	alert("새로고침 후 다시 시도해주세요.");
       	return;
-      }
+      } 
       
       let pw = form.pw.value.trim(); 
       if (pw.length < 1) {
       	alert("비밀번호를 입력해주세요.");
       	form.pw.focus();
       	return;
-      }  
-      
+      } 
+
       $("#reply-pwCheck button").addClass("loading");
       let data = { 
       	"id" : replyId,
       	"pw" : pw,
-      };
+      }; 
+      let dataType = form.dataType.value.trim();
       
-      let res = await $.post('/usr/reply/doCheckPw', data);
-      if(res.success){
-        	$("#my-modal-5").prop("checked", false)
-        	$("#my-modal-6").prop("checked", true)
-      } else {
-         $(".status").html('<p class="text-error p-2">'+res.msg+'</p>');
-         setTimeout(()=>{ $(".status").html(''); }, 3000)
-      }
-      
-      $("#reply-pwCheck button").removeClass("loading");
-  	  form.pw.value = "";
+      $.ajax({
+    	url :'/usr/reply/doCheckPw', 
+    	data : data,
+    	method: 'POST',
+    	success : function(res){ 
+    		if(res.success){
+        	  	$("#my-modal-5").prop("checked", false)
+                if(dataType == "delete")
+                	deleteReply(replyId)
+                else
+              		$("#my-modal-6").prop("checked", true)
+            } else {
+            	  $(".status").html('<p class="text-error p-2">'+res.msg+'</p>');
+            }
+    	},error : function(err){
+    		console.log(err)
+    	},complete: function(){ 
+          $("#reply-pwCheck button").removeClass("loading");
+      	  form.pw.value = "";
+    	}
+      })  
+	}
+	
+	function deleteReply(id){ 
+		location.replace("/usr/reply/doDelete?id=" + id) 
 	}
 
 	$(document).on('click', 'label[data-type]', function(e) {
+		$(".status").html('');
+		let dataType = $(this).attr("data-type"); 
+		
 		$('div[id^=reply-] input.id').val(e.target.dataset.id);
+		$('#reply-pwCheck input.dataType').val(dataType);
 		$('#reply-modify textarea').val(e.target.dataset.body);
 	})
 </script>
@@ -258,9 +277,12 @@
           <label for="my-modal-5"
             class="text-xs underline cursor-pointer" data-id="${reply.id}" data-type="modify"
             data-body="${reply.body}">수정</label>
+          <label for="my-modal-5"
+            class="text-xs underline cursor-pointer" data-id="${reply.id}" data-type="delete"
+            data-body="${reply.body}">삭제</label>
           <!--  <a class="text-xs underline"
             onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
-            href="/usr/reply/doDelete?id=${reply.id}&replaceUri=${rq.getEncodedCurrentUri()}">삭제</a>-->
+            href="">삭제</a>-->
           <c:if test="${reply.regDate != reply.updateDate}">
             <span class="text-xs text-gray-500">
               ${reply.forPrintType2UpdateDate} 에 수정됨
@@ -295,6 +317,7 @@
     </div>
     <form class="mt-2" onsubmit="checkReplyPw(this); return false;">
       <input type="hidden" name="id" class="id" value="" />
+      <input type="hidden" name="dataType" class="dataType" value="" />
       <input type="password" name="pw" class="input input-sm input-bordered" autocomplete="false" placeholder="비밀번호" /> 
       <p class="status"></p>
       <button type="submit" class="btn btn-sm btn-info float-right">확인</button>
