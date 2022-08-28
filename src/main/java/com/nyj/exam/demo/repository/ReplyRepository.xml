@@ -83,4 +83,11 @@
 		relId = #{relId},
 		`body` = #{body}
 	</insert>
+	
+	<select id="getNewReplies" resultType="Reply">
+		SELECT *
+		FROM `reply` 
+		ORDER BY id DESC
+		LIMIT 0, 4;
+	</select>
 </mapper>

@@ -20,8 +20,8 @@
     </div>
   </div>
   
-  <div class="flex gap-4">
-    <div class="bg-base-300 w-1/2 rounded-box p-6">
+  <div class="grid grid-cols-3 grid-rows-2 gap-4">
+    <div class="bg-base-300 rounded-box p-6 col-start-1 col-end-3 row-start-1 row-end-2">
       <h3 class="text-xl font-bold mb-4">
         NEW 게시글📃
         <a class="float-right" href="/adm/article/list"><i class="fas fa-chevron-right"></i></a>
@@ -37,9 +37,28 @@
         </c:forEach>
       </ul>
     </div>
+  
+    <div class="bg-base-300 rounded-box p-6 col-start-3 col-end-4 row-start-1 row-end-3">
+      <h3 class="text-xl font-bold mb-1">
+        NEW 댓글💬 
+      </h3>
+      <ul class="flex flex-col gap-3 stats-vertical">
+        <c:forEach var="reply" items="${replyList}">
+        <li class="pt-3">
+          <a class="flex flex-col" href="/usr/article/detail?id=${reply.relId}">
+            <span class="title_text text-md flex-grow">${reply.body}</span>
+            <span>
+              <span class="text-xs text-base-content/60">${reply.writer}${reply.extra__writerName} &nbsp;</span> 
+              <span class="text-xs text-base-content/60">${reply.forPrintType1RegDate}</span>
+            </span>
+          </a>
+        </li>
+        </c:forEach>
+      </ul>
+    </div>
      
     
-    <div class="bg-base-300 w-1/2 rounded-box p-6">
+    <div class="bg-base-300 rounded-box p-6 col-start-1 col-end-3 row-start-2 row-end-3">
       <h3 class="text-xl font-bold mb-4">
         NEW 회원😁
         <a class="float-right" href="/adm/member/list"><i class="fas fa-chevron-right"></i></a>

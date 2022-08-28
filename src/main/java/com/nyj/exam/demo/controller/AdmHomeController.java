@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nyj.exam.demo.service.ArticleService;
 import com.nyj.exam.demo.service.MemberService;
+import com.nyj.exam.demo.service.ReplyService;
 import com.nyj.exam.demo.service.VisitService;
 import com.nyj.exam.demo.vo.Article;
 import com.nyj.exam.demo.vo.Member;
+import com.nyj.exam.demo.vo.Reply;
 import com.nyj.exam.demo.vo.Rq;
 
 @Controller
@@ -24,6 +26,8 @@ public class AdmHomeController {
 	ArticleService articleService; 
 	@Autowired
 	MemberService memberService; 
+	@Autowired
+	ReplyService replyService;
 	
 	public AdmHomeController(Rq rq) {
 		this.rq = rq;
@@ -46,6 +50,10 @@ public class AdmHomeController {
 		
 		List<Article> articleList = articleService.getNewArticles();
 		model.addAttribute("articleList", articleList);
+		
+
+		List<Reply> replyList = replyService.getNewReplies();
+		model.addAttribute("replyList", replyList);
 		
 		List<Member> memberList = memberService.getNewMembers();
 		model.addAttribute("memberList", memberList); 

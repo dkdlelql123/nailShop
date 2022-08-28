@@ -141,4 +141,8 @@ public class ReplyService {
 		replyRepository.deleteReplyFromMember(memberId);
 	}
 
+	public List<Reply> getNewReplies() {
+		return replyRepository.getNewReplies();
+	}
+
 }

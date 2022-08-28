@@ -28,4 +28,6 @@ public interface ReplyRepository {
 	void doMemberWriteReply(int memberId, String pw, String salt, String relTypeCode, int relId, String body);
 
 	void doNonMemberWriteReply(String writer, String pw, String salt, String relTypeCode, int relId, String body);
+
+	List<Reply> getNewReplies();
 }
