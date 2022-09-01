@@ -16,13 +16,13 @@ function checkForm(form) {
 		return;
 	}
 	
-	let loginId = doTrim(form.loginId.value);
-	let loginPw = doTrim(form.loginPw.value);
-	let loginPw2 = doTrim(form.loginPw2.value);
-	let userName = doTrim(form.name.value); 
-	let userEmail = doTrim(form.email.value);
-	let userNickname = doTrim(form.nickname.value);
-	let userPhoneNumber = doTrim(form.phoneNumber.value);   
+	let loginId = form.loginId.value.trim();
+	let loginPw = form.loginPw.value.trim();
+	let loginPw2 = form.loginPw2.value.trim();
+	let userName = form.name.value.trim();
+	let userEmail = form.email.value.trim();
+	let userNickname = form.nickname.value.trim();
+	let userPhoneNumber = form.phoneNumber.value.trim();
 	
 	if (!isNull(loginId)) {
 		alert("아이디(을)를 입력해주세요.");
@@ -83,7 +83,7 @@ function checkForm(form) {
 
 /** 로그인아이디 중복 확인 */
 function checkLoginIdDup(loginId) { 
-	let data = doTrim(loginId.value); 
+	let data = loginId.value.trim(); 
 	if (!isNull(data)) {
 		$('.loginId-message').html('');
 	} else {

@@ -20,32 +20,32 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script> 
-	function Theme__toggle(){  
+function Theme__toggle(){  
+	
+	const theme = localStorage.getItem("theme") ?? "cupcake";
+	if(theme == "forest"){
+		localStorage.setItem("theme", "cupcake");
+		//Theme__applyTo("cupcake");
 		
-		const theme = localStorage.getItem("theme") ?? "cupcake";
-		if(theme == "forest"){
-			localStorage.setItem("theme", "cupcake");
-			//Theme__applyTo("cupcake");
-			
-		} else if(theme == "cupcake"){
-			localStorage.setItem("theme", "forest");
-			//Theme__applyTo("forest");
-		}  
-		
-		location.reload();
-	}	
+	} else if(theme == "cupcake"){
+		localStorage.setItem("theme", "forest");
+		//Theme__applyTo("forest");
+	}  
 	
-	function Theme__applyTo(themeName){ 
-		// cupcake, forest 
-		$("html").attr("data-theme", themeName);
-	}
-	
-	function Theme__init(){
-		const theme = localStorage.getItem("theme") ?? "cupcake";
-		Theme__applyTo(theme);
-	}
-	
-	Theme__init();
+	location.reload();
+}	
+
+function Theme__applyTo(themeName){ 
+	// cupcake, forest 
+	$("html").attr("data-theme", themeName);
+}
+
+function Theme__init(){
+	const theme = localStorage.getItem("theme") ?? "cupcake";
+	Theme__applyTo(theme);
+}
+
+Theme__init();
 </script>
 
 <!-- 데이지UI -->

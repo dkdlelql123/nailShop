@@ -40,4 +40,9 @@ public class UsrHomeController {
 		
 		return "usr/home/index";
 	}
+	
+	@RequestMapping("/intro")
+	public String showIntro() {
+		return "/usr/home/intro";  
+	}
 }

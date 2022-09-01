@@ -6,82 +6,78 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
 <script>
-	let submitWriterFormDone = false;
-	let vaildBoardName = "";
-	let vaildBoardCode = "";
+let submitWriterFormDone = false;
+let vaildBoardName = "";
+let vaildBoardCode = "";
 
-	function board__submitForm(form) {  
-		if (submitWriterFormDone) {
-			alert("처리중입니다.");
-			return;
-		}
-		
-		form.name.value =form.name.value.trim(); 
-		if(form.name.value == null || form.name.value <= 0){
-			alert("게시판 이름을 입력해주세요.");
-	      	form.name.focus();
-			return;
-		} 
-		   
-		form.code.value =form.code.value.trim(); 
-	    if (form.code.value == null || form.code.value <= 0) {
-			alert("게시판 이름을 입력해주세요.");
-	      	form.code.focus();
-	      	return;
-	    }
-	    
-	    if( form.name.value == vaildBoardName || form.code.value == vaildBoardCode){
-			alert("사용이 불가능합니다. \n다시 입력해주세요");
-			return;
-		}
-	    
-	    form.replyStatus.value = form.replyStatusBtn.value == "on" ? 0 : 1;
-	    
-	    console.log(form.replyStatusBtn.value)
-	    console.log(form.reactionPointStatusBtn.value)
-	    
-	    return ;
-
-		//form.submit();
-		//submitWriterFormDone = true;
-	}  
-
-	function checkName(el){
-        let dataValue = el.value.trim();
-        let type = el.name;
-        
-        let data = {
-        		"value": dataValue,
-        		"type": type	  
-        	} 
-
-		let span = $("input[name="+el.name+"]").siblings("span"); 
-
-        if(dataValue.length > 0 && type != null){	  
-        	$.ajax({
-            	url:"/adm/board/doCheck",
-            	type: "GET",
-            	data: data,
-                success: function(result){
-                    if( result.resultCode.substr(0,1) == "S"){
-                    	span.html('<div class="text-xs pt-2 text-green-600">✔️ '+result.msg+'</div>');
-                    } else {
-                    	span.html('<div class="text-xs pt-2 text-red-600">❌ '+result.msg+'</div>');
-                    
-                    if( type == 'name' ){
-                    	vaildBoardName = dataValue;
-                    } else {
-                    	vaildBoardCode = dataValue;
-                    } 
-                }
-                }, error: function(error){
-                	console.log(error)			  
-                } 
-            })
-        }
+/** 게시물작성 폼 체크 */
+function board__submitForm(form) {  
+	if (submitWriterFormDone) {
+		alert("처리중입니다.");
+		return;
 	}
-	const fncDebounce = _.debounce(checkName, 500) 
-	 
+	
+	let boardName = form.name.value.trim();
+	let boardCode = form.code.value.trim();
+	
+	if(!isNull(boardName)){
+		alert("게시판 이름을 입력해주세요.");
+      	form.name.focus();
+		return;
+	} 
+	   
+	if(!isNull(boardCode)){
+		alert("게시판 코드을 입력해주세요.");
+      	form.code.focus();
+      	return;
+    }
+    
+    if(boardName == vaildBoardName || boardCode == vaildBoardCode ){
+		alert("사용이 불가능합니다. \n다시 입력해주세요");
+		return;
+	}
+    
+    //form.replyStatus.value = form.replyStatusBtn.value == "on" ? 0 : 1;
+	form.submit();
+	submitWriterFormDone = true;
+}  
+
+/** 게시판 이름, 코드 중복 확인 */
+async function checkName(el){
+  	let dataValue = el.value.trim();
+  	let type = el.name;
+  
+ 	let data = {
+  		"value": dataValue,
+  		"type": type	  
+  	} 
+  	let span = $("input[name="+el.name+"]").siblings("span");  
+ 	
+	if(isNull(dataValue) && isNull(type)){	
+  		await $.ajax({
+        	url:"/adm/board/doCheck",
+        	type: "GET",
+        	data: data,
+          	success: function(result){
+        		if( result.resultCode.substr(0,1) == "S"){
+                	span.html('<div class="text-xs pt-2 text-green-600">✔️ '+result.msg+'</div>');
+              	} else {
+                	span.html('<div class="text-xs pt-2 text-red-600">❌ '+result.msg+'</div>');
+                	if( type == 'name' ){
+                  		vaildBoardName = dataValue;
+                    } else {
+                      	vaildBoardCode = dataValue;
+                    } 
+          		}
+        	},error: function(error){
+          		console.log(error)			  
+          	} 
+      	})
+  	} else {
+  		span.html("")
+  	}
+}
+const fncDebounce = _.debounce(checkName, 500) 
 </script>
 
 <h1 class="font-title mb-8 text-3xl font-extrabold">게시판 생성하기</h1>

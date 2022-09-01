@@ -8,15 +8,17 @@ $('select[data-value]').each(function(index, el){
 
 /** 공백삭제 */
 function doTrim(str){
-	let trimStr = str.trim();
-	return trimStr;
+	return str.trim();
 }
 
 /** 한 글자 이상 확인 */
 function isNull(str) { 
-	let trimStr = str.trim(); 
-	if (trimStr.length <= 0) {
+	if (str == null || str =="") 
 		return false;
-	}
+		
+	let trimStr = str.trim(); 
+	if (trimStr.length <= 0) 
+		return false;
+	
 	return true;
 }
