@@ -84,10 +84,13 @@
 		`body` = #{body}
 	</insert>
 	
-	<select id="getNewReplies" resultType="Reply">
-		SELECT *
-		FROM `reply` 
-		ORDER BY id DESC
+	<select id="getNewReplies" resultType="Reply"> 
+		SELECT r.*,
+		m.nickname AS extra__writerName
+		FROM `reply` r
+		LEFT JOIN MEMBER m
+		ON r.memberId = m.id
+		ORDER BY r.id DESC
 		LIMIT 0, 4;
 	</select>
 </mapper>

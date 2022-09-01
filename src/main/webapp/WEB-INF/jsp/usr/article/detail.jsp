@@ -148,11 +148,10 @@
 	}
 
 	$(document).on('click', 'label[data-type]', function(e) {
-		$(".status").html('');
-		let dataType = $(this).attr("data-type"); 
+		$(".status").html(''); 
 		
 		$('div[id^=reply-] input.id').val(e.target.dataset.id);
-		$('#reply-pwCheck input.dataType').val(dataType);
+		$('#reply-pwCheck input.dataType').val(e.target.dataset.type);
 		$('#reply-modify textarea').val(e.target.dataset.body);
 	})
 </script>
@@ -279,10 +278,7 @@
             data-body="${reply.body}">수정</label>
           <label for="my-modal-5"
             class="text-xs underline cursor-pointer" data-id="${reply.id}" data-type="delete"
-            data-body="${reply.body}">삭제</label>
-          <!--  <a class="text-xs underline"
-            onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
-            href="">삭제</a>-->
+            data-body="${reply.body}">삭제</label> 
           <c:if test="${reply.regDate != reply.updateDate}">
             <span class="text-xs text-gray-500">
               ${reply.forPrintType2UpdateDate} 에 수정됨
