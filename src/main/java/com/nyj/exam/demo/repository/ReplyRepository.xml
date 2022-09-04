@@ -84,11 +84,12 @@
 		`body` = #{body}
 	</insert>
 	
-	<select id="getNewReplies" resultType="Reply"> 
-		SELECT r.*,
-		m.nickname AS extra__writerName
+	<select id="getNewReplies" resultType="Reply"> 	
+		SELECT 
+		r.*,
+		IFNULL(m.nickname, r.writer) AS extra__writerName
 		FROM `reply` r
-		LEFT JOIN MEMBER m
+		LEFT JOIN `member` m
 		ON r.memberId = m.id
 		ORDER BY r.id DESC
 		LIMIT 0, 4;

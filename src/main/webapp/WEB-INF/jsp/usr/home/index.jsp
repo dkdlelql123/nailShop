@@ -27,8 +27,7 @@ function check__searchFrom(form){
 		return;
 	}
 	
-	form.submit();
-	console.log("검색");
+	form.submit(); 
 }
 </script>
 

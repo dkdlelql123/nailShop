@@ -47,10 +47,9 @@ public class AdmHomeController {
 		model.addAttribute("total", total);
 		model.addAttribute("today", today);
 		model.addAttribute("yesterday", yesterday);
-		
+	
 		List<Article> articleList = articleService.getNewArticles();
 		model.addAttribute("articleList", articleList);
-		
 
 		List<Reply> replyList = replyService.getNewReplies();
 		model.addAttribute("replyList", replyList);
