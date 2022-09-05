@@ -1,8 +1,5 @@
 package com.nyj.exam.demo.service;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,53 +38,19 @@ public class ReplyService {
 	}
 
 	public ResultData doMemberWriteReply(int memberId, String pw, String relTypeCode, int relId, String body) {
-		String salt = getSalt();
-		String encrypt = sha256(pw, salt);
+		String salt = Ut.getSalt();
+		String encrypt = Ut.sha256(pw, salt);
 		
 		replyRepository.doMemberWriteReply(memberId, encrypt, salt, relTypeCode, relId, body);
 		return ResultData.form("S-1", "회원님 댓글을 등록되었습니다.");
 	}
 	
 	public ResultData doNonMemberWriteReply(String writer, String pw, String relTypeCode, int relId, String body) {
-		String salt = getSalt();
-		String encrypt = sha256(pw, salt);
+		String salt = Ut.getSalt();
+		String encrypt = Ut.sha256(pw, salt);
 		
 		replyRepository.doNonMemberWriteReply(writer, encrypt, salt, relTypeCode, relId, body);
 		return ResultData.form("S-1", Ut.f("%s님 댓글을 등록되었습니다.", writer));
-	}
-	
-
-	public String sha256(String pw, String salt){
-		String result = "";
-		
-		try {
-			MessageDigest md = MessageDigest.getInstance("SHA-256");
-			md.update((pw+salt).getBytes());
-			byte[] pwd = md.digest();	
-			result = byteToString(pwd);
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
-
-	public String getSalt() {
-		SecureRandom random = new SecureRandom();
-		byte[] salt = new byte[10];
-		random.nextBytes(salt);
-		
-		return byteToString(salt);
-	}
-	
-	public String byteToString(byte[] temp) {
-		StringBuffer sb = new StringBuffer();
-		
-		for(byte b : temp) {
-			sb.append(String.format("%02x", b));
-		}
-		
-		return sb.toString();
 	}
 
 	public void doDelete(int id) {

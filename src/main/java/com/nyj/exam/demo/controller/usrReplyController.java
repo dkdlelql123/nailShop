@@ -49,7 +49,7 @@ public class usrReplyController {
 			return ResultData.form("F-1", "해당 댓글은 존재하지 않습니다.");  
 		}
 		
-		String encrypt = replyService.sha256(pw, reply.getSalt());
+		String encrypt = Ut.sha256(pw, reply.getSalt());
 		
 		if(reply.getPw().equals(encrypt) != true) {
 			return ResultData.form("F-2", "비밀번호가 일치하지 않습니다.");   

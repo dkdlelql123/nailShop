@@ -89,7 +89,7 @@ public class UsrMemberController {
 		
 		if( member.getSalt() != null && member.getSalt().length() > 0) { 
 			salt = member.getSalt();
-			encrypt = memberService.getEncrypt(loginPw, salt);
+			encrypt = Ut.sha256(loginPw, salt);
 		} else {
 			// salt가 없는 경우
 			afterLoginUri = "/usr/member/checkPassword";
@@ -139,7 +139,7 @@ public class UsrMemberController {
 		
 		if(rq.getMember().getSalt() !=null && rq.getMember().getSalt().length() > 0) {
 			salt = rq.getMember().getSalt();
-			encrypt = memberService.getEncrypt(loginPw, salt);
+			encrypt = Ut.sha256(loginPw, salt);
 		} 		 
 		
 		if(rq.getMember().getLoginPw().equals(encrypt) == false) {
@@ -234,7 +234,7 @@ public class UsrMemberController {
 		
 		// 3. 임시 비밀번호로 회원 정보 수정 - memberService
 		String salt = member.getSalt();
-		String encrypt = memberService.getEncrypt(mail.getNewPw(), salt);
+		String encrypt = Ut.sha256(mail.getNewPw(), salt);
 		memberService.changePw(member.getId(), encrypt, salt);
 		
 		return ResultData.form("S-1", "임시 비밀번호를 이메일로 전송했습니다.", "mail", mail);

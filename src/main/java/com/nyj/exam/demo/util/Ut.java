@@ -1,6 +1,9 @@
 package com.nyj.exam.demo.util;
 
 import java.net.URLEncoder;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Enumeration;
@@ -125,6 +128,43 @@ public class Ut {
 		String today = now.toString();
 		String nowstr = today.replaceAll("-", "");
 		return nowstr;
+	}
+
+	public static String sha256(String pw, String salt) {		
+		String result = "";
+		
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			md.update((pw+salt).getBytes());
+			byte[] rs = md.digest();
+			result = byteToString(rs);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	public static String getSalt() {
+		byte[] salt = new byte[10];
+		
+		// SecureRandom, byte 객체 생성
+		SecureRandom sr = new SecureRandom();
+		
+		// 난수 생성
+		sr.nextBytes(salt);
+		
+		return byteToString(salt);
+	}
+
+	public static String byteToString(byte[] temp) {
+		// byte To String (10진수 문자열 변경)
+		
+		StringBuffer sb = new StringBuffer();
+		for(byte i : temp) {
+			sb.append(String.format("%02x", i));
+		}
+		return sb.toString();
 	}
 	
 }

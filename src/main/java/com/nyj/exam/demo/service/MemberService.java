@@ -1,7 +1,5 @@
 package com.nyj.exam.demo.service;
 
-import java.security.MessageDigest;
-import java.security.SecureRandom;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,51 +45,11 @@ public class MemberService {
 			return ResultData.form("F-2", Ut.f("이미 사용중인 이름(%s)와 이메일(%s) 입니다", name, email));
 		}
 		
-		String salt = getSalt();
-		String encrypt = getEncrypt(loginPw, salt);
+		String salt = Ut.getSalt();
+		String encrypt = Ut.sha256(loginPw, salt);
 		
 		memberRepository.join(loginId, encrypt, salt, email, name, nickname, phoneNumber);
 		return ResultData.form("S-1", "회원가입이 완료되었습니다.");
-	}
-	
-	public String getEncrypt(String loginPw, String salt) {
-		String result = "";
-		try {	
-			// SHA-256 알고리즘 객체 생성
-			MessageDigest md = MessageDigest.getInstance("SHA-256");
-			
-			// password + salt 합친 문자열에 SHA-256 적용
-			md.update((loginPw + salt).getBytes() );
-			byte[] pwdsalt = md.digest();
-			
-			// byte to String
-			StringBuffer sb = new StringBuffer();
-			for(byte b : pwdsalt) {
-				sb.append(String.format("%02x", b));
-			}
-			
-			result = sb.toString();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-
-	public String getSalt() {
-		// SecureRandom, byte 객체 생성
-		SecureRandom r = new SecureRandom();
-		byte[] salt = new byte[10];
-		
-		// 난수 생성
-		r.nextBytes(salt);
-		
-		// byte To String (10진수 문자열 변경)
-		StringBuffer sb = new StringBuffer();
-		for(byte b : salt) {
-			sb.append(String.format("%02x", b));
-		}
-		
-		return sb.toString();
 	}
 
 	public int getLastInsertId() {
@@ -125,8 +83,8 @@ public class MemberService {
 		String encrypt = null;
 		
 		if(loginPw != null) {
-			salt = getSalt();
-			encrypt = getEncrypt(loginPw, salt);			
+			salt = Ut.getSalt();
+			encrypt = Ut.sha256(loginPw, salt);			
 		}
 		
 		memberRepository.modify(memberId, encrypt, salt, email, nickname, phoneNumber);
