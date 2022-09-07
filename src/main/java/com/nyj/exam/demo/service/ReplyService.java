@@ -108,4 +108,8 @@ public class ReplyService {
 		return replyRepository.getNewReplies();
 	}
 
+	public List<Reply> getReplyByMemberId(int memberId, int limitStart, int limitTake) {
+		return replyRepository.getReplyByMemberId(memberId,limitStart,limitTake);
+	}
+
 }

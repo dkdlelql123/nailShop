@@ -94,4 +94,18 @@
 		ORDER BY r.id DESC
 		LIMIT 0, 4;
 	</select>
+	
+	<select id="getReplyByMemberId" resultType="Reply">
+	SELECT * 
+	FROM reply
+	WHERE memberId = #{memberId}
+	AND relTypeCode = "article"
+	ORDER BY id DESC
+	<if test="limitTake != 0">
+		LIMIT #{limitStart}, #{limitTake};
+	</if>
+	<if test="limitTake == 0">
+		LIMIT 0, 5;
+	</if>
+	</select>
 </mapper>

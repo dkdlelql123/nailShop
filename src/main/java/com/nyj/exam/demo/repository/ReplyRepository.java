@@ -29,5 +29,7 @@ public interface ReplyRepository {
 
 	void doNonMemberWriteReply(String writer, String pw, String salt, String relTypeCode, int relId, String body);
 
-	List<Reply> getNewReplies();
+	List<Reply> getNewReplies(); 
+
+	List<Reply> getReplyByMemberId(int memberId, int limitStart, int limitTake);
 }

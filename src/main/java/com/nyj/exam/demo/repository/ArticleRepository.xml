@@ -172,10 +172,10 @@
 	WHERE memberId = #{memberId}
 	ORDER BY id DESC
 	<if test="limitTake != 0">
-	LIMIT #{limitStart}, #{limitTake};
+		LIMIT #{limitStart}, #{limitTake};
 	</if>
 	<if test="limitTake == 0">
-	LIMIT 0, 5;
+		LIMIT 0, 5;
 	</if>
 	</select>
 	

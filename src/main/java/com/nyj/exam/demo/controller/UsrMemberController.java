@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.nyj.exam.demo.service.ArticleService;
 import com.nyj.exam.demo.service.MailService;
 import com.nyj.exam.demo.service.MemberService;
+import com.nyj.exam.demo.service.ReplyService;
 import com.nyj.exam.demo.util.Ut;
 import com.nyj.exam.demo.vo.Article;
 import com.nyj.exam.demo.vo.Mail;
 import com.nyj.exam.demo.vo.Member;
+import com.nyj.exam.demo.vo.Reply;
 import com.nyj.exam.demo.vo.ResultData;
 import com.nyj.exam.demo.vo.Rq;
 
@@ -30,6 +32,9 @@ public class UsrMemberController {
 	
 	@Autowired
 	ArticleService articleService; 
+	
+	@Autowired
+	ReplyService replyService; 
 
 	private Rq rq;
 
@@ -132,6 +137,9 @@ public class UsrMemberController {
 		
 		List<Article> articleList = articleService.getArticlesByMemberId(member.getId(),0,0);
 		model.addAttribute("articleList", articleList);
+		
+		List<Reply> ReplyList = replyService.getReplyByMemberId(member.getId(),0,0);
+		model.addAttribute("replyList", ReplyList);
 		
 		return "/usr/member/mypage";
 	}

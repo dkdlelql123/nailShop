@@ -23,23 +23,35 @@
       </p>
       <p class="text-base-content/70">📧 ${member.email} &nbsp; 📞${member.phoneNumber}</p> 
     </section>
+    
     <section class="mt-20">
       <h2 class="text-2xl font-extrabold mb-4">내가 작성한 게시물</h2>
       <ul class="flex gap-2 flex-col">
         <c:forEach var="article"  items="${articleList}" >
           <li class="border p-2 flex rounded">
-            <span class="flex-grow">${article.title}</span>
-            <span class="text-base-content/70">${article.forPrintType2RegDate}</span>
+            <span class="flex-grow"><a href="/usr/article/detail?id=${article.id}">${article.title}</a></span>
+            <span class="text-sm text-base-content/70">${article.forPrintType2RegDate}</span>
           </li>
         </c:forEach>
         <c:if test="${articleList.size() == 0}">
-        <div class="border p-2">작성된 게시물이 없습니다.</div>
+          <div class="border p-2">작성된 게시물이 없습니다.</div>
         </c:if>
       </ul>
     </section>
+    
     <section class="mt-20">
       <h2 class="text-2xl font-extrabold mb-4">내가 작성한 댓글</h2>
-
+      <ul class="flex gap-2 flex-col">
+        <c:forEach var="reply"  items="${replyList}" >
+          <li class="border p-2 flex rounded">
+            <span class="flex-grow">${reply.body} <a class="link text-sm text-base-content/70" href="/usr/article/detail?id=${reply.relId}">보기</a></span>
+            <span class="text-sm text-base-content/70">${reply.forPrintType2RegDate}</span>
+          </li>
+        </c:forEach>
+        <c:if test="${replyList.size() == 0}">
+          <div class="border p-2">작성된 댓글이 없습니다.</div>
+        </c:if>
+      </ul>
     </section>
   </div> 
 </div>
