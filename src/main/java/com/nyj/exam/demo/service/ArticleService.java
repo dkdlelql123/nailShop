@@ -129,5 +129,14 @@ public class ArticleService {
 	public void deleteFromMember(int memberId) {
 		articleRepository.deleteFromMember(memberId);
 	}
+
+	/** 
+	 * int memberId
+	 * int limitStart
+	 * int limitTake
+	 * */
+	public List<Article> getArticlesByMemberId(int memberId, int limitStart, int limitTake) {
+		return articleRepository.getArticlesByMemberId(memberId, limitStart, limitTake);
+	}
 	
 }

@@ -1,5 +1,7 @@
 package com.nyj.exam.demo.controller; 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.nyj.exam.demo.service.ArticleService;
 import com.nyj.exam.demo.service.MailService;
 import com.nyj.exam.demo.service.MemberService;
 import com.nyj.exam.demo.util.Ut;
+import com.nyj.exam.demo.vo.Article;
 import com.nyj.exam.demo.vo.Mail;
 import com.nyj.exam.demo.vo.Member;
 import com.nyj.exam.demo.vo.ResultData;
@@ -23,6 +27,9 @@ public class UsrMemberController {
 	
 	@Autowired
 	MailService mailService; 
+	
+	@Autowired
+	ArticleService articleService; 
 
 	private Rq rq;
 
@@ -120,7 +127,12 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/mypage")
 	public String showMyPage(Model model) {
-		model.addAttribute("member", rq.getMember());
+		Member member = rq.getMember();
+		model.addAttribute("member", member);
+		
+		List<Article> articleList = articleService.getArticlesByMemberId(member.getId(),0,0);
+		model.addAttribute("articleList", articleList);
+		
 		return "/usr/member/mypage";
 	}
 	 
@@ -132,10 +144,8 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/doCheckPassword")
 	@ResponseBody
 	public String doCheckPassword(String loginPw, String replaceUri) {  
-
 		String salt = "";
 		String encrypt = loginPw;
-		System.out.println("encrypt : "+encrypt);
 		
 		if(rq.getMember().getSalt() !=null && rq.getMember().getSalt().length() > 0) {
 			salt = rq.getMember().getSalt();
