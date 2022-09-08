@@ -108,17 +108,22 @@ public interface BoardRepository {
 	""")
 	Board CheckForDuplicates(String value, String type);
 	
-	@Insert("""			
+	@Insert("""		
+			<script>		
 			INSERT INTO board
 			SET regDate = NOW(),
 			updateDate = NOW(),
 			`code` = #{code},
-			`name` = #{name},
+			`name` = #{name}, 
+			<if test=" link != '' ">
+				`link` = #{link},
+			</if>
 			`replyStatus` = #{replyStatus},
 			`reactionPointStatus` = #{reactionPointStatus},
 			`publicStatus` = #{publicStatus}
+			</script>	
 			""")
-	void doWrite(String name, String code, int replyStatus, int reactionPointStatus, int publicStatus);
+	void doWrite(String name, String code, String link, int replyStatus, int reactionPointStatus, int publicStatus);
 	
 	@Update("""
 			<script>			

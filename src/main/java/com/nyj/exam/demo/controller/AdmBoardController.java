@@ -50,9 +50,9 @@ public class AdmBoardController {
 	
 	@RequestMapping("/adm/board/doWrite")
 	@ResponseBody
-	public String doWrite(String name, String code, int replyStatus, int reactionPointStatus, int publicStatus) {
+	public String doWrite(String name, String code,@RequestParam(defaultValue = "") String link, int replyStatus, int reactionPointStatus, int publicStatus) {
 		
-		int id = boardService.doWrite(name, code, replyStatus, reactionPointStatus, publicStatus); 
+		int id = boardService.doWrite(name, code, link, replyStatus, reactionPointStatus, publicStatus); 
 		
 		return Ut.jsReplace("게시판이 생성되었습니다.", "/adm/board/list");
 	}

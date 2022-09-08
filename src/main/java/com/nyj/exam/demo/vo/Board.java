@@ -13,6 +13,7 @@ public class Board {
 	String updateDate;
 	String code;
 	String name;
+	String link;
 	
 	int replyStatus;
 	int reactionPointStatus;

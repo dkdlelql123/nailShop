@@ -105,6 +105,13 @@ const fncDebounce = _.debounce(checkName, 500)
         </td>
       </tr> 
       <tr>
+        <th>링크</th>
+        <td>
+            <input type="text" class="w-full input input-sm" name="link" 
+            placeholder="선택시 작성해주세요" />
+        </td>
+      </tr> 
+      <tr>
         <th>댓글 기능</th>
         <td>
           <div class="flex gap-4">

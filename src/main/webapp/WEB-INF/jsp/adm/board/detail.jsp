@@ -43,6 +43,12 @@
         <td colspan="3">
             ${board.code}
         </td>
+      </tr> 
+      <tr>
+        <th>링크</th>
+        <td colspan="3">
+            ${board.link != null ? board.link: "-"}
+        </td>
       </tr>
       <tr>
         <th>댓글 기능</th>

@@ -44,8 +44,8 @@ public class BoardService {
 		return ResultData.form("S-1", "사용가능한 이름입니다."); 
 	}
 
-	public int doWrite(String name, String code, int replyStatus, int reactionPointStatus, int publicStatus) {
-		boardrepository.doWrite(name, code, replyStatus, reactionPointStatus, publicStatus);
+	public int doWrite(String name, String code, String link,int replyStatus, int reactionPointStatus, int publicStatus) {
+		boardrepository.doWrite(name, code, link, replyStatus, reactionPointStatus, publicStatus);
 		int id = getLastInsertId();
 		return id;
 	}
