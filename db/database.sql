@@ -288,3 +288,7 @@ ADD salt VARCHAR(100) AFTER pw;
 # 댓글테이블 memberId 제약조건 변경 - null 허용
 ALTER TABLE reply
 MODIFY memberId INT(10) UNSIGNED NULL;
+
+# 게시판에 링크컬럼 추가
+ALTER TABLE board
+ADD COLUMN link VARCHAR(100) NULL AFTER NAME;
