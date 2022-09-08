@@ -6,7 +6,9 @@
 <%@ include file="../common/head.jspf"%>
 
 <h1 class="font-title mb-4 text-3xl font-extrabold">${board.name} 총 ${articlesCount}개</h1>
- 
+<c:if test="${not empty board.link}">
+<a href="${board.link}" target="_blank"class="text-base-content/70">✨ 해당 사이트로 이동(클릭)</a>
+</c:if>
  
 <c:if test="${rq.member.authLevel == 10}">
   <div class="flex justify-end">  
