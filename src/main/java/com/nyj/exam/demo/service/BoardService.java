@@ -50,8 +50,8 @@ public class BoardService {
 		return id;
 	}
 
-	public void doModify(int id, String name, String code, int replyStatus, int reactionPointStatus, int publicStatus) {
-		boardrepository.doModify(id, name, code, replyStatus, reactionPointStatus, publicStatus);	
+	public void doModify(int id, String name, String code, String link,int replyStatus, int reactionPointStatus, int publicStatus) {
+		boardrepository.doModify(id, name, code, link, replyStatus, reactionPointStatus, publicStatus);	
 	}
 	
 	public int getLastInsertId() {

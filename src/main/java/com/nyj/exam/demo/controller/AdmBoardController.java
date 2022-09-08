@@ -84,7 +84,7 @@ public class AdmBoardController {
 	
 	@RequestMapping("/adm/board/doModify")
 	@ResponseBody
-	public String doModify(String name, String code, int id, int replyStatus, int reactionPointStatus, int publicStatus, Model model) {
+	public String doModify(String name, String code,@RequestParam(defaultValue = "") String link, int id, int replyStatus, int reactionPointStatus, int publicStatus, Model model) {
 
 		Board board = boardService.getBoardById(id);
 		if(board == null) {
@@ -93,7 +93,7 @@ public class AdmBoardController {
 
 		model.addAttribute("board", board);
 
-		boardService.doModify(id, name, code, replyStatus, reactionPointStatus, publicStatus);
+		boardService.doModify(id, name, code, link,replyStatus, reactionPointStatus, publicStatus);
 		return Ut.jsReplace("게시판이 수정되었습니다.", "/adm/board/detail?id="+id);
 	}
 

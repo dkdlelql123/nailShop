@@ -100,7 +100,7 @@
           <td class="text-center">${board.publicStatus == 1 ? "O":"X"}</td> 
           <td>
             <div class="flex justify-center gap-1">
-              <a href="/adm/board/detail?id=${board.id}" class="btn btn-xs btn-success">수정</a>
+              <a href="/adm/board/modify?id=${board.id}" class="btn btn-xs btn-success">수정</a>
               <a href="" class="btn btn-xs btn-error">삭제</a>
             </div>
           </td>

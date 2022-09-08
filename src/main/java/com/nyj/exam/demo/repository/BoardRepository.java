@@ -130,13 +130,16 @@ public interface BoardRepository {
 			UPDATE board
 			SET `name` = #{name},
 			`code` = #{code},
+			<if test=" link != '' ">
+				`link` = #{link},
+			</if>
 			`replyStatus` = #{replyStatus},
 			`reactionPointStatus` = #{reactionPointStatus},
 			`publicStatus` = #{publicStatus}
 			WHERE id = #{id};
 			</script>
 			""")
-	void doModify(int id, String name, String code, int replyStatus, int reactionPointStatus, int publicStatus);
+	void doModify(int id, String name, String code, String link, int replyStatus, int reactionPointStatus, int publicStatus);
 
 	@Select("""
 			SELECT LAST_INSERT_ID();

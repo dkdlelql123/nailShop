@@ -136,6 +136,14 @@ $(function() {
       </tr>
       
       <tr>
+        <th>링크</th>
+        <td colspan="3">
+            <input type="text" class="w-full input input-sm" name="link"  placeholder="필요시 입력해주세요."  value="${board.link}" />
+            <span></span>
+        </td>
+      </tr>
+      
+      <tr>
         <th>댓글 기능</th>
         <td colspan="3">
           <div class="flex gap-4">
