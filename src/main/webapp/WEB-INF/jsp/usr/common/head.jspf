@@ -97,5 +97,5 @@ Theme__init();
     <!-- HEADER end --> 
     
     <!-- content -->
-    <div class="p-8 md:p-12 xl:max-w-screen-lg xl:mx-auto">
-    
+    <div class="p-8  md:p-12 ${fullSize =='true' ? '' : 'xl:max-w-screen-lg '} xl:mx-auto">
+     

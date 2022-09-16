@@ -3,8 +3,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:set var="pageTitle" value="게시물 수정페이지" />
+<c:set var="fullSize" value="true" />
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../../common/toastUIEditerLib.jspf"%>
+
+<style>
+
+</style>
  
 <script> 
   let submitModifyrFormDone = false;
@@ -43,15 +48,26 @@
 
   <table>
     <colgroup>
-      <col width="200">
+      <col width="120">
+      <col>
+      <col width="120">
+      <col>
     </colgroup>
     <tr class="">
       <td>번호</td>
       <td>${article.id}</td>
+      <td>작성자</td>
+      <td>${article.extra__writerName}</td>
     </tr>
     <tr>
+      <td>작성일</td>
+      <td>${article.forPrintType2RegDate}</td> 
+      <td>수정일</td>
+      <td>${article.forPrintType2UpdateDate}</td>
+    </tr> 
+    <tr>
         <td>카테고리</td>
-        <td>
+        <td colspan="3">
           <select name="boardId" id="boardCategory" class="select select-sm select-bordered" >
             <option>-선택해주세요-</option>
             <c:forEach var="board" items="${boards}">
@@ -67,22 +83,10 @@
             </c:forEach>
           </select>
         </td>
-      </tr>
-    <tr>
-      <td>작성자</td>
-      <td>${article.extra__writerName}</td>
     </tr>
-    <tr>
-      <td>작성일</td>
-      <td>${article.forPrintType2RegDate}</td>
-    </tr>
-    <tr>
-      <td>수정일</td>
-      <td>${article.forPrintType2UpdateDate}</td>
-    </tr> 
     <tr>
       <td>제목</td>
-      <td>
+      <td colspan="3">
         <input type="text" class="w-full input input-sm input-bordered" name="title" value="${article.title}" />
       </td>
     </tr>

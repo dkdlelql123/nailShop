@@ -296,7 +296,7 @@ function ToastEditor__init() {
       el: node,
       previewStyle: 'vertical',
       initialValue: initialValue,
-      height:'600px',
+      height:'750px',
       //theme: theme,
       plugins: [
         [toastui.Editor.plugin.chart, ToastEditor__chartOptions],
