@@ -138,5 +138,11 @@ public class ArticleService {
 	public List<Article> getArticlesByMemberId(int memberId, int limitStart, int limitTake) {
 		return articleRepository.getArticlesByMemberId(memberId, limitStart, limitTake);
 	}
+
+	public List<Article> getTenNewArticles(int page, int itemsCountInAPage) {
+		int limitStart = (page - 1) * itemsCountInAPage;
+		int limitTake = itemsCountInAPage; 
+		return articleRepository.getTenNewArticles(limitStart, limitTake);
+	}
 	
 }

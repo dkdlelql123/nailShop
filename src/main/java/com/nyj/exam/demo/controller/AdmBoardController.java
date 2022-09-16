@@ -54,7 +54,7 @@ public class AdmBoardController {
 		
 		int id = boardService.doWrite(name, code, link, replyStatus, reactionPointStatus, publicStatus); 
 		
-		return Ut.jsReplace("게시판이 생성되었습니다.", "/adm/board/list");
+		return Ut.jsReplace(Ut.f("게시판이 생성되었습니다.", id), "/adm/board/list");
 	}
 	
 	@RequestMapping("/adm/board/doCheck")

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nyj.exam.demo.service.ArticleService;
 import com.nyj.exam.demo.service.BoardService;
@@ -28,18 +29,22 @@ public class UsrHomeController {
 	
 	
 	@RequestMapping("/usr/home") 
-	public String showHome(Model model) { 
-		
-		// 조회수 높은 글
-		List<Article> bestArticles = articleService.getBestArticles();
-		model.addAttribute("bestArticles", bestArticles);
+	public String showHome(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int itemsCountInAPage ) { 
 
-		// 새로 작성된 글
-		List<Article> newArticles = articleService.getNewArticles();
+		List<Article> newArticles = articleService.getTenNewArticles(page,itemsCountInAPage); 
 		model.addAttribute("newArticles", newArticles);
 		
 		return "usr/home/index";
 	}
+	
+//	@RequestMapping("/usr/home/getMore") 
+//	@ResponseBody
+//	public ResultData getMoreArticles(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int itemsCountInAPage ) { 
+//		List<Article> newArticles = articleService.getTenNewArticles(page,itemsCountInAPage); 
+//		ResultData rd = ResultData.form("S-1", "게시물 추가 성공", "NewArticles", newArticles);
+//		
+//		return rd;
+//	}
 	
 	@RequestMapping("/intro")
 	public String showIntro() {

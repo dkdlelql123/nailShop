@@ -52,44 +52,27 @@ function check__searchFrom(form){
   </form> 
 </section>
 
-<!--  text-base-content glass xl:rounded-box -mt-48 grid max-w-screen-xl gap-4 bg-opacity-60 xl:pb-0 -->
-<section class="mt-20">
-  <h2 class="text-3xl font-extrabold mb-4">BEST</h2>
-  <div class="mx-auto grid md:grid-cols-3 grid-cols-1 gap-4">
-  <c:forEach var="article" items="${bestArticles}">
-    <a class="card card-compact bg-base-200 border shadow-sm" href="/usr/article/detail?id=${article.id}">
-      <div class="card-body">
-         <h2 class="card-title"> 
-           <span class="title_text text-lg font-semibold">${article.title}</span>
-         </h2>     
-         <p><c:out value='${fn:substring(article.body.replaceAll("\\\<.*?\\\>",""),0,40)}' /> </p>
-         <p class="text-xs text-base-content/70">
-         <!-- ${article.extra__writerName} |  -->${article.getForPrintType1RegDate()} | ${article.extra__boardName}
-         </p>
-      </div>
-    </a>
-  </c:forEach>
-  </div>
-</section>
-
-
 <section class="mt-20">
   <h2 class="text-3xl font-extrabold mb-4">NEW</h2> 
-  <div class="mx-auto grid md:grid-cols-3 grid-cols-1 gap-4">
+  <div class="mx-auto grid md:grid-cols-3 grid-cols-1 gap-6">
   <c:forEach var="article" items="${newArticles}">
-    <a class="card card-compact bg-base-200 border shadow-sm" href="/usr/article/detail?id=${article.id}">
+    <a class="card card-compact border shadow-sm" href="/usr/article/detail?id=${article.id}">
       <div class="card-body">
          <h2 class="card-title"> 
             <span class="title_text text-lg font-semibold">${article.title}</span>
          </h2>       
-         <p><c:out value='${fn:substring(article.body.replaceAll("\\\<.*?\\\>",""),0,40)}' /> </p>
+         <p class="text-base-content/70"><c:out value='${fn:substring(article.body.replaceAll("\\\<.*?\\\>",""),0,30)}' />..</p>
          <p class="text-xs text-base-content/70">
-         <!-- ${article.extra__writerName} |  -->${article.getForPrintType1RegDate()} | ${article.extra__boardName}
+         조회 ${article.hit} | ${article.getForPrintType1RegDate()} | ${article.extra__boardName}
          </p>
       </div>
     </a>
   </c:forEach>
+     <div class="card card-compact border shadow-sm flex-column items-center justify-center flex-stretch bg-yellow-100">
+        <div class="text-gray-900">🌷놀러와주셔서 감사합니다🌷</div>
+    </div>
   </div>
 </section>
+
 
 <%@ include file="../common/tail.jspf"%>

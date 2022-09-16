@@ -77,4 +77,6 @@ public interface ArticleRepository {
 	void deleteFromMember(int memberId);
 
 	List<Article> getArticlesByMemberId(int memberId, int limitStart, int limitTake);
+
+	List<Article> getTenNewArticles(int limitStart, int limitTake);
 }
