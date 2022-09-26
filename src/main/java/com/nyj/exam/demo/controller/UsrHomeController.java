@@ -32,7 +32,12 @@ public class UsrHomeController {
 	public String showHome(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int itemsCountInAPage ) { 
 
 		List<Article> newArticles = articleService.getTenNewArticles(page,itemsCountInAPage); 
-		model.addAttribute("newArticles", newArticles);
+		model.addAttribute("newArticles", newArticles); 
+		System.out.println(newArticles);
+		
+		for(Article a : newArticles) {
+			System.out.println(a);
+		}
 		
 		return "usr/home/index";
 	}
