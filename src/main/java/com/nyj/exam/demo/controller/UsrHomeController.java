@@ -51,7 +51,7 @@ public class UsrHomeController {
 //		return rd;
 //	}
 	
-	@RequestMapping("/intro")
+	@RequestMapping("/portfolio")
 	public String showIntro() {
 		return "/usr/home/intro";  
 	}

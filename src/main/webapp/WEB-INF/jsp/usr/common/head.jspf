@@ -83,10 +83,19 @@ Theme__init();
       </div>
       
       <ul class="flex gap-4 text-base-content"> 
-        <li><a href="/usr/article/detail?id=14" class="link link-hover">
-          <span class="hidden md:inline">기술</span>설명서</a>
+        <li>
+          <a href="/usr/article/detail?id=14" class="link link-hover">
+            <span class="hidden md:inline">기술설명서</span>
+            <span class="inline md:hidden"><i class="fas fa-pencil-alt"></i></span>
+          </a>
         </li>
-        <li><a href="/usr/contact">문의</a></li> 
+        <li>
+          <a href="/portfolio" target="_blank">
+            <span class="hidden md:inline">포트폴리오</span>
+            <span class="inline md:hidden"><i class="far fa-list-alt"></i></span>
+          </a>  
+        </li>
+        <li><a href="/usr/contact"><i class="far fa-envelope"></i></a></li> 
       </ul>
       
       <a class="btn btn-primary btn-theme-toggle" href="javascript:Theme__toggle();">
