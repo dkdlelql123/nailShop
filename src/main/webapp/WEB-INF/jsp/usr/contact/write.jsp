@@ -35,6 +35,12 @@
 	      form.email.focus();
 	      return;
 	    }
+	    
+	    if(validEmailCheck(form.email) == false){
+	        alert('올바른 이메일 주소를 입력해주세요.') 
+	        form.email.focus();
+	        return;
+	    }
  
 	    form.body.value = form.body.value.trim();
 	    if (form.body.value.length < 5) {
@@ -57,7 +63,10 @@
 	    $("#sendMail").addClass("loading animate-bounce ");
 	    let res = await $.post(url, data);
 	    $("#sendMail").removeClass("loading animate-bounce");
-
+	    
+	    $("#sendMail").text("전송 완료되었습니다.");
+	    $("#sendMail").addClass(" btn-disabled ");
+	    
 		submitWriterFormDone = true;
 	} 
 </script>
@@ -85,7 +94,7 @@
          <label class="label">
             <span class="label-text">Message</span>
           </label>
-          <textarea class="textarea textarea-bordered " name="body" rows=5 placeholder="메시지를 입력하세요." required ></textarea>
+          <textarea class="textarea textarea-bordered " name="body" rows="5" placeholder="메시지를 입력하세요." required ></textarea>
         </div>
        <div class="form-control"> 
           <div class="flex items-center justify-end gap-2">

@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="/resource/common.js" defer="defer"></script>
   <style>
   body {
     font: 400 15px Lato, sans-serif;
@@ -292,7 +293,7 @@
         </div>
       </div>
       
-      <textarea class="form-control" id="body" name="body" placeholder="Comment" rows="5" required></textarea><br>
+      <textarea class="form-control" id="body" name="body" placeholder="Message" rows="5" required></textarea><br>
       
       <div> 
           <div class="text-right">
@@ -388,6 +389,12 @@ async function mail__submitForm(form) {
     return;
   }
   
+  if(validEmailCheck(form.email) == false){
+      alert('올바른 이메일 주소를 입력해주세요.') 
+      form.email.focus();
+      return;
+  }
+  
   form.body.value = form.body.value.trim();
   if (form.body.value.length < 5) {
   alert("내용을 5글자 이상 작성해주세요."); 
@@ -406,9 +413,9 @@ async function mail__submitForm(form) {
   	"body" :form.body.value,
   }
   
-  $("#sendMail").html("메일 보내는 중..");
+  $("#sendMail").html("메일 보내는 중..🏃‍♀️");
   let res = await $.post(url, data);
-  $("#sendMail").html("완료");
+  $("#sendMail").html("완료").attr("disabled", true);
   
   submitWriterFormDone = true;
 }

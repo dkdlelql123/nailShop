@@ -22,3 +22,13 @@ function isNull(str) {
 	
 	return true;
 }
+
+/** 
+이메일 유효성 검사
+@param input(type=email)
+^문자열 시작 - ? 존재여부(_) - @ 필수 - .필수 - .뒤에 문자 2~3글자 - $문자열 종료
+*/  
+function validEmailCheck(obj){
+    let pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    return (obj.value.match(pattern)!=null)
+}

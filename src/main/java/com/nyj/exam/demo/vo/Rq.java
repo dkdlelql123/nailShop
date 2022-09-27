@@ -163,4 +163,10 @@ public class Rq {
 	public boolean isAdmin() { 
 		return member.isAdmin();
 	}
+	
+	public String pringHistoryBackJs(String msg) {
+		req.setAttribute("msg", msg);
+		req.setAttribute("historyBack", true);
+		return "/common/js";
+	}
 }

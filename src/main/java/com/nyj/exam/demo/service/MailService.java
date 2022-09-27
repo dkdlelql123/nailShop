@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.nyj.exam.demo.vo.Mail;
 import com.nyj.exam.demo.vo.Member;
-import com.nyj.exam.demo.vo.ResultData;
 
 @Service
 public class MailService {
@@ -20,8 +19,14 @@ public class MailService {
     public MailService(JavaMailSender mailSender) {
     	this.mailSender = mailSender;
 	}
-	 
+	
+    /**
+     * 임시 비밀번호 생성, mail 내용 작성
+     * @param Member member : 회원정보
+     * @return Mail mail : 임시비밀번호가 담긴 메일
+     * */
 	public Mail createMailAndChangePassword(Member member) {
+		// 임시 비밀번호
 		String uuid = UUID.randomUUID().toString().replace("-", "");
 		String tempPw = uuid.substring(0, 6);
 		
@@ -35,6 +40,10 @@ public class MailService {
 		
 	}
 	
+	/** 
+	 * 임시 비밀번호 메일 전송 
+	 * @param Mail mail
+	 * */
 	public void mailSend(Mail mail){
 		try {
 	        SimpleMailMessage message = new SimpleMailMessage();
@@ -42,13 +51,16 @@ public class MailService {
 	        message.setFrom(FROM_ADDRESS);
 	        message.setSubject(mail.getTitle());
 	        message.setText(mail.getMsg());
-	        mailSender.send(message);
-	        
+	        mailSender.send(message); 
 		} catch (Exception e) { 
 			e.printStackTrace();
 		}
     }
-
+	
+	/** 
+	 * contact 메일 전송 
+	 * @param Mail mail
+	 * */ 
 	public void sendContect(Mail mail) { 
 		try { 
 	        SimpleMailMessage message = new SimpleMailMessage();
@@ -59,9 +71,6 @@ public class MailService {
 	        mailSender.send(message);   
 		} catch (Exception e) { 
 			e.printStackTrace();
-		}
-		
+		} 
 	}
- 
-
 }

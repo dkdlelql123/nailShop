@@ -92,13 +92,7 @@ function checkForm(form) {
 	form.submit();
 	submitJoinFormDone = true;
 }
- 
-// 이메일 유효성 검사
-// ^문자열 시작 - ? 존재여부(_) - @ 필수 - .필수 - .뒤에 문자 2~3글자 - $문자열 종료 
-function validEmailCheck(obj){
-    var pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-    return (obj.value.match(pattern)!=null)
-}
+
 
 /** 로그인아이디 중복 확인 */
 function checkLoginIdDup(loginId) { 
