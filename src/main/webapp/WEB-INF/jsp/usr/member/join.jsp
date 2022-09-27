@@ -64,6 +64,12 @@ function checkForm(form) {
 		form.email.focus();
 		return;
 	}
+	
+	if(validEmailCheck(form.email) == false){
+        alert('올바른 이메일 주소를 입력해주세요.') 
+        form.email.focus();
+        return;
+    }
 
 	if (!isNull(userNickname)) {
 		alert("별명(을)를 입력해주세요.");
@@ -76,9 +82,22 @@ function checkForm(form) {
 		form.phoneNumber.focus();
 		return;
 	}
+	
+	if (userPhoneNumber.length != 11) {
+		alert("전화번호(을)를 11글자 입력해주세요");
+		form.phoneNumber.focus();
+		return;
+	}
 
 	form.submit();
 	submitJoinFormDone = true;
+}
+ 
+// 이메일 유효성 검사
+// ^문자열 시작 - ? 존재여부(_) - @ 필수 - .필수 - .뒤에 문자 2~3글자 - $문자열 종료 
+function validEmailCheck(obj){
+    var pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    return (obj.value.match(pattern)!=null)
 }
 
 /** 로그인아이디 중복 확인 */
@@ -179,11 +198,12 @@ const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 500);
         for="email"
         class="block mb-2 text-sm font-medium label-text">이메일</label>
       <input 
-        type="text" 
+        type="email" 
         name="email" 
         id="email"
         class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-sm"
-        placeholder="abc@abc.com" 
+        title="올바른 이메일을 등록해주세요."
+        placeholder="abc@abc.com"  
         required />
     </div>
 
@@ -204,12 +224,15 @@ const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 500);
       <label 
         for="phoneNumber"
         class="block mb-2 text-sm font-medium label-text">전화번호</label>
+        
       <input 
         type="text" 
         name="phoneNumber" 
         id="phoneNumber"
         class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-sm "
-        placeholder="전화번호" 
+        placeholder="-를 빼고 숫자만 입력해주세요."
+        maxlength="11" 
+        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 
         required />
     </div>
 
