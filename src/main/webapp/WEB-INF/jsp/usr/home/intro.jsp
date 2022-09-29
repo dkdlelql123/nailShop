@@ -231,7 +231,7 @@
       <p>
       작업기간 : 2022. 07 - 2022. 08 <br />
       - JAVA, Spring Boot <br />
-      - GIT <a link="https://github.com/dkdlelql123/blog" target="_blank" class="btn btn-xs btn-default" >바로가기</a><br />
+      - GIT <a href="https://github.com/dkdlelql123/blog" target="_blank" class="btn btn-xs btn-default" >바로가기</a><br />
       - MySQL, MariaDB <br />
       - Nginx, Tomcat <br />
       - HTML, CSS, JS <br />
@@ -257,17 +257,44 @@
       작업기간 : 2022. 09 ~ <br />
       - 윈도우 64bit 환경 / 전자정부 프레임워크 4.x 실행환경<br />
       - JAVA 11.0.16<br />
-      - GIT <a link="https://github.com/dkdlelql123/eGov_web_pratice" target="_blank" class="btn btn-xs btn-default">바로가기</a><br />
+      - GIT <a href="https://github.com/dkdlelql123/eGov_web_pratice" target="_blank" class="btn btn-xs btn-default">바로가기</a><br />
       - 개발환경 - 4.x 다운로드<br />
       - MySQL, XAMPP(v 3.3.0), SQLyog<br />
       - Tomcat <br />
       - HTML, CSS, JS <br />
       - Bootstrap
       </p>
-      <br><a href="https://blog.yeji.967.be" target="_blank" class="btn btn-default btn-lg">Github 👉</a>
+      <br><a href="https://github.com/dkdlelql123/eGov_web_pratice" target="_blank" class="btn btn-default btn-lg">Github 👉</a>
     </div>
   </div>
 </div> 
+ 
+<div id="portfolio" class="container-fluid">
+  <div class="row"> 
+    <div class="col-sm-6">
+      <img style="width:100%" src="/resource/img/portfolio_3.jpg" alt="포트폴리오_게시판_형식" title="포트폴리오_게시판_형식" />
+    </div>
+    <div class="col-sm-6">
+      <h2>게시판 형식 웹 사이트</h2> 
+      <h4>
+       수업을 통해서 만든 웹 사이트입니다.
+       로그인, 게시물CURD 등 간단한 기능까지 구현했습니다.
+       여기서 관리자 페이지, 계정 찾기, 비밀번호 암호화, 비회원 댓글 작성 등 부족한 부분을 추가해 Blog 웹사이트를 만들게 되었습니다.
+       </h4> 
+      <p>
+      작업기간 : 2022. 07 <br />
+      - JAVA, Spring Boot <br />
+      - GIT <a href="https://github.com/dkdlelql123/sb_c_2022" target="_blank" class="btn btn-xs btn-default" >바로가기</a><br />
+      - MySQL, MariaDB <br />
+      - Nginx, Tomcat <br />
+      - HTML, CSS, JS <br />
+      - TailwindCSS, DaisyUI
+      </p>
+      <br><a href="https://bbs.yeji.967.be/" target="_blank" class="btn btn-default btn-lg">Go 👉</a>
+    </div>
+  </div>
+</div>
+
 
 <!-- Container (Contact Section) -->
 <div id="contact" class="container-fluid bg-grey">
