@@ -129,7 +129,7 @@ const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 500);
 </script>
 
 <div class="table-box-type-1 m-auto w-full lg:w-1/2">
-  <form onsubmit="checkForm(this); return false;" action="/usr/member/doJoin" method="post" >
+  <form onsubmit="checkForm(this); return false;" action="/usr/member/doJoin" method="post" enctype="multipart/form-data">
     <div class="mt-8 mb-4">
       <label 
         for="loginId"
@@ -229,6 +229,13 @@ const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 500);
         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 
         required />
     </div>
+    
+    <div  class="mb-4"> 
+        <label class="block mb-2 text-sm font-medium label-text">
+            프로필 이미지
+        </label>
+        <input type="file" name="file__member__0__extra__profileImg__1" placeholder="프로필 이미지를 선택해주세요." />
+     </div>
 
     <button 
       type="submit"
