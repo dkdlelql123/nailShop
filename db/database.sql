@@ -292,3 +292,26 @@ MODIFY memberId INT(10) UNSIGNED NULL;
 # 게시판에 링크컬럼 추가
 ALTER TABLE board
 ADD COLUMN link VARCHAR(100) NULL AFTER NAME;
+
+
+# 파일 테이블 생성
+CREATE TABLE genFile(
+ id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+ regDate DATETIME,
+ updateDate DATETIME,
+ delDate DATETIME DEFAULT NULL,
+ delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT "삭제상태(0:미삭제,1:삭제)",
+ relTypeCode VARCHAR(50) NOT NULL COMMENT '관련 데이터 타입(article, member)',
+ relId INT(10) UNSIGNED NOT NULL,
+ originFileName VARCHAR(100) NOT NULL COMMENT '업로드 당시의 파일이름',
+ fileExt VARCHAR(10) NOT NULL COMMENT '확장자',
+ typeCode VARCHAR(20) NOT NULL COMMENT '종류코드 (common)',
+ type2Code VARCHAR(20) NOT NULL COMMENT '종류2코드 (attatchment)',
+ fileSize INT(10) UNSIGNED NOT NULL,
+ fileExtTypeCode VARCHAR(10) NOT NULL COMMENT '파일규격코드(img, video)	',
+ fileExtType2Code VARCHAR(10) NOT NULL COMMENT '파일규격2코드(jpg, mp4)',
+ fileNo SMALLINT(2) UNSIGNED NOT NULL COMMENT' 파일번호 (1)',
+ fileDir CHAR(20) NOT NULL,
+ PRIMARY KEY(id),
+ KEY relId(relTypeCode, relId, typeCode, type2Code, fileNo)
+);
