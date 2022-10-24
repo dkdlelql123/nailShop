@@ -1,6 +1,7 @@
 package com.nyj.exam.demo.controller; 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,8 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.nyj.exam.demo.service.ArticleService;
+import com.nyj.exam.demo.service.GenFileService;
 import com.nyj.exam.demo.service.MailService;
 import com.nyj.exam.demo.service.MemberService;
 import com.nyj.exam.demo.service.ReplyService;
@@ -34,7 +38,10 @@ public class UsrMemberController {
 	ArticleService articleService; 
 	
 	@Autowired
-	ReplyService replyService; 
+	ReplyService replyService;  
+
+	@Autowired
+	GenFileService genFileService; 
 
 	private Rq rq;
 
@@ -56,17 +63,32 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public String doJoin(String loginId, String loginPw, String email, String name, String nickname, String phoneNumber) {
+	public String doJoin(MultipartRequest multipartReq, String loginId, String loginPw, String email, String name, String nickname, String phoneNumber) {
+		
 		ResultData joinRd = memberService.join(loginId, loginPw, email, name, nickname, phoneNumber);
 		if (joinRd.isFail()) {
 			return Ut.jsHistoryBack(joinRd.getMsg());
 		}
 
-		int id = memberService.getLastInsertId();
-		Member member = memberService.getMemberById(id);
-		rq.login(member);  
+		int newMemberId = memberService.getLastInsertId();
+		
+		Map<String, MultipartFile> fileMap = multipartReq.getFileMap();
+		
+		for(String fileInputName : fileMap.keySet()) {
+			MultipartFile multipartFile = fileMap.get(fileInputName);
+			
+			if(multipartFile.isEmpty() == false) {
+				genFileService.save(multipartFile, newMemberId);
+				System.out.println("=================multipartFile===================");
+				System.out.println(multipartFile);
+			}
+		} 	
+		
+		Member member = memberService.getMemberById(newMemberId);
+		//rq.login(member);  
 
-		return Ut.jsReplace(Ut.f("%s님 반갑습니다.", member.getNickname()), "/");
+		return Ut.jsReplace("로그인 이후 이용해주세요.", "/usr/member/login");
+		//return Ut.jsReplace(Ut.f("%s님 반갑습니다.", member.getNickname()), "/");
 	}
 	
 
