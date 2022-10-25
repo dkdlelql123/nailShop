@@ -85,10 +85,10 @@ public class UsrMemberController {
 		} 	
 		
 		Member member = memberService.getMemberById(newMemberId);
-		//rq.login(member);  
+		rq.login(member);  
 
-		return Ut.jsReplace("로그인 이후 이용해주세요.", "/usr/member/login");
-		//return Ut.jsReplace(Ut.f("%s님 반갑습니다.", member.getNickname()), "/");
+		//return Ut.jsReplace("로그인 이후 이용해주세요.", "/usr/member/login");
+		return Ut.jsReplace(Ut.f("%s님 반갑습니다.", member.getNickname()), "/");
 	}
 	
 

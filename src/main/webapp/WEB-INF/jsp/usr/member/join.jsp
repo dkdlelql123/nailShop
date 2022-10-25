@@ -234,6 +234,14 @@ const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 500);
         <label class="block mb-2 text-sm font-medium label-text">
             프로필 이미지
         </label>
+        <!-- 
+                      :file
+        relTypeCode   :member
+        relId         :0
+        typeCode      :extra
+        type2Code     :profileImg
+        fileNo        :1 (profileImg 중 1번)
+         -->
         <input type="file" name="file__member__0__extra__profileImg__1" placeholder="프로필 이미지를 선택해주세요." />
      </div>
 

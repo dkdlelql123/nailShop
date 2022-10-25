@@ -78,5 +78,10 @@ public class ResultData {
 		this.data2msg = msg;
 		this.data2 = obj;
 	}
+
+	public Object getBody() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
