@@ -25,9 +25,11 @@ public class MenuInterceptor implements HandlerInterceptor{
 	
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler) throws Exception {
+		// left menu
 		List<Board> boards = boardService.getBoards();
 		req.setAttribute("boards", boards);
 		
+		// today
 		int total = visitService.getTotalCount();
 		int today = visitService.getTodayCount();
 		req.setAttribute("total", total);

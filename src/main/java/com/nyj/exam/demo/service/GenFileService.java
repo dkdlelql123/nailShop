@@ -2,13 +2,18 @@ package com.nyj.exam.demo.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
+import com.google.common.base.Joiner;
 import com.nyj.exam.demo.repository.GenFileRepository;
 import com.nyj.exam.demo.util.Ut;
 import com.nyj.exam.demo.vo.GenFile;
@@ -64,7 +69,7 @@ public class GenFileService {
             GenFile oldGenFile = getGenFile(relTypeCode, relId, typeCode, type2Code, fileNo);
 
             if (oldGenFile != null) {
-//                deleteGenFile(oldGenFile);
+                deleteGenFile(oldGenFile);
             }
         }
         
@@ -97,7 +102,7 @@ public class GenFileService {
         
     }
 
-	private GenFile getGenFile(String relTypeCode, int relId, String typeCode, String type2Code, int fileNo) {
+	public GenFile getGenFile(String relTypeCode, int relId, String typeCode, String type2Code, int fileNo) {
         return genFileRepository.getGenFile(relTypeCode, relId, typeCode, type2Code, fileNo);
     }
 	
@@ -113,5 +118,81 @@ public class GenFileService {
         int id = Ut.getAsInt(param.get("id"), 0);
         return ResultData.form("S-1", "성공하였습니다.", "id", id);
 	}
+
+	public ResultData saveFiles(Map<String, Object> param, MultipartRequest multipartRequest) {
+        // 업로드 시작
+        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+
+        Map<String, ResultData> filesResultData = new HashMap<>();
+        List<Integer> genFileIds = new ArrayList<>();
+
+        for (String fileInputName : fileMap.keySet()) {
+            MultipartFile multipartFile = fileMap.get(fileInputName);
+
+            if (multipartFile.isEmpty() == false) {
+                ResultData fileResultData = save(multipartFile);
+                int genFileId = (int) fileResultData.getData1();
+                genFileIds.add(genFileId);
+
+                filesResultData.put(fileInputName, fileResultData);
+            }
+        }
+
+        String genFileIdsStr = Joiner.on(",").join(genFileIds);
+
+        // 삭제 시작
+        int deleteCount = 0;
+
+        for (String inputName : param.keySet()) {
+            String[] inputNameBits = inputName.split("__");
+
+            if (inputNameBits[0].equals("deleteFile")) {
+                String relTypeCode = inputNameBits[1];
+                int relId = Integer.parseInt(inputNameBits[2]);
+                String typeCode = inputNameBits[3];
+                String type2Code = inputNameBits[4];
+                int fileNo = Integer.parseInt(inputNameBits[5]);
+
+                GenFile oldGenFile = getGenFile(relTypeCode, relId, typeCode, type2Code, fileNo);
+
+                if (oldGenFile != null) {
+                    deleteGenFile(oldGenFile);
+                    deleteCount++;
+                }
+            }
+        }
+
+        return ResultData.form("S-1", "파일을 업로드하였습니다.");
+        //return new ResultData("S-1", "파일을 업로드하였습니다.", "filesResultData", filesResultData, "genFileIdsStr", genFileIdsStr, "deleteCount", deleteCount);
+                
+    }
+	
+   public ResultData save(MultipartFile multipartFile) {
+        String fileInputName = multipartFile.getName();
+        String[] fileInputNameBits = fileInputName.split("__");
+
+        String relTypeCode = fileInputNameBits[1];
+        int relId = Integer.parseInt(fileInputNameBits[2]);
+        String typeCode = fileInputNameBits[3];
+        String type2Code = fileInputNameBits[4];
+        int fileNo = Integer.parseInt(fileInputNameBits[5]);
+
+        return save(multipartFile, relTypeCode, relId, typeCode, type2Code, fileNo);
+    }
+
+
+	public GenFile getGenFile(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
+    private void deleteGenFile(GenFile genFile) {
+        String filePath = genFile.getFilePath(genFileDirPath);
+        Ut.deleteFile(filePath);
+
+        genFileRepository.deleteFile(genFile.getId());
+    }
+
 
 }

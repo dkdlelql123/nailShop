@@ -32,10 +32,17 @@ public class Member {
 	public String getForPrintType1RegDate() {
 		return regDate.substring(0,10);
 	}
+	
 	public String getForPrintType1UpdateDate() {
 		return updateDate.substring(0,10);
 	}
+	
 	public boolean isAdmin() {
 		return authLevel == 10;
 	}
+	
+    public String getProfileImgUri() {
+        return "/common/genFile/file/member/" + id + "/extra/profileImg/1";
+    }
+
 }

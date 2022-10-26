@@ -1,6 +1,7 @@
 package com.nyj.exam.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -28,6 +29,9 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 	
 	@Autowired
 	NeedAdminInterceptor needAdminInterceptor;
+	
+	@Value("${custom.genFileDirPath}")
+    private String genFileDirPath;
 
 
 	// 이 함수는 인터셉터를 적용하는 역할을 합니다.
@@ -36,7 +40,9 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		registry.addInterceptor(beforeActionInterceptor)
 		.addPathPatterns("/**")
 		.excludePathPatterns("/resource/**")
+		.excludePathPatterns("/gen/**")//.addResourceLocations("file:///" + genFileDirPath + "/").setCachePeriod(20);
 		.excludePathPatterns("/error");
+		 
 		
 		registry.addInterceptor(menuInterceptor)
 		.addPathPatterns("/**")

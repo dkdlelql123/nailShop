@@ -1,5 +1,7 @@
 package com.nyj.exam.demo.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +28,32 @@ public class GenFile {
     private String fileExt;
     private String fileDir;
     private String originFileName;
+    
+    @JsonIgnore
+    public String getFilePath(String genFileDirPath) {
+        return genFileDirPath + getBaseFileUri();
+    }
+
+    @JsonIgnore
+    private String getBaseFileUri() {
+        return "/" + relTypeCode + "/" + fileDir + "/" + getFileName();
+    }
+
+    public String getFileName() {
+        return id + "." + fileExt;
+    }
+
+    public String getForPrintUrl() {
+        return "/gen" + getBaseFileUri() + "?updateDate=" + updateDate;
+    }
+
+    public String getDownloadUrl() {
+        return "/common/genFile/doDownload?id=" + id;
+    }
+
+    public String getMediaHtml() {
+        return "<img src=\"" + getForPrintUrl() + "\">";
+    }
 	
 	public String getForPrintType1RegDate() {
 		return regDate.substring(2,10);
