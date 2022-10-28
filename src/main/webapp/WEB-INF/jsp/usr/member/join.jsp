@@ -242,7 +242,11 @@ const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 500);
         type2Code     :profileImg
         fileNo        :1 (profileImg 중 1번)
          -->
-        <input type="file" name="file__member__0__extra__profileImg__1" placeholder="프로필 이미지를 선택해주세요." />
+        <input 
+          type="file" 
+          name="file__member__0__extra__profileImg__1" 
+          accept= "image/png image/jpeg image/jpg"
+          placeholder="프로필 이미지를 선택해주세요." />
      </div>
 
     <button 
