@@ -44,5 +44,13 @@ public class Member {
     public String getProfileImgUri() {
         return "/common/genFile/file/member/" + id + "/extra/profileImg/1";
     }
+    
+    public String getProfileFallbackImgUri() {
+        return "https://via.placeholder.com/94?text=^_^";
+    }
+
+    public String getProfileFallbackImgOnErrorHtmlAttr() {
+        return "this.src = '" + getProfileFallbackImgUri() + "'";
+    }
 
 }
