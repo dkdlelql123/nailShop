@@ -186,7 +186,13 @@
   <div class="text-center">
     <h4 class="text-sm text-base-content/70 mb-2">${article.extra__boardName}</h4>
     <h1 class="text-3xl font-bold mb-4">${article.title}</h1>
-    <div class="text-sm text-base-content/70 pb-8 mb-8 border-b border-gray-400">
+    <div class="text-sm text-base-content/70 pb-8 mb-8 border-b border-gray-400 flex items-center justify-center">
+    
+      <div class="mask mask-squircle bg-base-content h-8 w-8 bg-opacity-10 p-px mx-2">
+        <img  src="${article.getWriterProfileImgUri()}" 
+              onerror="${article.getWriterProfileFallbackImgOnErrorHtmlAttr()}" 
+              width="44" height="44" alt="member img" class="mask mask-squircle" />
+      </div>
       <span>작성자 ${article.extra__writerName} | </span>
       <span>${article.forPrintType2RegDate}</span>
       <c:if test="${article.extra__reactionPointStatus == 1}"> 

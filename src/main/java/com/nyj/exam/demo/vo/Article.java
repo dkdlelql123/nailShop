@@ -49,4 +49,20 @@ public class Article {
 		return updateDate.substring(2,16);
 	}
 	
+	// --- 작성자 프로필 이미지 관련 
+	
+	public String getWriterProfileImgUri() {
+	        return "/common/genFile/file/member/" + id + "/extra/profileImg/1";
+	}
+	
+	public String getWriterProfileFallbackImgUri() {
+	    return "https://via.placeholder.com/94?text=^_^";
+	}
+	
+	public String getWriterProfileFallbackImgOnErrorHtmlAttr() {
+	    return "this.src = '" + getWriterProfileFallbackImgUri() + "'";
+	}
+	
+	// --- 작성자 프로필 이미지 관련 끝
+	
 }
