@@ -65,10 +65,36 @@
 <div class="table-box-type-1 m-auto w-full lg:w-1/2">
   <h1 class="text-3xl font-bold text-center">내정보 수정</h1> 
   
-  <form onsubmit="checkForm(this); return false;" action="/usr/member/doModify" method="post">
+  <form onsubmit="checkForm(this); return false;" action="/usr/member/doModify" method="post" enctype="multipart/form-data">
     <input type="hidden" name="memberModifyAuthKey" value="${param.memberModifyAuthKey}" />
     
-    <div class="mt-8 mb-4">
+    <div class="mask mask-squircle bg-base-content h-24 w-24 bg-opacity-10 p-px mx-auto mt-8 ">
+      <img  src="${member.getProfileImgUri()}" 
+            onerror="${member.getProfileFallbackImgOnErrorHtmlAttr()}" 
+            width="94" height="94" alt="member img" class="mask mask-squircle" />
+    </div>
+    <div class="mb-4">
+          <label class="block mb-2 text-sm font-medium label-text" for="profileImg">
+              프로필 이미지 변경
+        <!-- 
+                      :file
+        relTypeCode   :member
+        relId         :0
+        typeCode      :extra
+        type2Code     :profileImg
+        fileNo        :1 (profileImg 중 1번)
+         -->
+        <input 
+          type="file" 
+          name="file__member__0__extra__profileImg__1"
+          id="profileImg" 
+          accept= "image/png image/jpeg image/jpg"
+          placeholder="프로필 이미지를 선택해주세요." />
+          
+          </label>
+    </div>
+    
+    <div class="mb-4">
       <label for="loginId" class="block mb-2 text-sm font-medium label-text">아이디</label>
       <input 
         type="text"  

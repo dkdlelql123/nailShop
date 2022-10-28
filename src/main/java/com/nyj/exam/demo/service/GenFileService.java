@@ -77,7 +77,7 @@ public class GenFileService {
                 fileExtTypeCode, fileExtType2Code, fileExt, fileSize, fileDir);
         int newGenFileId = (int) saveMetaRd.getData1();
         
-     // 새 파일이 저장될 폴더(io파일) 객체 생성
+        // 새 파일이 저장될 폴더(io파일) 객체 생성
         String targetDirPath = genFileDirPath + "/" + relTypeCode + "/" + fileDir;
         java.io.File targetDir = new java.io.File(targetDirPath);
 

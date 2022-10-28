@@ -11,11 +11,10 @@
 
   <div class="flex grid templete-row-3">
     <section class="flex gap-2 flex-col mt-20 text-center border rounded py-6">
-      <div class="mask mask-squircle bg-base-content h-24 w-24 bg-opacity-10 p-px mx-auto">
-      
+      <div class="mask mask-squircle bg-base-content h-24 w-24 bg-opacity-10 p-px mx-auto text-center">
         <img  src="${member.getProfileImgUri()}" 
               onerror="${member.getProfileFallbackImgOnErrorHtmlAttr()}" 
-              width="94" height="94" alt="member img" class="mask mask-squircle"/>
+              width="110" height="110" alt="member img" class="mask mask-squircle" />
       </div>
       <div>
         😁 <span class="text-2xl font-bold">${member.loginId}</span>

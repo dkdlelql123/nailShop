@@ -213,7 +213,7 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doModify")
 	@ResponseBody
-	public String doModify(String loginPw, String loginPw2, String email,String nickname, String phoneNumber, String memberModifyAuthKey) {
+	public String doModify(MultipartRequest multipartReq, String loginPw, String loginPw2, String email,String nickname, String phoneNumber, String memberModifyAuthKey) {
 		if(Ut.empty(memberModifyAuthKey)) {
 			return rq.historyBackJsOnView("유효키가 없습니다. 올바른 방법으로 이용바랍니다.");
 		}
@@ -237,6 +237,19 @@ public class UsrMemberController {
 		if (doModifyRd.isFail()) {
 			return Ut.jsHistoryBack(doModifyRd.getMsg());
 		}
+		
+		
+		Map<String, MultipartFile> fileMap = multipartReq.getFileMap();
+		
+		for(String fileInputName : fileMap.keySet()) {
+			MultipartFile multipartFile = fileMap.get(fileInputName);
+			
+			if(multipartFile.isEmpty() == false) {
+				genFileService.save(multipartFile, rq.getLoginedMemberId());
+				System.out.println("=================multipartFile===================");
+				System.out.println(multipartFile);
+			}
+		} 
 		
 		return Ut.jsReplace("회원정보수정이 완료되었습니다.", "/usr/member/mypage");
 	} 
