@@ -53,6 +53,10 @@ public class Rq {
 		this.member = member;
 		
 		this.req.setAttribute("rq", this);
+	} 
+	
+	public HttpServletRequest getRequest() {
+		return this.req;
 	}
 
 	public void login(Member member) {

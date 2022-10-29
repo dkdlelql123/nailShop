@@ -3,6 +3,8 @@ package com.nyj.exam.demo.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -237,7 +239,11 @@ public class UsrMemberController {
 		if (doModifyRd.isFail()) {
 			return Ut.jsHistoryBack(doModifyRd.getMsg());
 		}
-		
+		 
+		// 
+		if ( rq.getRequest().getParameter("deleteFile__member__0__extra__profileImg__1") != null ) {
+            genFileService.deleteGenFile("member", rq.getLoginedMemberId(), "extra", "profileImg", 1);
+        }
 		
 		Map<String, MultipartFile> fileMap = multipartReq.getFileMap();
 		
