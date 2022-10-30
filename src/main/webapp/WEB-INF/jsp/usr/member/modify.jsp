@@ -6,7 +6,17 @@
 <c:set var="pageTitle" value="회원가입수정" />
 <%@ include file="../common/head.jspf"%>
 
-<script type="text/javascript" defer="defer">
+<script type="text/javascript">
+
+function deleteProfileImg(chk){
+	let status = $("#delete__profileImg").prop("checked");
+	if(status) {
+		$(".profileImg").addClass(' btn-disabled');
+	} else{
+		$(".profileImg").removeClass(' btn-disabled');
+	}
+}
+
 	function isNull(el) {
 		let str = el.trim();
 		if (str.length <= 0) {
@@ -16,7 +26,7 @@
 	}
 
 	let submitJoinFormDone = false;
-
+	
 	function checkForm(form) {
 		if (submitJoinFormDone) {
 			alert("처리중입니다. \n새로고침 후 이용해주세요.");
@@ -56,10 +66,22 @@
 			return;
 		}
 		
-		// 기본 프로필 이미지 체크시
-	    const deleteProfileImgFileInput = form["deleteFile__member__0__extra__profileImg__1"];
+
+	    const maxSizeMb = 10;
+	    const maxSize = maxSizeMb * 1024 * 1024;
+	    const profileImgFileInput = form["file__member__0__extra__profileImg__1"];
+	    if (profileImgFileInput.value) {
+	        if (profileImgFileInput.files[0].size > maxSize) {
+	            alert(maxSizeMb + "MB 이하의 파일을 업로드 해주세요.");
+	            profileImgFileInput.focus();
+	            return;
+	        }
+	    }
+		
+		// 기본 프로필 이미지 체크시 (이미지 삭제)
+	    const deleteProfileImgFileInput = $("#delete__profileImg");
         if ( deleteProfileImgFileInput.checked ) {
-            form["file__member__0__extra__profileImg__1"].value = '';
+            $("#profileImg").val('');
         }
 
 		$(".messege").html("");
@@ -67,7 +89,6 @@
 		submitJoinFormDone = true;
 		form.submit();
 	}
-	
 	
 </script>
 
@@ -92,14 +113,15 @@
         <label class="label cursor-pointer">
           <input type="checkbox" 
           name="deleteFile__member__0__extra__profileImg__1"
-          id="deleteFile__member__0__extra__profileImg__1"
+          id="delete__profileImg" 
+          onclick="deleteProfileImg()"
           class="checkbox checkbox-primary checkbox-xs"  />
           &nbsp;
           <span class="label-text">기본이미지 선택</span>
         </label>
       </div>
       <div class="text-base-content/70">|</div>
-      <label class="label-text" for="profileImg"> 프로필 이미지 변경 </label>
+      <label class="profileImg btn btn-xs btn-primary text-center label-text" for="profileImg" > 프로필 이미지 변경 </label>
       <div class="hidden">
         <!-- 
                       :file
@@ -109,8 +131,11 @@
         type2Code     :profileImg
         fileNo        :1 (profileImg 중 1번)
          -->
-        <input type="file" name="file__member__0__extra__profileImg__1"
-          id="profileImg" accept="image/png image/jpeg image/jpg"
+        <input 
+          type="file" 
+          name="file__member__0__extra__profileImg__1"
+          id="profileImg" 
+          accept="image/png image/jpeg image/jpg"
           placeholder="프로필 이미지를 선택해주세요." />
       </div>
     </div>
