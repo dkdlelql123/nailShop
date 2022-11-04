@@ -52,7 +52,7 @@ public class Article {
 	// --- 작성자 프로필 이미지 관련 
 	
 	public String getWriterProfileImgUri() {
-	        return "/common/genFile/file/member/" + id + "/extra/profileImg/1";
+	        return "/common/genFile/file/member/" + memberId + "/extra/profileImg/1";
 	}
 	
 	public String getWriterProfileFallbackImgUri() {
