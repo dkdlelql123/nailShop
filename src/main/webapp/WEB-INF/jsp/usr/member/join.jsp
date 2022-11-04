@@ -89,7 +89,7 @@ function checkForm(form) {
 		return;
 	}
 	
-    const maxSizeMb = 10;
+    const maxSizeMb = 5;
     const maxSize = maxSizeMb * 1024 * 1024;
     const profileImgFileInput = form["file__member__0__extra__profileImg__1"];
     if (profileImgFileInput.value) {

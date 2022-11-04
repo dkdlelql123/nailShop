@@ -67,9 +67,10 @@ function deleteProfileImg(chk){
 		}
 		
 
-	    const maxSizeMb = 10;
+	    const maxSizeMb = 5;
 	    const maxSize = maxSizeMb * 1024 * 1024;
 	    const profileImgFileInput = form["file__member__0__extra__profileImg__1"];
+	    
 	    if (profileImgFileInput.value) {
 	        if (profileImgFileInput.files[0].size > maxSize) {
 	            alert(maxSizeMb + "MB 이하의 파일을 업로드 해주세요.");
@@ -79,9 +80,11 @@ function deleteProfileImg(chk){
 	    }
 		
 		// 기본 프로필 이미지 체크시 (이미지 삭제)
-	    const deleteProfileImgFileInput = $("#delete__profileImg");
+	    // const deleteProfileImgFileInput = $("#delete__profileImg");
+		
+   		const deleteProfileImgFileInput = form["deleteFile__member__0__extra__profileImg__1"];
         if ( deleteProfileImgFileInput.checked ) {
-            $("#profileImg").val('');
+            form["file__member__0__extra__profileImg__1"].value = '';
         }
 
 		$(".messege").html("");
@@ -95,8 +98,10 @@ function deleteProfileImg(chk){
 <div class="table-box-type-1 m-auto w-full lg:w-1/2">
   <h1 class="text-3xl font-bold text-center">내정보 수정</h1>
 
-  <form onsubmit="checkForm(this); return false;"
-    action="/usr/member/doModify" method="post"
+  <form 
+    onsubmit="checkForm(this); return false;"
+    action="/usr/member/doModify" 
+    method="post"
     enctype="multipart/form-data">
     <input type="hidden" name="memberModifyAuthKey"
       value="${param.memberModifyAuthKey}" />
@@ -133,7 +138,9 @@ function deleteProfileImg(chk){
          -->
         <input 
           type="file" 
+          onerror="${member.removeProfileImgIfNotExistsOnErrorHtmlAttr}" 
           name="file__member__0__extra__profileImg__1"
+          src="${member.profileImgUri}" 
           id="profileImg" 
           accept="image/png image/jpeg image/jpg"
           placeholder="프로필 이미지를 선택해주세요." />

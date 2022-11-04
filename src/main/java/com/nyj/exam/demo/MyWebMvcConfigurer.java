@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.nyj.exam.demo.interceptor.BeforeActionInterceptor;
@@ -32,6 +33,13 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 	
 	@Value("${custom.genFileDirPath}")
     private String genFileDirPath;
+	
+	// 파일업로드관련
+	@Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/gen/**")
+                .addResourceLocations("file:///" + genFileDirPath + "/");
+    }
 
 
 	// 이 함수는 인터셉터를 적용하는 역할을 합니다.
@@ -40,9 +48,7 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		registry.addInterceptor(beforeActionInterceptor)
 		.addPathPatterns("/**")
 		.excludePathPatterns("/resource/**")
-		.excludePathPatterns("/gen/**")//.addResourceLocations("file:///" + genFileDirPath + "/").setCachePeriod(20);
-		.excludePathPatterns("/error");
-		 
+		.excludePathPatterns("/error"); 
 		
 		registry.addInterceptor(menuInterceptor)
 		.addPathPatterns("/**")
