@@ -4,7 +4,6 @@
 
 <c:set var="pageTitle" value="게시물 글쓰기" />
 <%@ include file="../common/head.jspf"%>
-<%@ include file="../../common/toastUIEditerLib.jspf"%>
 
 <c:set var="board_id" value="${param.boardId}" />
 <input type="hidden" id="board_id" value="${board_id}" />
@@ -30,15 +29,15 @@
 	      return;
 	    }
 
-	 	const editor = $(form).find('.toast-ui-editor').data('data-toast-editor');
-	    const markdown = editor.getMarkdown().trim(); 
+	    const editor = $(form).find('.toast-ui-editor').data('data-toast-editor'); 
+	    const markdown = editor.getMarkdown().trim();  
  
-	    if (markdown.length < 10) {
-			alert("내용을 10글자 이상 작성해주세요.");
-			editor.focus();
-			
+	    if (markdown.length < 2) {
+			alert("내용을 2글자 이상 작성해주세요.");
+			editor.focus(); 
 			return; 
 	    }
+	    
 	    
 	    form.body.value = markdown; 
 
@@ -53,23 +52,22 @@
 	});
 </script>
 
+
 <div>
-  <form onsubmit="article__submitForm(this); return false;"
-    class="table-box-type-1" action="/usr/article/doWrite" method="POST">
+  <form 
+    action="/usr/article/doWrite" 
+    method="POST"
+    class="table-box-type-1" 
+    onsubmit="article__submitForm(this); return false;"
+    enctype="multipart/form-data"
+    >
     <input type="hidden" name="memberId" value="${rq.loginedMemberId}" />
     <input type="hidden" name="body" />
 
-    <table style="width:100%">
+    <table >
       <colgroup>
         <col width="200" />
-      </colgroup>
-      <tr style="width:200px">
-        <th>작성자</th>
-        <td>
-          <input type="text" class="w-full input-sm"
-            value="${rq.member.nickname}" readonly />
-        </td>
-      </tr>
+      </colgroup> 
       <tr>
         <th>카테고리</th>
         <td>
@@ -85,24 +83,22 @@
       <tr>
         <th>제목</th>
         <td>
-          <input type="text" class="w-full input-sm" name="title"  
+          <input type="text" class="w-full input input-sm input-bordered" name="title"  
             required="required" placeholder="제목을 입력해주세요." />
         </td>
-      </tr>
-      <tr>
-        <th>내용</th>
-        <td>
-         <div class="toast-ui-editor">
-                <script type="text/x-template"></script>
-              </div>
-        </td>
-      </tr>
+      </tr> 
     </table>
+    <!--<div id="editor"></div>-->
+     <div class="toast-ui-editor">
+        <script type="text/x-template"></script>
+    </div>   
 
     <div class="flex justify-end mt-4">
-      <button type="submit" class="btn btn-info btn-sm">작성하기</button>
+      <button type="submit" class="btn btn-info btn-sm">작성하기</button> 
     </div>
   </form>
 </div>
 
+
+<%@ include file="../../common/toastUIEditerLib.jspf"%>
 <%@ include file="../common/tail.jspf"%>

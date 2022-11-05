@@ -1,38 +1,71 @@
 @font-face {
-	font-family: 'HallymGothic-Regular';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2204@1.0/HallymGothic-Regular.woff2')
-		format('woff2');
-	font-weight: 400;
-	font-style: normal;
+ font-family: 'NanumBarunGothic';
+ font-style: normal;
+ font-weight: 400;
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
 }
 
 @font-face {
-	font-family: 'HallymGothic-Regular';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2204@1.0/HallymGothic-Medium.woff2')
-		format('woff2');
-	font-weight: 500;
-	font-style: normal;
+ font-family: 'NanumBarunGothic';
+ font-style: normal;
+ font-weight: 700;
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot');
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf') format('truetype')
 }
 
 @font-face {
-	font-family: 'HallymGothic-Regular';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2204@1.0/HallymGothic-Bold.woff2')
-		format('woff2');
-	font-weight: 700;
-	font-style: normal;
+ font-family: 'NanumBarunGothic';
+ font-style: normal;
+ font-weight: 300;
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot');
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.ttf') format('truetype');
 }
 
 html>body,
 .toastui-editor-contents, 
 .toastui-editor-contents, * { 
-	font-family: 'HallymGothic-Regular', sans-serif;
+	font-family: 'NanumBarunGothic', sans-serif;
+}
+ 
+ 
+/* 테마 관련 */ 
+html[data-theme='forest'] .theme{
+	cursor:pointer;
 }
 
-body{
-	min-width: 800px;
+html[data-theme='cupcake'] .theme.cupcake {
+	display:none;
+}
+
+html[data-theme='forest'] .theme.forest {
+	display:none;
+}
+
+html[data-theme='forest'] .toastui-editor-contents * {
+	color:inherit;
+}
+
+/* 모바일 - ios 사파리 기본 스타일 제거 
+input, textarea, button {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+}
+
+input[type=radio]{
+	appearance: auto;
+	-moz-appearance: auto;
+    -webkit-appearance: auto;    
+}
+*/
+
+input:focus{
+	outline:none;
+	-webkit-tap-highlight-color : transparent;
 }
 
 .table-box-type-1 table {
@@ -45,15 +78,38 @@ body{
 	font-weight: normal;
 }
 
-textarea.textarea, input[type=text], input[type=password],input[type=email] {
+/*
+html[data-theme="night"] :is(.table-box-type-1>table th, .table-box-type-1>table td) {
+  border-color:white;
+  border-color:rgba(166, 173, 186, 0.2);
+}
+
+html[data-theme='cupcake'] :where(input[type=text], input[type=password], input[type=email], textarea.textarea) {
 	color: #0a0a0a;
 	background: #f0f0f0;
 	padding:4px 8px ; 
 	border-radius: 2px;
-} 
+}
+
+
 input:read-only{
 	background-color: rgba(0,0,0,0);
 	padding:0px; 
 	border: 0;
 	box-shadow: none;
+} */
+
+
+aside {
+	background: url('/resource/220210.png') no-repeat;
+	background-size: cover;
+}
+html[data-theme='forest'] aside {
+	background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.65)), url('/resource/220210.png') no-repeat;
+	background-size: cover;
+}
+
+html[data-theme='forest'] .toastui-editor-main-container,
+html[data-theme='forest'] .ProseMirror {
+	color:inherit;
 }

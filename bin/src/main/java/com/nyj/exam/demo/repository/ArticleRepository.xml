@@ -20,13 +20,55 @@
 	<select id="getForPrintArticle" resultType="Article">
 		SELECT a.*,
 		m.nickname AS extra__writerName,
-		b.name AS extra__boardName
+		b.name AS extra__boardName,
+		b.publicStatus AS extra__publicStatus,
+		b.replyStatus AS extra__replyStatus,
+		b.reactionPointStatus AS extra__reactionPointStatus
 		FROM article a
 		LEFT JOIN `member` m
 		ON a.memberId = m.id
 		LEFT JOIN `board` b
 		ON a.boardId = b.id
 		WHERE a.id = #{id}
+	</select>
+
+	<select id="getArticles" resultType="Article">
+		SELECT a.*,
+		m.nickname AS extra__writerName
+		FROM (
+			SELECT a.*, 
+			COUNT(r.id) AS extra__replyCount
+			FROM article a
+			LEFT JOIN `reply` r
+			ON a.id = r.relId 
+			WHERE (r.relTypeCode IS NULL || r.relTypeCode = "article")
+			GROUP BY a.id
+		) a
+		LEFT JOIN `member` m
+		ON a.memberId = m.id 
+		WHERE 1
+		<if test='boardId !=null and boardId !="" and boardId !=0 '>
+			AND boardId = #{boardId}	
+		</if>
+		<if test="searchKeyword != ''">
+			<choose>
+				<when test="searchKeywordType == 'title'" >
+					AND title LIKE CONCAT('%', #{searchKeyword}, '%')
+				</when>
+				<when test="searchKeywordType == 'body'" >
+					AND `body` LIKE CONCAT('%', #{searchKeyword}, '%')
+				</when>
+				<otherwise>
+					AND (
+						title LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+						`body` LIKE CONCAT('%', #{searchKeyword}, '%')
+					)
+				</otherwise>
+			</choose>
+		</if>
+		ORDER BY a.id DESC
+		LIMIT #{limitStart}, #{limitTake}
 	</select>
 
 	<delete id="deleteArticle">
@@ -90,5 +132,65 @@
 		</set>
 		WHERE id = #{relId};
 	</update>
+	
+	<select id="getBestArticles" resultType="Article">
+	SELECT a.*,
+	m.nickname AS extra__writerName,
+	b.name AS extra__boardName
+	FROM article AS a
+	LEFT JOIN `member` AS m
+	ON a.memberId = m.id
+	LEFT JOIN `board` b
+	ON a.boardId = b.id 
+	WHERE b.publicStatus = 1
+	ORDER BY a.hit DESC 
+	LIMIT 0, 3;
+	</select>
+	
+	<select id="getNewArticles" resultType="Article">
+	SELECT a.*,
+	m.nickname AS extra__writerName,
+	b.name AS extra__boardName
+	FROM article AS a
+	LEFT JOIN `member` AS m
+	ON a.memberId = m.id
+	LEFT JOIN `board` b
+	ON a.boardId = b.id
+	WHERE b.publicStatus = 1
+	ORDER BY a.regDate DESC 
+	LIMIT 0, 3;
+	</select>
+	
+	<select id="getTenNewArticles" resultType="Article">
+	SELECT a.*,
+	m.nickname AS extra__writerName,
+	b.name AS extra__boardName
+	FROM article AS a
+	LEFT JOIN `member` AS m
+	ON a.memberId = m.id
+	LEFT JOIN `board` b
+	ON a.boardId = b.id
+	WHERE b.publicStatus = 1
+	ORDER BY a.regDate DESC
+	LIMIT #{limitStart}, #{limitTake}
+	</select>
+
+	<delete id="deleteFromMember">
+		DELETE FROM article 
+		WHERE memberId = #{memberId}
+	</delete>
+	
+	<select id="getArticlesByMemberId" resultType="Article">
+	SELECT * 
+	FROM article
+	WHERE memberId = #{memberId}
+	ORDER BY id DESC
+	<if test="limitTake != 0">
+		LIMIT #{limitStart}, #{limitTake};
+	</if>
+	<if test="limitTake == 0">
+		LIMIT 0, 5;
+	</if>
+	</select>
 	
 </mapper>

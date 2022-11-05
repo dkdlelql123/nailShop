@@ -18,16 +18,6 @@
 		AND relTypeCode = "article" ;
 	</select>
 	
-	<insert id="doWriteReply" >
-		INSERT INTO `reply`
-		SET regDate = NOW(),
-		updateDate = NOW(),
-		memberId = #{memberId},
-		relTypeCode = #{relTypeCode},
-		relId = #{relId},
-		`body` = #{body}
-	</insert>
-	
 	<delete id="doDelete">
 		DELETE FROM `reply`
 		WHERE id = #{id}
@@ -64,4 +54,58 @@
 		</set>
 		WHERE id = #{relId};
 	</update> 
+	
+	<delete id="deleteReplyFromMember">
+		DELETE FROM `reply`
+		WHERE memberId = #{memberId};	
+	</delete>
+	
+	<insert id="doMemberWriteReply" >
+		INSERT INTO `reply`
+		SET regDate = NOW(),
+		updateDate = NOW(),
+		memberId = #{memberId},
+		pw = #{pw},
+		salt = #{salt},
+		relTypeCode = #{relTypeCode},
+		relId = #{relId},
+		`body` = #{body}
+	</insert>
+	
+	<insert id="doNonMemberWriteReply" >
+		INSERT INTO `reply`
+		SET regDate = NOW(),
+		updateDate = NOW(),
+		`writer` = #{writer},
+		`pw` = #{pw},
+		salt = #{salt},
+		relTypeCode = #{relTypeCode},
+		relId = #{relId},
+		`body` = #{body}
+	</insert>
+	
+	<select id="getNewReplies" resultType="Reply"> 	
+		SELECT 
+		r.*,
+		IFNULL(m.nickname, r.writer) AS extra__writerName
+		FROM `reply` r
+		LEFT JOIN `member` m
+		ON r.memberId = m.id
+		ORDER BY r.id DESC
+		LIMIT 0, 4;
+	</select>
+	
+	<select id="getReplyByMemberId" resultType="Reply">
+	SELECT * 
+	FROM reply
+	WHERE memberId = #{memberId}
+	AND relTypeCode = "article"
+	ORDER BY id DESC
+	<if test="limitTake != 0">
+		LIMIT #{limitStart}, #{limitTake};
+	</if>
+	<if test="limitTake == 0">
+		LIMIT 0, 5;
+	</if>
+	</select>
 </mapper>

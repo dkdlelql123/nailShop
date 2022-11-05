@@ -3,7 +3,7 @@
 <mapper namespace="com.nyj.exam.demo.repository.ReactionPointRepository">
 
 	<select id="actorCanMakeReactionPoint" resultType="int">
-		SELECT ISNULL(SUM(`point`), 0) AS P
+		SELECT IFNULL(SUM(`point`), 0) AS P
 		FROM reactionPoint
 		WHERE memberId = #{memberId}
 		AND relTypeCode = #{relTypeCode}

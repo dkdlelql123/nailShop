@@ -291,3 +291,17 @@ CREATE TABLE genFile(
  PRIMARY KEY(id),
  KEY relId(relTypeCode, relId, typeCode, type2Code, fileNo)
 );
+
+
+# 상점 카테고리 테이블 생성
+CREATE TABLE `shopCate`(
+ id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+ regDate DATETIME, 
+ updateDate DATETIME, 
+ `code` VARCHAR(40) NOT NULL UNIQUE,
+ `relCode` VARCHAR(40) COMMENT "참조코드",
+ `name` VARCHAR(20) NOT NULL,
+ `link` VARCHAR(200) COMMENT "카테고리 링크",
+ `desc` TEXT(5000) COMMENT "카테고리 설명", 
+ publicStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT "0:미사용,1:사용"
+ );

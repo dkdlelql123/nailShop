@@ -8,6 +8,7 @@
 	updateDate = NOW(),
 	loginId = #{loginId},
 	loginPw = #{loginPw},
+	salt = #{salt},
 	`name` = #{name},
 	nickname = #{nickname},
 	email = #{email},
@@ -31,7 +32,23 @@
 	WHERE id = #{id}
 	</select>
 	
-	<select id="getMemberNameAndEmail" resultType="Member">
+	<select id="getForPrintMemberById" resultType="Member">
+	SELECT m.*,
+	COUNT(r.id) AS extra__totalWrittenReplies
+	FROM (	
+		SELECT m.*,
+		COUNT(a.id) AS extra__totalWrittenArticles
+		FROM `member` m
+		LEFT JOIN article a
+		ON m.id = a.memberId
+		WHERE m.id = #{id}
+		) AS m
+	LEFT JOIN reply r
+	ON m.id = r.memberId 
+	WHERE m.id = #{id}
+	</select>
+	
+	<select id="getMemberByNameAndEmail" resultType="Member">
 	SELECT *
 	FROM `member`
 	WHERE `name` = #{name}
@@ -47,6 +64,9 @@
 	<if test="email !=null">
 		, email = #{email}
 	</if>
+	<if test="salt !=null">
+	, salt = #{salt}
+	</if>
 	<if test="nickname !=null">
 		, nickname = #{nickname}
 	</if>
@@ -54,9 +74,25 @@
 		, phoneNumber = #{phoneNumber}
 	</if>
 	WHERE id = #{memberId};
-	</update> 
+	</update>
+
+	<delete id="delete" >
+		DELETE FROM `member`
+		WHERE id = #{memberId};
+	</delete>	 
+	 
+	<update id="changePw" >
+	UPDATE `member`
+	SET updateDate = NOW(),
+	loginPw = #{loginPw},
+	salt = #{salt}
+	WHERE id = #{id};
+	</update>
 	
-	
-	
-	
+	<select id="getNewMembers" resultType="Member">
+	SELECT *
+	FROM `member`
+	ORDER BY ID DESC
+	LIMIT 0, 3
+	</select>
 </mapper>
