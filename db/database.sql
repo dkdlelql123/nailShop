@@ -1,7 +1,8 @@
 # DB생성
-DROP DATABASE IF EXISTS blog;
-CREATE DATABASE blog;
-USE blog;
+DROP DATABASE IF EXISTS nailShop;
+CREATE DATABASE nailShop; 
+USE `nailShop`; 
+
 
 # 게시물 테이블 생성
 CREATE TABLE article(
@@ -97,6 +98,7 @@ CREATE TABLE reactionPoint (
 );
 
 # 리액션포인트 테스트 데이터 생성
+/*
 INSERT INTO reactionPoint 
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -104,6 +106,7 @@ memberId = 1,
 relTypeCode = 'article',
 relId = 1,
 `point` = 1;
+*/
 
 # 게시물에 좋아요, 싫어요 칼럼 추가
 ALTER TABLE article
@@ -138,6 +141,7 @@ CREATE TABLE `reply`(
 );
 
 # 테스트 댓글 생성
+/*
 INSERT INTO `reply`
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -145,6 +149,7 @@ memberId = 1,
 relTypeCode = 'article',
 relId = 1,
 `body` = '이것이 첫번째 댓글 입니다~';
+*/
 
 # 댓글에 좋아요 수, 싫어요 수 칼럼 추가
 ALTER TABLE reply
@@ -305,3 +310,4 @@ CREATE TABLE `shopCate`(
  `desc` TEXT(5000) COMMENT "카테고리 설명", 
  publicStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT "0:미사용,1:사용"
  );
+  
