@@ -303,11 +303,11 @@ CREATE TABLE `shopCate`(
  id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
  regDate DATETIME, 
  updateDate DATETIME, 
- `code` VARCHAR(40) NOT NULL UNIQUE,
- `relCode` VARCHAR(40) COMMENT "참조코드",
+ `code` int(10) NOT NULL UNIQUE,
+ `relCode` int(10) COMMENT "참조코드",
  `name` VARCHAR(20) NOT NULL,
  `link` VARCHAR(200) COMMENT "카테고리 링크",
  `desc` TEXT(5000) COMMENT "카테고리 설명", 
- publicStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT "0:미사용,1:사용"
+ useYn TINYINT(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT "0:미사용,1:사용"
  );
   
