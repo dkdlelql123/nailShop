@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nyj.exam.demo.repository.ShopCateRepository"> 
+	
+	<select id="getLastInsertId" resultType="int">
+		SELECT LAST_INSERT_ID()
+	</select> 
+	
+	<select id="getFindById" resultType="ShopCate">
+	 SELECT id ,
+			regDate ,
+			updateDate , 
+			`relId`,
+			`name` ,
+			`link` ,
+			`desc` ,
+			useYn 
+	   FROM `shopCate`
+	  WHERE id = #{id}
+	    AND useYn = 1;
+	</select>
+	
+	<select id="getForPrintShopCates" resultType="ShopCate">
+	 SELECT id ,
+			regDate ,
+			updateDate , 
+			`relId`,
+			`name` ,
+			`link` ,
+			`desc` ,
+			useYn 
+	   FROM `shopCate` 
+	  WHERE useYn = 1;
+	</select>
+	
+	<select id="CheckForDuplicates" resultType="ShopCate">
+		SELECT *
+	  	  FROM shopCate
+	 	 WHERE 1
+		<if test=" type=='name' ">
+           AND name= #{value}
+		</if>	 
+	</select> 
+	
+	<select id="getShopCates" resultType="ShopCate">
+	 SELECT id ,  
+			`name` , 
+			useYn 
+	   FROM `shopCate` 
+	  WHERE useYn = 1
+	    AND relId = 0
+	</select> 
+	
+	<insert id="doWrite">
+	 INSERT INTO `shopCate`
+	    SET regDate = NOW(),
+			updateDate = NOW(), 
+			<if test=" relId != null ">
+	           relId= #{relId},
+			</if>	
+			<if test=" link !=null">
+			   `link`= #{link},
+			</if> 
+			<if test=" desc !=null">
+			   `desc`= #{desc},
+			</if> 
+			<if test=" useYn !=null">
+			   useYn= #{useYn},
+			</if> 
+	 		`name` = #{name}
+	</insert>
+</mapper>

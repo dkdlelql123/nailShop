@@ -38,6 +38,12 @@
         <a href="/adm/member/list">회원관리</a>
       </li>
       <li>
+        <a href="/adm/shopCate/list">카테고리관리</a>
+      </li>
+      <li>
+        <a href="/adm/article/list">게시글관리</a>
+      </li>
+      <li>
         <a href="/adm/board/list">게시판관리</a>
       </li>
       <li>

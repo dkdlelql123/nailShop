@@ -71,8 +71,7 @@
       <tr>
         <th>카테고리</th>
         <td>
-          <select name="boardId" id="boardCategory"
-            class="select select-sm select-bordered ">
+          <select name="boardId" id="boardCategory" class="select select-sm select-bordered ">
             <option disabled >-선택해주세요-</option>
             <c:forEach var="board" items="${boards}">
               <option value="${board.id}" data="cate${board.id}">${board.name}</option>
