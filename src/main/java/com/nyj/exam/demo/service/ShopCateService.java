@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.nyj.exam.demo.repository.ShopCateRepository;
 import com.nyj.exam.demo.util.Ut;
-import com.nyj.exam.demo.vo.Board;
 import com.nyj.exam.demo.vo.ResultData;
 import com.nyj.exam.demo.vo.ShopCate;
 
@@ -17,6 +16,7 @@ public class ShopCateService {
 	@Autowired
 	ShopCateRepository shopCateRepository;  
 	
+	@SuppressWarnings("unused")
 	private ShopCate getFindById(int id) {
 		return shopCateRepository.getFindById(id);
 	}
@@ -28,10 +28,14 @@ public class ShopCateService {
 	public List<ShopCate> getForPrintShopCates() { 
 		return shopCateRepository.getForPrintShopCates();
 	}
+
+	public List<ShopCate> getForPrintCategoryAndLevel() { 
+		return shopCateRepository.getForPrintCategoryAndLevel();
+	}
 	
 	/**
-	 * 대메뉴만 호출하기
-	 * relId = 0 항목만 추출
+	 * 대메뉴만(중메뉴만) 호출하기
+	 * ex) relId = 0 항목만 추출
 	 * param int relId
 	 * return List<shopCate>
 	 * */

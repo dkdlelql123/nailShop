@@ -24,5 +24,9 @@ public class ShopCate {
 	String desc;
 	/** 사용여부 */
 	int useYn; 
-	 
+	
+	/** category */
+	String category;
+	/** LEVEL */
+	int level;
 }

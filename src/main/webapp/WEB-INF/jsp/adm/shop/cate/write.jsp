@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="관리자 - 게시판생성" />
-<%@ include file="../common/head.jspf"%> 
+<c:set var="pageTitle" value="관리자 - 카테고리 생성" />
+<%@ include file="../../common/head.jspf"%> 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
 <script>
 let submitWriterFormDone = false;
-let vaildBoardName = "";
-let vaildBoardCode = "";
+let vaildCateName = "";
 
-/** 게시물작성 폼 체크 */
+/** 작성 폼 체크 */
 function board__submitForm(form) {  
 	if (submitWriterFormDone) {
 		alert("처리중입니다.");
@@ -25,7 +24,7 @@ function board__submitForm(form) {
 		return;
 	}  
     
-    if(nm == vaildBoardName){
+    if(nm == vaildCateName){
 		alert("사용이 불가능합니다. \n다시 입력해주세요");
 		return;
 	}
@@ -58,9 +57,7 @@ async function checkName(el){
                 	span.html('<div class="text-xs pt-2 text-red-600">❌ '+result.msg+'</div>');
                 	if( type == 'name' ){
                   		vaildBoardName = dataValue;
-                    } else {
-                      	vaildBoardCode = dataValue;
-                    } 
+                    }  
           		}
         	},error: function(error){
           		console.log(error)			  
@@ -70,13 +67,34 @@ async function checkName(el){
   		span.html("")
   	}
 }
-const fncDebounce = _.debounce(checkName, 500) 
+const fncDebounce = _.debounce(checkName, 500);
+
+ 
 </script>
 
 <h1 class="font-title mb-8 text-3xl font-extrabold">상품카테고리 생성하기</h1>
 <div>
-  <form onsubmit="board__submitForm(this); return false;"
-    class="table-box-type-1" action="/adm/shopCate/doWrite" method="POST">
+  <div>
+    <ul>
+      <c:forEach var="item" items="${allCateList}" >
+        <li class=" ${item.level == 1 ? 'mt-2 font-bold text-lg' : 'pl-2'} flex items-center">
+          <c:out value="${item.category}" />
+          &nbsp;
+         <%--
+         <a href="?id=${item.id}" class="text-xs" title="수정"> 
+            <i class="far fa-edit"></i>
+          </a> 
+           &nbsp;
+         <a href="/adm/shopCate/doDelete?id=${item.id}" class="text-xs text-red-800" title="삭제"> 
+            <i class="far fa-trash-alt"></i>
+          </a> 
+        --%> 
+        </li>
+      </c:forEach>
+    </ul>
+  </div>
+
+  <form onsubmit="board__submitForm(this); return false;" class="table-box-type-1 mt-4" action="/adm/shopCate/doWrite" method="POST">
     <table >
       <colgroup>
         <col width="200" />
@@ -142,4 +160,4 @@ const fncDebounce = _.debounce(checkName, 500)
 </div>
 
 
-<%@ include file="../common/tail.jspf"%>
+<%@ include file="../../common/tail.jspf"%>

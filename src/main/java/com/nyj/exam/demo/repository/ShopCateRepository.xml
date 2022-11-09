@@ -33,6 +33,25 @@
 	  WHERE useYn = 1;
 	</select>
 	
+	<select id="getForPrintCategoryAndLevel" resultType="ShopCate">
+	SELECT  tb.`id` `id`, 
+			CONCAT( LPAD('-', (tb.`level` - 1)*1), tb.`name`) category, 
+			tb.`level` `level`
+	  FROM (
+		SELECT 	tb1.`id`,
+				tb1.`name`, 
+				IFNULL(tb2.`name`, '') `reName`, 
+				CASE 
+					WHEN tb2.`name` IS NULL THEN 1
+					ELSE 2
+					END `level`
+		FROM shopCate tb1
+		LEFT OUTER JOIN shopCate tb2
+		ON tb1.relId = tb2.id
+		WHERE tb1.useYn = 1
+	) tb
+	</select>
+	
 	<select id="CheckForDuplicates" resultType="ShopCate">
 		SELECT *
 	  	  FROM shopCate
@@ -48,7 +67,7 @@
 			useYn 
 	   FROM `shopCate` 
 	  WHERE useYn = 1
-	    AND relId = 0
+	    AND relId = #{relId}
 	</select> 
 	
 	<insert id="doWrite">

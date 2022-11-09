@@ -15,6 +15,8 @@ public interface ShopCateRepository {
 
 	List<ShopCate> getForPrintShopCates();
 
+	List<ShopCate> getForPrintCategoryAndLevel();
+
 	ShopCate CheckForDuplicates(String value, String type);
 
 	List<ShopCate> getShopCates(int relId);

@@ -43,17 +43,24 @@ public class AdmShopCateController {
 //		return "/adm/board/list";
 //	}
 //	
-	@RequestMapping("/adm/shopCate/write")
+	@RequestMapping("/adm/shop/cate/write")
 	public String showWrite(Model model) {
+
+		List<ShopCate> allCateList = shopCateService.getForPrintCategoryAndLevel();
+		model.addAttribute("allCateList", allCateList);
 		
-//		List<ShopCate> cateList = shopCateService.getForPrintShopCates();
 		List<ShopCate> cateList = shopCateService.getShopCates(0);
 		model.addAttribute("cateList", cateList); 
 		
-		return "/adm/shopCate/write";
+		return "/adm/shop/cate/write";
 	}
 	
-	@RequestMapping("/adm/shopCate/doWrite")
+	@RequestMapping("/adm/shop/item/write")
+	public String showItemWrite(Model model) {
+		return "/adm/shop/item/write";
+	}
+	
+	@RequestMapping("/adm/shop/cate/doWrite")
 	@ResponseBody
 	public String doWrite(ShopCate shopCate) {
 		
@@ -65,10 +72,10 @@ public class AdmShopCateController {
 		  
 		ResultData rs = shopCateService.doWrite(shopCate);
 		
-		return Ut.jsReplace(rs.getMsg(), "/adm/shopCate/write");
+		return Ut.jsReplace(rs.getMsg(), "/adm/shop/cate/write");
 	}
 	
-	@RequestMapping("/adm/shopCate/doCheck")
+	@RequestMapping("/adm/shop/cate/doCheck")
 	@ResponseBody
 	public ResultData doCheck(String value, String type) {
 		ResultData rd = shopCateService.CheckForDuplicates(value,type);
