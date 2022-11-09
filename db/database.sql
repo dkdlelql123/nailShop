@@ -306,6 +306,24 @@ CREATE TABLE `shopCate`(
  `relId` INT(10) DEFAULT 0 COMMENT "상속 카테고리 ID",
  `name` VARCHAR(20) NOT NULL,
  `link` VARCHAR(200) COMMENT "카테고리 링크",
- `desc` TEXT(5000) COMMENT "카테고리 설명", 
+ `desc` VARCHAR(200) COMMENT "카테고리 설명", 
+ useYn TINYINT(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT "0:미사용,1:사용"
+ );
+
+ # 상품 테이블 생성
+ CREATE TABLE `shopItem`(
+ id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+ regDate DATETIME, 
+ updateDate DATETIME, 
+ memberId INT(10) NOT NULL,
+ memberName CHAR(20) NOT NULL,
+ `categoryId` INT(10) NOT NULL COMMENT "shopCate id로 카테고리 구분 ",
+ `name` VARCHAR(20) NOT NULL,
+ `link` VARCHAR(200) COMMENT "링크",
+ `desc` VARCHAR(200) COMMENT "설명", 
+ toneType VARCHAR(50),
+ seasonType VARCHAR(50),
+ price INT UNSIGNED NOT NULL ,
+ sale INT UNSIGNED DEFAULT 0,
  useYn TINYINT(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT "0:미사용,1:사용"
  );
