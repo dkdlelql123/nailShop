@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nyj.exam.demo.repository.ShopItemRepository"> 
+	
+	<select id="getLastInsertId" resultType="int">
+		SELECT LAST_INSERT_ID()
+	</select>  
+	
+	<insert id="doWrite">
+	 INSERT INTO `shopItem`
+	    SET regDate = NOW()
+			,updateDate = NOW()
+			,memberId = #{memberId}
+			,memberName = #{memberName}
+			,categoryId = #{categoryId}
+			,`name`= #{name}
+			,price = #{price}
+			<if test=" desc != null and desc != '' ">
+	           ,desc= #{desc}
+			</if>	
+			<if test=" link !=null and link != '' ">
+			   ,`link`= #{link}
+			</if> 
+			<if test=" toneType != null and toneType != '' ">
+	           ,toneType= #{toneType}
+			</if>	
+			<if test=" seasonType !=null and seasonType != '' ">
+			   ,`seasonType`= #{seasonType}
+			</if> 
+			<if test=" sale !=null and sale != '' ">
+			   ,`sale`= #{sale}
+			</if> 
+			<if test=" useYn !=null and useYn != '' ">
+			   ,useYn= #{useYn}
+			</if>  
+	</insert>
+</mapper>
+ 

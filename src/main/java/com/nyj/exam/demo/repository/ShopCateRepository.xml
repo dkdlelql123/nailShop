@@ -61,7 +61,7 @@
 		</if>	 
 	</select> 
 	
-	<select id="getShopCates" resultType="ShopCate">
+	<select id="getShopCates" resultType="Shop">
 	 SELECT id ,  
 			`name` , 
 			useYn 
