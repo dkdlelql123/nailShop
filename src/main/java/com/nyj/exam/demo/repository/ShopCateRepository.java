@@ -4,22 +4,24 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.nyj.exam.demo.vo.ShopCate;
+import com.nyj.exam.demo.vo.Shop;
 
 @Mapper
 public interface ShopCateRepository {
 
 	int getLastInsertId();
 
-	ShopCate getFindById(int id);
+	Shop getFindById(int id);
 
-	List<ShopCate> getForPrintShopCates();
+	List<Shop> getForPrintShopCates();
 
-	List<ShopCate> getForPrintCategoryAndLevel();
+	List<Shop> getForPrintCategoryAndLevel();
 
-	ShopCate CheckForDuplicates(String value, String type);
+	Shop CheckForDuplicates(String value, String type);
 
-	List<ShopCate> getShopCates(int relId);
+	List<Shop> getShopCates(int relId);
 
-	void doWrite(ShopCate shopCate);
+	void doWrite(Shop shop);
+
+	List<Shop> getForPrintNameAndParentName(String parentName);
 }

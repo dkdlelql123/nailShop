@@ -47,7 +47,7 @@ async function checkName(el){
  	
 	if(isNull(dataValue) && isNull(type)){	
   		await $.ajax({
-        	url:"/adm/shopCate/doCheck",
+        	url:"/adm/shop/cate/doCheck",
         	type: "GET",
         	data: data,
           	success: function(result){
@@ -94,7 +94,7 @@ const fncDebounce = _.debounce(checkName, 500);
     </ul>
   </div>
 
-  <form onsubmit="board__submitForm(this); return false;" class="table-box-type-1 mt-4" action="/adm/shopCate/doWrite" method="POST">
+  <form onsubmit="board__submitForm(this); return false;" class="table-box-type-1 mt-4" action="/adm/shop/cate/doWrite" method="POST">
     <table >
       <colgroup>
         <col width="200" />

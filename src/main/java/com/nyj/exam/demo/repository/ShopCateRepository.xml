@@ -6,7 +6,7 @@
 		SELECT LAST_INSERT_ID()
 	</select> 
 	
-	<select id="getFindById" resultType="ShopCate">
+	<select id="getFindById" resultType="Shop">
 	 SELECT id ,
 			regDate ,
 			updateDate , 
@@ -20,7 +20,7 @@
 	    AND useYn = 1;
 	</select>
 	
-	<select id="getForPrintShopCates" resultType="ShopCate">
+	<select id="getForPrintShopCates" resultType="Shop">
 	 SELECT id ,
 			regDate ,
 			updateDate , 
@@ -33,7 +33,7 @@
 	  WHERE useYn = 1;
 	</select>
 	
-	<select id="getForPrintCategoryAndLevel" resultType="ShopCate">
+	<select id="getForPrintCategoryAndLevel" resultType="Shop">
 	SELECT  tb.`id` `id`, 
 			CONCAT( LPAD('-', (tb.`level` - 1)*1), tb.`name`) category, 
 			tb.`level` `level`
@@ -52,7 +52,7 @@
 	) tb
 	</select>
 	
-	<select id="CheckForDuplicates" resultType="ShopCate">
+	<select id="CheckForDuplicates" resultType="Shop">
 		SELECT *
 	  	  FROM shopCate
 	 	 WHERE 1
@@ -69,6 +69,18 @@
 	  WHERE useYn = 1
 	    AND relId = #{relId}
 	</select> 
+	
+	<select id="getForPrintNameAndParentName" resultType="Shop">
+	SELECT a.id, b.name, b.relId, a.name AS parentName
+	  FROM shopCate a INNER JOIN
+	       shopCate b
+	    ON a.id = b.relId     
+	 WHERE a.useYn = 1
+	   AND b.useYn = 1
+   	<if test=" parentName != '' and parentName != null">	
+	   AND a.name = #{parentName}  
+	</if> 
+	</select>
 	
 	<insert id="doWrite">
 	 INSERT INTO `shopCate`

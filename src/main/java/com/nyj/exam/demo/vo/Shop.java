@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShopCate {
+public class Shop {
 	/** pk */
 	int id;
 	/** 등록일 */
@@ -29,4 +29,6 @@ public class ShopCate {
 	String category;
 	/** LEVEL */
 	int level;
+	/** parentName */
+	String parentName;
 }
