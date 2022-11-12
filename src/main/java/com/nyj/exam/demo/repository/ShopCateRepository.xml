@@ -20,6 +20,15 @@
 	    AND useYn = 1;
 	</select>
 	
+	<select id="getShopCateByRelId" resultType="Shop">
+	 SELECT id ,  
+			`name` , 
+			useYn 
+	   FROM `shopCate` 
+	  WHERE useYn = 1
+	    AND relId = #{relId}
+	</select> 
+	
 	<select id="getForPrintShopCates" resultType="Shop">
 	 SELECT id ,
 			regDate ,
@@ -59,15 +68,6 @@
 		<if test=" type=='name' ">
            AND name= #{value}
 		</if>	 
-	</select> 
-	
-	<select id="getShopCates" resultType="Shop">
-	 SELECT id ,  
-			`name` , 
-			useYn 
-	   FROM `shopCate` 
-	  WHERE useYn = 1
-	    AND relId = #{relId}
 	</select> 
 	
 	<select id="getForPrintNameAndParentName" resultType="Shop">

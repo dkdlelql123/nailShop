@@ -11,6 +11,8 @@ public interface ShopItemRepository {
 
 	int getLastInsertId();
 
+	Item getShopItemById(int id);
+	
 	List<Item> getAllShopItem();
 
 	int getShopItemCount(String searchKeywordType, String searchKeyword);
@@ -18,6 +20,7 @@ public interface ShopItemRepository {
 	List<Item> getForPrintShopItems(String searchKeywordType, String searchKeyword, int limitStart, int limitTake);
 
 	void doWrite(Item item);
+
 
 
 }

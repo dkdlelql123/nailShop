@@ -25,7 +25,7 @@ public class AdmShopCateController {
 		List<Shop> allCateList = shopCateService.getForPrintCategoryAndLevel();
 		model.addAttribute("allCateList", allCateList);
 		
-		List<Shop> cateList = shopCateService.getShopCates(0);
+		List<Shop> cateList = shopCateService.getShopCateByRelId(0);
 		model.addAttribute("cateList", cateList); 
 		
 		return "/adm/shop/cate/write";

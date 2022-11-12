@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="관리자 - 상품생성" />
+<c:set var="pageTitle" value="관리자 - 상품생성" />  
+ 
 <%@ include file="../../common/head.jspf"%> 
 
 <script>
@@ -43,9 +44,13 @@ function submitForm_check(form) {
   form.seasonType.value = seasonList;
   form.toneType.value = toneList;
    
-  console.log(form)
+  let itemId = form.id.value;
+  if(itemId == 0){
+    form.action = "/adm/shop/item/doWrite";	  
+  } else {	  
+    form.action = "/adm/shop/item/doModify";	  
+  }
   
-  form.action = "/adm/shop/item/doWrite";
   form.method = "POST";
   form.submit();
   submitWriterFormDone = true;
@@ -56,13 +61,26 @@ function submitForm_check(form) {
 <h1 class="font-title mb-8 text-3xl font-extrabold">상품 생성하기</h1>
 <div> 
   <form onsubmit="submitForm_check(this); return false;" class="table-box-type-1 mt-4" >
-    <input type="hidden" name="categoryId" value="1" />
+    <input type="hidden" name="id" id="id" value="${id}" />
     <input type="hidden" name="seasonType" value="" />
     <input type="hidden" name="toneType" value="" />
     <table >
       <colgroup>
         <col width="200" />
       </colgroup>   
+      <tr>
+        <th class="req">카테고리</th>
+        <td>
+           <div class="flex gap-4">
+            <c:forEach var="item" items="${cateList}">
+              <label class="cursor-pointer label">
+                <span class="label-text mr-2" >${item.name}</span>
+                <input type="radio" name="categoryId" class="category${item.id} radio checked:bg-blue-500" value="${item.id}" /> 
+              </label> 
+            </c:forEach>
+          </div>
+        </td>
+      </tr>
       <tr>
         <th class="req">이름</th>
         <td>
@@ -101,9 +119,9 @@ function submitForm_check(form) {
           <div class="flex gap-4">
             <c:forEach var="item" items="${seasonList}">
               <label class="cursor-pointer label">
+                <span class="label-text mr-2" >${item.name}</span>
                 <input type="checkbox" name="seasonList" 
                       class="checkbox checkbox-primary seasonCheckBox" value="${item.id}" /> 
-                <span class="label-text ml-1" >${item.name}</span>
               </label> 
             </c:forEach>
             </div>
@@ -115,9 +133,9 @@ function submitForm_check(form) {
           <div class="flex gap-4">
             <c:forEach var="item" items="${toneTypeList}">
               <label class="cursor-pointer label">
+                <span class="label-text mr-2">${item.name}</span>
                 <input type="checkbox" name="toneTypeList" 
                        class="checkbox checkbox-primary toneCheckBox" value="${item.id}" /> 
-                <span class="label-text ml-1">${item.name}</span>
               </label> 
             </c:forEach>
             </div>
@@ -145,10 +163,17 @@ function submitForm_check(form) {
     </table>
 
     <div class="flex justify-end mt-4">
-      <button type="submit" class="btn btn-info btn-sm">생성하기</button>
+      <button type="submit" class="btn btn-info btn-sm">${id == 0 ? '생성':'수정' }</button>
     </div>
   </form>
 </div>
 
+<script>
+
+/** 초기화 */
+if( $("#id").val() == 0 ){
+	$(".category2").prop("checked", true);
+}
+</script>
 
 <%@ include file="../../common/tail.jspf"%>

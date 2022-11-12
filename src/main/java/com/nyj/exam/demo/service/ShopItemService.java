@@ -21,6 +21,10 @@ public class ShopItemService {
 		return shopItemRepository.getLastInsertId();
 	}
 	
+	public Item getShopItemById(int id) { 
+		return shopItemRepository.getShopItemById(id);
+	}
+	
 	public List<Item> getAllShopItem() {
 		return shopItemRepository.getAllShopItem();
 	}
@@ -42,4 +46,6 @@ public class ShopItemService {
 		int id = getLastInsertId();
 		return ResultData.form("S-1", Ut.f("상품이 생성되었습니다.", id));
 	}
+
+	
 }

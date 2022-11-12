@@ -32,9 +32,15 @@ public class AdmShopItemController {
 	Rq rq;
 	  
 	@RequestMapping("/adm/shop/item/write")
-	public String showItemWrite(Model model) {
-		 
-		List<Shop> cateList = shopCateService.getShopCates(0);
+	public String showItemWrite(Model model, @RequestParam(defaultValue = "0") int id) {
+		
+		if(id != 0) {
+			Item item = shopItemService.getShopItemById(id);
+			model.addAttribute("item", item);
+		}
+		model.addAttribute("id", id);
+		
+		List<Shop> cateList = shopCateService.getShopCateByRelId(1);
 		model.addAttribute("cateList", cateList);
 		
 		List<Shop> seasonList = shopCateService.getForPrintNameAndParentName("계절");

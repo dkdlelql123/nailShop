@@ -40,8 +40,8 @@ public class ShopCateService {
 	 * param int relId
 	 * return List<shop>
 	 * */
-	public List<Shop> getShopCates(int relId) { 
-		return shopCateRepository.getShopCates(relId);
+	public List<Shop> getShopCateByRelId(int relId) { 
+		return shopCateRepository.getShopCateByRelId(relId);
 	}
 
 	public ResultData CheckForDuplicates(String value, String type) { 

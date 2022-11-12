@@ -19,7 +19,7 @@ public interface ShopCateRepository {
 
 	Shop CheckForDuplicates(String value, String type);
 
-	List<Shop> getShopCates(int relId);
+	List<Shop> getShopCateByRelId(int relId);
 
 	void doWrite(Shop shop);
 
