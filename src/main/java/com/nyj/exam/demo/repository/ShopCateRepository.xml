@@ -71,7 +71,7 @@
 	</select> 
 	
 	<select id="getForPrintNameAndParentName" resultType="Shop">
-	SELECT a.id, b.name, b.relId, a.name AS parentName
+	SELECT b.id id, b.name name, a.id categoryId, a.name AS parentName
 	  FROM shopCate a INNER JOIN
 	       shopCate b
 	    ON a.id = b.relId     

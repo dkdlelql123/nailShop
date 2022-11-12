@@ -5,7 +5,7 @@
 <%@ include file="../../common/head.jspf"%> 
 
 <script>
-let submitWriterFormDone = false;
+let submitWriterFormDone = false ;
 
 /** 작성 폼 체크 */
 function submitForm_check(form) {  
@@ -22,13 +22,31 @@ function submitForm_check(form) {
         form.name.focus();
     return;
   }   
-  
-  if(!isNull(price)){
+
+  console.log(price > 0)
+  if( price <= 0 || price == '0' || !isNull(price)){
     alert("가격을 입력해주세요.");
         form.price.focus();
     return;
-  }  
+  } 
+   
+  let seasonList = "", toneList = "";
   
+  $("input.seasonCheckBox:checked").each(function(i, val) {  
+	  seasonList += val.value +" ";
+  }); 
+  
+  $("input.toneCheckBox:checked").each(function(i, val) { 
+	  toneList += val.value +" "; 
+  });
+  
+  form.seasonType.value = seasonList;
+  form.toneType.value = toneList;
+   
+  console.log(form)
+  
+  form.action = "/adm/shop/item/doWrite";
+  form.method = "POST";
   form.submit();
   submitWriterFormDone = true;
 }  
@@ -36,9 +54,11 @@ function submitForm_check(form) {
 </script>
 
 <h1 class="font-title mb-8 text-3xl font-extrabold">상품 생성하기</h1>
-<div>
-  <form onsubmit="submitForm_check(this); return false;" class="table-box-type-1 mt-4" action="/adm/shop/item/doWrite" method="POST">
-    <input type="hidden" name="relId" value="1" />
+<div> 
+  <form onsubmit="submitForm_check(this); return false;" class="table-box-type-1 mt-4" >
+    <input type="hidden" name="categoryId" value="1" />
+    <input type="hidden" name="seasonType" value="" />
+    <input type="hidden" name="toneType" value="" />
     <table >
       <colgroup>
         <col width="200" />
@@ -46,18 +66,10 @@ function submitForm_check(form) {
       <tr>
         <th class="req">이름</th>
         <td>
-            <input type="text" class="w-full input input-sm" name="name" onkeyup="fncDebounce(this);"   
-            required="required" placeholder="이름을 입력해주세요."  />
-            <span></span>
+            <input type="text" class="w-full input input-sm" name="name" required="required" placeholder="이름을 입력해주세요."  />
         </td>
       </tr> 
-      <!-- 
-      <tr>
-        <th>링크</th>
-        <td>
-            <input type="text" class="w-full input input-sm" name="link" placeholder="선택시 작성해주세요" />
-        </td>
-      </tr>  -->  
+ 
       <tr>
         <th>설명</th>
         <td> 
@@ -67,8 +79,8 @@ function submitForm_check(form) {
        <tr>
         <th>가격</th>
         <td>
-           <input type="text" class="w-full input input-sm" name="price"  placeholder="가격을 작성해주세요"
-            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 
+           <input type="text" class="w-full input input-sm" name="price" id="price"  placeholder="가격을 작성해주세요"
+            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  
             title="숫자만 입력이 가능합니다."
             /> 
         </td>
@@ -76,8 +88,8 @@ function submitForm_check(form) {
       <tr>
         <th>세일가격</th>
         <td> 
-           <input type="text" class="w-full input input-sm" name="price"  placeholder="세일가격을 작성해주세요" 
-            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 
+           <input type="text" class="w-full input input-sm" name="sale"  placeholder="세일가격을 작성해주세요" 
+            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="0"
             title="숫자만 입력이 가능합니다."
            /> 
         </td>
@@ -89,8 +101,9 @@ function submitForm_check(form) {
           <div class="flex gap-4">
             <c:forEach var="item" items="${seasonList}">
               <label class="cursor-pointer label">
-                <input type="checkbox" name="seasonList" class="checkbox checkbox-primary" /> 
-                <span class="label-text ml-1">${item.name}</span>
+                <input type="checkbox" name="seasonList" 
+                      class="checkbox checkbox-primary seasonCheckBox" value="${item.id}" /> 
+                <span class="label-text ml-1" >${item.name}</span>
               </label> 
             </c:forEach>
             </div>
@@ -102,7 +115,8 @@ function submitForm_check(form) {
           <div class="flex gap-4">
             <c:forEach var="item" items="${toneTypeList}">
               <label class="cursor-pointer label">
-                <input type="checkbox" name="toneTypeList" class="checkbox checkbox-primary" /> 
+                <input type="checkbox" name="toneTypeList" 
+                       class="checkbox checkbox-primary toneCheckBox" value="${item.id}" /> 
                 <span class="label-text ml-1">${item.name}</span>
               </label> 
             </c:forEach>

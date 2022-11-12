@@ -2,9 +2,77 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nyj.exam.demo.repository.ShopItemRepository"> 
 	
+	<select id="getAllShopItem" resultType="Item">
+		SELECT * FROM `shopItem`
+	</select>
+	
+	<select id="getPrintForShopItem" resultType="Item">
+		SELECT * FROM `shopItem`
+	</select>
+	
 	<select id="getLastInsertId" resultType="int">
 		SELECT LAST_INSERT_ID()
 	</select>  
+	
+	<select id="getShopItemCount" resultType="int">
+		SELECT COUNT(*)
+		FROM `shopItem`
+		WHERE 1
+		<if test="searchKeyword != ''">
+			<choose>
+				<when test="searchKeywordType == 'name'">
+					AND `name` LIKE CONCAT('%',#{searchKeyword},'%')
+				</when>
+				<when test="searchKeywordType == 'desc'">
+					AND `desc` LIKE CONCAT('%', #{searchKeyword}, '%')
+				</when>
+				<otherwise>
+					AND (
+						`name` LIKE CONCAT('%', #{searchKeyword}, '%')
+						OR
+						`desc` LIKE CONCAT('%', #{searchKeyword}, '%')
+					)
+				</otherwise>
+			</choose>
+		</if> 
+	</select>	
+	
+	
+	<select id="getForPrintShopItems" resultType="Item"> 
+			SELECT
+					A.id,
+					A.memberId,
+					A.memberName,
+					A.categoryId,
+					B.name extra__categoryName,
+					A.name,
+					IF(A.sale = 0, A.price, A.sale) AS price,
+					A.useYn,
+					A.regDate
+			  FROM `shopItem` AS A
+			  LEFT JOIN `shopCate` AS B
+			    ON A.categoryId = B.id 
+			 WHERE 1 = 1
+			<if test="searchKeyword != ''">
+				<choose>
+					<when test="searchKeywordType == 'name'">
+						AND A.`name` LIKE CONCAT('%',#{searchKeyword},'%')
+					</when>
+					<when test="searchKeywordType == 'desc'">
+						AND A.`desc` LIKE CONCAT('%', #{searchKeyword}, '%')
+					</when>
+					<otherwise>
+						AND (
+							A.`name` LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							A.`desc` LIKE CONCAT('%', #{searchKeyword}, '%')
+						)
+					</otherwise>
+				</choose>
+			</if>
+			ORDER BY A.id DESC
+			LIMIT #{limitStart}, #{limitTake}
+	</select>
 	
 	<insert id="doWrite">
 	 INSERT INTO `shopItem`
@@ -16,7 +84,7 @@
 			,`name`= #{name}
 			,price = #{price}
 			<if test=" desc != null and desc != '' ">
-	           ,desc= #{desc}
+	           ,`desc`= #{desc}
 			</if>	
 			<if test=" link !=null and link != '' ">
 			   ,`link`= #{link}
@@ -34,5 +102,7 @@
 			   ,useYn= #{useYn}
 			</if>  
 	</insert>
+	
+	
 </mapper>
  

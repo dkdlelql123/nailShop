@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nyj.exam.demo.service.ShopCateService;
 import com.nyj.exam.demo.service.ShopItemService;
 import com.nyj.exam.demo.util.Ut;
+import com.nyj.exam.demo.vo.Board;
 import com.nyj.exam.demo.vo.Item;
 import com.nyj.exam.demo.vo.Member;
 import com.nyj.exam.demo.vo.ResultData;
@@ -69,5 +71,27 @@ public class AdmShopItemController {
 		
 		return Ut.jsReplace(rs.getMsg(), "/adm/shop/item/write");
 	} 
+
+	@RequestMapping("/adm/shop/item/list")
+	public String showItemList(@RequestParam(defaultValue = "1") int page, 
+			@RequestParam(defaultValue = "10") int itemsCountInAPage,
+			@RequestParam(defaultValue = "name,desc") String searchKeywordType,
+			@RequestParam(defaultValue = "") String searchKeyword,
+			Model model) {
+
+		int count = shopItemService.getShopItemCount(searchKeywordType, searchKeyword);
+		model.addAttribute("count", count);
+		
+		int pagesCount = (int) Math.ceil((double)count / itemsCountInAPage);
+		model.addAttribute("pagesCount", pagesCount);
+		model.addAttribute("page", page); 
+		
+		List<Item> itemList = shopItemService.getForPrintShopItems(searchKeywordType, searchKeyword, page, itemsCountInAPage);
+		model.addAttribute("itemList", itemList);
+		
+		return "/adm/shop/item/list";
+	}
+	 
+	
 
 }

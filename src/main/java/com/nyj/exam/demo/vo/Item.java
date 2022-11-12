@@ -20,6 +20,8 @@ public class Item {
 	String memberName;
 	/** 카테고리ID */
 	int categoryId;
+	/** 카테고리이름 */
+	String extra__categoryName;
 	/** 상풍명 */
 	String name;
 	/** 카테고리 링크 */
@@ -38,5 +40,22 @@ public class Item {
 	
 	/** 사용여부 */
 	int useYn;  
+	
+	public String getForPrintType1RegDate() {
+		return regDate.substring(2,10);
+	}
+	
+	public String getForPrintType1UpdateDate() {
+		return updateDate.substring(2,10);
+	}
+	
+	public String getForPrintType2RegDate() {
+		return regDate.substring(2,16);
+	}
+	
+	public String getForPrintType2UpdateDate() {
+		return updateDate.substring(2,16);
+	}
+
 	 
 }
