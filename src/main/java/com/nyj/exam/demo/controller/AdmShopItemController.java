@@ -34,11 +34,14 @@ public class AdmShopItemController {
 	@RequestMapping("/adm/shop/item/write")
 	public String showItemWrite(Model model, @RequestParam(defaultValue = "0") int id) {
 		
+		model.addAttribute("id", id);
+		model.addAttribute("category", 2);	//2 : 손톱
+		
 		if(id != 0) {
 			Item item = shopItemService.getShopItemById(id);
-			model.addAttribute("item", item);
+			model.addAttribute("shopItem", item);
+			model.addAttribute("category", item.getCategoryId());
 		}
-		model.addAttribute("id", id);
 		
 		List<Shop> cateList = shopCateService.getShopCateByRelId(1);
 		model.addAttribute("cateList", cateList);

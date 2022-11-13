@@ -78,7 +78,7 @@
           <th><input type="checkbox" class="checkId" value="${item.id}"/></th>
           <th class="text-center">${item.id}</th>
           <td>
-            <a href="/adm//shop/item/write?id=${item.id}"> 
+            <a href="/adm/shop/item/write?id=${item.id}"> 
               ${item.name}
             </a>
           </td>
@@ -90,7 +90,6 @@
           </td>
           <td class="text-center">${item.useYn == 1 ? "O":"X"}</td>  
           <td class="text-center">${item.forPrintType1RegDate}</td>  
-       
         </tr>  
       </c:forEach>
     </tbody>
