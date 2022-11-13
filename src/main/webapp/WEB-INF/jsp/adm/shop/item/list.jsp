@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <c:set var="pageTitle" value="관리자 - 상품목록" />
 <%@ include file="../../common/head.jspf"%>
@@ -85,8 +86,8 @@
           <td class="text-center">
             ${item.extra__categoryName}
           </td>
-          <td class="text-center">
-            ${item.price}
+          <td class="text-center"> 
+           <fmt:formatNumber value="${item.price}" pattern="#,###"/>  
           </td>
           <td class="text-center">${item.useYn == 1 ? "O":"X"}</td>  
           <td class="text-center">${item.forPrintType1RegDate}</td>  

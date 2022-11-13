@@ -41,7 +41,7 @@
         <a href="/adm/shop/cate/write">카테고리관리</a>
       </li>
       <li>
-        <a href="/adm/shop/item/write">상품관리</a>
+        <a href="/adm/shop/item/list">상품관리</a>
       </li>
       <li>
         <a href="/adm/board/list">게시판관리</a>
