@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.nyj.exam.demo.service.ArticleService;
 import com.nyj.exam.demo.service.BoardService;
 import com.nyj.exam.demo.vo.Article;
+import com.nyj.exam.demo.vo.Rq;
 
 @Controller
 public class UsrHomeController {
@@ -21,10 +22,16 @@ public class UsrHomeController {
 	@Autowired
 	BoardService boardService;
 	
+	@Autowired
+	Rq rq;
+	
 	
 	@RequestMapping("/")
 	public String main() {
-		return "redirect:/usr/home";  
+		if(rq.isLogined()) {
+			return "redirect:/shop/customer/join";
+		}
+		return "redirect:/usr/member/login";  
 	}
 	
 	

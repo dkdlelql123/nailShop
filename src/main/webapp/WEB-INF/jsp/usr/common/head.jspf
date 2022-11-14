@@ -3,17 +3,7 @@
 
 <!doctype html> 
 <html lang="ko" data-theme="cupcake">
-<head>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-W7HD7X65ZD"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-W7HD7X65ZD');
-</script>
-
+<head> 
 <meta charset="UTF-8" />
 <title>${pageTitle}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no">
@@ -82,19 +72,7 @@ Theme__init();
         </a>
       </div>
       
-      <ul class="flex gap-4 text-base-content"> 
-        <li>
-          <a href="/usr/article/detail?id=14" class="link link-hover">
-            <span class="hidden md:inline">기술설명서</span>
-            <span class="inline md:hidden"><i class="fas fa-pencil-alt"></i></span>
-          </a>
-        </li>
-        <li>
-          <a href="/portfolio" target="_blank">
-            <span class="hidden md:inline">포트폴리오</span>
-            <span class="inline md:hidden"><i class="far fa-list-alt"></i></span>
-          </a>  
-        </li>
+      <ul class="flex gap-4 text-base-content">  
         <li><a href="/usr/contact"><i class="far fa-envelope"></i></a></li> 
       </ul>
       
