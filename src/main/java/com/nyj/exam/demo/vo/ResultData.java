@@ -34,6 +34,12 @@ public class ResultData {
 		return form(resultCode, msg, null, data1);
 	}
 	
+	/**
+	 * resultCode
+	 * msg
+	 * data1msg
+	 * data1
+	 * */
 	public static ResultData form(String resultCode, String msg, String data1msg, Object data1) {
 		ResultData rd = new ResultData();
 		

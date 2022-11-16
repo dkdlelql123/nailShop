@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.nyj.exam.demo.repository.ShopCateRepository;
 import com.nyj.exam.demo.util.Ut;
+import com.nyj.exam.demo.vo.Customer;
 import com.nyj.exam.demo.vo.Item;
 import com.nyj.exam.demo.vo.ResultData;
 import com.nyj.exam.demo.vo.Shop;
