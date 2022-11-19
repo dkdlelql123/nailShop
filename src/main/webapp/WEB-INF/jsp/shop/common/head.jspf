@@ -2,42 +2,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!doctype html> 
-<html lang="ko" data-theme="cupcake">
+<html lang="ko" data-theme="dark">
 <head> 
 <meta charset="UTF-8" />
 <title>${pageTitle}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script> 
-function Theme__toggle(){  
-	
-	const theme = localStorage.getItem("theme") ?? "cupcake";
-	if(theme == "forest"){
-		localStorage.setItem("theme", "cupcake");
-		//Theme__applyTo("cupcake");
-		
-	} else if(theme == "cupcake"){
-		localStorage.setItem("theme", "forest");
-		//Theme__applyTo("forest");
-	}  
-	
-	location.reload();
-}	
-
-function Theme__applyTo(themeName){ 
-	// cupcake, forest 
-	$("html").attr("data-theme", themeName);
-}
-
-function Theme__init(){
-	const theme = localStorage.getItem("theme") ?? "cupcake";
-	Theme__applyTo(theme);
-}
-
-Theme__init();
-</script>
-
+ 
 <!-- 데이지UI -->
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.20.0/dist/full.css" rel="stylesheet" type="text/css" />
 
@@ -52,37 +25,5 @@ Theme__init();
 <script src="/resource/common.js" defer="defer"></script>
 
 </head>
-<body>
-
-<div class="drawer drawer-mobile">
-  <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content flex-full flex-col items-start justify-start">
-   
-    <!-- HEADER start -->
-    <div class="flex justify-between items-center p-4 gap-4">
-      <div >
-        <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">
-          <i class="fas fa-bars"></i>
-        </label>
-      </div>      
-      
-      <div class="flex-1 ">
-        <a href="/" class="lg:hidden"> 
-          <span class="text-2xl font-bold">Blog</span>
-        </a>
-      </div>
-      
-      <ul class="flex gap-4 text-base-content">  
-        <li><a href="/usr/contact"><i class="far fa-envelope"></i></a></li> 
-      </ul>
-      
-      <a class="btn btn-primary btn-theme-toggle" href="javascript:Theme__toggle();">
-        <span class="theme cupcake"><i class="far fa-sun"></i></span>
-        <span class="theme forest"><i class="far fa-moon"></i></span>
-      </a>
-    </div>  
-    <!-- HEADER end --> 
-    
-    <!-- content -->
-    <div class="p-8  md:p-12 ${fullSize =='true' ? '' : 'xl:max-w-screen-lg '} xl:mx-auto">
+<body> 
      

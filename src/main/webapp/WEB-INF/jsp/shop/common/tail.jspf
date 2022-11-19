@@ -1,77 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
   
-     </div> 
-     <!--  content -->
-  
-	 <footer class="border-t"> 
-       <div class="tabs">
-        <a class="tab">Tab 1</a> 
-        <a class="tab tab-active">Tab 2</a> 
-        <a class="tab">Tab 3</a>
-        <a class="tab">Tab 3</a> 
-      </div>  
-    </footer>
-    
-    <!-- 
-    <ul class="flex gap-4 text-base-content"> 
-        <c:choose>
-          <c:when test="${rq.logined}">
-            <div class="dropdown dropdown-top">
-              <label tabindex="0" class="cursor-pointer"><i class="far fa-smile"></i></label>
-              <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-300 rounded-box w-36 text-sm">
-                <li><a href="/usr/member/doLogout">logout</a></li>
-                <li><a href="/usr/member/mypage">mypage</a></li>
-                <c:if test="${rq.member.authLevel == 10 }">
-                  <li><a href="/adm">admin</a></li>
-                </c:if>
-              </ul>
-            </div> 
-          </c:when>
-          <c:when test="${rq.logined == false}">
-            <li><a href="/usr/member/login"><i class="far fa-user"></i></a></li>
-          </c:when>
-        </c:choose> 
-      </ul>
-     -->
-              
-  </div> 
-  
-  <div class="drawer-side">
-    <label for="my-drawer-2" class="drawer-overlay"></label> 
-    <aside class="bg-base-200 w-80"> 
-      <div class="p-4">
-        <a href="/" class="logo flex items-end gap-2 pl-3" >
-          <span class="text-3xl font-bold">Blog</span>
-          <span class="text-xs">22.08.02 -</span>
-        </a>
-        <div class="p-4">today <span id="today">${today}</span> | total <span id="total">${total}</span></div>
-      </div>
-          
-      <ul class="menu p-4 overflow-y-auto text-base-content text-sm">
-        <c:forEach var="board" items="${boards}">
-          <c:choose>
-            <c:when test="${board.publicStatus == 1}">
-              <li><a href="/usr/article/list?boardId=${board.id}">${board.name}[${board.extra__articleCount}]</a></li>
-           </c:when>
-           <c:when test="${board.publicStatus == 0 && rq.member.authLevel == 10}">
-              <li>
-                <a class="gap-0" href="/usr/article/list?boardId=${board.id}">
-                <span class="text-sm text-base-content/70 mr-1">[비공개]</span>${board.name}[${board.extra__articleCount}]
-                </a>
-              </li>
-            </c:when>
-          </c:choose>
-        </c:forEach>  
-      </ul>
-    </aside>
+
+<div class="w-full h-20"></div>
+
+<div class="w-full fixed bg bottom-0 bg-base-100 ">
+  <div class="tabs max-w-xl mx-auto">
+    <a class="tab tab-lg tab-bordered flex-grow tab-active" href="/shop/home/list">홈</a>
+    <a class="tab tab-lg tab-bordered flex-grow " href="/shop/item/list">상품</a>
+    <a class="tab tab-lg tab-bordered flex-grow " href="/shop/customer/list">고객</a>
+    <a class="tab tab-lg tab-bordered flex-grow " href="">관리</a>
   </div>
-  
-</div>
-
-<div id="license_link" class="hidden">
-  <a target="_blank" href="https://icons8.com/icon/32323/instagram">Instagram</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>  
-</div>
-
+</div>     
+     
 </body>
 </html>
