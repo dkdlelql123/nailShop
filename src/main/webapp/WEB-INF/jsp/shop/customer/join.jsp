@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="고객등록" />
+<c:set var="pageTitle" value="고객 상세" />
 <%@ include file="../common/head.jspf"%>
 
 <script  src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+
 <script type="text/javascript"> 
 let submitJoinFormDone = false; 
 
@@ -51,74 +52,86 @@ function checkForm(form) {
 	submitJoinFormDone = true;
 } 
 </script>
-
-<div class="table-box-type-1 m-auto w-full lg:w-1/2">
-  <form onsubmit="checkForm(this); return false;" action="/shop/customer/doJoin" method="post" enctype="multipart/form-data">
-    <div class="mt-8 mb-4">
-    <!--   <label 
-        for="loginId"
-        class="block mb-2 text-sm font-medium label-text">고객번호</label>
-      <input 
-        type="text" 
-        name="loginId" 
-        id="loginId" 
-        class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-sm"
-        placeholder="자동 생성" 
-        autocomplete="off" 
-        required />
-      <div class="text-xs loginId-message"></div>
-    </div>
- 
-    <div class="mb-4"> 
-        <label class="block mb-2 text-sm font-medium label-text">
-            프로필 이미지
-        </label> 
-                      :file
-        relTypeCode   :member
-        relId         :0
-        typeCode      :extra
-        type2Code     :profileImg
-        fileNo        :1 (profileImg 중 1번)
+<main class="py-6 px-4 sm:p-6 md:py-10 md:px-8">
+  <div class="max-w-xl mx-auto grid grid-cols-1 lg:max-w-xl lg:gap-y-10">
+    <section>
+      <h1
+        class="mt-1 text-lg font-semibold text-white sm:text-slate-900 md:text-2xl dark:sm:text-white">
+        고객 상세
+      </h1>
+      
+      <form onsubmit="checkForm(this); return false;" action="/shop/customer/doSave" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="${customer.id}" />
+        <div class="mt-8 mb-4">
+        <!--   <label 
+            for="loginId"
+            class="block mb-2 text-sm font-medium label-text">고객번호</label>
+          <input 
+            type="text" 
+            name="loginId" 
+            id="loginId" 
+            class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-sm"
+            placeholder="자동 생성" 
+            autocomplete="off" 
+            required />
+          <div class="text-xs loginId-message"></div>
+        </div>
+     
+        <div class="mb-4"> 
+            <label class="block mb-2 text-sm font-medium label-text">
+                프로필 이미지
+            </label> 
+                          :file
+            relTypeCode   :member
+            relId         :0
+            typeCode      :extra
+            type2Code     :profileImg
+            fileNo        :1 (profileImg 중 1번)
+             
+            <input 
+              type="file" 
+              name="file__customer__0__extra__profileImg__1" 
+              accept= "image/png image/jpeg image/jpg"
+              placeholder="프로필 이미지를 선택해주세요." />
+         </div>
          
-        <input 
-          type="file" 
-          name="file__customer__0__extra__profileImg__1" 
-          accept= "image/png image/jpeg image/jpg"
-          placeholder="프로필 이미지를 선택해주세요." />
-     </div>
-     
-    <div class="mb-4"> --> 
-      <label 
-        for="name"
-        class="block mb-2 text-sm font-medium label-text">이름</label>
-      <input 
-        type="text" 
-        name="name" 
-        id="name"
-        class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-sm" 
-        placeholder="이름"
-        required />
-    </div>
-     
-    <div class="mb-4">
-      <label 
-        for="phoneNumber"
-        class="block mb-2 text-sm font-medium label-text">전화번호</label> 
-      <input 
-        type="text" 
-        name="phoneNumber" 
-        id="phoneNumber"
-        class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-sm "
-        placeholder="전화번호 뒷자리 4글자만 입력해주세요."
-        maxlength="4" 
-        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 
-        required />
-    </div>
+        <div class="mb-4"> --> 
+          <label 
+            for="name"
+            class="block mb-2 text-sm font-medium label-text">이름</label>
+          <input 
+            type="text" 
+            name="name" 
+            id="name"
+            class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-sm" 
+            placeholder="이름"
+            value="${customer.name}"
+            required />
+        </div>
+         
+        <div class="mb-4">
+          <label 
+            for="phoneNumber"
+            class="block mb-2 text-sm font-medium label-text">전화번호</label> 
+          <input 
+            type="text" 
+            name="phoneNumber" 
+            id="phoneNumber"
+            class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-sm required"
+            placeholder="전화번호 뒷자리 4글자만 입력해주세요."
+            maxlength="4" 
+            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  
+            value="${customer.phoneNumber}"
+            required />
+        </div>
+    
+        <button 
+          type="submit"
+          class="w-full btn btn-primary mt-12 py-2 block text-center">등록</button>
+      </form>
 
-    <button 
-      type="submit"
-      class="w-full btn btn-primary mt-12 py-2 block text-center">등록</button>
-  </form>
-</div>
+    </section>
+  </div>
+</main>
 
 <%@ include file="../common/tail.jspf"%>
