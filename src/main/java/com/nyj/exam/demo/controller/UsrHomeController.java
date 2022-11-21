@@ -29,7 +29,7 @@ public class UsrHomeController {
 	@RequestMapping("/")
 	public String main() {
 		if(rq.isLogined()) {
-			return "redirect:/shop/customer/join";
+			return "redirect:/shop/home/list";
 		}
 		return "redirect:/usr/member/login";  
 	}

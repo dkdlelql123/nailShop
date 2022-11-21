@@ -80,8 +80,7 @@ public class UsrMemberController {
 			MultipartFile multipartFile = fileMap.get(fileInputName);
 			
 			if(multipartFile.isEmpty() == false) {
-				genFileService.save(multipartFile, newMemberId);
-				System.out.println("=================multipartFile===================");
+				genFileService.save(multipartFile, newMemberId); 
 				System.out.println(multipartFile);
 			}
 		} 	

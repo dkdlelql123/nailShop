@@ -7,10 +7,21 @@
 	SELECT LAST_INSERT_ID()
 	</select>
 	
+	<select id="getCustomerById" resultType="Customer">
+	SELECT *
+	FROM `customer`
+	WHERE id = #{id};
+	</select> 
+	
 	<select id="getCustomerByPhoneNumber" resultType="Customer">
 	SELECT *
 	  FROM `customer`
 	 WHERE phoneNumber = #{phoneNumber};
+	</select> 
+	
+	<select id="getCustomers" resultType="Customer">
+	SELECT *
+	  FROM `customer` 
 	</select>
 	
 	<insert id="doCustomerJoin">
@@ -21,6 +32,15 @@
 	       `name` = #{name}, 
 		   phoneNumber = #{phoneNumber}; 
 	</insert>
+	
+	<update id="doUpdateCustomer">
+	UPDATE customer
+	   SET updateDate = NOW(), 
+		   `code` = #{code},
+	   	   `name` = #{name},
+	       phoneNumber = #{phoneNumber}
+	 WHERE id = #{id};
+	 </update>
 	
 	 
 </mapper>

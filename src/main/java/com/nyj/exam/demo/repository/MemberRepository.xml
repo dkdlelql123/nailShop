@@ -4,16 +4,16 @@
 
 	<insert id="join">
 	INSERT INTO `member`
-	SET regDate = NOW(),
-	updateDate = NOW(),
-	loginId = #{loginId},
-	loginPw = #{loginPw},
-	salt = #{salt},
-	`name` = #{name},
-	nickname = #{nickname},
-	email = #{email},
-	phoneNumber = #{phoneNumber},
-	authLevel = 2;
+	   SET regDate = NOW(),
+			updateDate = NOW(),
+			loginId = #{loginId},
+			loginPw = #{loginPw},
+			salt = #{salt},
+			`name` = #{name},
+			nickname = #{nickname},
+			email = #{email},
+			phoneNumber = #{phoneNumber},
+			authLevel = 2;
 	</insert>
 	
 	<select id="getLastInsertId" resultType="int">
