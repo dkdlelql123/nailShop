@@ -83,7 +83,7 @@ public class UsrMemberController {
 				genFileService.save(multipartFile, newMemberId); 
 				System.out.println(multipartFile);
 			}
-		} 	
+		} 	 
 		
 		Member member = memberService.getMemberById(newMemberId);
 		rq.login(member);  

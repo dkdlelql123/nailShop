@@ -57,23 +57,38 @@ function submitForm_check(form) {
   }
    
   let itemId = form.id.value;
+  /*
   if(itemId == 0){
     form.action = "/adm/shop/item/doWrite";	  
   } else {	  
     form.action = "/adm/shop/item/doModify";	  
   }
+  */
+  form.action = "/adm/shop/item/doWrite";
   
   form.method = "POST";
   form.submit();
   submitWriterFormDone = true;
 }  
 
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('preview').src = e.target.result;
+    };
+    reader.readAsDataURL(input.files[0]);
+  } else {
+    document.getElementById('preview').src = "";
+  }
+}
+
 </script>
 
 <h1 class="font-title mb-8 text-3xl font-extrabold">상품 ${title}하기</h1> 
 
 <div> 
-  <form onsubmit="submitForm_check(this); return false;" class="table-box-type-1 mt-4" method="post"
+  <form onsubmit="submitForm_check(this); return false;" class="table-box-type-1 mt-4"  
     enctype="multipart/form-data">
     <input type="hidden" name="id" id="id" value="${id}" />
     <input type="hidden" name="seasonType" value="" />
@@ -81,7 +96,7 @@ function submitForm_check(form) {
     <div class="flex"> 
     <div class="max-w-xs w-1/3 pr-4"> 
         <div class="mask  mb-4 w-full bg-base-300">
-          <img 
+          <img id="preview"
             src="${shopItem.getShopItemImgUri()}"  onerror="${shopItem.getShopItemFallbackImgOnErrorHtmlAttr()}"
             width="400" height="400" alt="item img" class="mask" />
         </div>
@@ -95,7 +110,9 @@ function submitForm_check(form) {
          -->
         <input 
           type="file" 
-          name="file__item__0__extra__shopItemImg__1" 
+          name="file__item__0__extra__shopItemImg__1"
+          class="w-full overflow-hidden" 
+          onchange="readURL(this);"
           accept= "image/png image/jpeg image/jpg"
           placeholder="프로필 이미지를 선택해주세요." />
     </div>

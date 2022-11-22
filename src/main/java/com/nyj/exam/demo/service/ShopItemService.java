@@ -47,5 +47,10 @@ public class ShopItemService {
 		return ResultData.form("S-1", Ut.f("상품이 생성되었습니다.", id), id);
 	}
 
+	public ResultData doModify(Item item) { 
+		shopItemRepository.doModify(item); 
+		return ResultData.form("S-1", "상품이 수정이 완료되었습니다.", item.getId());
+	}
+
 	
 }

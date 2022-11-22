@@ -105,6 +105,21 @@
 			</if>  
 	</insert>
 	
-	
+	<update id="doModify"> 
+	UPDATE shopItem
+	   SET updateDate = NOW() 
+			, memberId = #{memberId}
+			, memberName = #{memberName}
+			, `categoryId` = #{categoryId}
+			, `name` = #{name}
+			, `link` = #{link}
+			, `desc` = #{desc}
+			, toneType = #{toneType}
+			, seasonType = #{seasonType}
+			, price = #{price}
+			, sale = #{sale}
+			, useYn = #{useYn}
+	 WHERE id =  #{id} 
+	</update>
 </mapper>
  

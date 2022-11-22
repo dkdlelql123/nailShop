@@ -82,7 +82,15 @@ public class ShopItemController {
 		item.setMemberName(member.getName());
 		item.setMemberId(member.getId());
 		
-		ResultData rs = shopItemService.doWrite(item); 
+		ResultData rs ;
+		
+		if(item.getId() != 0) {
+			//update
+			rs = shopItemService.doModify(item);
+		} else {
+			// create
+			rs = shopItemService.doWrite(item); 			
+		} 
 		
 		Map<String, MultipartFile> fileMap = multipartReq.getFileMap();
 		
@@ -95,8 +103,8 @@ public class ShopItemController {
 			}
 		} 
 		
-		return Ut.jsReplace(rs.getMsg(), "/adm/shop/item/write");
-	} 
+		return Ut.jsReplace(rs.getMsg(), "/adm/shop/item/write?id="+rs.getData1());
+	}  
 
 	@RequestMapping("/adm/shop/item/list")
 	public String showItemList(@RequestParam(defaultValue = "1") int page, 

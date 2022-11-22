@@ -21,6 +21,8 @@ public interface ShopItemRepository {
 
 	void doWrite(Item item);
 
+	void doModify(Item item);
+
 
 
 }
