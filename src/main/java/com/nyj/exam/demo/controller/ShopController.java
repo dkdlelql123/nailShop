@@ -6,17 +6,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.nyj.exam.demo.service.ShopCateService;
+import com.nyj.exam.demo.service.ShopItemService;
 import com.nyj.exam.demo.service.ShopService;
 import com.nyj.exam.demo.util.Ut;
 import com.nyj.exam.demo.vo.Article;
 import com.nyj.exam.demo.vo.Customer;
+import com.nyj.exam.demo.vo.Item;
 import com.nyj.exam.demo.vo.ResultData;
 import com.nyj.exam.demo.vo.Rq;
 
 @Controller
 public class ShopController { 
+
+	
+	@Autowired
+	ShopCateService shopCateService; 
+	
+	@Autowired
+	ShopItemService shopItemService; 
 	
 	@Autowired
 	ShopService shopService;
@@ -108,5 +119,27 @@ public class ShopController {
 	}
 	
 	 
+	/**
+	 * 상품 목록
+	 * */
+	@RequestMapping("/shop/item/list")
+	public String showItemrList(@RequestParam(defaultValue = "1") int page, 
+			@RequestParam(defaultValue = "10") int itemsCountInAPage,
+			@RequestParam(defaultValue = "name,desc") String searchKeywordType,
+			@RequestParam(defaultValue = "") String searchKeyword,
+			Model model) {
+
+		int count = shopItemService.getShopItemCount(searchKeywordType, searchKeyword);
+		model.addAttribute("count", count);
+		
+		int pagesCount = (int) Math.ceil((double)count / itemsCountInAPage);
+		model.addAttribute("pagesCount", pagesCount);
+		model.addAttribute("page", page); 
+		
+		List<Item> itemList = shopItemService.getForPrintShopItems(searchKeywordType, searchKeyword, page, itemsCountInAPage);
+		model.addAttribute("itemList", itemList);
+		
+		return "/shop/item/list";
+	}
 
 }

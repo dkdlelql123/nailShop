@@ -1,12 +1,75 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<c:set var="pageTitle" value="관리자 - 상품목록" />
+<c:set var="pageTitle" value="상품 목록" />
 <%@ include file="../common/head.jspf"%>
 
-<h1 class="font-title mb-4 text-3xl font-extrabold">상품 총 ${count}개</h1>
+<main class="py-6 px-4 sm:p-6 md:py-10 md:px-8">
+  <div class="max-w-xl mx-auto grid grid-cols-1 lg:max-w-xl lg:gap-y-10">
+    <section>
+      <h1
+        class="mt-1 text-lg font-semibold text-white sm:text-slate-900 md:text-2xl dark:sm:text-white">
+        상품 
+        <c:out value="${count}" />개
+      </h1>
+      
+      <div class="flex flex-wrap mt-4">
+        <c:forEach var="item" items="${itemList}">
+           <div class="card bg-base-100 w-1/2 p-2">
+             <a href="/shop/item/detail?id=<c:out value="${item.id}"/>" class="block">
+              <span>
+                <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
+              </span>
+              <div class="mt-4">
+                <h2 class="mb-2">
+                  <span class="badge badge-outline text-sm"><c:out value="${item.extra__categoryName}" /></span>
+                  <span class="text-base"><c:out value="${item.name}" /></span>
+                </h2>
+                <p><fmt:formatNumber value="${item.price}" pattern="#,###"/> </p>
+                <!-- <div class="card-actions justify-end">
+                  <div class="badge badge-outline">Fashion</div> 
+                </div>-->
+              </div>
+            </a>
+          </div> 
+        </c:forEach>  
+      </div> 
+       
+       <!-- 페이지 관련 -->
+      <c:set var="pageRange" value="5" />
+      <c:set var="startPage"
+        value="${page - pageRange >= 1 ? page - pageRange : 1}" />
+      <c:set var="endPage"
+        value="${ startPage+pageRange <= pagesCount ? startPage+pageRange : pagesCount }" />
+      
+      <c:set var="baseUri" value="?" />
+      <c:set var="baseUri" value="${baseUri}&itemsCountInAPage=${param.itemsCountInAPage}" />
+      <c:set var="baseUri"  value="${baseUri}&searchKeywordType=${param.searchKeywordType}" />
+      <c:set var="baseUri"  value="${baseUri}&searchKeyword=${param.searchKeyword}" /> 
+      
+      <div class="flex justify-center mt-8">
+        <div class="btn-group">
+          <c:if test="${page != 1}">
+            <a href="${baseUri}&page=1" class="btn btn-sm">«</a>
+          </c:if>
+      
+          <c:forEach begin="${startPage}" end="${endPage}" var="i">
+            <a href="${baseUri}&page=${i}"
+              class="btn btn-sm ${page == i ? 'btn-active' : '' }">${i}</a>
+          </c:forEach>
+      
+          <c:if test="${page != pagesCount && pagesCount != 1 }">
+            <a href="${baseUri}&page=${pagesCount}" class="btn btn-sm">»</a>
+          </c:if>
+        </div>
+      </div> 
+      
+   </section>
+  </div>
+</main>
+    
+ <!-- 
 <div class="form-control">
   <form class="input-group justify-center" name="search-form"> 
     <input type="hidden" name="itemsCountInAPage" value="${param.itemsCountInAPage}" />
@@ -74,74 +137,11 @@
       </tr>
     </thead>
     <tbody>
-      <c:forEach var="item" items="${itemList}">
-        <tr>
-          <th><input type="checkbox" class="checkId" value="${item.id}"/></th>
-          <th class="text-center">${item.id}</th>
-          <td>
-            <a href="/adm/shop/item/write?id=${item.id}"> 
-              ${item.name}
-            </a>
-          </td>
-          <td class="text-center">
-            ${item.extra__categoryName}
-          </td>
-          <td class="text-center"> 
-           <fmt:formatNumber value="${item.price}" pattern="#,###"/>  
-          </td>
-          <td class="text-center">${item.useYn == 1 ? "O":"X"}</td>  
-          <td class="text-center">${item.forPrintType1RegDate}</td>  
-        </tr>  
-      </c:forEach>
+     
     </tbody>
   </table>
-</div>
+</div> -->
+ 
 
-<script>
-$(".allCheckIds").change(function(){
-    const $this = $(this);
-    const checkedStatus = $this.prop("checked");
-    
-    $(".checkId").prop("checked",checkedStatus );
-  });
-  
-  $(".checkId").change(function(){
-    const checkIdCount = $(".checkId").length;
-    const checkIdCheckedCount = $(".checkId:checked").length;
-    
-    const allCheck = checkIdCount == checkIdCheckedCount ;
-    
-    $(".allCheckIds").prop("checked", allCheck);
-  }); 
-</script>
-
-<!-- 페이지 관련 -->
-<c:set var="pageRange" value="9" />
-<c:set var="startPage"
-  value="${page - pageRange >= 1 ? page - pageRange : 1}" />
-<c:set var="endPage"
-  value="${ startPage+pageRange <= pagesCount ? startPage+pageRange : pagesCount }" />
-
-<c:set var="baseUri" value="?" />
-<c:set var="baseUri" value="${baseUri}&itemsCountInAPage=${param.itemsCountInAPage}" />
-<c:set var="baseUri"  value="${baseUri}&searchKeywordType=${param.searchKeywordType}" />
-<c:set var="baseUri"  value="${baseUri}&searchKeyword=${param.searchKeyword}" /> 
-
-<div class="flex justify-center mt-8">
-  <div class="btn-group">
-    <c:if test="${page != 1}">
-      <a href="${baseUri}&page=1" class="btn btn-sm">«</a>
-    </c:if>
-
-    <c:forEach begin="${startPage}" end="${endPage}" var="i">
-      <a href="${baseUri}&page=${i}"
-        class="btn btn-sm ${page == i ? 'btn-active' : '' }">${i}</a>
-    </c:forEach>
-
-    <c:if test="${page != pagesCount && pagesCount != 1 }">
-      <a href="${baseUri}&page=${pagesCount}" class="btn btn-sm">»</a>
-    </c:if>
-  </div>
-</div>
 
 <%@ include file="../common/tail.jspf"%>

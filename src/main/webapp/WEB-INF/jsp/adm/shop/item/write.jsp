@@ -3,8 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <c:set var="title" value="${id == 0 ? '생성':'수정'}"/>
-<c:set var="pageTitle" value="관리자 - 상품${title}" />  
- 
+<c:set var="pageTitle" value="관리자 - 상품${title}" />   
 <%@ include file="../../common/head.jspf"%> 
 
 <script>
@@ -45,6 +44,17 @@ function submitForm_check(form) {
   
   form.seasonType.value = seasonList;
   form.toneType.value = toneList;
+  
+  const maxSizeMb = 5;
+  const maxSize = maxSizeMb * 1024 * 1024;
+  const profileImgFileInput = form["file__item__0__extra__shopItemImg__1"];
+  if (profileImgFileInput.value) {
+      if (profileImgFileInput.files[0].size > maxSize) {
+          alert(maxSizeMb + "MB 이하의 파일을 업로드 해주세요.");
+          profileImgFileInput.focus();
+          return;
+      }
+  }
    
   let itemId = form.id.value;
   if(itemId == 0){
@@ -63,10 +73,32 @@ function submitForm_check(form) {
 <h1 class="font-title mb-8 text-3xl font-extrabold">상품 ${title}하기</h1> 
 
 <div> 
-  <form onsubmit="submitForm_check(this); return false;" class="table-box-type-1 mt-4" >
+  <form onsubmit="submitForm_check(this); return false;" class="table-box-type-1 mt-4" method="post"
+    enctype="multipart/form-data">
     <input type="hidden" name="id" id="id" value="${id}" />
     <input type="hidden" name="seasonType" value="" />
-    <input type="hidden" name="toneType" value="" />
+    <input type="hidden" name="toneType" value="" /> 
+    <div class="flex"> 
+    <div class="max-w-xs w-1/3 pr-4"> 
+        <div class="mask  mb-4 w-full bg-base-300">
+          <img 
+            src="${shopItem.getShopItemImgUri()}"  onerror="${shopItem.getShopItemFallbackImgOnErrorHtmlAttr()}"
+            width="400" height="400" alt="item img" class="mask" />
+        </div>
+        <!-- 
+                      :file
+        relTypeCode   :item
+        relId         :0
+        typeCode      :extra
+        type2Code     :shopItemImg
+        fileNo        :1 (shopItemImg 중 1번)
+         -->
+        <input 
+          type="file" 
+          name="file__item__0__extra__shopItemImg__1" 
+          accept= "image/png image/jpeg image/jpg"
+          placeholder="프로필 이미지를 선택해주세요." />
+    </div>
     <table >
       <colgroup>
         <col width="200" />
@@ -172,8 +204,10 @@ function submitForm_check(form) {
         </td>
       </tr>  
     </table>
+    </div>
 
-    <div class="flex justify-end mt-4">
+    <div class="flex justify-end mt-4 gap-2">
+      <a type="submit" class="btn btn-outline btn-sm" href="/adm/shop/item/list">목록</a>
       <button type="submit" class="btn btn-info btn-sm">${title}</button>
     </div>
   </form>

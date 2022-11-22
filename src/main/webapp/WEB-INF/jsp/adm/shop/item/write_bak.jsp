@@ -5,7 +5,7 @@
 <c:set var="title" value="${id == 0 ? '생성':'수정'}"/>
 <c:set var="pageTitle" value="관리자 - 상품${title}" />  
  
-<%@ include file="../common/head.jspf"%> 
+<%@ include file="../../common/head.jspf"%> 
 
 <script>
 let submitWriterFormDone = false ;
@@ -181,4 +181,4 @@ function submitForm_check(form) {
 
  
 
-<%@ include file="../common/tail.jspf"%>
+<%@ include file="../../common/tail.jspf"%>

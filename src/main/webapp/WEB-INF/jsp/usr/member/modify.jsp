@@ -103,8 +103,7 @@ function deleteProfileImg(chk){
     action="/usr/member/doModify" 
     method="post"
     enctype="multipart/form-data">
-    <input type="hidden" name="memberModifyAuthKey"
-      value="${param.memberModifyAuthKey}" />
+    <input type="hidden" name="memberModifyAuthKey"value="${param.memberModifyAuthKey}" />
 
     <div
       class="mask mask-squircle bg-base-content h-24 w-24 bg-opacity-10 p-px mx-auto mt-8 ">

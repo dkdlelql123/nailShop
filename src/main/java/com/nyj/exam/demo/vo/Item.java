@@ -57,5 +57,20 @@ public class Item {
 		return updateDate.substring(2,16);
 	}
 
+	public String getShopItemImgUri() {
+        return "/common/genFile/file/item/" + id + "/extra/shopItemImg/1";
+    }
+    
+    public String getShopItemFallbackImgUri() {
+        return "https://via.placeholder.com/400?text=:)";
+    }
+
+    public String getShopItemFallbackImgOnErrorHtmlAttr() {
+        return "this.src = '" + getShopItemFallbackImgUri() + "';";
+    }
+    
+    public String getRemoveShopItemImgIfNotExistsOnErrorHtmlAttr() {
+        return "$(this).remove();";
+    }
 	 
 }

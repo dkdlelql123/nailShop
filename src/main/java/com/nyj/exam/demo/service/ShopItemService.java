@@ -44,7 +44,7 @@ public class ShopItemService {
 	public ResultData doWrite(Item item) {
 		shopItemRepository.doWrite(item);
 		int id = getLastInsertId();
-		return ResultData.form("S-1", Ut.f("상품이 생성되었습니다.", id));
+		return ResultData.form("S-1", Ut.f("상품이 생성되었습니다.", id), id);
 	}
 
 	
