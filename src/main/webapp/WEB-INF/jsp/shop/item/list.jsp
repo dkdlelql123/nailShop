@@ -19,7 +19,11 @@
            <div class="card bg-base-100 w-1/2 p-2">
              <a href="/shop/item/detail?id=<c:out value="${item.id}"/>" class="block">
               <span>
-                <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
+                <img 
+                  src="${item.getShopItemImgUri()}"
+                  onerror="${item.getShopItemFallbackImgOnErrorHtmlAttr()}"
+                  alt="<c:out value="${item.extra__categoryName}"/>" 
+                  />
               </span>
               <div class="mt-4">
                 <h2 class="mb-2">

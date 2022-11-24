@@ -62,7 +62,7 @@ public class Item {
     }
     
     public String getShopItemFallbackImgUri() {
-        return "https://via.placeholder.com/400?text=:)";
+        return "https://via.placeholder.com/400/000000/ffffff?text=^o^";
     }
 
     public String getShopItemFallbackImgOnErrorHtmlAttr() {
