@@ -13,9 +13,9 @@ import com.nyj.exam.demo.service.ShopCateService;
 import com.nyj.exam.demo.service.ShopItemService;
 import com.nyj.exam.demo.service.ShopService;
 import com.nyj.exam.demo.util.Ut;
-import com.nyj.exam.demo.vo.Article;
 import com.nyj.exam.demo.vo.Customer;
 import com.nyj.exam.demo.vo.Item;
+import com.nyj.exam.demo.vo.Payment;
 import com.nyj.exam.demo.vo.ResultData;
 import com.nyj.exam.demo.vo.Rq;
 
@@ -123,7 +123,7 @@ public class ShopController {
 	 * 상품 목록
 	 * */
 	@RequestMapping("/shop/item/list")
-	public String showItemrList(@RequestParam(defaultValue = "1") int page, 
+	public String showItemList(@RequestParam(defaultValue = "1") int page, 
 			@RequestParam(defaultValue = "10") int itemsCountInAPage,
 			@RequestParam(defaultValue = "name,desc") String searchKeywordType,
 			@RequestParam(defaultValue = "") String searchKeyword,
@@ -140,6 +140,31 @@ public class ShopController {
 		model.addAttribute("itemList", itemList);
 		
 		return "/shop/item/list";
+	}
+	
+	/**
+	 * 상품 목록
+	 * */
+	@RequestMapping("/shop/payment/detail")
+	public String showPayment(int customerId, Model model) {
+		ResultData rd = shopService.getCustomerById(customerId);
+		if(rd.isFail()) {
+			return "";
+		} 	
+		
+		model.addAttribute("customer",rd.getData1());
+		
+		return "/shop/payment/detail";
+	}
+	 
+	/**
+	 * 상품 목록
+	 * */
+	@RequestMapping("/shop/payment/save")
+	@ResponseBody
+	public String doPayment(Payment payment, Model model) {
+		
+		return "/shop/payment/detail";
 	}
 
 }

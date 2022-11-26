@@ -55,28 +55,14 @@ function checkForm(form) {
 <main class="py-6 px-4 sm:p-6 md:py-10 md:px-8">
   <div class="max-w-xl mx-auto grid grid-cols-1 lg:max-w-xl lg:gap-y-10">
     <section>
-      <h1
-        class="mt-1 text-lg font-semibold text-white sm:text-slate-900 md:text-2xl dark:sm:text-white">
+      <h1 class="mt-1 text-lg font-semibold text-white sm:text-slate-900 md:text-2xl dark:sm:text-white">
         고객 상세
       </h1>
       
       <form onsubmit="checkForm(this); return false;" action="/shop/customer/doSave" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="${customer.id}" />
         <div class="mt-8 mb-4">
-        <!--   <label 
-            for="loginId"
-            class="block mb-2 text-sm font-medium label-text">고객번호</label>
-          <input 
-            type="text" 
-            name="loginId" 
-            id="loginId" 
-            class="block p-2 w-full input input-sm input-bordered rounded-lg sm:text-sm"
-            placeholder="자동 생성" 
-            autocomplete="off" 
-            required />
-          <div class="text-xs loginId-message"></div>
-        </div>
-     
+        <!--     
         <div class="mb-4"> 
             <label class="block mb-2 text-sm font-medium label-text">
                 프로필 이미지
@@ -124,12 +110,24 @@ function checkForm(form) {
             value="${customer.phoneNumber}"
             required />
         </div>
+        
+        <div class="flex flex-wrap">
+          <div class="stats w-1/4 border border-gray-500"> 
+            <div class="stat ">
+              <div class="stat-title">Nail</div>
+              <div class="stat-value">
+                <span>1</span>
+                <a href="/shop/payment/detail?customerId=${customer.id}">+</a> 
+              </div>
+              <div class="stat-desc">last 22.10.10</div>
+            </div> 
+          </div>
+        </div>
     
         <button 
           type="submit"
-          class="w-full btn btn-primary mt-12 py-2 block text-center">등록</button>
-      </form>
-
+          class="w-full btn btn-primary mt-12 py-2 block text-center">저장</button>
+      </form> 
     </section>
   </div>
 </main>
