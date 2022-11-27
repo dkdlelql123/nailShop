@@ -146,13 +146,28 @@ public class ShopController {
 	 * 상품 목록
 	 * */
 	@RequestMapping("/shop/payment/detail")
-	public String showPayment(int customerId, Model model) {
+	public String showPayment(int customerId,
+			@RequestParam(defaultValue = "1") int page, 
+			@RequestParam(defaultValue = "12") int itemsCountInAPage,
+			@RequestParam(defaultValue = "name,desc") String searchKeywordType,
+			@RequestParam(defaultValue = "") String searchKeyword,
+			Model model) {
 		ResultData rd = shopService.getCustomerById(customerId);
 		if(rd.isFail()) {
 			return "";
 		} 	
 		
 		model.addAttribute("customer",rd.getData1());
+		
+		int count = shopItemService.getShopItemCount(searchKeywordType, searchKeyword);
+		model.addAttribute("count", count);
+		
+		int pagesCount = (int) Math.ceil((double)count / itemsCountInAPage);
+		model.addAttribute("pagesCount", pagesCount);
+		model.addAttribute("page", page); 
+		
+		List<Item> itemList = shopItemService.getForPrintShopItems(searchKeywordType, searchKeyword, page, itemsCountInAPage);
+		model.addAttribute("itemList", itemList);
 		
 		return "/shop/payment/detail";
 	}
