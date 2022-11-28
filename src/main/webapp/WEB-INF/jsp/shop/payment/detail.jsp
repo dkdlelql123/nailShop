@@ -7,6 +7,20 @@
 <script  src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
 
 <script type="text/javascript"> 
+
+function getToday(){
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = ("0" + (1 + date.getMonth())).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
+
+    return year +"-"+ month +"-"+ day;
+}
+
+$(function(){ 
+  $("#visitDate").val(getToday()); 
+})
+
 let submitFormDone = false; 
 
 /** 회원가입 폼 체크 */
@@ -37,6 +51,13 @@ function btn__itemModalOnClick(){
 	$('#itemName').val(name);
 	$('#itemPrice').val(price);
 }
+
+function onChange_prcie(){
+	let itemPrice = $('#itemPrice').val();
+	let salePrice = $('#salePrice').val();
+	$('#totalPrice').val(itemPrice-salePrice);
+}
+
 </script>
 <main class="py-6 px-4 sm:p-6 md:py-10 md:px-8">
   <div class="max-w-xl mx-auto grid grid-cols-1 lg:max-w-xl lg:gap-y-10">
@@ -118,7 +139,8 @@ function btn__itemModalOnClick(){
           <div class="flex">
             <span class="w-1/3 flex items-center">할인금액</span>
             <span class="text-right w-2/3">
-              <input type="text" name="salePrice" id="salePrice" class="input input-sm text-right" value="" placeholder="할인금액" required/>            
+              <input type="text" name="salePrice" id="salePrice" class="input input-sm text-right" value=""
+              onchange="onChange_prcie()" placeholder="할인금액" required/>            
             </span>
           </div>
           <div class="wx-1 h-px bg-base-content/20 my-2"></div> 

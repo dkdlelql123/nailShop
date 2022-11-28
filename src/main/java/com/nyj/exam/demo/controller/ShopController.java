@@ -179,6 +179,12 @@ public class ShopController {
 	@ResponseBody
 	public String doPayment(Payment payment, Model model) {
 		
+		String visitDate = payment.getVisitDate().trim();
+		if("".equals(visitDate) == true || visitDate == null ) {
+			return Ut.jsHistoryBack("방문일을 입력해주세요.");
+		}  
+	 
+		
 		return "/shop/payment/detail";
 	}
 
