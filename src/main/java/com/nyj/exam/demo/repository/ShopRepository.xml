@@ -41,6 +41,18 @@
 	       phoneNumber = #{phoneNumber}
 	 WHERE id = #{id};
 	 </update>
+	 
+	 <insert id="doSavePayment">
+	 INSERT INTO `payment`
+	    SET visitDate = NOW(),
+			customerId = #{customerId},
+  	 		itemId = #{itemId},
+	 		itemPrice = #{itemPrice},
+	 		salePrice  = #{salePrice},
+	 		totalPrice  = #{totalPrice},
+	 		etc = #{etc},
+	 		paymentMethod  = #{paymentMethod}
+	</insert>
 	
 	 
 </mapper>

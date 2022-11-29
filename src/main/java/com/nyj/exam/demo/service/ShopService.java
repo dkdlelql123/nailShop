@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.nyj.exam.demo.repository.ShopRepository;
 import com.nyj.exam.demo.util.Ut;
 import com.nyj.exam.demo.vo.Customer;
+import com.nyj.exam.demo.vo.Payment;
 import com.nyj.exam.demo.vo.ResultData;
 
 @Service
@@ -41,6 +42,10 @@ public class ShopService {
 
 	public void doUpdateCustomer(Customer customer) {
 		shopRepository.doUpdateCustomer(customer);  
+	}
+
+	public void doSavePayment(Payment payment) {
+		shopRepository.doSavePayment(payment);
 	}
 
 }

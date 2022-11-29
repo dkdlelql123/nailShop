@@ -15,11 +15,11 @@ public class Payment {
 	/** 고객 */
 	int customerId; 
 	/** 고객이름 */
-	int customerName; 
+	String customerName; 
 	/** 상품 */
 	int itemId;  
 	/** 상품이름 */
-	int itemName;  
+	String itemName;  
 	/** 상품판매가 */
 	int itemPrice;  
 	/** 결제할인가 */

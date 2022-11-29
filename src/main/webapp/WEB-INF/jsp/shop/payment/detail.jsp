@@ -29,13 +29,45 @@ function checkForm(form) {
     alert("처리중입니다. \n새로고침 후 다시 시도해주세요");
     return;
   } 
-  let userName = form.name.value.trim();  
+  let visitDate = form.visitDate.value.trim();  
+  let customerId = form.customerId.value.trim();  
+  let itemId = form.itemId.value.trim();  
+  let itemPrice = form.itemPrice.value.trim();  
+  let salePrice = form.salePrice.value.trim();  
+  let totalPrice = form.totalPrice.value.trim();  
 
-  if (!isNull(userName)) {
-    alert("이름(을)를 입력해주세요.");
-    form.name.focus();
+  if (!isNull(visitDate)) {
+    alert("등록일(을)를 입력해주세요.");
+    form.visitDate.focus();
     return;
   } 
+  if (!isNull(customerId)) {
+      alert("고객님(을)를 입력해주세요.");
+      form.customerId.focus();
+      return;
+  } 
+  if (!isNull(itemId)) {
+      alert("상품(을)를 등록해주세요.");
+      form.itemName.focus();
+      return;
+  } 
+  if (!isNull(itemPrice)) {
+      alert("상품가격(을)를 입력해주세요."); 
+      return;
+  } 
+  if (!isNull(salePrice)) {
+      alert("세일가격(을)를 등록해주세요.");
+      form.salePrice.focus();
+      return;
+  } 
+  if (!isNull(totalPrice)) {
+      alert("세일가격(을)를 등록해주세요.");
+      form.totalPrice.focus();
+      return;
+  } 	
+  
+  form.submit();
+  submitFormDone = true;
 } 
 
 function btn__itemModalOnClick(){ 
@@ -46,6 +78,12 @@ function btn__itemModalOnClick(){
 	if(itemId == null || itemId <= 0) {
 		alert("상품을 선택해주세요.");
 	}
+	
+	if(itemId == null || itemId <= 0) {
+		alert("상품을 선택해주세요.");
+	}
+	
+	console.log(itemId)
 	 
 	$('#itemId').val(itemId);
 	$('#itemName').val(name);
@@ -68,7 +106,7 @@ function onChange_prcie(){
       
       <form onsubmit="checkForm(this); return false;" action="/shop/payment/save" method="post" enctype="multipart/form-data">
         <input type="hidden" name="customerId" value="${customer.id}" /> 
-        <input type="hidden" name="itemId" value="" /> 
+        <input type="hidden" name="itemId" id="itemId" /> 
         
         <div class="mt-8 mb-4 flex gap-2"> 
           <div class="w-full">
@@ -124,6 +162,22 @@ function onChange_prcie(){
             placeholder="특이사항이 있다면 작성해주세요"  value="${payment.etc}"
             ></textarea>
         </div> 
+        
+        <div class="mb-4"> 
+          <span class="block mb-2 text-sm font-medium label-text">결제방법</span>
+           <div class="flex mb-4 gap-2">
+              <label class="cursor-pointer label">
+                <span class="label-text mr-2" >현금</span>
+                <input type="radio" name="paymentMethod" 
+                      class="radio radio-primary" value="현금" checked/> 
+              </label> 
+              <label class="cursor-pointer label">
+                <span class="label-text mr-2" >카드</span>
+                <input type="radio" name="paymentMethod" 
+                      class="radio radio-primary" value="카드" /> 
+              </label>  
+            </div>
+        </div>
         
         <h1 class="mt-12 text-lg font-semibold text-white sm:text-slate-900 md:text-2xl dark:sm:text-white">
           결제

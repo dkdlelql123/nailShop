@@ -183,9 +183,24 @@ public class ShopController {
 		if("".equals(visitDate) == true || visitDate == null ) {
 			return Ut.jsHistoryBack("방문일을 입력해주세요.");
 		}  
-	 
 		
-		return "/shop/payment/detail";
+		String customerName = payment.getCustomerName().trim();
+		if("".equals(customerName) == true || customerName == null ) {
+			return Ut.jsHistoryBack("고객이름을 입력해주세요.");
+		}
+		
+		String itemName = payment.getItemName().trim();
+		if("".equals(itemName) == true || itemName == null ) {
+			return Ut.jsHistoryBack("상품명을 입력해주세요.");
+		}
+		
+		if( payment.getItemPrice() <= 0 ) {
+			return Ut.jsHistoryBack("상품을 다시 선택해주세요.");
+		}
+		
+		shopService.doSavePayment(payment); 
+		 
+		return Ut.jsReplace(Ut.f("%s님 방문기록이 완료되었습니다.", customerName), "/shop/customer/detail?customerId="+payment.getCustomerId()) ;
 	}
 
 }
