@@ -111,9 +111,11 @@ public class ShopController {
 		ResultData rd = shopService.getCustomerById(customerId);
 		if(rd.isFail() == true) {
 			return Ut.jsHistoryBack(rd.getMsg());
-		}
-		
+		} 
 		model.addAttribute("customer", rd.getData1()); 
+		
+		ResultData paymentRd = shopService.findPaymentListByCustomerId(customerId);
+		model.addAttribute("paymentList", paymentRd.getData1());
 		
 		return "/shop/customer/join";
 	}

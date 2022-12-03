@@ -53,6 +53,19 @@
 	 		etc = #{etc},
 	 		paymentMethod  = #{paymentMethod}
 	</insert>
+	 
+	<select id="findPaymentListByCustomerId" resultType="Customer">
+	 SELECT MAX(A.customerId) AS customerId
+			, B.categoryId
+			, (SELECT `name` FROM `shopCate` WHERE id = MAX(B.categoryId)) AS categoryNm
+			, COUNT(B.categoryId) AS tot
+			, DATE_FORMAT(MAX(visitDate), '%Y-%m-%d') AS lastVisit
+	  FROM `payment` A
+	  LEFT JOIN `shopItem` B
+	    ON A.itemId = B.id
+	 WHERE A.customerId = #{customerId}
+	 GROUP BY B.categoryId
+	</select> 
 	
 	 
 </mapper>

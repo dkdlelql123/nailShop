@@ -48,4 +48,12 @@ public class ShopService {
 		shopRepository.doSavePayment(payment);
 	}
 
+	public ResultData findPaymentListByCustomerId(int customerId) {
+		List<Customer> list = shopRepository.findPaymentListByCustomerId(customerId);
+		if(list == null) {
+			return ResultData.form("F-1", "해당 회원의 결제 정보가 없습니다", 0);
+		}
+		return ResultData.form("S-1", "성공", list);
+	}
+
 }

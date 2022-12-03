@@ -22,4 +22,6 @@ public interface ShopRepository {
 
 	void doSavePayment(Payment payment);
 
+	List<Customer> findPaymentListByCustomerId(int customerId);
+
 }

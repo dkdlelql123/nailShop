@@ -21,4 +21,9 @@ public class Customer {
 	/** 전화번호 뒷자리 4글자 */
 	String phoneNumber;
 
+	/** 결제목록과 관련된 컬럼 */
+	int categoryId;
+	String categoryNm;
+	int tot;
+	String lastVisit;
 }
