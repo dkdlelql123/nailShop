@@ -157,11 +157,11 @@ function readURL(input) {
         </td>
       </tr>
       <tr>
-        <th>세일가격</th>
+        <th>판매가격</th>
         <td> 
            <input type="text" class="w-full input input-sm" name="sale"  placeholder="세일가격을 작성해주세요" 
-            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="0"
-            value="${shopItem.sale}" 
+            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 
+            value="${shopItem.sale}"  
             title="숫자만 입력이 가능합니다."
            /> 
         </td>
