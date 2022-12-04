@@ -61,7 +61,7 @@ public class ShopController {
 	 * */
 	@RequestMapping("/shop/customer/join")
 	public String showCustomerJoin() {
-		return "/shop/customer/join";
+		return "/shop/customer/detail";
 	}
 	
 	/**
@@ -117,7 +117,7 @@ public class ShopController {
 		ResultData paymentRd = shopService.findPaymentListByCustomerId(customerId);
 		model.addAttribute("paymentList", paymentRd.getData1());
 		
-		return "/shop/customer/join";
+		return "/shop/customer/detail";
 	}
 	
 	 

@@ -247,7 +247,7 @@ function onChange_prcie(){
                     value="${item.id}"
                     data-id="${item.id}"
                     data-name="${item.name}"
-                    data-price="${item.price}"
+                    data-price="${item.sale == 0 ? item.price : item.sale}"
               /> 
               <span>
                 <img 

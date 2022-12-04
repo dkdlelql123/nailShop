@@ -116,32 +116,33 @@ function checkForm(form) {
           class="w-full btn btn-primary  mt-4 py-2 block text-center">저장</button>
       </form> 
       
-      <div class="flex items-center mt-12"> 
-          <h1 class="w-full text-base font-semibold text-white sm:text-slate-900 md:text-xl dark:sm:text-white">
-            구매내역 
-          </h1>
-          <a class="btn btn-sm btn-circle btn-outline "  href="/shop/payment/detail?customerId=${customer.id}">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 12L18 12M12 6l0 12" /></svg>
-          </a>
-        </div>
-        
-        <div class="flex flex-wrap pt-4">
-          <c:if test="${empty paymentList}">
-            <div class="flex-grow text">정보가 없습니다.</div> 
-          </c:if>
-          <c:forEach var="payment" items="${paymentList}">
-            <div class="stats w-1/4 border border-gray-500"> 
-              <div class="stat">
-                <div class="stat-title">${payment.categoryNm}</div>
-                <div class="stat-value">
-                  <span>${payment.tot}</span>
-                  <a href="/shop/payment/detail?customerId=${customer.id}"></a> 
-                </div>
-                <div class="stat-desc">last ${payment.lastVisit}</div>
-              </div> 
-            </div>
-            </c:forEach> 
-        </div>
+      <c:if test="${customer.id > 0}">
+        <div class="flex items-center mt-12"> 
+            <h1 class="w-full text-base font-semibold text-white sm:text-slate-900 md:text-xl dark:sm:text-white">
+              방문내역 
+            </h1>
+            <a class="btn btn-sm btn-circle btn-outline "  href="/shop/payment/detail?customerId=${customer.id}">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 12L18 12M12 6l0 12" /></svg>
+            </a>
+          </div>
+          
+          <div class="flex flex-wrap pt-4">
+            <c:if test="${empty paymentList}">
+              <div class="flex-grow text">정보가 없습니다.</div> 
+            </c:if>
+            <c:forEach var="payment" items="${paymentList}">
+              <div class="stats w-1/4 border border-gray-500"> 
+                <div class="stat">
+                  <div class="stat-title">${payment.categoryNm}</div>
+                  <div class="stat-value">
+                    <a href="/shop/item/list?customerId=${customer.id}"> <span>${payment.tot}</span></a> 
+                  </div>
+                  <div class="stat-desc">last ${payment.lastVisit}</div>
+                </div> 
+              </div>
+              </c:forEach> 
+          </div>
+        </c:if>
     </section>
   </div>
 </main>
