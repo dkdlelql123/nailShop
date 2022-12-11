@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <c:set var="pageTitle" value="홈" />
 <%@ include file="../common/head.jspf"%>
@@ -10,59 +11,31 @@
     <section>
       <h1 class="mt-1 text-lg font-semibold text-white sm:text-slate-900 md:text-2xl dark:sm:text-white">BEST</h1>
       <div class="flex flex-wrap mt-4">
-        <div class="card bg-base-100 w-1/2 p-2  ">
-          <figure>
-            <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
-          </figure>
-          <div class="mt-4">
-            <h2 class="card-title">
-              Shoes!
-              <div class="badge badge-secondary">NEW</div>
-            </h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div class="card-actions justify-end">
-              <div class="badge badge-outline">Fashion</div>
-              <div class="badge badge-outline">Products</div>
-            </div>
-          </div>
-        </div>
-        <div class="card bg-base-100 w-1/2 p-2 ">
-          <figure>
-            <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
-          </figure>
-          <div class="mt-4">
-            <h2 class="card-title">
-              Shoes!
-              <div class="badge badge-secondary">NEW</div>
-            </h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div class="card-actions justify-end">
-              <div class="badge badge-outline">Fashion</div>
-              <div class="badge badge-outline">Products</div>
-            </div>
-          </div>
-        </div>
-        <div class="card bg-base-100 w-1/2 p-2 ">
-          <figure>
-            <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
-          </figure>
-          <div class="mt-4">
-            <h2 class="card-title">
-              Shoes!
-              <div class="badge badge-secondary">NEW</div>
-            </h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div class="card-actions justify-end">
-              <div class="badge badge-outline">Fashion</div>
-              <div class="badge badge-outline">Products</div>
-            </div>
-          </div>
-        </div>
+      
+         <c:forEach var="item" items="${bestList}">
+           <div class="card bg-base-100 w-1/2 p-2">
+             <a href="/shop/item/detail?id=<c:out value="${item.id}"/>" class="block">
+              <span>
+                <img 
+                  src="${item.getShopItemImgUri()}"
+                  onerror="${item.getShopItemFallbackImgOnErrorHtmlAttr()}"
+                  alt="<c:out value="${item.extra__categoryName}"/>" 
+                  />
+              </span>
+              <div class="mt-4">
+                <h2 class="mb-2"> 
+                  <span class="text-base"><c:out value="${item.name}" /></span>
+                </h2>
+                <p><fmt:formatNumber value="${item.price}" pattern="#,###"/></p> 
+              </div>
+            </a>
+          </div> 
+        </c:forEach>         
+         
       </div>
     </section>
     <section>
-      <h1
-        class="mt-1 text-lg font-semibold text-white sm:text-slate-900 md:text-2xl dark:sm:text-white">NEW</h1>
+      <h1 class="mt-1 text-lg font-semibold text-white sm:text-slate-900 md:text-2xl dark:sm:text-white">NEW</h1>
     </section>
   </div>
 </main>

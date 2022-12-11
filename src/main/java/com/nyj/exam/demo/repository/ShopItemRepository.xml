@@ -76,6 +76,23 @@
 			LIMIT #{limitStart}, #{limitTake}
 	</select>
 	
+	
+	<select id="getBestList" resultType="Item">
+	SELECT A.itemId AS id
+		   , B.name AS `name`
+		   , IF(B.sale <![CDATA[<=]]> 0, B.price, B.sale) AS price
+		   , COUNT(A.itemId) AS cnt
+	  FROM payment A
+	  LEFT JOIN shopItem B
+	  ON A.itemId = B.id
+	 WHERE useYn = 1
+	 GROUP BY itemId
+	 ORDER BY cnt DESC 
+	 LIMIT 0, 3
+	 ;
+	</select>
+	
+	
 	<insert id="doWrite">
 	 INSERT INTO `shopItem`
 	    SET regDate = NOW()

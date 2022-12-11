@@ -39,10 +39,13 @@ public class ShopController {
 	 * HOME
 	 * */
 	@RequestMapping("/shop/home/list")
-	public String showHomeList() {
+	public String showHomeList(Model model) {
+		
+		List<Item> bestList = shopItemService.getBestList();
+		model.addAttribute("bestList", bestList);
+		
 		return "/shop/home/list";
-	}
-	
+	} 
 
 	/**
 	 * 고객 목록

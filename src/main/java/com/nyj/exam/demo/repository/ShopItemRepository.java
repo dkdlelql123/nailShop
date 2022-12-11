@@ -19,6 +19,8 @@ public interface ShopItemRepository {
 
 	List<Item> getForPrintShopItems(String searchKeywordType, String searchKeyword, int limitStart, int limitTake);
 
+	List<Item> getBestList();
+
 	void doWrite(Item item);
 
 	void doModify(Item item);

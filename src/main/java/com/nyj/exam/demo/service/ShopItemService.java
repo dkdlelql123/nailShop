@@ -52,5 +52,9 @@ public class ShopItemService {
 		return ResultData.form("S-1", "상품이 수정이 완료되었습니다.", item.getId());
 	}
 
+	public List<Item> getBestList() { 
+		return shopItemRepository.getBestList();
+	}
+
 	
 }
