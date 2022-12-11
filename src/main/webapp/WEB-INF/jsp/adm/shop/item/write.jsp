@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <c:set var="title" value="${id == 0 ? '생성':'수정'}"/>
 <c:set var="pageTitle" value="관리자 - 상품${title}" />   
@@ -159,9 +160,10 @@ function readURL(input) {
       <tr>
         <th>판매가격</th>
         <td> 
+          <fmt:parseNumber value="${shopItem.sale}" var="sale"/>
            <input type="text" class="w-full input input-sm" name="sale"  placeholder="세일가격을 작성해주세요" 
             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 
-            value="${shopItem.sale}"  
+            value="${shopItem.sale != null ? sale : 0}"  
             title="숫자만 입력이 가능합니다."
            /> 
         </td>
