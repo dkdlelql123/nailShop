@@ -92,6 +92,15 @@
 	 ;
 	</select>
 	
+	<select id="getNewList" resultType="Item"> 
+	SELECT id, `name`, IF(sale <![CDATA[<=]]> 0, price, sale) AS price
+	  FROM `shopItem`
+	 WHERE useYn = 1
+	 ORDER BY ID DESC
+	 LIMIT 0, 4 
+	 ;
+	</select>
+	
 	
 	<insert id="doWrite">
 	 INSERT INTO `shopItem`

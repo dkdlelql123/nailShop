@@ -56,5 +56,9 @@ public class ShopItemService {
 		return shopItemRepository.getBestList();
 	}
 
+	public List<Item> getNewList() {
+		return shopItemRepository.getNewList();
+	}
+
 	
 }

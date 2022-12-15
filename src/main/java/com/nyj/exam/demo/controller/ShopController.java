@@ -44,6 +44,9 @@ public class ShopController {
 		List<Item> bestList = shopItemService.getBestList();
 		model.addAttribute("bestList", bestList);
 		
+		List<Item> newList = shopItemService.getNewList();
+		model.addAttribute("newList", newList);
+		
 		return "/shop/home/list";
 	} 
 

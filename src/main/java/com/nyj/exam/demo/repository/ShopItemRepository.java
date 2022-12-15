@@ -21,6 +21,8 @@ public interface ShopItemRepository {
 
 	List<Item> getBestList();
 
+	List<Item> getNewList();
+
 	void doWrite(Item item);
 
 	void doModify(Item item);
