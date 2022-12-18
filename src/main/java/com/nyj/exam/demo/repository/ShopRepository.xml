@@ -20,9 +20,21 @@
 	</select> 
 	
 	<select id="getCustomers" resultType="Customer">
-	SELECT *
-	  FROM `customer` 
-	</select>
+	SELECT @ROWNUM := @ROWNUM+1 NUM, A.*
+  	  FROM ( 
+			SELECT A.id
+			       , A.`name`
+			       , A.`phoneNumber`
+			       , FORMAT(SUM(NVL(IF(B.`salePrice` = 0, B.`totalPrice`, B.`salePrice`), 0)), 0) AS STR__TOT
+			       , NVL(COUNT(B.ID), 0) AS CNT
+		       	   , NVL(DATE_FORMAT(MAX(B.`visitDate`), '%Y-%m-%d'), '-') AS lastVisit
+			  FROM `customer` A
+			  LEFT OUTER JOIN `payment` B
+			    ON A.id = b.`customerId`
+			 GROUP BY A.id
+	) A, (SELECT @ROWNUM:= 0) B
+	;
+	</select> 
 	
 	<insert id="doCustomerJoin">
 	INSERT INTO `customer`

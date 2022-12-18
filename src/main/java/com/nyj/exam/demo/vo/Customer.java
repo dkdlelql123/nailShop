@@ -26,4 +26,9 @@ public class Customer {
 	String categoryNm;
 	int tot;
 	String lastVisit;
+	
+	/** 총방문횟수*/
+	int num;
+	int cnt;
+	String str__tot;
 }

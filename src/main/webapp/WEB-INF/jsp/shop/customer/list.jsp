@@ -13,15 +13,44 @@
         고객
         <c:out value="${customerCnt}" />명
       </h1>
+      <div class="overflow-x-auto mt-4" >
+        <table class="table table-compact w-full text-center"> 
+          <thead>
+            <tr>
+              <td>번호</td>
+              <td>이름(번호)</td>
+              <td>방문횟수</td>
+              <td>누적금액</td>
+              <td>최근방문일</td>
+            </tr>
+          </thead>
+          <tbody>
+            <c:forEach var="customer" items="${customers}">
+        	  <tr>
+              <td><c:out value="${customer.num}" /></td>
+              <td>
+                <a href="/shop/customer/detail?customerId=<c:out value="${customer.id}"/>">
+                  <c:out value="${customer.name}" />(<c:out value="${customer.phoneNumber}" />)
+                </a>
+              </td>
+              <td><c:out value="${customer.cnt}" /></td>
+              <td><c:out value="${customer.str__tot}" /></td>
+              <td><c:out value="${customer.lastVisit}" /></td>
+            </tr>
+            </c:forEach>
+          </tbody>
+        </table>
+      </div>
 
+      <!--
       <ul class="divide-y mt-4">
         <c:forEach var="customer" items="${customers}">
           <li class="py-3 sm:py-4">
             <a href="/shop/customer/detail?customerId=<c:out value="${customer.id}"/>">
               <div class="flex items-center space-x-4">
-                <div class="flex-shrink-0">
+                 <div class="flex-shrink-0">
                   <img class="w-8 h-8 rounded-full" src="https://placeimg.com/60/60/arch" alt="Neil image">
-                </div>
+                </div> 
                 <div class="flex-1 min-w-0">
                   <p class="text-sm font-medium truncate "><c:out value="${customer.name}" />(<c:out value="${customer.phoneNumber}" />)</p>
                   <p class="text-sm truncate">-</p>
@@ -34,6 +63,7 @@
           </li>
         </c:forEach> 
        </ul>
+       -->
     </section>
   </div>
 </main>
