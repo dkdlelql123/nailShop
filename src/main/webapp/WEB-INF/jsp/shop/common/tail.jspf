@@ -1,17 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-  
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<!-- 
+<c:set var="url" value="${pageContext.request.requestURL}" />
+<c:set var="uri" value="${pageContext.request.requestURI}" />
+-->
+<c:set var="path" value="${requestScope['javax.servlet.forward.servlet_path']}" /> 
+<c:set var="activeYn1"  value="${fn:contains(path, 'home')}" />
+<c:set var="activeYn2"  value="${fn:contains(path, 'item')}" />
+<c:set var="activeYn3"  value="${fn:contains(path, 'customer')}" />
+<c:set var="activeYn4"  value="${fn:contains(path, 'mypage')}" />
 
 <div class="w-full h-20"></div>
 
 <div class="w-full fixed bg bottom-0 bg-base-100 ">
   <div class="tabs max-w-xl mx-auto">
-    <a class="tab tab-lg tab-bordered flex-grow tab-active" href="/shop/home/list">홈</a>
-    <a class="tab tab-lg tab-bordered flex-grow " href="/shop/item/list">상품</a>
-    <a class="tab tab-lg tab-bordered flex-grow " href="/shop/customer/list">고객</a>
-    <a class="tab tab-lg tab-bordered flex-grow " href="">관리</a>
+    <a class="tab tab-lg tab-bordered flex-grow  ${activeYn1 ==true ? 'tab-active' : null}" href="/shop/home/list">홈</a>
+    <a class="tab tab-lg tab-bordered flex-grow  ${activeYn2 ==true ? 'tab-active' : null}" href="/shop/item/list">상품</a>
+    <a class="tab tab-lg tab-bordered flex-grow  ${activeYn3 ==true ? 'tab-active' : null}" href="/shop/customer/list">고객</a>
+    <a class="tab tab-lg tab-bordered flex-grow  ${activeYn4 ==true ? 'tab-active' : null}" href="/shop/mypage">관리</a>
   </div>
 </div>     
      
 </body>
 </html>
+
