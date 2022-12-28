@@ -31,7 +31,8 @@ public class UsrHomeController {
 		if(rq.isLogined()) {
 			return "redirect:/shop/home/list";
 		}
-		return "redirect:/usr/member/login";  
+		return  "redirect:/shop/home"; 
+		//return "redirect:/usr/member/login";  
 	}
 	
 	

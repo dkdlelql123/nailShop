@@ -77,6 +77,9 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		//.addPathPatterns("/usr/reply/doDelete")
 		.addPathPatterns("/adm")
 		.addPathPatterns("/adm/**")
+		.addPathPatterns("/shop/home/list")
+		.addPathPatterns("/shop/item/**")
+		.addPathPatterns("/shop/customer/**")
 		.excludePathPatterns("/adm/member/login")
 		.excludePathPatterns("/adm/member/doLogin") 
 		.excludePathPatterns("/adm/member/findLoginId")
@@ -85,10 +88,11 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		.excludePathPatterns("/adm/member/doFindLoginPw");
 		
 		registry.addInterceptor(needLogoutInterceptor)
+		.addPathPatterns("/shop/home")
 		.addPathPatterns("/usr/member/login")
 		.addPathPatterns("/usr/member/doLogin")
-		.addPathPatterns("/usr/member/join")
-		.addPathPatterns("/usr/member/doJoin")
+		//.addPathPatterns("/usr/member/join")
+		//.addPathPatterns("/usr/member/doJoin")
 		.addPathPatterns("/usr/member/findMember")
 		.addPathPatterns("/usr/member/findLoginId")
 		.addPathPatterns("/usr/member/findLoginPassword")

@@ -35,6 +35,11 @@ public class ShopController {
 	@Autowired
 	Rq rq;
 	
+	@RequestMapping("/shop/home")
+	public String showLogin() {
+		return "/shop/login";
+	}
+	
 	/**
 	 * HOME
 	 * */
@@ -151,9 +156,9 @@ public class ShopController {
 	}
 	
 	/**
-	 * 상품 목록
+	 * 고객 - 방문등록
 	 * */
-	@RequestMapping("/shop/payment/detail")
+	@RequestMapping("/shop/customer/payment")
 	public String showPayment(int customerId,
 			@RequestParam(defaultValue = "1") int page, 
 			@RequestParam(defaultValue = "12") int itemsCountInAPage,
@@ -181,7 +186,7 @@ public class ShopController {
 	}
 	 
 	/**
-	 * 상품 목록
+	 * 고객 - 방문등록 저장
 	 * */
 	@RequestMapping("/shop/payment/save")
 	@ResponseBody
@@ -209,6 +214,14 @@ public class ShopController {
 		shopService.doSavePayment(payment); 
 		 
 		return Ut.jsReplace(Ut.f("%s님 방문기록이 완료되었습니다.", customerName), "/shop/customer/detail?customerId="+payment.getCustomerId()) ;
+	}
+	
+	/**
+	 * 고객 - 방문등록
+	 * */
+	@RequestMapping("/shop/mypage")
+	public String showMypage() {
+		return "/shop/mypage";
 	}
 
 }

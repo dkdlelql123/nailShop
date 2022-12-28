@@ -121,7 +121,7 @@ function checkForm(form) {
             <h1 class="w-full text-base font-semibold text-white sm:text-slate-900 md:text-xl dark:sm:text-white">
               방문내역 
             </h1>
-            <a class="btn btn-sm btn-circle btn-outline "  href="/shop/payment/detail?customerId=${customer.id}">
+            <a class="btn btn-sm btn-circle btn-outline "  href="/shop/customer/payment?customerId=${customer.id}">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 12L18 12M12 6l0 12" /></svg>
             </a>
           </div>
